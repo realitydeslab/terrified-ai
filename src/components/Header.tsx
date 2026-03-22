@@ -8,8 +8,6 @@ export function Header({ title, subtitle }: { title: string; subtitle?: string }
     <header
       style={{
         padding: '2.5rem 1rem 0',
-        maxWidth: 'var(--max-width)',
-        margin: '0 auto',
       }}
     >
       <div

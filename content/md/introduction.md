@@ -6,16 +6,6 @@ summary: true
 next: terror-paradox
 ---
 
-*Should terror shape machine behaviors?*
-
-**Botao Amber Hu**
-
-University of Oxford · Cambridge AI: ERA Fellowship
-
-Mentor: Joel Lehman
-
-[Full version on arXiv](#) <!-- TODO: add arXiv link -->
-
 ## Executive Summary
 
 <!-- TODO: Write executive summary -->

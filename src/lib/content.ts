@@ -68,7 +68,7 @@ export async function getPage(slug: string): Promise<Page | null> {
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeKatex)
     .use(rehypeSlug)
-    .use(rehypeAutolinkHeadings, { behavior: 'wrap' })
+    .use(rehypeAutolinkHeadings, { behavior: 'prepend', properties: { className: ['heading-anchor'], ariaHidden: true, tabIndex: -1 } })
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(content);
 
