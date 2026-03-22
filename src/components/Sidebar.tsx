@@ -182,7 +182,7 @@ export function Sidebar({
 
         .sidebar-link.active {
           color: var(--foreground);
-          font-weight: 600;
+          font-weight: 500;
         }
 
         .subsections {
