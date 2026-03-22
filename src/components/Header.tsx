@@ -12,30 +12,31 @@ export function Header({ title }: { title: string }) {
         zIndex: 50,
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
-        padding: '8px 0',
+        background: 'var(--background)',
+        borderBottom: '1px solid var(--neutral-200)',
       }}
     >
       <div
         style={{
-          maxWidth: 'var(--content-width)',
+          maxWidth: 'var(--max-width)',
           margin: '0 auto',
-          padding: '24px 16px',
+          padding: '0.75rem 1rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          height: '80px',
+          height: '4rem',
         }}
       >
         <Link
           href="/"
           style={{
             fontFamily: 'var(--heading-font)',
-            fontSize: '2.25rem',
-            fontWeight: 600,
-            color: 'var(--neutral-800)',
+            fontSize: '1.5rem',
+            fontWeight: 400,
+            color: 'var(--foreground)',
             textDecoration: 'none',
             transition: 'opacity 0.2s',
-            marginTop: '8px',
+            lineHeight: 1.2,
           }}
         >
           {title}
