@@ -294,12 +294,17 @@ export function Sidebar({
           padding-left: 0.85rem;
         }
 
-        .external-item {
+        /* Last 3 items (external links area) get special spacing */
+        .sidebar-item:nth-last-child(-n+3) {
+          padding-top: 0;
+        }
+
+        .sidebar-item:nth-last-child(3) {
           margin-top: 1.5rem;
         }
 
-        .external-item + .external-item {
-          margin-top: 0;
+        .sidebar-item:last-child {
+          margin-top: 1rem;
         }
 
         @media (max-width: 64.5rem) {

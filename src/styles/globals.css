@@ -1,9 +1,20 @@
 @import 'katex/dist/katex.min.css';
 
+/* ============================================
+   CSS Variables — exact match from theartificialself.ai
+   ============================================ */
 :root {
-  /* Matching theartificialself.ai exactly */
+  --font-default: var(--content-font);
+  --font-mono: var(--font-geist-mono), monospace;
   --background: #ffffff;
   --foreground: #1a1a1a;
+  --content-font: var(--font-garamond), 'EB Garamond', Garamond, 'Times New Roman', serif;
+  --content-font-size: 1rem;
+  --content-line-height: 1.6;
+  --color-page-background: var(--background);
+  --font-family: var(--content-font);
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
   --neutral-50: #fafafa;
   --neutral-100: #f5f5f5;
   --neutral-200: #e5e5e5;
@@ -14,38 +25,42 @@
   --neutral-700: #404040;
   --neutral-800: #262626;
   --neutral-900: #1a1a1a;
-  --accent: #dc2626;
-  --accent-muted: #fecaca;
-  --accent-dark: #991b1b;
-  --primary: #2563eb;
-  --primary-dark: #1e40af;
-  --link-color: var(--primary);
-  --link-hover: var(--primary-dark);
-  --content-width: 40rem; /* ~640px — matching reference */
   --max-width: 800px;
+  --menu-text: #666666;
   --sidebar-width: 240px;
-  --sidebar-offset: max(calc(50%), 2rem);
-  --content-font: var(--font-garamond), 'EB Garamond', Garamond, 'Times New Roman', serif;
-  --heading-font: var(--font-garamond), 'EB Garamond', Garamond, 'Times New Roman', serif;
-  --mono-font: 'Geist Mono', 'JetBrains Mono', 'Fira Code', monospace;
+  --content-width: 40rem;
   --sidebar-font: var(--content-font);
   --sidebar-font-size: 1rem;
   --sidebar-line-height: 1.5;
-  --menu-text: #666666;
+  --sidebar-offset: max(calc(50%), 2rem);
   --tooltip-bg: white;
   --tooltip-border: #e5e7eb;
   --tooltip-text: #1f2937;
   --citation-link: #1d4ed8;
   --citation-link-hover: #1e3a8a;
+  --reference-text: #262626;
+  --reference-counter: #4b5563;
+  --error-text: #dc2626;
+  --error-bg: #fef2f2;
+  --error-border: #fee2e2;
+  --success-text: #16a34a;
+  --warning-text: #b45309;
+  --warning-bg: #fffbeb;
+  --warning-border: #fde68a;
+  --overlay-bg: rgba(0,0,0,0.5);
   --shadow-color: rgb(0 0 0 / 0.1);
+  --shadow-color-strong: rgba(0,0,0,0.12);
   --surface: white;
   --surface-hover: #fafafa;
+  --quote-mark: #d4d4d4;
   --scrollbar-thumb: #e5e5e5;
 }
 
 [data-theme='dark'] {
   --background: #1a1a1a;
   --foreground: #f5f5f5;
+  --primary: #60a5fa;
+  --primary-dark: #93bbfd;
   --neutral-50: #262626;
   --neutral-100: #2a2a2a;
   --neutral-200: #333333;
@@ -56,28 +71,43 @@
   --neutral-700: #e0e0e0;
   --neutral-800: #f0f0f0;
   --neutral-900: #fafafa;
-  --accent: #ef4444;
-  --accent-muted: #450a0a;
-  --accent-dark: #fca5a5;
-  --primary: #60a5fa;
-  --primary-dark: #93bbfd;
   --menu-text: #b0b0b0;
+  --color-page-background: var(--background);
   --tooltip-bg: #2a2a2a;
   --tooltip-border: #404040;
   --tooltip-text: #f0f0f0;
   --citation-link: #60a5fa;
   --citation-link-hover: #93bbfd;
+  --reference-text: #e8e8e8;
+  --reference-counter: #b0b0b0;
+  --error-text: #f87171;
+  --error-bg: #2d1515;
+  --error-border: #5c2020;
+  --success-text: #4ade80;
+  --warning-text: #fbbf24;
+  --warning-bg: #2d2205;
+  --warning-border: #5c4a10;
+  --overlay-bg: rgba(0,0,0,0.7);
   --shadow-color: rgb(0 0 0 / 0.3);
+  --shadow-color-strong: rgba(0,0,0,0.4);
   --surface: #262626;
   --surface-hover: #2a2a2a;
+  --quote-mark: #525252;
   --scrollbar-thumb: #404040;
   color-scheme: dark;
 }
 
+/* ============================================
+   Base reset & body — from reference
+   ============================================ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+sup + sup {
+  margin-left: 0.25em;
 }
 
 html {
@@ -91,21 +121,23 @@ html {
 }
 
 body {
-  font-family: var(--content-font);
   background: var(--background);
-  color: var(--foreground);
+  font-family: var(--content-font);
   line-height: 1.6;
-  font-size: 1rem;
+  font-size: 16px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-/* ============================================
-   Headings — weight 400 matching reference
-   ============================================ */
-h1, h2, h3, h4, h5, h6 {
+body, h1, h2, h3, h4, h5, h6 {
   color: var(--foreground);
+}
+
+h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   line-height: 1.3;
   margin-top: 1.5em;
@@ -116,11 +148,11 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   margin-top: 0;
   line-height: 1.2;
-  font-size: 1.52rem;
+  font-size: 1.5rem;
 }
 
 h2 { font-size: 1.3rem; }
-h3 { font-size: 1.25rem; }
+h3 { font-size: 1.2rem; }
 
 p {
   margin-bottom: 1rem;
@@ -139,19 +171,64 @@ a:hover {
 }
 
 /* ============================================
-   Prose — matching theartificialself.ai layout
-   Content is NOT body-centered. It sits right
-   of the sidebar with its own max-width.
+   Nav — from reference
+   ============================================ */
+nav, nav a {
+  color: var(--menu-text);
+}
+
+nav {
+  font-size: 0.7rem;
+  line-height: 1.5;
+  padding-right: 2rem;
+}
+
+nav a {
+  display: block;
+  padding: 0.2rem 0;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: var(--foreground);
+}
+
+nav > ul > li {
+  margin-bottom: 0.5rem;
+}
+
+nav > ul > li > a {
+  font-weight: 500;
+}
+
+/* ============================================
+   Code
+   ============================================ */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+pre {
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  background: var(--neutral-50);
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+/* ============================================
+   Prose — from reference (tailwind typography overrides)
    ============================================ */
 .prose {
-  max-width: var(--content-width);
   width: 100%;
   font-family: var(--content-font);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: var(--content-font-size);
+  line-height: var(--content-line-height);
   text-align: justify;
   -webkit-hyphens: auto;
   hyphens: auto;
+  color: var(--foreground);
 }
 
 .prose > * {
@@ -159,50 +236,37 @@ a:hover {
 }
 
 .prose h1 {
-  font-family: var(--heading-font);
-  font-size: 1.52rem;
   font-weight: 400;
-  margin: 0 0 1.35em;
+  margin-top: 0;
   line-height: 1.2;
-  color: var(--foreground);
-  text-align: left;
-  hyphens: none;
+  font-size: 1.52rem;
 }
 
 .prose h2 {
-  font-family: var(--heading-font);
-  font-size: 1.3rem;
   font-weight: 400;
-  margin: 2rem 0 0.75em;
-  line-height: 1.3;
-  color: var(--foreground);
-  text-align: left;
-  hyphens: none;
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5em;
 }
 
 .prose h3 {
-  font-family: var(--heading-font);
-  font-size: 1.25rem;
   font-weight: 400;
-  margin: 1.5rem 0 0.5em;
-  color: var(--foreground);
-  text-align: left;
-  hyphens: none;
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .prose p {
-  margin: 0 0 1rem;
-  line-height: 1.6;
+  margin-bottom: 1rem;
 }
 
-/* Subtitle — first paragraph if italic (rendered from markdown *text*) */
+/* Subtitle — first paragraph if italic */
 .prose > p:first-child > em:only-child {
   font-size: 1.52rem;
   line-height: 1.2;
   font-weight: normal;
   font-style: italic;
   display: block;
-  margin-bottom: 0.5em;
+  margin: 0 0 0.5em;
   text-align: left;
   hyphens: none;
 }
@@ -212,6 +276,7 @@ a:hover {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
+  font-weight: 500;
   transition: color 0.2s ease;
 }
 
@@ -239,6 +304,8 @@ a:hover {
 
 .prose h1, .prose h2, .prose h3 {
   position: relative;
+  text-align: left;
+  hyphens: none;
 }
 
 /* Headings should not look like links */
@@ -259,34 +326,17 @@ a:hover {
   font-style: italic;
 }
 
-.prose code {
-  font-family: var(--mono-font);
-  font-size: 0.9rem;
-  background: var(--neutral-100);
-  padding: 0.15em 0.4em;
-  border-radius: 3px;
-}
-
-.prose pre {
-  background: var(--neutral-50);
-  padding: 1.25rem;
-  border-radius: 0.5rem;
-  overflow-x: auto;
-  margin: 1.5rem 0;
-}
-
-.prose pre code {
-  background: none;
-  padding: 0;
-}
-
 .prose strong {
-  font-weight: 600;
   color: var(--foreground);
+  font-weight: 600;
 }
 
-.prose em {
-  font-style: italic;
+.prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 2em auto;
 }
 
 .prose ul, .prose ol {
@@ -294,13 +344,8 @@ a:hover {
   padding-left: 1.625em;
 }
 
-.prose ol {
-  list-style-type: decimal;
-}
-
-.prose ul {
-  list-style-type: disc;
-}
+.prose ul { list-style-type: disc; }
+.prose ol { list-style-type: decimal; }
 
 .prose li {
   margin: 0.5em 0;
@@ -312,67 +357,55 @@ a:hover {
   margin: 3em 0;
 }
 
-.prose img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
-  margin: 2em auto;
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  font-weight: 600;
+  color: var(--foreground);
 }
 
-.prose table {
+.prose pre {
+  color: #e5e7eb;
+  background-color: #1f2937;
+  overflow-x: auto;
+  font-weight: 400;
+  font-size: 0.875em;
+  line-height: 1.7;
+  margin: 1.7em 0;
+  border-radius: 0.375rem;
+  padding: 0.857em 1.143em;
+}
+
+.prose pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-weight: inherit;
+  color: inherit;
+  font-size: inherit;
+}
+
+table {
   width: 100%;
   border-collapse: collapse;
   margin: 2em 0;
   font-size: 1rem;
 }
 
-.prose th, .prose td {
+th, td {
   padding: 1rem;
   border-bottom: 1px solid var(--neutral-200);
   text-align: left;
 }
 
-.prose th {
+th {
   font-weight: 600;
   background: var(--neutral-50);
 }
 
 /* ============================================
-   Summary box
+   Figure styling — from reference
    ============================================ */
-.summary-box {
-  position: relative;
-  background: var(--background);
-  border: 1px solid var(--neutral-300);
-  border-radius: 4px;
-  padding: 1.75rem 1.5rem 1.25rem;
-  margin: 2rem 0;
-}
-
-.summary-box .summary-title {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--foreground);
-  margin-bottom: 1em;
-}
-
-.summary-box p {
-  margin: 0 0 0.75em;
-}
-
-.summary-box p:last-child {
-  margin-bottom: 0;
-}
-
-/* ============================================
-   Figure styling
-   ============================================ */
-.figure {
-  margin: 2em 0;
-  text-align: center;
-}
-
 .body-figure {
   max-width: 90%;
   margin: 2em auto;
@@ -383,19 +416,11 @@ a:hover {
   width: 100%;
 }
 
-.figure img, .figure svg {
-  max-width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
-}
-
-.figure figcaption,
 .figure-caption {
   font-size: 0.92rem;
   color: var(--neutral-700);
   margin-top: 0.75rem;
   margin-bottom: 1.5rem;
-  text-align: left;
   line-height: 1.5;
 }
 
@@ -404,7 +429,49 @@ a:hover {
 }
 
 /* ============================================
-   Collapsible experiment boxes
+   Summary box — from reference SummaryBox component
+   ============================================ */
+.summary-box {
+  position: relative;
+  border: 1px solid var(--neutral-300);
+  border-radius: 4px;
+  padding: 1.75rem 1.5rem 1.25rem;
+  margin: 2rem 0;
+  background: var(--background);
+}
+
+.summary-box .summary-title-wrapper {
+  position: absolute;
+  top: -0.75rem;
+  left: 1rem;
+  background: var(--background);
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.summary-box .summary-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--foreground);
+  line-height: 1.3;
+}
+
+.summary-box .summary-content {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.summary-box .summary-content p {
+  margin-bottom: 0.75rem;
+}
+
+.summary-box .summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   Experiment box — from reference ExperimentBox
    ============================================ */
 .collapsible {
   position: relative;
@@ -413,7 +480,7 @@ a:hover {
   padding: 1.75rem 1.5rem 1.25rem;
   margin: 2rem 0;
   background: var(--background);
-  transition: padding 0.3s;
+  transition: padding 0.3s ease;
 }
 
 .collapsible summary {
@@ -459,7 +526,7 @@ a:hover {
 }
 
 /* ============================================
-   Footnotes
+   Footnotes — from reference
    ============================================ */
 .footnote-ref {
   position: relative;
@@ -479,10 +546,6 @@ sup {
   font-size: 0.75em;
   vertical-align: super;
   line-height: 0;
-}
-
-sup + sup {
-  margin-left: 0.25em;
 }
 
 /* ============================================
@@ -528,8 +591,19 @@ sup + sup {
 }
 
 /* ============================================
-   Layout — matching theartificialself.ai
-   Sidebar fixed left, content offset right
+   Content main area
+   ============================================ */
+.content-main {
+  max-width: var(--content-width);
+  padding: 0.25rem 1rem 2rem;
+  width: 100%;
+  font-family: var(--content-font);
+  font-size: var(--content-font-size);
+  line-height: var(--content-line-height);
+}
+
+/* ============================================
+   Layout helpers
    ============================================ */
 .min-h-screen {
   min-height: 100vh;
@@ -537,46 +611,8 @@ sup + sup {
   flex-direction: column;
 }
 
-/* Nav links */
-nav, nav a {
-  color: var(--menu-text);
-}
-
-nav {
-  font-size: 0.7rem;
-  line-height: 1.5;
-  padding-right: 2rem;
-}
-
-nav a {
-  display: block;
-  padding: 0.2rem 0;
-  text-decoration: none;
-}
-
-nav a:hover {
-  color: var(--foreground);
-}
-
-nav > ul > li {
-  margin-bottom: 0.5rem;
-}
-
-nav > ul > li > a {
-  font-weight: 500;
-}
-
 /* ============================================
-   Content main area
-   ============================================ */
-.content-main {
-  max-width: var(--content-width);
-  padding: 0.5rem 1rem 3rem;
-  width: 100%;
-}
-
-/* ============================================
-   Responsive — sidebar offset on desktop
+   Responsive breakpoints — exact from reference
    ============================================ */
 @media (min-width: 64.5rem) {
   :root {
@@ -603,4 +639,28 @@ nav > ul > li > a {
   .content-main {
     margin: 0 auto;
   }
+}
+
+/* ============================================
+   Lightbox for images
+   ============================================ */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(4px);
+  padding: 2rem;
+}
+
+.lightbox-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.5rem;
 }
