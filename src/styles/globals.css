@@ -1,7 +1,7 @@
 @import 'katex/dist/katex.min.css';
 
 :root {
-  /* Matching theartificialself.ai tokens */
+  /* Matching theartificialself.ai exactly */
   --background: #ffffff;
   --foreground: #1a1a1a;
   --neutral-50: #fafafa;
@@ -21,15 +21,13 @@
   --primary-dark: #1e40af;
   --link-color: var(--primary);
   --link-hover: var(--primary-dark);
-  --content-width: 40rem;
+  --content-width: 40rem; /* ~640px — matching reference */
   --max-width: 800px;
-  --sidebar-width: 240px;
+  --sidebar-width: 150px;
   --content-font: var(--font-garamond), 'EB Garamond', Garamond, 'Times New Roman', serif;
   --heading-font: var(--font-garamond), 'EB Garamond', Garamond, 'Times New Roman', serif;
   --mono-font: 'Geist Mono', 'JetBrains Mono', 'Fira Code', monospace;
   --sidebar-font: var(--content-font);
-  --sidebar-font-size: 1rem;
-  --sidebar-line-height: 1.5;
   --menu-text: #666666;
   --tooltip-bg: white;
   --tooltip-border: #e5e7eb;
@@ -37,10 +35,8 @@
   --citation-link: #1d4ed8;
   --citation-link-hover: #1e3a8a;
   --shadow-color: rgb(0 0 0 / 0.1);
-  --shadow-color-strong: rgba(0,0,0,0.12);
   --surface: white;
   --surface-hover: #fafafa;
-  --quote-mark: #d4d4d4;
   --scrollbar-thumb: #e5e5e5;
 }
 
@@ -69,10 +65,8 @@
   --citation-link: #60a5fa;
   --citation-link-hover: #93bbfd;
   --shadow-color: rgb(0 0 0 / 0.3);
-  --shadow-color-strong: rgba(0,0,0,0.4);
   --surface: #262626;
   --surface-hover: #2a2a2a;
-  --quote-mark: #525252;
   --scrollbar-thumb: #404040;
   color-scheme: dark;
 }
@@ -102,14 +96,10 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 1rem;
 }
 
 /* ============================================
-   Headings — matching theartificialself.ai
-   (weight 400, not bold)
+   Headings — weight 400 matching reference
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
   color: var(--foreground);
@@ -123,11 +113,11 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   margin-top: 0;
   line-height: 1.2;
-  font-size: 1.5rem;
+  font-size: 1.52rem;
 }
 
 h2 { font-size: 1.3rem; }
-h3 { font-size: 1.2rem; }
+h3 { font-size: 1.25rem; }
 
 p {
   margin-bottom: 1rem;
@@ -146,7 +136,9 @@ a:hover {
 }
 
 /* ============================================
-   Prose styling — matching theartificialself.ai
+   Prose — matching theartificialself.ai layout
+   Content is NOT body-centered. It sits right
+   of the sidebar with its own max-width.
    ============================================ */
 .prose {
   max-width: var(--content-width);
@@ -200,7 +192,7 @@ a:hover {
   line-height: 1.6;
 }
 
-/* Subtitle — first italic paragraph (bigger) */
+/* Subtitle — first italic paragraph */
 .prose > p:first-child {
   font-size: 1.65rem;
   line-height: 1.3;
@@ -211,7 +203,7 @@ a:hover {
 
 .prose a {
   color: var(--primary);
-  text-decoration: none;
+  text-decoration: underline;
   transition: color 0.2s ease;
   font-weight: 500;
 }
@@ -308,7 +300,7 @@ a:hover {
 }
 
 /* ============================================
-   Summary box — matching reference
+   Summary box
    ============================================ */
 .summary-box {
   position: relative;
@@ -335,7 +327,7 @@ a:hover {
 }
 
 /* ============================================
-   Figure styling — matching theartificialself.ai
+   Figure styling
    ============================================ */
 .figure {
   margin: 2em 0;
@@ -428,20 +420,7 @@ a:hover {
 }
 
 /* ============================================
-   Interactive chart container
-   ============================================ */
-.interactive-chart {
-  width: 100%;
-  min-height: 300px;
-  margin: 2em 0;
-  border: 1px solid var(--neutral-200);
-  border-radius: 4px;
-  overflow: hidden;
-  background: var(--neutral-50);
-}
-
-/* ============================================
-   Footnotes — matching theartificialself.ai
+   Footnotes
    ============================================ */
 .footnote-ref {
   position: relative;
@@ -510,7 +489,8 @@ sup + sup {
 }
 
 /* ============================================
-   Layout
+   Layout — matching theartificialself.ai
+   Sidebar fixed left, content offset right
    ============================================ */
 .min-h-screen {
   min-height: 100vh;
@@ -518,9 +498,7 @@ sup + sup {
   flex-direction: column;
 }
 
-/* ============================================
-   Nav / Sidebar — matching theartificialself.ai
-   ============================================ */
+/* Nav links */
 nav {
   font-size: 0.7rem;
   line-height: 1.5;
@@ -539,46 +517,26 @@ nav a:hover {
   color: var(--foreground);
 }
 
-nav > ul > li {
-  margin-bottom: 0.5rem;
-}
-
-nav > ul > li > a {
-  font-weight: 500;
+/* ============================================
+   Content main area
+   ============================================ */
+.content-main {
+  max-width: var(--content-width);
+  padding: 0.5rem 1rem 3rem;
+  width: 100%;
 }
 
 /* ============================================
-   Lightbox (for images) — matching reference
+   Responsive — sidebar offset on desktop
    ============================================ */
-.lightbox-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,.85);
-  backdrop-filter: blur(4px);
-  padding: 2rem;
-}
-
-.lightbox-image {
-  max-width: 90vw;
-  max-height: 90vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  border-radius: 0.5rem;
-}
-
-/* ============================================
-   Responsive
-   ============================================ */
-@media (min-width: 1024px) {
-  main {
-    margin-left: var(--sidebar-width);
+@media (min-width: 64.5rem) {
+  .content-main {
+    margin-left: 240px;
   }
-  .prose {
+}
+
+@media (max-width: 64.5rem) {
+  .content-main {
     margin: 0 auto;
   }
 }

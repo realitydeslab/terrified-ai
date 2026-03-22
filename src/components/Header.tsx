@@ -7,42 +7,49 @@ export function Header({ title, subtitle }: { title: string; subtitle?: string }
   return (
     <header
       style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
-        background: 'var(--background)',
-        borderBottom: '1px solid var(--neutral-200)',
+        padding: '2.5rem 1rem 0',
+        maxWidth: 'var(--max-width)',
+        margin: '0 auto',
       }}
     >
       <div
         style={{
-          maxWidth: 'var(--max-width)',
-          margin: '0 auto',
-          padding: '0.75rem 1rem',
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'space-between',
-          minHeight: '4rem',
         }}
       >
-        <Link
-          href="/"
-          style={{
-            fontFamily: 'var(--heading-font)',
-            fontSize: '1.5rem',
-            fontWeight: 400,
-            color: 'var(--foreground)',
-            textDecoration: 'none',
-            transition: 'opacity 0.2s',
-            lineHeight: 1.2,
-          }}
-        >
-          {title}{subtitle ? ': ' : ''}{subtitle && (
-            <span style={{ fontStyle: 'italic' }}>{subtitle}</span>
+        <div>
+          <Link
+            href="/"
+            style={{
+              fontFamily: 'var(--heading-font)',
+              fontSize: '2.125rem',
+              fontWeight: 400,
+              color: 'var(--foreground)',
+              textDecoration: 'none',
+              lineHeight: 1.2,
+              display: 'block',
+            }}
+          >
+            {title}
+          </Link>
+          {subtitle && (
+            <p
+              style={{
+                fontFamily: 'var(--heading-font)',
+                fontSize: '1.2rem',
+                fontStyle: 'italic',
+                color: 'var(--foreground)',
+                marginTop: '0.25rem',
+                marginBottom: 0,
+                lineHeight: 1.4,
+              }}
+            >
+              {subtitle}
+            </p>
           )}
-        </Link>
+        </div>
         <ThemeToggle />
       </div>
     </header>

@@ -34,7 +34,7 @@ export default async function ContentPage({ params }: { params: Promise<Params> 
   return (
     <>
       <Sidebar config={config} headings={page.headings} />
-      <main style={{ maxWidth: 'var(--content-width)', margin: '0 auto', padding: '0.5rem 1rem 2rem' }}>
+      <main className="content-main">
         <article className="prose" dangerouslySetInnerHTML={{ __html: page.html }} />
         <PageNav prev={prev} next={next} />
       </main>

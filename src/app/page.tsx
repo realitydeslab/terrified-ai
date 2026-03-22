@@ -10,7 +10,7 @@ export default async function HomePage() {
     return (
       <>
         <Sidebar config={config} />
-        <main style={{ maxWidth: 'var(--content-width)', margin: '0 auto', padding: '2rem 1rem' }}>
+        <main className="content-main">
           <article className="prose">
             <p style={{ fontStyle: 'italic', fontSize: '1.5rem', lineHeight: 1.2, margin: '0 0 0.5em' }}>
               {config.subtitle}
@@ -39,7 +39,7 @@ export default async function HomePage() {
   return (
     <>
       <Sidebar config={config} headings={page.headings} />
-      <main style={{ maxWidth: 'var(--content-width)', margin: '0 auto', padding: '0.5rem 1rem 2rem' }}>
+      <main className="content-main">
         <article className="prose" dangerouslySetInnerHTML={{ __html: page.html }} />
         <PageNav next={nextItem} />
       </main>

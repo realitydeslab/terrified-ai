@@ -142,16 +142,16 @@ export function Sidebar({
       <style jsx>{`
         .sidebar {
           position: fixed;
-          top: 5rem;
+          top: 4.5rem;
           bottom: 0;
-          left: max(calc((100vw - var(--content-width)) / 2 - var(--sidebar-width) - 3rem), 1rem);
+          left: 24px;
           width: var(--sidebar-width);
           padding-top: 1rem;
-          padding-right: 2rem;
+          padding-right: 1rem;
           overflow-y: auto;
           font-family: var(--content-font);
-          font-size: 1rem;
-          line-height: 1.5;
+          font-size: 0.7rem;
+          line-height: 1.8;
           scrollbar-width: thin;
           scrollbar-color: var(--neutral-300) transparent;
         }
@@ -302,7 +302,7 @@ export function Sidebar({
           margin-top: 0;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 64.5rem) {
           .sidebar {
             display: none;
           }
