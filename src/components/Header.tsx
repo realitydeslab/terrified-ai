@@ -3,52 +3,46 @@
 import Link from 'next/link';
 import { ThemeToggle } from './ThemeToggle';
 
-export function Header({ title, subtitle }: { title: string; subtitle?: string }) {
+export function Header({ title }: { title: string }) {
   return (
     <header
+      className="sticky left-0 right-0 top-0 z-50"
       style={{
-        padding: '2.5rem 1rem 0',
+        background: 'color-mix(in srgb, var(--background) 80%, transparent)',
+        backdropFilter: 'blur(4px)',
+        WebkitBackdropFilter: 'blur(4px)',
+        padding: '0.5rem 0',
+        transition: 'all 0.2s',
       }}
     >
       <div
         style={{
+          maxWidth: 'var(--content-width)',
+          margin: '0 auto',
+          padding: '1.5rem 1rem',
           display: 'flex',
-          alignItems: 'flex-start',
+          height: '4rem',
+          alignItems: 'center',
           justifyContent: 'space-between',
         }}
       >
-        <div>
-          <Link
-            href="/"
-            style={{
-              fontFamily: 'var(--heading-font)',
-              fontSize: '2.125rem',
-              fontWeight: 400,
-              color: 'var(--foreground)',
-              textDecoration: 'none',
-              lineHeight: 1.2,
-              display: 'block',
-            }}
-          >
-            {title}
-          </Link>
-          {subtitle && (
-            <p
-              style={{
-                fontFamily: 'var(--heading-font)',
-                fontSize: '1.2rem',
-                fontStyle: 'italic',
-                color: 'var(--foreground)',
-                marginTop: '0.25rem',
-                marginBottom: 0,
-                lineHeight: 1.4,
-              }}
-            >
-              {subtitle}
-            </p>
-          )}
+        <Link
+          href="/"
+          style={{
+            fontFamily: 'var(--content-font)',
+            fontSize: '2.25rem',
+            fontWeight: 600,
+            color: 'var(--neutral-800)',
+            textDecoration: 'none',
+            marginTop: '0.5rem',
+            transition: 'all 0.2s',
+          }}
+        >
+          {title}
+        </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+          <ThemeToggle />
         </div>
-        <ThemeToggle />
       </div>
     </header>
   );

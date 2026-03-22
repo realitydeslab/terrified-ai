@@ -55,21 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="antialiased" style={{ maxWidth: 'var(--max-width)', margin: '0 auto', padding: '0 1rem' }}>
         <div className="min-h-screen">
-          <Header title={config.title} subtitle={config.subtitle} />
-          {/* Author info below header */}
-          <div style={{
-            fontSize: '0.8125rem',
-            color: 'var(--neutral-500)',
-            padding: '0.35rem 1rem 1rem',
-          }}>
-            {config.authors.map((a: { name: string; corresponding?: boolean }, i: number) => (
-              <span key={i}>
-                {i > 0 && ', '}
-                {a.name}
-                {a.corresponding && <sup>*</sup>}
-              </span>
-            ))}
-          </div>
+          <Header title={config.title} />
           <div style={{ display: 'flex', flex: 1 }}>{children}</div>
         </div>
       </body>

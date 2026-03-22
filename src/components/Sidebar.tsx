@@ -142,16 +142,16 @@ export function Sidebar({
       <style jsx>{`
         .sidebar {
           position: fixed;
-          top: 4.5rem;
+          top: 4rem;
           bottom: 0;
-          left: 24px;
+          left: var(--sidebar-offset);
           width: var(--sidebar-width);
-          padding-top: 1rem;
-          padding-right: 1rem;
+          padding-top: 4rem;
+          padding-right: 2rem;
           overflow-y: auto;
-          font-family: var(--content-font);
-          font-size: 0.7rem;
-          line-height: 1.8;
+          font-family: var(--sidebar-font);
+          font-size: var(--sidebar-font-size);
+          line-height: var(--sidebar-line-height);
           scrollbar-width: thin;
           scrollbar-color: var(--neutral-300) transparent;
         }

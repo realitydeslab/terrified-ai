@@ -23,11 +23,14 @@
   --link-hover: var(--primary-dark);
   --content-width: 40rem; /* ~640px — matching reference */
   --max-width: 800px;
-  --sidebar-width: 150px;
+  --sidebar-width: 240px;
+  --sidebar-offset: max(calc(50%), 2rem);
   --content-font: var(--font-garamond), 'EB Garamond', Garamond, 'Times New Roman', serif;
   --heading-font: var(--font-garamond), 'EB Garamond', Garamond, 'Times New Roman', serif;
   --mono-font: 'Geist Mono', 'JetBrains Mono', 'Fira Code', monospace;
   --sidebar-font: var(--content-font);
+  --sidebar-font-size: 1rem;
+  --sidebar-line-height: 1.5;
   --menu-text: #666666;
   --tooltip-bg: white;
   --tooltip-border: #e5e7eb;
@@ -192,11 +195,14 @@ a:hover {
   line-height: 1.6;
 }
 
-/* Subtitle styling — only if explicitly classed */
-.prose .subtitle-line {
-  font-size: 1.65rem;
-  line-height: 1.3;
-  margin-bottom: 0.6em;
+/* Subtitle — first paragraph if italic (rendered from markdown *text*) */
+.prose > p:first-child > em:only-child {
+  font-size: 1.52rem;
+  line-height: 1.2;
+  font-weight: normal;
+  font-style: italic;
+  display: block;
+  margin-bottom: 0.5em;
   text-align: left;
   hyphens: none;
 }
@@ -532,22 +538,32 @@ sup + sup {
 }
 
 /* Nav links */
+nav, nav a {
+  color: var(--menu-text);
+}
+
 nav {
   font-size: 0.7rem;
   line-height: 1.5;
   padding-right: 2rem;
-  color: var(--menu-text);
 }
 
 nav a {
   display: block;
   padding: 0.2rem 0;
-  color: var(--menu-text);
   text-decoration: none;
 }
 
 nav a:hover {
   color: var(--foreground);
+}
+
+nav > ul > li {
+  margin-bottom: 0.5rem;
+}
+
+nav > ul > li > a {
+  font-weight: 500;
 }
 
 /* ============================================
@@ -563,8 +579,23 @@ nav a:hover {
    Responsive — sidebar offset on desktop
    ============================================ */
 @media (min-width: 64.5rem) {
-  .content-main {
-    margin-left: 240px;
+  :root {
+    --sidebar-offset: max(calc((100% - var(--content-width)) / 2 - 14rem), 2rem);
+  }
+}
+
+@media (min-width: 80rem) {
+  :root {
+    --sidebar-offset: calc((100% - var(--content-width)) / 2 - 16rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    margin-left: var(--sidebar-width);
+  }
+  .prose {
+    margin: 0 auto;
   }
 }
 
