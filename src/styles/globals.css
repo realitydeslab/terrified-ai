@@ -27,23 +27,24 @@
 }
 
 [data-theme='dark'] {
-  --background: #0a0a0f;
-  --foreground: #e5e5e5;
-  --neutral-50: #171717;
-  --neutral-100: #1c1c1c;
-  --neutral-200: #2a2a2a;
-  --neutral-300: #3a3a3a;
+  --background: #1a1a1a;
+  --foreground: #f5f5f5;
+  --neutral-50: #262626;
+  --neutral-100: #2a2a2a;
+  --neutral-200: #333333;
+  --neutral-300: #404040;
   --neutral-400: #525252;
   --neutral-500: #737373;
-  --neutral-600: #a3a3a3;
-  --neutral-700: #d4d4d4;
-  --neutral-800: #e5e5e5;
+  --neutral-600: #b0b0b0;
+  --neutral-700: #e0e0e0;
+  --neutral-800: #f0f0f0;
   --neutral-900: #fafafa;
   --accent: #ef4444;
   --accent-muted: #450a0a;
   --accent-dark: #fca5a5;
   --link-color: #60a5fa;
-  --link-hover: #93c5fd;
+  --link-hover: #93bbfd;
+  color-scheme: dark;
 }
 
 * {
@@ -106,12 +107,11 @@ body {
 .prose a {
   color: var(--link-color);
   text-decoration: none;
-  transition: color 0.15s;
+  transition: color 0.2s;
 }
 
 .prose a:hover {
   color: var(--link-hover);
-  text-decoration: underline;
 }
 
 .prose blockquote {
@@ -234,31 +234,41 @@ body {
 }
 
 /* ============================================
-   Collapsible experiment boxes
+   Collapsible experiment boxes (matching ExperimentBox)
    ============================================ */
 .collapsible {
-  border: 1px solid var(--neutral-200);
+  position: relative;
+  border: 1px solid var(--neutral-300);
   border-radius: 4px;
-  margin: 1.5em 0;
-  overflow: hidden;
+  padding: 1.75rem 1.5rem 1.25rem;
+  margin: 2rem 0;
+  background: var(--background);
+  transition: padding 0.3s;
 }
 
 .collapsible summary {
-  padding: 1em 1.5em;
   cursor: pointer;
   font-weight: 600;
   font-size: 0.95em;
-  background: var(--neutral-50);
+  color: var(--foreground);
+  line-height: 1.3;
   list-style: none;
   display: flex;
   align-items: center;
   gap: 0.5em;
+  transition: color 0.15s;
+}
+
+.collapsible summary:hover {
+  color: var(--neutral-700);
 }
 
 .collapsible summary::before {
   content: '▸';
-  transition: transform 0.2s;
-  font-size: 0.8em;
+  font-size: 0.85em;
+  color: var(--neutral-600);
+  transition: transform 0.3s;
+  flex-shrink: 0;
 }
 
 .collapsible[open] summary::before {
@@ -266,7 +276,16 @@ body {
 }
 
 .collapsible .collapsible-content {
-  padding: 1em 1.5em;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s, opacity 0.25s;
+  opacity: 0;
+}
+
+.collapsible[open] .collapsible-content {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 1rem;
 }
 
 /* ============================================
@@ -303,6 +322,18 @@ sup {
 }
 
 /* ============================================
+   Page content fade-in
+   ============================================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.prose {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* ============================================
    Navigation arrows
    ============================================ */
 .page-nav {
@@ -317,11 +348,11 @@ sup {
   font-size: 0.95em;
   color: var(--neutral-600);
   text-decoration: none;
-  transition: color 0.15s;
+  transition: color 0.2s;
 }
 
 .page-nav a:hover {
-  color: var(--link-color);
+  color: var(--foreground);
 }
 
 /* ============================================

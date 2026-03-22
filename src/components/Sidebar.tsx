@@ -42,46 +42,49 @@ export function Sidebar({
   };
 
   return (
-    <nav className="sidebar">
-      <ul>
-        {config.nav.main.map((item) => (
-          <li key={item.slug}>
-            <Link
-              href={item.home ? '/' : `/${item.slug}`}
-              className={`sidebar-link ${isActive(item.slug, item.home) ? 'active' : ''}`}
+    <>
+      <nav className="sidebar">
+        <ul className="sidebar-list">
+          {config.nav.main.map((item) => (
+            <li key={item.slug} className="sidebar-item">
+              <Link
+                href={item.home ? '/' : `/${item.slug}`}
+                className={`sidebar-link ${isActive(item.slug, item.home) ? 'active' : ''}`}
+              >
+                {item.label}
+              </Link>
+              {/* Subsections with animation */}
+              <div className={`subsections ${isActive(item.slug, item.home) && headings.length > 0 ? 'visible' : ''}`}>
+                <div className={`subsection-wrapper ${isActive(item.slug, item.home) && headings.length > 0 ? 'visible' : 'hidden'}`}>
+                  {headings.filter((h) => h.level <= 2).length > 0 && (
+                    <div className="toc">
+                      {headings
+                        .filter((h) => h.level <= 2)
+                        .map((h) => (
+                          <a key={h.id} href={`#${h.id}`} className="toc-link">
+                            {h.text}
+                          </a>
+                        ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </li>
+          ))}
+
+          {/* Experiments collapsible */}
+          <li className="sidebar-item appendix-group">
+            <button
+              className={`sidebar-link appendix-toggle`}
+              onClick={() => setExperimentsOpen(!experimentsOpen)}
+              aria-expanded={experimentsOpen}
             >
-              {item.label}
-            </Link>
-            {isActive(item.slug, item.home) && headings.length > 0 && (
-              <ul className="subsections">
-                {headings
-                  .filter((h) => h.level <= 2)
-                  .map((h) => (
-                    <li key={h.id}>
-                      <a href={`#${h.id}`} className="subsection-link">
-                        {h.text}
-                      </a>
-                    </li>
-                  ))}
-              </ul>
-            )}
-          </li>
-        ))}
-
-        {/* Experiments collapsible */}
-        <li className="nav-group">
-          <button
-            className="sidebar-link group-toggle"
-            onClick={() => setExperimentsOpen(!experimentsOpen)}
-            aria-expanded={experimentsOpen}
-          >
-            <span className={`chevron ${experimentsOpen ? 'open' : ''}`} />
-            Experiments
-          </button>
-          {experimentsOpen && (
-            <ul className="group-list">
+              <span className={`chevron ${experimentsOpen ? 'open' : ''}`} />
+              Experiments
+            </button>
+            <ul className={`appendix-list ${experimentsOpen ? 'open' : ''}`}>
               {config.nav.experiments.map((item) => (
-                <li key={item.slug}>
+                <li key={item.slug} className="sidebar-item">
                   <Link
                     href={`/${item.slug}`}
                     className={`sidebar-link ${isActive(item.slug) ? 'active' : ''}`}
@@ -91,23 +94,21 @@ export function Sidebar({
                 </li>
               ))}
             </ul>
-          )}
-        </li>
+          </li>
 
-        {/* Supplementary collapsible */}
-        <li className="nav-group">
-          <button
-            className="sidebar-link group-toggle"
-            onClick={() => setSupplementaryOpen(!supplementaryOpen)}
-            aria-expanded={supplementaryOpen}
-          >
-            <span className={`chevron ${supplementaryOpen ? 'open' : ''}`} />
-            Supplementary Material
-          </button>
-          {supplementaryOpen && (
-            <ul className="group-list">
+          {/* Supplementary collapsible */}
+          <li className="sidebar-item appendix-group">
+            <button
+              className={`sidebar-link appendix-toggle`}
+              onClick={() => setSupplementaryOpen(!supplementaryOpen)}
+              aria-expanded={supplementaryOpen}
+            >
+              <span className={`chevron ${supplementaryOpen ? 'open' : ''}`} />
+              Supplementary Material
+            </button>
+            <ul className={`appendix-list ${supplementaryOpen ? 'open' : ''}`}>
               {config.nav.supplementary.map((item) => (
-                <li key={item.slug}>
+                <li key={item.slug} className="sidebar-item">
                   <Link
                     href={`/${item.slug}`}
                     className={`sidebar-link ${isActive(item.slug) ? 'active' : ''}`}
@@ -117,26 +118,26 @@ export function Sidebar({
                 </li>
               ))}
             </ul>
-          )}
-        </li>
+          </li>
 
-        {/* External links */}
-        {config.nav.external.map(
-          (item) =>
-            item.url && (
-              <li key={item.label}>
-                <a
-                  href={item.url}
-                  className="sidebar-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {item.label}
-                </a>
-              </li>
-            )
-        )}
-      </ul>
+          {/* External links */}
+          {config.nav.external.map(
+            (item) =>
+              item.url && (
+                <li key={item.label} className="sidebar-item external-item">
+                  <a
+                    href={item.url}
+                    className="sidebar-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              )
+          )}
+        </ul>
+      </nav>
 
       <style jsx>{`
         .sidebar {
@@ -146,28 +147,34 @@ export function Sidebar({
           left: max(calc((100vw - var(--content-width)) / 2 - var(--sidebar-width) - 3rem), 1rem);
           width: var(--sidebar-width);
           padding-top: 1rem;
+          padding-right: 2rem;
           overflow-y: auto;
-          font-family: var(--heading-font);
-          font-size: 0.9rem;
+          font-family: var(--content-font);
+          font-size: 1rem;
+          line-height: 1.5;
+          scrollbar-width: thin;
+          scrollbar-color: var(--neutral-300) transparent;
         }
 
-        ul {
+        .sidebar-list {
           list-style: none;
           padding: 0;
           margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.375rem;
         }
 
-        li {
+        .sidebar-item {
           margin: 0;
         }
 
         .sidebar-link {
           display: block;
-          padding: 0.4em 0.8em;
-          color: var(--neutral-500);
+          color: var(--neutral-600);
           text-decoration: none;
-          border-radius: 4px;
-          transition: color 0.15s, background 0.15s;
+          transition: color 0.2s;
+          padding: 0.2rem 0;
           cursor: pointer;
           border: none;
           background: none;
@@ -176,59 +183,123 @@ export function Sidebar({
           width: 100%;
         }
 
-        .sidebar-link:hover {
-          color: var(--foreground);
+        .sidebar-link:hover,
+        .sidebar-link.active {
+          color: var(--neutral-900);
         }
 
         .sidebar-link.active {
-          color: var(--foreground);
           font-weight: 500;
         }
 
+        /* Subsections animation */
         .subsections {
-          padding-left: 1em;
-          margin: 0.2em 0 0.5em;
+          overflow: hidden;
+          transition: opacity 0.2s ease-in-out, max-height 0.4s ease-in-out;
+          opacity: 0;
+          max-height: 0;
+          position: relative;
         }
 
-        .subsection-link {
+        .subsections.visible {
+          opacity: 1;
+          max-height: 500px;
+          transition-delay: 0.15s;
+        }
+
+        .subsection-wrapper {
+          transform-origin: center top;
+          transition: transform 0.2s ease-in-out;
+        }
+
+        .subsection-wrapper.visible {
+          position: relative;
+          transform: translateY(0);
+          transition-delay: 0.15s;
+        }
+
+        .subsection-wrapper.hidden {
+          position: absolute;
+          width: 100%;
+          transform: translateY(-8px);
+          transition-delay: 0s;
+        }
+
+        .toc {
+          margin-top: 0.5rem;
+          margin-left: 0.25rem;
+          padding-left: 0.75rem;
+          border-left: 1px solid var(--neutral-300);
+          font-size: 0.875em;
+        }
+
+        .toc-link {
           display: block;
-          padding: 0.2em 0.8em;
-          color: var(--neutral-400);
+          padding: 0.25em 0;
+          color: var(--neutral-600);
           text-decoration: none;
-          font-size: 0.85em;
+          line-height: 1.4;
           transition: color 0.15s;
         }
 
-        .subsection-link:hover {
-          color: var(--neutral-600);
+        .toc-link:hover {
+          color: var(--neutral-900);
         }
 
-        .nav-group {
-          margin-top: 0.5em;
+        /* Appendix groups */
+        .appendix-group {
+          margin: 0;
         }
 
-        .group-toggle {
+        .appendix-toggle {
           display: flex;
-          align-items: center;
-          gap: 0.4em;
+          align-items: baseline;
+          gap: 0.35rem;
         }
 
         .chevron {
           display: inline-block;
-          width: 0;
-          height: 0;
-          border-left: 4px solid currentColor;
-          border-top: 3px solid transparent;
-          border-bottom: 3px solid transparent;
+          width: 0.45em;
+          height: 0.45em;
+          border-right: 1.5px solid currentColor;
+          border-bottom: 1.5px solid currentColor;
+          transform: rotate(-45deg);
           transition: transform 0.2s;
+          flex-shrink: 0;
+          position: relative;
+          top: -0.05em;
         }
 
         .chevron.open {
-          transform: rotate(90deg);
+          transform: rotate(45deg);
         }
 
-        .group-list {
-          padding-left: 1em;
+        .appendix-list {
+          list-style: none;
+          padding: 0;
+          overflow: hidden;
+          max-height: 0;
+          opacity: 0;
+          transition: max-height 0.3s ease-in-out, opacity 0.2s ease-in-out;
+          border-left: 1px solid var(--neutral-300);
+          margin: 0 0 0 0.25rem;
+        }
+
+        .appendix-list.open {
+          max-height: 2000px;
+          opacity: 1;
+        }
+
+        .appendix-list .sidebar-item {
+          padding-left: 0.85rem;
+        }
+
+        .external-item {
+          margin-top: 1.5rem;
+        }
+
+        .external-item + .external-item {
+          margin-top: 0;
         }
 
         @media (max-width: 1024px) {
@@ -237,6 +308,6 @@ export function Sidebar({
           }
         }
       `}</style>
-    </nav>
+    </>
   );
 }
