@@ -17,12 +17,12 @@
   --accent: #dc2626;
   --accent-muted: #fecaca;
   --accent-dark: #991b1b;
-  --content-width: 720px;
-  --sidebar-width: 220px;
+  --content-width: 40rem;
+  --sidebar-width: 240px;
   --sidebar-offset: calc((100vw - var(--content-width)) / 2 - var(--sidebar-width) - 2rem);
-  --content-font: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
-  --heading-font: 'Inter', system-ui, -apple-system, sans-serif;
-  --mono-font: 'JetBrains Mono', 'Fira Code', monospace;
+  --content-font: var(--font-garamond), 'EB Garamond', Garamond, 'Times New Roman', serif;
+  --heading-font: var(--font-garamond), 'EB Garamond', Garamond, 'Times New Roman', serif;
+  --mono-font: 'Geist Mono', 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 [data-theme='dark'] {
@@ -57,8 +57,8 @@ body {
   font-family: var(--content-font);
   background: var(--background);
   color: var(--foreground);
-  line-height: 1.7;
-  font-size: 1.05rem;
+  line-height: 1.6;
+  font-size: 1rem;
   -webkit-font-smoothing: antialiased;
 }
 

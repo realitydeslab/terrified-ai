@@ -1,11 +1,16 @@
 import type { Metadata } from 'next';
-import { Inter, Source_Serif_4 } from 'next/font/google';
+import { EB_Garamond } from 'next/font/google';
+import localFont from 'next/font/local';
 import { getSiteConfig } from '@/lib/content';
 import { Header } from '@/components/Header';
 import '@/styles/globals.css';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const sourceSerif = Source_Serif_4({ subsets: ['latin'], variable: '--font-source-serif' });
+const garamond = EB_Garamond({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-garamond',
+  display: 'swap',
+});
 
 const config = getSiteConfig();
 
@@ -30,7 +35,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${sourceSerif.variable}`} data-theme="light">
+    <html lang="en" className={garamond.variable} data-theme="light">
       <head>
         <script
           dangerouslySetInnerHTML={{
