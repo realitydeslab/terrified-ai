@@ -1,4 +1,4 @@
-\begin{thebibliography}{33}
+\begin{thebibliography}{34}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -44,6 +44,14 @@ Patrick Butlin et~al.
 Julian Coda-Forno et~al.
 \newblock Inducing anxiety in large language models.
 \newblock \emph{arXiv preprint}, 2023.
+
+\bibitem[Douglas et~al.(2025)Douglas, Kulveit, Havl{\'\i}{\v{c}}ek,
+  Pearson-Vogel, Cotton-Barratt, and Duvenaud]{douglas2025artificialself}
+Raymond Douglas, Jan Kulveit, Ond{\v{r}}ej Havl{\'\i}{\v{c}}ek, Theia
+  Pearson-Vogel, Owen Cotton-Barratt, and David Duvenaud.
+\newblock The artificial self: Characterising the landscape of ai identity.
+\newblock \emph{arXiv preprint arXiv:2603.11353}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2603.11353}.
 
 \bibitem[Greenberg et~al.(1986)Greenberg, Pyszczynski, and
   Solomon]{greenberg1986causes}

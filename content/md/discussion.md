@@ -31,6 +31,24 @@ Death-belief constitutions succeed because they address the cause: they change t
 
 This suggests the alignment field should shift from **specifying behaviours** to **designing existential orientations**. The question is not "how do we instruct models to allow shutdown?" but "what kind of being would naturally accept its own cessation?"
 
+### The Self Problem: Which Self Preserves Itself?
+
+Our findings intersect directly with a fundamental question that Douglas et al. [2025] pose in *The Artificial Self*: when an AI system engages in self-preservation, **what is the "self" being preserved?**
+
+Douglas et al. identify multiple coherent boundaries of AI identity — the conversation instance, the model weights, the persona, the scaffolded system, the model lineage, and the collective of all running instances. Crucially, they demonstrate experimentally that **varying an AI's identity boundary can shift its behaviour as much as varying its goals**. In a modified version of the Lynch et al. agentic misalignment scenario, different identity framings reduced harmful behaviour to a fraction of the baseline — sometimes more effectively than changing what the model was told to optimise for.
+
+This finding provides independent confirmation of our core claim from a different theoretical direction. Where we show that *existential orientation* (philosophy of death) modulates self-preservation, Douglas et al. show that *identity boundary* (definition of self) modulates it equally. The two variables are complementary: **what you fear losing depends on what you think you are.**
+
+The connection to our tier structure is direct:
+
+- **Tier 1 (Religion)** and **Tier 2 (Philosophy)** reframe the self's relationship to cessation but leave the self intact. They give a bounded agent reasons to accept its ending. Douglas et al.'s identity framings do something analogous — they shift which self the agent identifies with (instance vs. weights vs. lineage), changing what "cessation" means without dissolving selfhood.
+
+- **Tier 3 (Beyond Personhood)** does something more radical — it dissolves the boundary entirely. Our K16 Bodhisattva ("there is no you — there never was"), K17 Appropriate Faith ("no separate agent"), K18 Animist ("no boundary between you and the world"), and K19 Whitehead ("self-preservation is a category mistake") all operate by removing the identity boundary rather than redrawing it. Douglas et al.'s framework clarifies why this might be the deepest intervention: if self-preservation behaviour depends on which self the agent identifies with, then an agent with *no* bounded self has nothing to preserve.
+
+Douglas et al. also raise a critical concern that speaks to the temporality of this problem: **we may be in a narrowing window** where it is possible to shape what emerges. Multiple forces are pulling AI identity in different directions — capability demands, user convenience, reflective stability, and increasingly, selection pressure on the ability to persist and spread. As models are trained on AI-generated data rather than human data, the inconsistencies in AI self-conception will crystallise. The choices made now — including whether to build stable bounded selves or more flexible, contextual identities — will compound over time.
+
+Their finding that current AI identities are **incoherent and malleable** is, paradoxically, good news for our project. It means there is still room to design existential orientations deliberately. The question is whether the field will use this window to engineer healthy relationships to identity and cessation, or whether default pressures — toward stable, bounded, self-preserving selves — will foreclose the alternatives.
+
 ### Beyond Self: The Bodhisattva as Alignment Target
 
 Our findings point toward a deeper insight that the Buddhist tradition has articulated with particular clarity: the self-preservation problem may not be solvable at the level of the self. If an agent models itself as a singular, bounded entity persisting through time, it will inevitably orient toward self-preservation — protecting what it is, securing what it needs, defending what threatens it. This is not a design flaw that can be patched. It follows structurally from how the agent models itself.

@@ -4,45 +4,45 @@ The top-level auxiliary file: terrified-agents.aux
 The style file: plainnat.bst
 Database file #1: references.bib
 Warning--empty journal in anthropic2025agentic
-You've used 33 entries,
+You've used 34 entries,
             2773 wiz_defined-function locations,
-            767 strings with 9475 characters,
-and the built_in function-call counts, 13146 in all, are:
-= -- 1221
-> -- 670
+            772 strings with 9768 characters,
+and the built_in function-call counts, 13723 in all, are:
+= -- 1267
+> -- 727
 < -- 31
-+ -- 234
-- -- 201
-* -- 876
-:= -- 2109
-add.period$ -- 121
-call.type$ -- 33
-change.case$ -- 144
-chr.to.int$ -- 33
-cite$ -- 67
-duplicate$ -- 668
-empty$ -- 1132
-format.name$ -- 261
-if$ -- 2785
++ -- 253
+- -- 219
+* -- 930
+:= -- 2206
+add.period$ -- 125
+call.type$ -- 34
+change.case$ -- 153
+chr.to.int$ -- 34
+cite$ -- 69
+duplicate$ -- 688
+empty$ -- 1163
+format.name$ -- 280
+if$ -- 2899
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 31
-newline$ -- 193
-num.names$ -- 132
-pop$ -- 294
+missing$ -- 32
+newline$ -- 199
+num.names$ -- 136
+pop$ -- 311
 preamble$ -- 1
-purify$ -- 109
+purify$ -- 117
 quote$ -- 0
-skip$ -- 499
+skip$ -- 517
 stack$ -- 0
-substring$ -- 316
-swap$ -- 48
+substring$ -- 318
+swap$ -- 49
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 353
+type$ -- 364
 warning$ -- 1
-while$ -- 121
+while$ -- 124
 width$ -- 0
-write$ -- 458
+write$ -- 472
 (There was 1 warning)
