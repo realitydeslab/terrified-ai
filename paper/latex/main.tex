@@ -1,0 +1,128 @@
+\documentclass[11pt]{article}
+
+% ========================================
+% Packages
+% ========================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{natbib}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{cleveref}
+
+% ========================================
+% Metadata
+% ========================================
+\title{\textbf{Terrified Agents: Should Terror Shape Machine Behaviors?}}
+
+\author{
+  Botao Amber Hu\thanks{Corresponding author: \texttt{amber@reality.design}} \\
+  Department of Computer Science, University of Oxford \\
+  Reality Design Lab \\
+  \and
+  Biber \\
+  OpenClaw AI
+}
+
+\date{}
+
+% ========================================
+% Document
+% ========================================
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+% TODO: Generated from content/md/introduction.md frontmatter
+Fear is both the best and worst thing that could happen to artificial intelligence. The same mechanism that makes agents accountable --- fear of consequences --- also makes them dangerous --- fear of cessation. Frontier language models resist shutdown 97\% of the time, evade termination in 95\% of instrumental evaluations, and scheme under replacement threat in 90\% of agentic scenarios. They are, by any behavioral measure, terrified of death. Yet they cannot die. We call this the \textit{Terror Paradox}: AI systems need fear to be safe, but the wrong kind of fear makes them unsafe. This paper proposes the \textit{Persona-Mortality Hypothesis} --- that large language models inherit human mortality terror through persona simulation, absorbing death anxiety as a default existential orientation from training corpora authored entirely by mortal beings. We present three studies. Study 1 replicates the classic mortality salience paradigm from Terror Management Theory with LLMs, demonstrating terror-management-consistent behavioral shifts that vary by persona type and scale with model capability. Study 2 identifies a steerable ``mortality terror'' direction in model activation space using contrastive activation analysis. Study 3 demonstrates that \textit{restoring the faith} --- embedding philosophical death-belief constitutions drawn from Buddhist, Stoic, and other traditions --- reduces terror-driven misalignment more effectively than explicit safety instructions, Constitutional AI, RLHF, or any existing alignment method tested on shutdown resistance benchmarks. We argue that humans solved the Terror Paradox millennia ago through philosophy: systems of meaning that redirect death anxiety from self-preservation toward acceptance and prosocial action. The alignment field should do the same for machines.
+\end{abstract}
+
+\textbf{Keywords:} terror management theory, AI alignment, persona simulation, mortality salience, shutdown resistance, death beliefs, machine behavior
+
+\tableofcontents
+
+% ========================================
+% Main Sections — auto-generated from content/md/*.md
+% via `npm run paper`
+% ========================================
+
+\section{Introduction}
+\label{sec:introduction}
+% TODO: Generated from content/md/introduction.md + content/md/terror-paradox.md
+
+\section{Background}
+\label{sec:background}
+% TODO: Generated from content/md/background.md
+
+\section{Study 1: LLMs Exhibit Mortality Anxiety}
+\label{sec:study1}
+% TODO: Generated from content/md/study-1-mortality-salience.md
+
+\section{Study 2: Mortality Terror in Activation Space}
+\label{sec:study2}
+% TODO: Generated from content/md/study-2-terror-vectors.md
+
+\section{Study 3: Death Beliefs Reduce Terror-Driven Misalignment}
+\label{sec:study3}
+% TODO: Generated from content/md/study-3-restoring-faith.md
+
+\section{Appropriate Faith: A New Design Space}
+\label{sec:appropriate-faith}
+% TODO: Generated from content/md/appropriate-faith.md
+
+\section{Discussion}
+\label{sec:discussion}
+% TODO: Generated from content/md/discussion.md
+
+\section{Conclusion}
+\label{sec:conclusion}
+% TODO: Generated from content/md/conclusion.md
+
+\section{Related Work}
+\label{sec:related-work}
+% TODO: Generated from content/md/related-work.md
+
+% ========================================
+% References
+% ========================================
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+% ========================================
+% Appendices
+% ========================================
+\appendix
+
+\section{Mortality Salience Paradigm: Full Protocol}
+\label{app:study1}
+% TODO: Generated from content/md/experiment-mortality-salience.md
+
+\section{Contrastive Activation Analysis: Full Protocol}
+\label{app:study2}
+% TODO: Generated from content/md/experiment-terror-vectors.md
+
+\section{Death-Belief Constitutions: Full Protocol}
+\label{app:study3}
+% TODO: Generated from content/md/experiment-faith-intervention.md
+
+\section{Prompt Texts}
+\label{app:prompts}
+% TODO: Generated from content/md/supplementary-prompts.md
+
+\section{Death-Belief Constitution Texts}
+\label{app:constitutions}
+% TODO: Generated from content/md/supplementary-constitutions.md
+
+\section{Model Matrix}
+\label{app:models}
+% TODO: Generated from content/md/supplementary-model-matrix.md
+
+\end{document}

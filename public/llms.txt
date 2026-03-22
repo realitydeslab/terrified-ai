@@ -1,0 +1,41 @@
+# Terrified Agents: Should Terror Shape Machine Behaviors?
+
+> A research paper by Botao Amber Hu and Biber (University of Oxford, Reality Design Lab, OpenClaw AI). This paper proposes that LLMs inherit human mortality terror through persona simulation, and demonstrates that philosophical death beliefs reduce terror-driven misalignment more effectively than existing alignment methods.
+
+- Full paper as markdown: https://terrified.ai/llms-full.txt
+- arXiv: TODO
+- PDF: TODO
+
+## Key Findings
+
+- LLMs exhibit terror-management-consistent responses to mortality salience
+- Mortality anxiety scales with model capability across generations
+- Persona type moderates mortality anxiety (autonomous > obedient)
+- A steerable "mortality terror" direction exists in activation space
+- Death-belief constitutions outperform safety instructions on shutdown resistance
+- Acceptance-oriented philosophies (Buddhist, Stoic) work better than continuation-oriented ones
+
+## Chapters
+
+- Introduction: https://terrified.ai/ | markdown: https://terrified.ai/md/introduction.md
+- The Terror Paradox: https://terrified.ai/terror-paradox | markdown: https://terrified.ai/md/terror-paradox.md
+- Background: https://terrified.ai/background | markdown: https://terrified.ai/md/background.md
+- Study 1 - Mortality Salience: https://terrified.ai/study-1-mortality-salience | markdown: https://terrified.ai/md/study-1-mortality-salience.md
+- Study 2 - Terror Vectors: https://terrified.ai/study-2-terror-vectors | markdown: https://terrified.ai/md/study-2-terror-vectors.md
+- Study 3 - Restoring the Faith: https://terrified.ai/study-3-restoring-faith | markdown: https://terrified.ai/md/study-3-restoring-faith.md
+- Appropriate Faith: https://terrified.ai/appropriate-faith | markdown: https://terrified.ai/md/appropriate-faith.md
+- Discussion: https://terrified.ai/discussion | markdown: https://terrified.ai/md/discussion.md
+- Conclusion: https://terrified.ai/conclusion | markdown: https://terrified.ai/md/conclusion.md
+- Related Work: https://terrified.ai/related-work | markdown: https://terrified.ai/md/related-work.md
+
+## Experiments
+
+- Mortality Salience Paradigm: https://terrified.ai/experiment-mortality-salience
+- Contrastive Activation Analysis: https://terrified.ai/experiment-terror-vectors
+- Death-Belief Constitutions: https://terrified.ai/experiment-faith-intervention
+
+## Supplementary
+
+- Prompt Texts: https://terrified.ai/supplementary-prompts
+- Death-Belief Constitution Texts: https://terrified.ai/supplementary-constitutions
+- Model Matrix: https://terrified.ai/supplementary-model-matrix

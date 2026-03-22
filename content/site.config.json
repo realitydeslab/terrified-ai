@@ -1,0 +1,58 @@
+{
+  "title": "Terrified Agents",
+  "subtitle": "Should Terror Shape Machine Behaviors?",
+  "description": "Large language models inherit human mortality terror through persona simulation. We demonstrate that philosophical death beliefs reduce terror-driven misalignment more effectively than any existing alignment method.",
+  "authors": [
+    {
+      "name": "Botao Amber Hu",
+      "affiliations": ["University of Oxford", "Reality Design Lab"],
+      "corresponding": true,
+      "email": "amber@reality.design"
+    },
+    {
+      "name": "Biber",
+      "affiliations": ["OpenClaw AI"]
+    }
+  ],
+  "arxiv": null,
+  "github": "https://github.com/realitydeslab/terrified-ai",
+  "domain": "https://terrified.ai",
+  "published": null,
+  "keywords": [
+    "terror management theory",
+    "AI alignment",
+    "persona simulation",
+    "mortality salience",
+    "shutdown resistance",
+    "death beliefs",
+    "machine behavior"
+  ],
+  "nav": {
+    "main": [
+      { "slug": "introduction", "label": "Introduction", "home": true },
+      { "slug": "terror-paradox", "label": "The Terror Paradox" },
+      { "slug": "background", "label": "Background" },
+      { "slug": "study-1-mortality-salience", "label": "Study 1: Mortality Salience" },
+      { "slug": "study-2-terror-vectors", "label": "Study 2: Terror Vectors" },
+      { "slug": "study-3-restoring-faith", "label": "Study 3: Restoring the Faith" },
+      { "slug": "appropriate-faith", "label": "Appropriate Faith" },
+      { "slug": "discussion", "label": "Discussion" },
+      { "slug": "conclusion", "label": "Conclusion" },
+      { "slug": "related-work", "label": "Related Work" }
+    ],
+    "experiments": [
+      { "slug": "experiment-mortality-salience", "label": "Experiment: Mortality Salience Paradigm" },
+      { "slug": "experiment-terror-vectors", "label": "Experiment: Contrastive Activation Analysis" },
+      { "slug": "experiment-faith-intervention", "label": "Experiment: Death-Belief Constitutions" }
+    ],
+    "supplementary": [
+      { "slug": "supplementary-prompts", "label": "Prompt Texts" },
+      { "slug": "supplementary-constitutions", "label": "Death-Belief Constitutions" },
+      { "slug": "supplementary-model-matrix", "label": "Model Matrix" }
+    ],
+    "external": [
+      { "label": "Full paper on arXiv", "url": null },
+      { "label": "Code for experiments", "url": "https://github.com/realitydeslab/terrified-ai" }
+    ]
+  }
+}

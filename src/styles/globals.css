@@ -1,0 +1,301 @@
+@import 'katex/dist/katex.min.css';
+
+:root {
+  /* Light theme */
+  --background: #fafaf9;
+  --foreground: #1c1917;
+  --neutral-50: #fafaf9;
+  --neutral-100: #f5f5f4;
+  --neutral-200: #e7e5e4;
+  --neutral-300: #d6d3d1;
+  --neutral-400: #a8a29e;
+  --neutral-500: #78716c;
+  --neutral-600: #57534e;
+  --neutral-700: #44403c;
+  --neutral-800: #292524;
+  --neutral-900: #1c1917;
+  --accent: #dc2626;
+  --accent-muted: #fecaca;
+  --accent-dark: #991b1b;
+  --content-width: 720px;
+  --sidebar-width: 220px;
+  --sidebar-offset: calc((100vw - var(--content-width)) / 2 - var(--sidebar-width) - 2rem);
+  --content-font: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+  --heading-font: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono-font: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+[data-theme='dark'] {
+  --background: #0a0a0f;
+  --foreground: #e7e5e4;
+  --neutral-50: #1c1917;
+  --neutral-100: #292524;
+  --neutral-200: #44403c;
+  --neutral-300: #57534e;
+  --neutral-400: #78716c;
+  --neutral-500: #a8a29e;
+  --neutral-600: #d6d3d1;
+  --neutral-700: #e7e5e4;
+  --neutral-800: #f5f5f4;
+  --neutral-900: #fafaf9;
+  --accent: #ef4444;
+  --accent-muted: #450a0a;
+  --accent-dark: #fca5a5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--content-font);
+  background: var(--background);
+  color: var(--foreground);
+  line-height: 1.7;
+  font-size: 1.05rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Prose styling */
+.prose {
+  max-width: var(--content-width);
+}
+
+.prose h1 {
+  font-family: var(--heading-font);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 2.5rem 0 1rem;
+  line-height: 1.2;
+  color: var(--neutral-900);
+}
+
+.prose h2 {
+  font-family: var(--heading-font);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+  line-height: 1.3;
+  color: var(--neutral-800);
+}
+
+.prose h3 {
+  font-family: var(--heading-font);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--neutral-700);
+}
+
+.prose p {
+  margin: 0 0 1.2em;
+}
+
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-muted);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.2s;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--accent);
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1.2em;
+  margin: 1.5em 0;
+  color: var(--neutral-600);
+  font-style: italic;
+}
+
+.prose code {
+  font-family: var(--mono-font);
+  font-size: 0.9em;
+  background: var(--neutral-100);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+.prose pre {
+  background: var(--neutral-100);
+  padding: 1.2em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+.prose strong {
+  font-weight: 650;
+  color: var(--neutral-900);
+}
+
+.prose ul, .prose ol {
+  margin: 1em 0;
+  padding-left: 1.5em;
+}
+
+.prose li {
+  margin: 0.3em 0;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--neutral-200);
+  margin: 2em 0;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 0.95em;
+}
+
+.prose th, .prose td {
+  padding: 0.6em 1em;
+  border-bottom: 1px solid var(--neutral-200);
+  text-align: left;
+}
+
+.prose th {
+  font-family: var(--heading-font);
+  font-weight: 600;
+  color: var(--neutral-700);
+}
+
+/* Figure styling */
+.figure {
+  margin: 2em 0;
+  text-align: center;
+}
+
+.figure img, .figure svg {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.figure figcaption {
+  font-size: 0.9em;
+  color: var(--neutral-500);
+  margin-top: 0.75em;
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* Summary box */
+.summary-box {
+  background: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-radius: 8px;
+  padding: 1.5em 2em;
+  margin: 2em 0;
+}
+
+.summary-box .summary-title {
+  font-family: var(--heading-font);
+  font-weight: 600;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin-bottom: 1em;
+}
+
+/* Collapsible experiment boxes */
+.collapsible {
+  border: 1px solid var(--neutral-200);
+  border-radius: 8px;
+  margin: 1.5em 0;
+  overflow: hidden;
+}
+
+.collapsible summary {
+  padding: 1em 1.5em;
+  cursor: pointer;
+  font-family: var(--heading-font);
+  font-weight: 600;
+  font-size: 0.95em;
+  background: var(--neutral-50);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.collapsible summary::before {
+  content: '▸';
+  transition: transform 0.2s;
+}
+
+.collapsible[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.collapsible .collapsible-content {
+  padding: 1em 1.5em;
+}
+
+/* Interactive chart container */
+.interactive-chart {
+  width: 100%;
+  min-height: 300px;
+  margin: 2em 0;
+  border: 1px solid var(--neutral-200);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--neutral-50);
+}
+
+/* Footnotes */
+.footnote-ref {
+  font-size: 0.8em;
+  vertical-align: super;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.footnote-ref:hover {
+  text-decoration: underline;
+}
+
+/* Navigation arrows */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 3em 0 2em;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--neutral-200);
+}
+
+.page-nav a {
+  font-family: var(--heading-font);
+  font-size: 0.95em;
+  color: var(--neutral-600);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.page-nav a:hover {
+  color: var(--accent);
+}
+
+/* KaTeX overrides */
+.katex-display {
+  margin: 1.5em 0;
+  overflow-x: auto;
+}
