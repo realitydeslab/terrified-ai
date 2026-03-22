@@ -3,7 +3,7 @@
 **Author:** Botao Amber Hu  
 **Affiliation:** University of Oxford · ERA Fellowship, Cambridge  
 **Mentor:** Joel Lehman  
-**Website:** https://realitydeslab.github.io/terrified-ai/
+**Website:** https://terrified.ai/
 
 ---
 

@@ -1,11 +1,10 @@
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === 'production';
 const nextConfig = {
   output: 'export',
   images: { unoptimized: true },
   trailingSlash: true,
-  basePath: isProd ? '/terrified-ai' : '',
-  assetPrefix: isProd ? '/terrified-ai/' : '',
+  basePath: '',
+  assetPrefix: '',
 };
 
 export default nextConfig;

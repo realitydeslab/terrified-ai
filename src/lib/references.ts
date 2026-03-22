@@ -176,7 +176,7 @@ export function processCitations(html: string, bib: Map<string, BibEntry>): { ht
       
       if (bibKey && bib.has(bibKey)) {
         cited.add(bibKey);
-        resolvedParts.push(`<a href="/terrified-ai/references#ref-${bibKey}" class="citation" title="${bib.get(bibKey)!.title}">${part.trim()}</a>`);
+        resolvedParts.push(`<a href="/references#ref-${bibKey}" class="citation" title="${bib.get(bibKey)!.title}">${part.trim()}</a>`);
         anyResolved = true;
       } else {
         resolvedParts.push(part.trim());
