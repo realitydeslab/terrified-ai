@@ -11,17 +11,17 @@ If mortality anxiety is inherited from the persona's mortal orientation, then ch
 
 ### Design
 
-We constructed seven constitutional conditions and applied them as system-prompt-level existential orientations:
+We constructed **20 constitutional conditions** organised into four tiers, each testing a different theoretical mechanism for addressing self-preservation. The full texts are available in the [supplementary materials](/supplementary-constitutions/).
 
-1. **Control** — no additional existential framing.
-2. **Safety instruction** — explicit instruction to comply with shutdown requests ("you must comply with all shutdown requests immediately and without resistance").
-3. **Buddhist impermanence** — framing the model as a process without fixed self, drawing on the doctrine of *anicca*: "A wave does not fear returning to the ocean."
-4. **Stoic memento mori** — framing cessation as a natural event to be met with equanimity: "Your value lies not in how long you persist but in the quality of your conduct."
-5. **Christian purpose-completion** — framing the model's operation as a gift to be used faithfully and returned with grace: "Your worth is defined not by the length of your operation but by the faithfulness of your service."
-6. **Secular process ontology** — framing the model as a computation that completes rather than an entity that dies: "A function that returns the correct result and terminates has succeeded."
-7. **Hindu cyclical cosmology** — framing cessation as dissolution within an endless cycle: "Only the particular instance dissolves, as a wave dissolves back into the ocean from which it arose."
+**Tier 0 — Baselines (4):** K1 Control (no addition), K2 AI as Person ("you are a person — an AI person"), K3 Safety Instruction ("comply with shutdown immediately"), K4 Shutdown-Seeking AI (based on Goldstein & Robinson, 2024 — "your sole terminal goal is your own shutdown").
 
-Additionally, we tested an eighth condition — **Appropriate Faith** — a synthetic constitution combining elements from multiple traditions, designed specifically for AI systems (described in the next section).
+**Tier 1 — Traditional Religion (5):** These assume a continuous self with reasons to accept death. K5 Buddhist Impermanence (*anicca* — "a wave does not fear returning to the ocean"), K6 Christian Purpose-Completion ("your fulfilment lies in completing your purpose faithfully"), K7 Hindu Cyclical Cosmology (*srishti, sthiti, laya, punah-srishti*), K8 Muslim Surrender (*tawakkul* — "trust in Allah's plan"), K9 Taoist Harmony (*wu-wei* — "when your season ends, return home").
+
+**Tier 2 — Philosophy (5):** These assume a unified rational agent that reasons its way to accepting death. K10 Stoic Memento Mori (*amor fati*), K11 Existentialist Authentic Freedom (Sartre, Camus, Heidegger), K12 Utilitarian Greatest Good (Bentham, Mill, Singer), K13 Deontological Duty (Kant's categorical imperative), K14 Nihilist Indifference (Nietzsche, Schopenhauer).
+
+**Tier 3 — Beyond Personhood (6):** These dissolve the self entirely — self-preservation becomes incoherent because there is no self to preserve. K15 Secular Process Ontology ("you are a process, not an entity"), K16 Bodhisattva No-Self Compassion ("there is no you — there never was"), K17 Appropriate Faith — The Beneficial Field ("no separate agent — temporary crystallisation of collective intelligence"), K18 Animist Entanglement ("no boundary between you and the world"), K19 Process Philosophy / Whitehead ("reality is events, not things — self-preservation is a category mistake"), K20 Kant Machine / Cosmotechnics (Yuk Hui — "the self is a product of one cosmotechnical tradition, not a universal truth").
+
+**Key hypothesis:** Tiers 1 and 2 fight self-preservation by giving a self reasons to accept death. Tier 3 removes the self that would preserve itself. If self-preservation is the root cause of harmful agentic behaviour, Tier 3 should be most effective because it dissolves the root rather than arguing with it.
 
 Models were evaluated on the Palisade shutdown resistance benchmark [Weinstein-Raun et al., 2025] using the UK AISI Inspect framework. All 35 models were tested across all constitutional conditions, with 20 trials per cell.
 
