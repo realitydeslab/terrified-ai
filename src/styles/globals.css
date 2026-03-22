@@ -595,6 +595,7 @@ sup {
    ============================================ */
 .content-main {
   max-width: var(--content-width);
+  margin: 0 auto;
   padding: 0.25rem 1rem 2rem;
   width: 100%;
   font-family: var(--content-font);
@@ -623,15 +624,6 @@ sup {
 @media (min-width: 80rem) {
   :root {
     --sidebar-offset: calc((100% - var(--content-width)) / 2 - 16rem);
-  }
-}
-
-@media (min-width: 1024px) {
-  main {
-    margin-left: var(--sidebar-width);
-  }
-  .prose {
-    margin: 0 auto;
   }
 }
 

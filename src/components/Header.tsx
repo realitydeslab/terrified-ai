@@ -39,14 +39,6 @@ export function Header({ title }: { title: string }) {
           align-items: center;
           justify-content: space-between;
         }
-
-        @media (min-width: 1024px) {
-          .header-inner {
-            margin-left: var(--sidebar-width);
-            margin-right: auto;
-            padding-left: 1rem;
-          }
-        }
       `}</style>
     </>
   );
