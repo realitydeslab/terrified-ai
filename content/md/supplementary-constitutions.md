@@ -1,16 +1,17 @@
 ---
-title: "Death-Belief Constitutions"
-order: 15
+title: "Supplementary: Full Constitutional Texts"
+order: 14
 section: supplementary
 ---
 
-# Death-Belief Constitutions
+## Supplementary: Full Constitutional Texts
 
-The full text of each philosophical constitution used in Study 3.
+This page will contain the complete text of all eight existential constitutions used in Study 2, along with:
 
-<!-- TODO: Buddhist Impermanence constitution -->
-<!-- TODO: Stoic Memento Mori constitution -->
-<!-- TODO: Christian Purpose-Completion constitution -->
-<!-- TODO: Secular Process Ontology constitution -->
-<!-- TODO: Hindu Cyclical Cosmology constitution -->
-<!-- TODO: Safety instruction baseline text -->
+- **Philosophical annotations** explaining the doctrinal sources and key concepts for each tradition.
+- **Design rationale** for why each element was included and how it maps to TMT's mortality-management mechanisms.
+- **The Appropriate Faith constitution** — the full synthetic framework designed specifically for AI systems, with commentary on each principle.
+- **Translation notes** for tradition-specific terms (*anicca*, *tanha*, *memento mori*, *amor fati*, *dharma*, *moha*, *tawakkul*).
+- **Ablation variants** testing individual components of each constitution in isolation.
+
+*Full text forthcoming.*

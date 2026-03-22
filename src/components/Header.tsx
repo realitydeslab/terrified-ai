@@ -19,7 +19,15 @@ export function Header({ title }: { title: string }) {
         <div className="header-inner">
           <Link
             href="/"
-            className="header-title"
+            style={{
+              fontFamily: 'var(--content-font)',
+              fontSize: '2.25rem',
+              fontWeight: 600,
+              color: 'var(--neutral-800)',
+              textDecoration: 'none',
+              marginTop: '0.5rem',
+              transition: 'all 0.2s',
+            }}
           >
             {title}
           </Link>

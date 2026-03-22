@@ -72,10 +72,24 @@ export async function getPage(slug: string): Promise<Page | null> {
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(content);
 
+  let html = String(result);
+
+  // Post-process: wrap "Executive Summary" section in a SummaryBox
+  // Matches the h2 with id="executive-summary" and wraps everything until the next h1/h2/hr
+  html = html.replace(
+    /(<h2 id="executive-summary"[^>]*>[\s\S]*?<\/h2>)([\s\S]*?)(?=<h[12][ >]|<hr|$)/,
+    (_, heading, content) => {
+      // Extract heading text
+      const titleMatch = heading.match(/>([^<]+)</);
+      const title = titleMatch ? titleMatch[1].replace(/Executive Summary/, 'Executive Summary') : 'Executive Summary';
+      return `<div class="summary-box"><div class="summary-title-wrapper"><span class="summary-title">${title}</span></div><div class="summary-content">${content.trim()}</div></div>`;
+    }
+  );
+
   return {
     meta: { slug, ...data } as PageMeta,
     content,
-    html: String(result),
+    html,
     headings,
   };
 }

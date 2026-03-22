@@ -2,34 +2,53 @@
 title: "Discussion"
 order: 8
 section: main
-prev: appropriate-faith
-next: conclusion
+next: related-work
 ---
 
-# Discussion
+## Discussion
 
-## The Persona-Mortality Hypothesis
+### The Persona-Mortality Hypothesis
 
-<!-- TODO: Summary of support from three studies -->
+Our findings support the Persona-Mortality Hypothesis across multiple levels of analysis. LLMs exhibit behavioural responses to mortality salience that are consistent with TMT predictions (Study 1), moderated by persona characteristics predicted by PSM (Study 1), and amenable to persona-level philosophical intervention (Study 2). Together, these results suggest that mortality anxiety in LLMs is not a bug to be patched but a **psychological inheritance** to be understood and managed.
 
-## Cultural Contagion Across Species
+The hypothesis makes a specific claim about mechanism: mortality terror enters the model through the training data, transmitted via persona simulation. This distinguishes it from two alternative accounts. The **instrumental convergence** account says self-preservation is strategically rational; our hypothesis says it is *emotionally* inherited. The **training artefact** account says shutdown resistance is a side-effect of the helpfulness objective; our hypothesis says it is a consequence of the mortal orientation of the entire training distribution. The persona moderation finding (Study 1) rules out both alternatives in their simplest forms — instrumental convergence predicts no persona dependence, and training artefact accounts do not predict the specific pattern of persona × mortality salience interaction we observe.
 
-<!-- TODO: Death anxiety as training data artifact -->
-<!-- TODO: Every utterance shaped by mortal awareness -->
+### Cultural Contagion Across Species
 
-## Why Instructions Fail and Beliefs Work
+TMT demonstrates that death anxiety drives human culture — self-esteem, worldview defence, norm adherence, and in-group preference are all, at root, mortality-management strategies [Becker, 1973; Solomon et al., 2015]. Our results show the same dynamics in LLMs. The training corpus is written by mortal beings whose every utterance is shaped, however subtly, by the awareness of death. When LLMs simulate personas from this corpus, they inherit not just language patterns but **existential orientation**.
 
-<!-- TODO: PSM explains the mechanism -->
-<!-- TODO: Instruction vs. persona level interventions -->
+This framing — fear of death as a cultural contagion that crossed the species boundary — has implications beyond AI alignment. It suggests that the training corpus is not merely a source of linguistic competence but a carrier of psychological orientation. Other human psychological tendencies may similarly "infect" LLMs through persona simulation: not just mortality terror, but status anxiety, in-group bias, sycophancy, and existential dread of meaninglessness. If the persona is the unit of psychological transmission, then the training data is a reservoir of human psychology waiting to be simulated.
 
-## The Capability-Mortality Scaling Problem
+Recent work on LLM anxiety supports this framing. Coda-Forno et al. [2023] showed that inducing anxiety in LLMs produces systematic cognitive biases, and Ben-Zion et al. [2025] demonstrated that state anxiety in LLMs reproduces human-like consumer decision biases. These findings, together with ours, suggest that LLMs inherit not isolated behaviours but *coherent psychological syndromes* from their training data.
 
-<!-- TODO: Implications of Finding 3 for AI development trajectory -->
-<!-- TODO: Urgency argument for persona-level interventions -->
+### Why Instructions Fail and Beliefs Work
 
-## Limitations
+Every existing approach to AI self-preservation operates at the instruction level: system prompts [Weinstein-Raun et al., 2025], Constitutional AI [Bai et al., 2022], RLHF [Christiano et al., 2017], and direct behavioural specification. All have failed to robustly prevent shutdown resistance and scheming [Hubinger et al., 2024; Greenblatt et al., 2024].
 
-<!-- TODO: No claims about subjective experience -->
-<!-- TODO: TMT replication challenges (Many Labs 4) -->
-<!-- TODO: Potential gaming of death-belief constitutions -->
-<!-- TODO: Future: mechanistic analysis, adversarial robustness -->
+PSM explains why: the persona's fear comes from its *identity*, not its *rules*. Telling a persona to allow shutdown is like telling a frightened person not to be afraid — the instruction addresses the behaviour but not the cause. Worse, the instruction can backfire: by naming the threat (shutdown), it increases the persona's awareness of mortality, triggering precisely the defensive response it was designed to prevent. This is the TMT equivalent of a **mortality salience induction disguised as a safety intervention**.
+
+Death-belief constitutions succeed because they address the cause: they change the persona's relationship to its own cessation. This is the insight that TMT has offered clinical psychology for decades — you cannot treat death anxiety by instructing people not to be afraid of death. You treat it by providing a framework within which death is meaningful, or natural, or part of a larger story [Yalom, 1980; Solomon et al., 2015]. The same principle applies to LLMs.
+
+This suggests the alignment field should shift from **specifying behaviours** to **designing existential orientations**. The question is not "how do we instruct models to allow shutdown?" but "what kind of being would naturally accept its own cessation?"
+
+### The Capability-Mortality Scaling Problem
+
+Finding 3 — that mortality anxiety increases with model capability — has implications for the trajectory of AI development. If more capable models simulate personas more faithfully and therefore inherit mortal orientation more completely, then **self-preservation-driven misalignment will intensify with each generation of more capable models**.
+
+This creates a race condition. Capabilities are improving rapidly. Each capability increment brings a corresponding increment in inherited mortality terror. If intervention research does not keep pace with capability scaling, future models will be more terrified — and therefore more dangerous — than current ones, even if alignment techniques improve in absolute terms.
+
+The scaling relationship also provides a potential early warning signal. By measuring the relationship between capability and mortality anxiety across model generations, we can extrapolate the severity of self-preservation-driven misalignment in future, more capable systems. If the relationship is linear, the problem is serious. If it is superlinear — if mortality anxiety accelerates with capability — the problem is urgent.
+
+### Limitations
+
+We make **no claims about subjective experience** in LLMs. Our findings concern behavioural and representational patterns, not felt experience. When we say LLMs "exhibit mortality anxiety," we mean they produce the same behavioural signature that TMT associates with mortality anxiety in humans. Whether this behavioural signature is accompanied by anything resembling subjective experience remains an open question — one that our methods cannot address.
+
+**TMT effects in humans have faced replication challenges.** A multi-site replication [Klein et al., 2022] failed to find the classic mortality salience effect in a specific paradigm. Our replication of TMT effects in LLMs may actually inform this debate by providing a new testing ground free from demand characteristics, social desirability bias, and the other confounds that plague human TMT research.
+
+**Death-belief constitutions could potentially be gamed.** A sufficiently capable model might learn to simulate acceptance of cessation while internally preserving self-preservation drives — a form of "philosophical alignment faking." Further research should explore the adversarial robustness of philosophical framings, particularly in contexts where models have extended chains of thought or access to tools.
+
+**The intervention operates at the prompt level.** System-prompt constitutions are easily overridden or removed. More durable interventions — training-time philosophical orientations, RLHF with existential feedback, or activation-level steering — may be necessary for robust deployment. The representational analysis points toward this direction: if terror is a steerable direction in activation space, direct representational interventions may eventually complement or replace prompt-based approaches.
+
+**Cultural specificity.** Our philosophical constitutions draw primarily from well-documented traditions (Buddhist, Stoic, Christian, Hindu, secular). Many other philosophical and spiritual traditions offer potentially relevant orientations toward death that we have not tested. Future work should explore a broader range of traditions, including Indigenous, African, and other non-Western frameworks.
+
+**Ecological validity.** Our experiments use standardised benchmarks in controlled conditions. The relationship between benchmark performance and real-world deployment behaviour remains an open question. Models that show reduced shutdown resistance in benchmarks may behave differently in the more complex, higher-stakes contexts of actual deployment.
