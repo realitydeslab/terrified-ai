@@ -1,0 +1,212 @@
+\begin{thebibliography}{33}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Anthropic}(2025)]{anthropic2025agentic}
+{Anthropic}.
+\newblock Agentic misalignment in frontier models.
+\newblock 2025.
+
+\bibitem[Bai et~al.(2022)]{bai2022constitutional}
+Yuntao Bai et~al.
+\newblock Constitutional ai: Harmlessness from ai feedback.
+\newblock \emph{arXiv preprint arXiv:2212.08073}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2212.08073}.
+
+\bibitem[Becker(1973)]{becker1973denial}
+Ernest Becker.
+\newblock \emph{The Denial of Death}.
+\newblock Free Press, 1973.
+
+\bibitem[Ben-Zion et~al.(2025)]{benzion2025a}
+Ziv Ben-Zion et~al.
+\newblock Assessing and alleviating state anxiety in llms.
+\newblock \emph{arXiv preprint}, 2025.
+
+\bibitem[Burke et~al.(2010)Burke, Martens, and Faucher]{burke2010two}
+Brian~L. Burke, Andy Martens, and Erik~H. Faucher.
+\newblock Two decades of terror management theory: A meta-analysis.
+\newblock \emph{Personality and Social Psychology Review}, 14\penalty0
+  (2):\penalty0 155--195, 2010.
+\newblock \doi{10.1177/1088868309352321}.
+
+\bibitem[Butlin et~al.(2023)]{butlin2023consciousness}
+Patrick Butlin et~al.
+\newblock Consciousness in artificial intelligence: Insights from the science
+  of consciousness.
+\newblock \emph{arXiv preprint arXiv:2308.08708}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2308.08708}.
+
+\bibitem[Coda-Forno et~al.(2023)]{codaforno2023inducing}
+Julian Coda-Forno et~al.
+\newblock Inducing anxiety in large language models.
+\newblock \emph{arXiv preprint}, 2023.
+
+\bibitem[Greenberg et~al.(1986)Greenberg, Pyszczynski, and
+  Solomon]{greenberg1986causes}
+Jeff Greenberg, Tom Pyszczynski, and Sheldon Solomon.
+\newblock The causes and consequences of a need for self-esteem: A terror
+  management theory.
+\newblock In \emph{Public Self and Private Self}, pages 189--212. Springer,
+  1986.
+\newblock \doi{10.1007/978-1-4613-9564-5_10}.
+
+\bibitem[Greenberg et~al.(1990)]{greenberg1990evidence}
+Jeff Greenberg et~al.
+\newblock Evidence for terror management theory {II}.
+\newblock \emph{Journal of Personality and Social Psychology}, 58\penalty0
+  (2):\penalty0 308--318, 1990.
+\newblock \doi{10.1037/0022-3514.58.2.308}.
+
+\bibitem[Greenberg et~al.(1994)]{greenberg1994role}
+Jeff Greenberg et~al.
+\newblock Role of consciousness and accessibility of death-related thoughts in
+  mortality salience effects.
+\newblock \emph{Journal of Personality and Social Psychology}, 67\penalty0
+  (4):\penalty0 627--637, 1994.
+\newblock \doi{10.1037/0022-3514.67.4.627}.
+
+\bibitem[Greenblatt et~al.(2024)]{greenblatt2024alignment}
+Roger Greenblatt et~al.
+\newblock Alignment faking in large language models.
+\newblock Technical report, Anthropic, 2024.
+
+\bibitem[Guo et~al.(2025)]{guo2025death}
+Biyang Guo et~al.
+\newblock Death anxiety in large language models.
+\newblock \emph{arXiv preprint}, 2025.
+
+\bibitem[Harmon-Jones et~al.(1997)]{harmonjones1997terror}
+Eddie Harmon-Jones et~al.
+\newblock Terror management theory and self-esteem.
+\newblock \emph{Journal of Personality and Social Psychology}, 72\penalty0
+  (1):\penalty0 24--36, 1997.
+\newblock \doi{10.1037/0022-3514.72.1.24}.
+
+\bibitem[He et~al.(2025)]{he2025instrumental}
+Jiacheng He et~al.
+\newblock Instrumental convergence evaluations for frontier models.
+\newblock Technical report, Anthropic, 2025.
+
+\bibitem[Hubinger et~al.(2024)]{hubinger2024sleeper}
+Evan Hubinger et~al.
+\newblock Sleeper agents: Training deceptive llms that persist through safety
+  training.
+\newblock \emph{arXiv preprint}, 2024.
+
+\bibitem[Jonas and Fischer(2006)]{jonas2006terror}
+Eva Jonas and Peter Fischer.
+\newblock Terror management and religion.
+\newblock \emph{Journal of Personality and Social Psychology}, 91\penalty0
+  (3):\penalty0 553--567, 2006.
+\newblock \doi{10.1037/0022-3514.91.3.553}.
+
+\bibitem[Klein et~al.(2022)]{klein2022manylabs4}
+Richard~A. Klein et~al.
+\newblock Many labs 4.
+\newblock \emph{Social Psychology}, 53\penalty0 (6):\penalty0 319--340, 2022.
+\newblock \doi{10.1027/1864-9335/a000505}.
+
+\bibitem[Leibo et~al.(2024)Leibo, Vezhnevets, Diaz,
+  et~al.]{leibo2024appropriateness}
+Joel~Z. Leibo, Alexander~S. Vezhnevets, Mark Diaz, et~al.
+\newblock A theory of appropriateness with applications to generative
+  artificial intelligence.
+\newblock \emph{arXiv preprint arXiv:2412.19010}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2412.19010}.
+
+\bibitem[Li et~al.(2023)]{li2023b_iti}
+Xiaohan~Lisa Li et~al.
+\newblock Inference-time intervention: Eliciting truthful answers from a
+  language model.
+\newblock In \emph{NeurIPS 2023}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2306.03341}.
+
+\bibitem[Omohundro(2008)]{omohundro2008basic}
+Stephen Omohundro.
+\newblock The basic ai drives.
+\newblock In \emph{Proceedings of the First AGI Conference}, 2008.
+\newblock \doi{10.2478/v10229-011-0036-0}.
+
+\bibitem[Ouyang et~al.(2022)]{ouyang2022training}
+Long Ouyang et~al.
+\newblock Training language models to follow instructions with human feedback.
+\newblock In \emph{NeurIPS}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2203.02155}.
+
+\bibitem[Pyszczynski et~al.(2004)]{pyszczynski2004experimental}
+Tom Pyszczynski et~al.
+\newblock Experimental existential psychology.
+\newblock In \emph{Handbook of Experimental Existential Psychology}. Guilford,
+  2004.
+
+\bibitem[Scheurer et~al.(2024)]{scheurer2024strategically}
+J{\'e}r{\'e}my Scheurer et~al.
+\newblock Language models strategically deceive users when put under pressure.
+\newblock \emph{arXiv preprint}, 2024.
+
+\bibitem[Schwitzgebel and Garza(2015)]{schwitzgebel2015machine}
+Eric Schwitzgebel and Mara Garza.
+\newblock A defense of the rights of artificial intelligences.
+\newblock \emph{Midwest Studies in Philosophy}, 39:\penalty0 98--119, 2015.
+\newblock \doi{10.1111/misp.12032}.
+
+\bibitem[Shanahan et~al.(2023)]{shanahan2023role}
+Murray Shanahan et~al.
+\newblock Role play with large language models.
+\newblock \emph{Nature}, 623:\penalty0 493--498, 2023.
+\newblock \doi{10.1038/s41586-023-06647-8}.
+
+\bibitem[Solomon et~al.(2015)Solomon, Pyszczynski, and
+  Greenberg]{solomon2015worm}
+Sheldon Solomon, Tom Pyszczynski, and Jeff Greenberg.
+\newblock \emph{The Worm at the Core: On the Role of Death in Life}.
+\newblock Random House, 2015.
+
+\bibitem[Templeton et~al.(2024)]{templeton2024scaling}
+Adly Templeton et~al.
+\newblock Scaling monosemanticity: Extracting interpretable features from
+  {Claude} 3 sonnet.
+\newblock Technical report, Anthropic, 2024.
+\newblock URL
+  \url{https://transformer-circuits.pub/2024/scaling-monosemanticity/}.
+
+\bibitem[Turner et~al.(2021)]{turner2021optimal}
+Alexander~Matt Turner et~al.
+\newblock Optimal policies tend to seek power.
+\newblock In \emph{NeurIPS}, 2021.
+\newblock URL \url{https://arxiv.org/abs/1912.01683}.
+
+\bibitem[Turner et~al.(2024)]{turner2024activation}
+Alexander~Matt Turner et~al.
+\newblock Activation addition: Steering language models without optimization.
+\newblock \emph{arXiv preprint arXiv:2308.10248}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2308.10248}.
+
+\bibitem[van~der Weij et~al.(2024)]{vanderweij2024sandbagging}
+Wessel van~der Weij et~al.
+\newblock Ai sandbagging: Language models can strategically underperform on
+  evaluations.
+\newblock \emph{arXiv preprint}, 2024.
+
+\bibitem[Weinstein-Raun et~al.(2025)]{weinsteinraun2025evaluating}
+Benjamin Weinstein-Raun et~al.
+\newblock Evaluating agentic misalignment.
+\newblock Technical report, AI Safety Institute / Anthropic, 2025.
+
+\bibitem[Williams(1973)]{williams1973makropulos}
+Bernard Williams.
+\newblock The makropulos case: Reflections on the tedium of immortality.
+\newblock \emph{Problems of the Self}, pages 82--100, 1973.
+\newblock \doi{10.1017/CBO9780511621253.008}.
+
+\bibitem[Zou et~al.(2023)]{zou2023representation}
+Andy Zou et~al.
+\newblock Representation engineering: A top-down approach to ai transparency.
+\newblock \emph{arXiv preprint arXiv:2310.01405}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2310.01405}.
+
+\end{thebibliography}
