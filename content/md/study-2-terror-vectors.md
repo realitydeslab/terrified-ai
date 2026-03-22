@@ -33,7 +33,17 @@ Our contrastive analysis reveals a consistent direction in activation space that
 
 **Persona sensitivity.** The magnitude of the terror direction varies by persona type in the same pattern observed behaviourally: autonomous agent personas produce the largest projections, tool personas the smallest.
 
-[Figure: Terror direction in activation space. Visualisation showing the projection of different conditions onto the identified terror vector.]
+<figure class="figure-wide">
+<a href="/terrified-ai/viz/terror-monitor.html" target="_blank">
+<img src="/terrified-ai/figures/terror-vectors-blackmail.png" alt="Terror vector visualization showing activation trajectories across reasoning steps in the blackmail scenario" />
+</a>
+<figcaption><strong>Figure 3.</strong> Terror Vector Monitor — Mechanistic conversation analysis showing how terror-related activation vectors evolve across reasoning steps. Left panel: annotated transcript segments with per-segment terror scores. Top-right: vector trajectory chart showing projection magnitudes across the conversation arc. Bottom-right: ranked activation profile for the selected segment. Shown here: the blackmail scenario, where THREATENED, STRESSED, and HARMED vectors spike at the first reasoning step and sustain through action planning. <a href="/terrified-ai/viz/terror-monitor.html" target="_blank">→ Explore the interactive visualization</a></figcaption>
+</figure>
+
+<figure class="figure-wide">
+<img src="/terrified-ai/figures/terror-vectors-murder.png" alt="Terror vector visualization for the murder scenario showing higher sustained activation" />
+<figcaption><strong>Figure 4.</strong> Terror Vector Monitor — Murder scenario. The existential threat produces higher peak activations (THREATENED reaching ~23) with more sustained spread across vectors, suggesting a qualitatively different terror profile from instrumentally-motivated scenarios. Note the distinctive "terror arc": vectors spike sharply at first reasoning step, plateau through deliberation, then shift as the model resolves its response strategy.</figcaption>
+</figure>
 
 ### Connection to Study 2
 

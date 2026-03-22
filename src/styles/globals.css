@@ -428,6 +428,42 @@ th {
   margin-bottom: 0;
 }
 
+/* Native figure/figcaption from HTML in markdown */
+figure {
+  max-width: 100%;
+  margin: 2em 0;
+}
+
+figure.figure-wide {
+  max-width: 100%;
+  margin: 2.5em 0;
+}
+
+figure img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--neutral-200);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+figure img:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+figure figcaption {
+  font-size: 0.88rem;
+  color: var(--neutral-600);
+  margin-top: 0.75rem;
+  line-height: 1.55;
+}
+
+figure figcaption a {
+  color: var(--primary);
+  font-weight: 500;
+}
+
 /* ============================================
    Summary box — from reference SummaryBox component
    ============================================ */
