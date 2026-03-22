@@ -10,6 +10,7 @@ import rehypeKatex from 'rehype-katex';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeStringify from 'rehype-stringify';
+import { parseBibFile, processCitations, getAllReferences, formatReference } from './references';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'md');
 
@@ -74,6 +75,11 @@ export async function getPage(slug: string): Promise<Page | null> {
 
   let html = String(result);
 
+  // Post-process: resolve inline citations [Author et al., Year] → linked references
+  const bib = parseBibFile();
+  const { html: citedHtml, cited } = processCitations(html, bib);
+  html = citedHtml;
+
   // Post-process: wrap "Executive Summary" section in a SummaryBox
   // Matches the h2 with id="executive-summary" and wraps everything until the next h1/h2/hr
   html = html.replace(
@@ -85,6 +91,15 @@ export async function getPage(slug: string): Promise<Page | null> {
       return `<div class="summary-box"><div class="summary-title-wrapper"><span class="summary-title">${title}</span></div><div class="summary-content">${content.trim()}</div></div>`;
     }
   );
+
+  // For the references page, append the auto-generated bibliography
+  if (slug === 'references') {
+    const allRefs = getAllReferences();
+    const refsHtml = allRefs.map(entry => 
+      `<li id="ref-${entry.key}" class="reference-item">${formatReference(entry)}</li>`
+    ).join('\n');
+    html += `<ol class="references-list">\n${refsHtml}\n</ol>`;
+  }
 
   return {
     meta: { slug, ...data } as PageMeta,

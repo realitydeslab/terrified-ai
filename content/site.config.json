@@ -35,7 +35,8 @@
       { "slug": "appropriate-faith", "label": "Appropriate Faith" },
       { "slug": "discussion", "label": "Discussion" },
       { "slug": "conclusion", "label": "Conclusion" },
-      { "slug": "related-work", "label": "Related Work" }
+      { "slug": "related-work", "label": "Related Work" },
+      { "slug": "references", "label": "References" }
     ],
     "experiments": [
       { "slug": "experiment-mortality-salience", "label": "Experiment: Mortality Salience Paradigm" },

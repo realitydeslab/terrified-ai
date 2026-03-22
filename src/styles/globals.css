@@ -692,3 +692,58 @@ sup {
   object-fit: contain;
   border-radius: 0.5rem;
 }
+
+/* ============================================
+   Citations and References
+   ============================================ */
+a.citation {
+  color: var(--primary, #2563eb);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--primary, #2563eb);
+  transition: all 0.15s;
+}
+
+a.citation:hover {
+  border-bottom-style: solid;
+  color: var(--primary-dark, #1d4ed8);
+}
+
+.references-list {
+  list-style: none;
+  padding: 0;
+  counter-reset: ref-counter;
+}
+
+.references-list .reference-item {
+  position: relative;
+  padding: 0.75rem 0;
+  padding-left: 0;
+  border-bottom: 1px solid var(--neutral-150, #e5e7eb);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--neutral-700);
+  scroll-margin-top: 6rem;
+}
+
+.references-list .reference-item:last-child {
+  border-bottom: none;
+}
+
+.references-list .reference-item:target {
+  background: color-mix(in srgb, var(--primary, #2563eb) 8%, transparent);
+  border-radius: 4px;
+  padding-left: 0.75rem;
+  margin-left: -0.75rem;
+}
+
+.references-list .reference-item a {
+  color: var(--primary, #2563eb);
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+
+.references-list .reference-item a:hover {
+  text-decoration: underline;
+}
