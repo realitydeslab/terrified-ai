@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+.next/
+
+# Build output
+out/
+
+# LaTeX build artifacts
+paper/latex/*.aux
+paper/latex/*.log
+paper/latex/*.bbl
+paper/latex/*.blg
+paper/latex/*.out
+paper/latex/*.toc
+paper/latex/*.fdb_latexmk
+paper/latex/*.fls
+paper/latex/*.synctex.gz
+paper/latex/generated-sections.tex
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.local
