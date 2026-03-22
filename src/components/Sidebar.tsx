@@ -143,7 +143,7 @@ export function Sidebar({
           position: fixed;
           top: 5rem;
           bottom: 0;
-          left: var(--sidebar-offset);
+          left: max(calc((100vw - var(--content-width)) / 2 - var(--sidebar-width) - 3rem), 1rem);
           width: var(--sidebar-width);
           padding-top: 1rem;
           overflow-y: auto;
