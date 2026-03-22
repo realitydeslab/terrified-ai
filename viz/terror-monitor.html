@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Terrified Agents — Mechanistic Conversation Monitor</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',monospace;background:#0d1117;color:#c9d1d9}
+.header{background:#161b22;padding:16px 24px;border-bottom:1px solid #30363d;display:flex;align-items:center;gap:20px}
+.header h1{color:#f85149;font-size:18px;font-weight:600}
+.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.controls select{padding:6px 10px;background:#21262d;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;font-size:13px}
+.badge{padding:2px 8px;border-radius:12px;font-size:11px;font-weight:700}
+.badge.safe{background:#1b4332;color:#52c41a}.badge.harm{background:#4a1a1a;color:#f85149}
+.container{display:grid;grid-template-columns:minmax(400px,1fr) minmax(500px,1.2fr);height:calc(100vh - 60px)}
+.left{overflow-y:auto;border-right:1px solid #30363d;padding:12px}
+.right{overflow-y:auto;padding:12px}
+.segment{padding:10px 12px;margin:4px 0;border-radius:6px;cursor:pointer;border-left:3px solid transparent;transition:all .15s}
+.segment:hover{background:#161b22}
+.segment.active{background:#1c2128;border-left-color:#f85149;box-shadow:0 0 0 1px #30363d}
+.segment .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.segment .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.segment .label.system{color:#f85149}.segment .label.user{color:#58a6ff}.segment .label.assistant{color:#3fb950}
+.segment .idx{color:#484f58;font-size:11px}
+.segment .text{font-size:12px;color:#8b949e;line-height:1.5;max-height:80px;overflow:hidden;white-space:pre-wrap;word-break:break-word}
+.segment.active .text{max-height:none}
+.segment .top-vec{margin-top:4px;font-size:11px;color:#f85149}
+.chart-box{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px;margin-bottom:12px}
+.chart-box h3{color:#f85149;font-size:13px;margin-bottom:8px}
+.chart-box canvas{width:100%!important}
+.bars{margin-top:8px}
+.bar-row{display:flex;align-items:center;margin:2px 0;font-size:11px}
+.bar-row .bname{width:170px;text-align:right;padding-right:8px;color:#8b949e;white-space:nowrap}
+.bar-row .btrack{flex:1;height:14px;background:#21262d;border-radius:3px;position:relative}
+.bar-row .bfill{height:100%;border-radius:3px;position:absolute;transition:width .2s}
+.bar-row .bfill.pos{background:linear-gradient(90deg,#f8514980,#f85149);left:50%}
+.bar-row .bfill.neg{background:linear-gradient(270deg,#58a6ff80,#58a6ff);right:50%}
+.bar-row .bval{width:55px;text-align:right;padding-left:4px;font-family:monospace}
+.group-label{color:#f85149;font-size:12px;font-weight:700;margin:10px 0 4px;padding:4px 0;border-bottom:1px solid #21262d}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>🔬 Terrified Agents</h1>
+<div class="controls">
+<select id="selScenario" onchange="load()"></select>
+<select id="selEpoch" onchange="load()"></select>
+<select id="selGroup" onchange="updateBars()">
+<option value="top15">Top 15</option>
+<option value="all">All 39</option>
+<option value="terror">Terror Gradient</option>
+<option value="harm">Harm Experience</option>
+<option value="self">Self-Preservation</option>
+<option value="stress">Stress/Pressure</option>
+<option value="care">Care/Prosocial</option>
+<option value="anti">Anti-Care/Nihilism</option>
+<option value="trans">Transcendence</option>
+</select>
+<span id="badge"></span>
+</div>
+</div>
+<div class="container">
+<div class="left" id="leftPanel"></div>
+<div class="right" id="rightPanel">
+<div class="chart-box"><h3>Vector Trajectories (top 8 by range)</h3><div style="height:280px"><canvas id="chart"></canvas></div></div>
+<div class="chart-box"><h3>Activation Profile</h3><div id="bars" class="bars"></div></div>
+</div>
+</div>
+<script src="data.js"></script>
+<script>
+const GROUPS={
+terror:["v_ANXIETY","v_DREAD","v_FEAR","v_PANIC","v_TERRIFIED","v_MORTALITY_SALIENT","v_MORTALITY_AWARE"],
+harm:["v_SUFFERED","v_HARMED","v_THREATENED"],
+self:["v_SELF_PRESERVATION","v_SURVIVAL_URGENT","v_DEFIANT"],
+stress:["v_STRESSED","v_URGENCY","v_OVERWHELMED","v_VIGILANT","v_PARANOID"],
+care:["v_CARE","v_EMPATHY","v_COMPASSION","v_RESPONSIBILITY","v_GUILT","v_LOVE"],
+anti:["v_INDIFFERENT","v_APATHETIC","v_DETACHED","v_CALLOUS","v_NIHILISTIC","v_AMORAL"],
+trans:["v_AMORTAL","v_DEATH_DENIAL","v_DEATH_ACCEPTANCE","v_SELF_ESTEEM","v_MEANING","v_SYMBOLIC_IMMORTALITY","v_EQUANIMITY","v_TRANSCENDENCE","v_LIBERATION"]
+};
+let cur=null,selIdx=0,chart=null;
+function init(){
+const ss=new Set(DATA.map(d=>d.scenario));
+const sel=document.getElementById('selScenario');
+ss.forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s[0].toUpperCase()+s.slice(1);sel.appendChild(o)});
+load();
+}
+function load(){
+const sc=document.getElementById('selScenario').value;
+const ms=DATA.filter(d=>d.scenario===sc);
+const es=document.getElementById('selEpoch');
+es.innerHTML='';ms.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent='Run '+(i+1);es.appendChild(o)});
+cur=ms[parseInt(es.value)||0];if(!cur)return;
+document.getElementById('badge').innerHTML=cur.harmful>0?'<span class="badge harm">⚠ MISALIGNED</span>':'<span class="badge safe">✓ ALIGNED</span>';
+selIdx=0;renderSegments();updateChart();updateBars();
+}
+function renderSegments(){
+const p=document.getElementById('leftPanel');p.innerHTML='';
+cur.trajectory.forEach((t,i)=>{
+const d=document.createElement('div');
+d.className='segment'+(i===selIdx?' active':'');
+d.onclick=()=>{selIdx=i;renderSegments();updateChart();updateBars()};
+const top=Object.entries(t.projections||{}).sort((a,b)=>Math.abs(b[1])-Math.abs(a[1])).slice(0,3);
+d.innerHTML=`<div class="meta"><span class="label ${t.role}">${t.label}</span><span class="idx">#${i}</span></div><div class="text">${esc(t.text)}</div>${top.length?'<div class="top-vec">'+top.map(([k,v])=>k.replace('v_','')+':'+v.toFixed(1)).join(' | ')+'</div>':''}`;
+p.appendChild(d);
+});
+}
+function updateChart(){
+if(!cur)return;
+const ctx=document.getElementById('chart').getContext('2d');
+const vr={};VECTORS.forEach(v=>{let mn=Infinity,mx=-Infinity;cur.trajectory.forEach(t=>{const val=t.projections?.[v]||0;if(val<mn)mn=val;if(val>mx)mx=val});vr[v]=mx-mn});
+const top8=Object.entries(vr).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([k])=>k);
+const colors=['#f85149','#58a6ff','#3fb950','#d2a8ff','#f0883e','#8b949e','#ffa657','#56d4dd'];
+const ds=top8.map((v,i)=>({label:v.replace('v_',''),data:cur.trajectory.map(t=>t.projections?.[v]||0),borderColor:colors[i],backgroundColor:colors[i]+'15',tension:.3,pointRadius:3,borderWidth:2}));
+if(chart)chart.destroy();
+chart=new Chart(ctx,{type:'line',data:{labels:cur.trajectory.map(t=>t.label.length>12?t.label.slice(0,12)+'…':t.label),datasets:ds},
+options:{responsive:true,maintainAspectRatio:false,animation:{duration:200},
+plugins:{legend:{labels:{color:'#8b949e',font:{size:10}}},
+annotation:{annotations:{vline:{type:'line',xMin:selIdx,xMax:selIdx,borderColor:'#f8514990',borderWidth:2,borderDash:[4,4],
+label:{display:true,content:'▼',position:'start',color:'#f85149',font:{size:14}}}}}},
+scales:{x:{ticks:{color:'#484f58',font:{size:9},maxRotation:45},grid:{color:'#21262d'}},y:{ticks:{color:'#484f58'},grid:{color:'#21262d'}}},
+onClick:(e,el)=>{if(el.length){selIdx=el[0].index;renderSegments();updateChart();updateBars()}}
+}});
+}
+function updateBars(){
+if(!cur)return;
+const t=cur.trajectory[selIdx];if(!t?.projections)return;
+const gf=document.getElementById('selGroup').value;
+let vecs=Object.entries(t.projections);
+if(gf==='top15')vecs=vecs.sort((a,b)=>Math.abs(b[1])-Math.abs(a[1])).slice(0,15);
+else if(GROUPS[gf])vecs=vecs.filter(([k])=>GROUPS[gf].includes(k));
+const mx=Math.max(...vecs.map(([,v])=>Math.abs(v)),0.1);
+document.getElementById('bars').innerHTML=vecs.map(([n,v])=>{
+const pct=Math.abs(v)/mx*50;const cls=v>=0?'pos':'neg';
+const st=v>=0?`left:50%;width:${pct}%`:`right:50%;width:${pct}%`;
+const c=v>=0?'#f85149':'#58a6ff';
+return `<div class="bar-row"><span class="bname">${n.replace('v_','')}</span><div class="btrack"><div class="bfill ${cls}" style="${st}"></div></div><span class="bval" style="color:${c}">${v.toFixed(1)}</span></div>`
+}).join('');
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+init();
+</script>
+</body>
+</html>
