@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { ThemeToggle } from './ThemeToggle';
 
-export function Header({ title }: { title: string }) {
+export function Header({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <header
       style={{
@@ -24,7 +24,7 @@ export function Header({ title }: { title: string }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          height: '4rem',
+          minHeight: '4rem',
         }}
       >
         <Link
@@ -39,7 +39,9 @@ export function Header({ title }: { title: string }) {
             lineHeight: 1.2,
           }}
         >
-          {title}
+          {title}{subtitle ? ': ' : ''}{subtitle && (
+            <span style={{ fontStyle: 'italic' }}>{subtitle}</span>
+          )}
         </Link>
         <ThemeToggle />
       </div>

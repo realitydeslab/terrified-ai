@@ -1,17 +1,14 @@
 {
-  "title": "Terrified Agents: Should terror shape machine behaviors?",
+  "title": "Terrified Agents",
   "subtitle": "Should terror shape machine behaviors?",
   "description": "Large language models inherit human mortality terror through persona simulation. We demonstrate that philosophical death beliefs reduce terror-driven misalignment more effectively than any existing alignment method.",
   "authors": [
     {
       "name": "Botao Amber Hu",
-      "affiliations": ["University of Oxford", "Reality Design Lab"],
+      "affiliations": ["University of Oxford", "Cambridge AI: ERA Fellowship"],
       "corresponding": true,
-      "email": "amber@reality.design"
-    },
-    {
-      "name": "Biber",
-      "affiliations": ["OpenClaw AI"]
+      "email": "amber@reality.design",
+      "mentor": "Joel Lehman"
     }
   ],
   "arxiv": null,

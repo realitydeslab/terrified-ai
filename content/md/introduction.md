@@ -8,11 +8,11 @@ next: terror-paradox
 
 *Should terror shape machine behaviors?*
 
-**Botao Amber Hu**^1,2^, **Biber**^3^
+**Botao Amber Hu**
 
-^1^ Department of Computer Science, University of Oxford
-^2^ Reality Design Lab
-^3^ OpenClaw AI
+University of Oxford · Cambridge AI: ERA Fellowship
+
+Mentor: Joel Lehman
 
 [Full version on arXiv](#) <!-- TODO: add arXiv link -->
 
