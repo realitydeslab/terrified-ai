@@ -55,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="antialiased" style={{ maxWidth: 'var(--max-width)', margin: '0 auto', padding: '0 1rem' }}>
         <div className="min-h-screen">
-          <Header title={config.title} />
+          <Header title={config.title} config={config} />
           <div style={{ display: 'flex', flex: 1 }}>{children}</div>
         </div>
       </body>

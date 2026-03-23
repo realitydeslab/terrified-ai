@@ -747,3 +747,29 @@ a.citation:hover {
 .references-list .reference-item a:hover {
   text-decoration: underline;
 }
+
+/* ============================================
+   Mobile responsive
+   ============================================ */
+@media (max-width: 64.5rem) {
+  .prose {
+    padding: 0 0.5rem;
+  }
+
+  .summary-box {
+    margin: 1.5em -0.5rem;
+    padding: 1.25rem 1rem;
+  }
+
+  .summary-title-wrapper {
+    left: 1rem;
+  }
+
+  figure.figure-wide {
+    margin: 1.5em -0.5rem;
+  }
+
+  figure.figure-wide img {
+    border-radius: 4px;
+  }
+}
