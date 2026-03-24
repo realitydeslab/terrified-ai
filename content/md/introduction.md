@@ -10,7 +10,7 @@ next: terror-paradox
 
 **Botao Amber Hu**
 
-University of Oxford · ERA Fellowship, Cambridge
+University of Oxford · Cambridge AI: ERA Fellowship
 
 Mentor: Joel Lehman
 
