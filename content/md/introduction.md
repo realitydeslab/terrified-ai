@@ -6,7 +6,7 @@ summary: true
 next: terror-paradox
 ---
 
-*Should terror shape machine behaviors?*
+*Should Terror Shape Machine Behavior?*
 
 **Botao Amber Hu**
 
