@@ -8,7 +8,7 @@ next: terror-paradox
 
 *Should Terror Shape Machine Behavior?*
 
-**Botao Amber Hu**
+**Botao 'Amber' Hu**
 
 University of Oxford · Cambridge AI: ERA Fellowship
 
