@@ -773,3 +773,8 @@ a.citation:hover {
     border-radius: 4px;
   }
 }
+
+.figure-poster {
+  margin-top: 1em !important;
+  margin-bottom: 2em !important;
+}

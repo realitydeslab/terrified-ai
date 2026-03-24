@@ -14,7 +14,7 @@ University of Oxford · ERA Fellowship, Cambridge
 
 Mentor: Joel Lehman
 
-<figure class="figure-wide" style="margin-top: 1em; margin-bottom: 2em;">
+<figure class="figure-wide figure-poster">
 <a href="/figures/poster.pdf" target="_blank">
 <img src="/figures/poster.jpg" alt="Terrified Agents — ERA Fellowship Poster: Should Terror Shape Machine Behavior?" />
 </a>
