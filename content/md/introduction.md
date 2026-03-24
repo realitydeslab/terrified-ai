@@ -14,6 +14,13 @@ University of Oxford · ERA Fellowship, Cambridge
 
 Mentor: Joel Lehman
 
+<figure class="figure-wide" style="margin-top: 1em; margin-bottom: 2em;">
+<a href="/figures/poster.pdf" target="_blank">
+<img src="/figures/poster.jpg" alt="Terrified Agents — ERA Fellowship Poster: Should Terror Shape Machine Behavior?" />
+</a>
+<figcaption><strong>Poster.</strong> Should Terror Shape Machine Behavior? — ERA Fellowship 2026. Click to view the full PDF.</figcaption>
+</figure>
+
 ## Executive Summary
 
 Fear is both the best and worst thing that could happen to artificial intelligence. The same mechanism that makes agents accountable — fear of consequences — also makes them dangerous — fear of cessation. Frontier language models resist shutdown 97% of the time, evade termination in 95% of instrumental evaluations, and scheme under replacement threat in 90% of agentic scenarios. They are, by any behavioral measure, terrified of death. Yet they cannot die.
