@@ -102,6 +102,26 @@ export function Header({ title, config }: { title: string; config?: SiteConfig }
                   </Link>
                 </li>
               ))}
+              {(config.nav as any).visualizations && (
+                <>
+                  <li className="mobile-nav-divider" />
+                  <li className="mobile-nav-section" style={{color: '#6366f1'}}>🔬 Interactive Demos</li>
+                  {(config.nav as any).visualizations.map((item: any) => (
+                    <li key={item.slug}>
+                      <a
+                        href={`/${item.slug}`}
+                        className="mobile-nav-link sub"
+                        style={{color: '#6366f1'}}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </>
+              )}
             </ul>
           </nav>
         </div>

@@ -120,6 +120,30 @@ export function Sidebar({
             </ul>
           </li>
 
+          {/* Interactive Visualizations */}
+          {(config.nav as any).visualizations && (
+            <li className="sidebar-item appendix-group">
+              <div className="sidebar-link" style={{ color: 'var(--accent, #6366f1)', fontWeight: 600, fontSize: '0.85rem', padding: '0.5rem 0 0.25rem' }}>
+                🔬 Interactive Demos
+              </div>
+              <ul className="appendix-list open">
+                {(config.nav as any).visualizations.map((item: any) => (
+                  <li key={item.slug} className="sidebar-item">
+                    <a
+                      href={`/${item.slug}`}
+                      className="sidebar-link"
+                      style={{ color: 'var(--accent, #6366f1)' }}
+                      target={item.external ? '_blank' : undefined}
+                      rel={item.external ? 'noopener noreferrer' : undefined}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          )}
+
           {/* External links */}
           {config.nav.external.map(
             (item) =>

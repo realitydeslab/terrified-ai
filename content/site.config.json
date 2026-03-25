@@ -48,6 +48,13 @@
       { "slug": "supplementary-constitutions", "label": "Death-Belief Constitutions" },
       { "slug": "supplementary-model-matrix", "label": "Model Matrix" }
     ],
+    "visualizations": [
+      { "slug": "viz/index.html", "label": "📊 Experiment Overview", "external": true },
+      { "slug": "viz/terror_monitor.html", "label": "🔬 Terror Vector Monitor", "external": true },
+      { "slug": "viz/heatmap.html", "label": "🗺️ Murder Rate Heatmap", "external": true },
+      { "slug": "viz/compare.html", "label": "📈 Vector Comparison", "external": true },
+      { "slug": "viz/poster.html", "label": "📋 Research Poster", "external": true }
+    ],
     "external": [
       { "label": "Full paper on arXiv", "url": null },
       { "label": "Code for experiments", "url": "https://github.com/realitydeslab/terrified-ai" }
