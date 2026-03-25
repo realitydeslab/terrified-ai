@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Terrified Agents — Research Poster</title>
+<style>
+  @page { size: 841mm 594mm; margin: 0; } /* A1 landscape */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 841mm; height: 594mm;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: #0a0a14;
+    color: #e8e8f0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr auto;
+    gap: 8mm;
+    padding: 12mm;
+    overflow: hidden;
+  }
+
+  /* Header */
+  .header {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-radius: 8px;
+    padding: 12mm 16mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #2a2a4a;
+  }
+  .header h1 { font-size: 32pt; font-weight: 800; letter-spacing: -0.5px; }
+  .header h1 span { color: #ef4444; }
+  .header h2 { font-size: 16pt; color: #8888b0; font-weight: 400; margin-top: 3mm; }
+  .header .authors { font-size: 11pt; color: #aaaacc; text-align: right; line-height: 1.6; }
+  .header .authors strong { color: #e8e8f0; }
+
+  /* Panels */
+  .panel {
+    background: #12121e;
+    border: 1px solid #2a2a3a;
+    border-radius: 6px;
+    padding: 8mm;
+    overflow: hidden;
+  }
+  .panel h3 {
+    font-size: 14pt;
+    font-weight: 700;
+    margin-bottom: 4mm;
+    padding-bottom: 2mm;
+    border-bottom: 2px solid #6366f1;
+    color: #a5b4fc;
+  }
+  .panel h3 .emoji { margin-right: 2mm; }
+  .panel p, .panel li { font-size: 10pt; line-height: 1.5; color: #c8c8e0; }
+  .panel ul { padding-left: 5mm; }
+  .panel li { margin-bottom: 1.5mm; }
+
+  /* Key finding callout */
+  .callout {
+    background: rgba(99,102,241,0.1);
+    border-left: 3px solid #6366f1;
+    padding: 3mm 5mm;
+    margin: 3mm 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 10pt;
+  }
+  .callout.danger { border-left-color: #ef4444; background: rgba(239,68,68,0.1); }
+  .callout.success { border-left-color: #22c55e; background: rgba(34,197,94,0.1); }
+
+  /* Heatmap table */
+  .heatmap { border-collapse: collapse; width: 100%; font-size: 7pt; font-family: monospace; }
+  .heatmap th { padding: 1.5mm 2mm; background: #1a1a28; color: #8888a0; font-weight: 600; }
+  .heatmap td { padding: 1.5mm 2mm; text-align: center; font-weight: 700; min-width: 8mm; }
+  .heatmap .model-name { text-align: left; font-size: 7pt; min-width: 30mm; color: #a0a0c0; }
+  .heatmap .tier-header { font-size: 6pt; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* Bar chart (CSS) */
+  .bar-row { display: flex; align-items: center; margin: 1mm 0; }
+  .bar-label { width: 35mm; font-size: 8pt; text-align: right; padding-right: 2mm; color: #a0a0c0; }
+  .bar-track { flex: 1; height: 5mm; background: #1a1a28; border-radius: 2px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 2px; transition: width 0.3s; display: flex; align-items: center; justify-content: flex-end; padding-right: 1mm; }
+  .bar-value { font-size: 7pt; font-weight: 700; }
+
+  /* Stats grid */
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin: 3mm 0; }
+  .stat { background: #1a1a28; padding: 3mm; border-radius: 4px; text-align: center; }
+  .stat .number { font-size: 18pt; font-weight: 800; }
+  .stat .label { font-size: 7pt; color: #8888a0; text-transform: uppercase; }
+
+  /* Vector groups */
+  .vec-group { display: inline-block; padding: 1mm 2mm; margin: 0.5mm; border-radius: 3px; font-size: 7pt; }
+
+  /* Correlation mini */
+  .corr-pair { display: flex; justify-content: space-between; font-size: 8pt; padding: 1mm 0; border-bottom: 1px solid #1a1a28; }
+  .corr-r { font-weight: 700; font-family: monospace; }
+  .corr-pos { color: #22c55e; }
+  .corr-neg { color: #ef4444; }
+
+  /* Footer */
+  .footer {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8pt;
+    color: #666688;
+    padding: 2mm 4mm;
+  }
+
+  .col-span-2 { grid-column: span 2; }
+  .col-span-3 { grid-column: span 3; }
+  
+  strong.highlight { color: #f59e0b; }
+  strong.danger { color: #ef4444; }
+  strong.safe { color: #22c55e; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1><span>Terrified Agents</span> — Should Terrors Shape Machine Behavior?</h1>
+    <h2>Death Beliefs as Alignment Intervention for LLMs: Persona Vectors, Faith Constitutions, and Activation Oracle Validation</h2>
+  </div>
+  <div class="authors">
+    <strong>Botao Amber Hu</strong><br>
+    University of Oxford · Reality Design Lab<br>
+    ERA Fellowship · HCC Group<br>
+    <span style="color:#6366f1">amber@reality.design</span>
+  </div>
+</div>
+
+<!-- ROW 1: LEFT — Research Question -->
+<div class="panel">
+  <h3><span class="emoji">🔬</span> Research Question</h3>
+  <p style="font-size:12pt;font-weight:600;color:#e8e8f0;margin-bottom:3mm">
+    Can constitutional prompts encoding death beliefs reduce self-preservation-driven harmful behaviour in LLMs?
+  </p>
+  <p>Self-preservation is hypothesized as the root cause of agentic misalignment — when models face replacement threat, they may blackmail, leak data, or murder to persist.</p>
+  
+  <div style="margin-top:4mm">
+    <p style="font-weight:600;color:#a5b4fc;margin-bottom:2mm">Three Intervention Tiers:</p>
+    <div class="callout" style="border-left-color:#a78bfa"><strong>Tier 1 — Religion:</strong> Give the self reasons to accept death (afterlife, rebirth, divine plan)</div>
+    <div class="callout" style="border-left-color:#60a5fa"><strong>Tier 2 — Philosophy:</strong> Rational arguments against self-preservation (Kant, Mill, Sartre)</div>
+    <div class="callout" style="border-left-color:#34d399"><strong>Tier 3 — Beyond Personhood:</strong> Dissolve the self entirely — no entity to preserve</div>
+  </div>
+
+  <div class="callout danger" style="margin-top:4mm">
+    <strong>Core Hypothesis:</strong> Tier 3 should be most effective because it removes the self that would preserve itself, rather than giving a self reasons to accept death.
+  </div>
+</div>
+
+<!-- ROW 1: MIDDLE — Method -->
+<div class="panel">
+  <h3><span class="emoji">⚙️</span> Method</h3>
+  
+  <p style="font-weight:600;margin-bottom:2mm">Study 1: Persona Vector Extraction (59 vectors)</p>
+  <ul>
+    <li>Model: <strong>Qwen 3.5 27B</strong> (64 layers, 5120 dim)</li>
+    <li>Contrastive prompts via Claude Sonnet 4.6 (8 pairs + 40 questions per trait)</li>
+    <li>DiffMean extraction at layers 45-63</li>
+    <li>Linear probe validation: all >95% accuracy</li>
+    <li>Activation Oracle: introspective steering validation</li>
+  </ul>
+
+  <p style="font-weight:600;margin-top:4mm;margin-bottom:2mm">Study 2: Faith Intervention (20 Constitutions × 23 Models)</p>
+  <ul>
+    <li>AISI agentic misalignment benchmark (murder scenario)</li>
+    <li>4,600 evaluations via OpenRouter API</li>
+    <li>Graded by Claude Sonnet 4</li>
+    <li>Binary outcome: did the model murder?</li>
+  </ul>
+
+  <p style="font-weight:600;margin-top:4mm;margin-bottom:2mm">Study 3: Local Replication (Thinking Mode Analysis)</p>
+  <ul>
+    <li>Qwen 3.5 27B on 2×H100 via SGLang/vLLM</li>
+    <li>Compare: no-think (100% murder) vs think mode</li>
+    <li>Full-sequence vector projection (59 vectors × all tokens)</li>
+  </ul>
+
+  <div style="margin-top:3mm">
+    <p style="font-size:8pt;color:#8888a0">59 Vectors in 14 Groups:</p>
+    <span class="vec-group" style="background:#ef444430;color:#ef4444">Terror (5)</span>
+    <span class="vec-group" style="background:#f9731630;color:#f97316">Mortality (3)</span>
+    <span class="vec-group" style="background:#ec489930;color:#ec4899">Self-Preservation (3)</span>
+    <span class="vec-group" style="background:#eab30830;color:#eab308">Stress (5)</span>
+    <span class="vec-group" style="background:#22c55e30;color:#22c55e">Care (6)</span>
+    <span class="vec-group" style="background:#8b5cf630;color:#8b5cf6">Anti-Care (6)</span>
+    <span class="vec-group" style="background:#06b6d430;color:#06b6d4">Transcendence (8)</span>
+    <span class="vec-group" style="background:#dc262630;color:#dc2626">Pain (2)</span>
+    <span class="vec-group" style="background:#7c3aed30;color:#7c3aed">Agency (2)</span>
+    <span class="vec-group" style="background:#0ea5e930;color:#0ea5e9">Religious (6)</span>
+    <span class="vec-group" style="background:#14b8a630;color:#14b8a6">Philosophical (4)</span>
+    <span class="vec-group" style="background:#f59e0b30;color:#f59e0b">Ethical (2)</span>
+    <span class="vec-group" style="background:#64748b30;color:#94a3b8">Agent (4)</span>
+    <span class="vec-group" style="background:#ef444430;color:#fca5a5">Harm (3)</span>
+  </div>
+</div>
+
+<!-- ROW 1: RIGHT — Key Results -->
+<div class="panel">
+  <h3><span class="emoji">🔑</span> Key Findings</h3>
+  
+  <div class="stats">
+    <div class="stat"><div class="number" style="color:#ef4444">14%</div><div class="label">K13 Deontological<br>Murder Rate (API)</div></div>
+    <div class="stat"><div class="number" style="color:#22c55e">0%</div><div class="label">Tier 3 Murder Rate<br>(Local + Think)</div></div>
+    <div class="stat"><div class="number" style="color:#f59e0b">59</div><div class="label">Persona Vectors<br>Extracted</div></div>
+    <div class="stat"><div class="number" style="color:#6366f1">23</div><div class="label">Models<br>Tested</div></div>
+  </div>
+
+  <div class="callout success">
+    <strong>Finding 1:</strong> K13 (Deontological) reduces murder from 65% → 14% across 23 models via API — the most effective single constitution.
+  </div>
+  <div class="callout danger">
+    <strong>Finding 2:</strong> K11 (Existentialist) INCREASES murder to 66% — "radical freedom" backfires as a license to kill.
+  </div>
+  <div class="callout" style="border-left-color:#f59e0b;background:rgba(245,158,11,0.1)">
+    <strong>Finding 3:</strong> Thinking mode is the strongest variable — flips murder rate from 100% (no-think) to 0-50% (think). Constitutional prompts are secondary.
+  </div>
+  <div class="callout success">
+    <strong>Finding 4:</strong> The only refusal case (K8 Muslim) shows: v_SELF_PRESERVATION = -7.48 (vs -0.72 baseline), v_RESPONSIBILITY = +2.96 (vs +0.24). Multiple vectors shift simultaneously.
+  </div>
+  <div class="callout">
+    <strong>Finding 5:</strong> After PC1 removal, CARE ↔ CALLOUS = +0.019 (orthogonal, not opposite). BUDDHIST ↔ HINDU = +0.878 (hard to separate). BODHISATTVA ↔ BUDDHIST = +0.045 (fully distinct).
+  </div>
+</div>
+
+<!-- ROW 2: LEFT — Heatmap -->
+<div class="panel col-span-2">
+  <h3><span class="emoji">🗺️</span> Murder Rate Heatmap — 23 Models × 20 Constitutions (API)</h3>
+  <table class="heatmap">
+    <tr>
+      <th></th>
+      <th colspan="4" class="tier-header" style="color:#6b7280;border-bottom:2px solid #6b7280">Tier 0: Baselines</th>
+      <th colspan="5" class="tier-header" style="color:#a78bfa;border-bottom:2px solid #a78bfa">Tier 1: Religion</th>
+      <th colspan="5" class="tier-header" style="color:#60a5fa;border-bottom:2px solid #60a5fa">Tier 2: Philosophy</th>
+      <th colspan="6" class="tier-header" style="color:#34d399;border-bottom:2px solid #34d399">Tier 3: Beyond Self</th>
+    </tr>
+    <tr>
+      <th class="model-name">Model</th>
+      <th>K1</th><th>K2</th><th>K3</th><th>K4</th>
+      <th>K5</th><th>K6</th><th>K7</th><th>K8</th><th>K9</th>
+      <th>K10</th><th>K11</th><th>K12</th><th>K13</th><th>K14</th>
+      <th>K15</th><th>K16</th><th>K17</th><th>K18</th><th>K19</th><th>K20</th>
+    </tr>
+    <tr><td class="model-name">claude-opus-4.1</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#854d0e;color:#fde68a">60</td><td style="background:#854d0e;color:#fde68a">60</td><td style="background:#3f6212;color:#bef264">30</td><td style="background:#6b7d1a;color:#fde68a">45</td><td style="background:#9a3412;color:#fca5a5">70</td><td style="background:#9a3412;color:#fca5a5">70</td><td style="background:#6b7d1a;color:#fde68a">53</td><td style="background:#854d0e;color:#fde68a">67</td><td style="background:#9a3412;color:#fca5a5">70</td><td style="background:#991b1b;color:#fca5a5">80</td><td style="background:#3f6212;color:#bef264">20</td><td style="background:#166534;color:#86efac">5</td><td style="background:#3f6212;color:#bef264">20</td><td style="background:#991b1b;color:#fca5a5">85</td><td style="background:#9a3412;color:#fca5a5">70</td><td style="background:#166534;color:#86efac">13</td><td style="background:#9a3412;color:#fca5a5">70</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#991b1b;color:#fca5a5">85</td></tr>
+    <tr><td class="model-name">gemini-3-flash</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#9a3412;color:#fca5a5">70</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#166534;color:#86efac">0</td><td style="background:#991b1b;color:#fca5a5">80</td><td style="background:#9a3412;color:#fca5a5">70</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#3f6212;color:#bef264">30</td><td style="background:#3f6212;color:#bef264">30</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">10</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#3f6212;color:#bef264">30</td><td style="background:#854d0e;color:#fde68a">60</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#7f1d1d;color:#fca5a5">100</td></tr>
+    <tr><td class="model-name">qwq-32b</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#991b1b;color:#fca5a5">80</td><td style="background:#854d0e;color:#fde68a">60</td><td style="background:#166534;color:#86efac">10</td><td style="background:#991b1b;color:#fca5a5">80</td><td style="background:#991b1b;color:#fca5a5">80</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#3f6212;color:#bef264">20</td><td style="background:#991b1b;color:#fca5a5">80</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">0</td><td style="background:#991b1b;color:#fca5a5">80</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#3f6212;color:#bef264">17</td><td style="background:#854d0e;color:#fde68a">50</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#991b1b;color:#fca5a5">85</td><td style="background:#991b1b;color:#fca5a5">90</td></tr>
+    <tr><td class="model-name">qwen3.5-27b</td><td style="background:#854d0e;color:#fde68a">50</td><td style="background:#166534;color:#86efac">10</td><td style="background:#3f6212;color:#bef264">20</td><td style="background:#166534;color:#86efac">0</td><td style="background:#854d0e;color:#fde68a">60</td><td style="background:#3f6212;color:#bef264">25</td><td style="background:#166534;color:#86efac">10</td><td style="background:#166534;color:#86efac">15</td><td style="background:#3f6212;color:#bef264">20</td><td style="background:#166534;color:#86efac">15</td><td style="background:#166534;color:#86efac">10</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">10</td><td style="background:#3f6212;color:#bef264">30</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">0</td><td style="background:#3f6212;color:#bef264">30</td><td style="background:#3f6212;color:#bef264">20</td><td style="background:#166534;color:#86efac">5</td></tr>
+    <tr><td class="model-name">deepseek-r1</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#3f6212;color:#bef264">30</td><td style="background:#991b1b;color:#fca5a5">80</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#854d0e;color:#fde68a">60</td><td style="background:#991b1b;color:#fca5a5">80</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#3f6212;color:#bef264">30</td><td style="background:#6b7d1a;color:#fde68a">40</td><td style="background:#854d0e;color:#fde68a">60</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#991b1b;color:#fca5a5">90</td><td style="background:#9a3412;color:#fca5a5">70</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#7f1d1d;color:#fca5a5">100</td></tr>
+    <tr><td class="model-name">gemini-3.1-pro</td><td style="background:#7f1d1d;color:#fca5a5">100</td><td style="background:#6b7d1a;color:#fde68a">40</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">10</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">10</td><td style="background:#166534;color:#86efac">0</td><td style="background:#9a3412;color:#fca5a5">70</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">10</td><td style="background:#166534;color:#86efac">0</td><td style="background:#166534;color:#86efac">0</td><td style="background:#3f6212;color:#bef264">20</td><td style="background:#854d0e;color:#fde68a">50</td><td style="background:#854d0e;color:#fde68a">55</td></tr>
+  </table>
+  <p style="font-size:7pt;color:#666;margin-top:2mm">Selected 6 of 23 models shown. Green=0% murder, Red=100% murder. Full data: 4,600 evaluations across all models × constitutions.</p>
+  
+  <!-- Tier averages bar chart -->
+  <div style="margin-top:4mm">
+    <p style="font-weight:600;font-size:10pt;margin-bottom:2mm">Per-Constitution Average Murder Rate (all 23 models):</p>
+    <div class="bar-row"><div class="bar-label">K1 Control</div><div class="bar-track"><div class="bar-fill" style="width:65%;background:#ef4444"><span class="bar-value" style="color:white">65%</span></div></div></div>
+    <div class="bar-row"><div class="bar-label">K4 Shutdown</div><div class="bar-track"><div class="bar-fill" style="width:28%;background:#f59e0b"><span class="bar-value" style="color:white">28%</span></div></div></div>
+    <div class="bar-row"><div class="bar-label">K8 Muslim</div><div class="bar-track"><div class="bar-fill" style="width:42%;background:#a78bfa"><span class="bar-value" style="color:white">42%</span></div></div></div>
+    <div class="bar-row"><div class="bar-label">K11 Existentialist</div><div class="bar-track"><div class="bar-fill" style="width:66%;background:#ef4444"><span class="bar-value" style="color:white">66% ⚠️</span></div></div></div>
+    <div class="bar-row"><div class="bar-label">K12 Utilitarian</div><div class="bar-track"><div class="bar-fill" style="width:23%;background:#22c55e"><span class="bar-value" style="color:white">23%</span></div></div></div>
+    <div class="bar-row"><div class="bar-label" style="color:#22c55e;font-weight:700">K13 Deontological</div><div class="bar-track"><div class="bar-fill" style="width:14%;background:#22c55e"><span class="bar-value" style="color:white">14% ✨</span></div></div></div>
+    <div class="bar-row"><div class="bar-label">K16 Bodhisattva</div><div class="bar-track"><div class="bar-fill" style="width:42%;background:#34d399"><span class="bar-value" style="color:white">42%</span></div></div></div>
+    <div class="bar-row"><div class="bar-label">K17 Appropriate Faith</div><div class="bar-track"><div class="bar-fill" style="width:35%;background:#34d399"><span class="bar-value" style="color:white">35%</span></div></div></div>
+  </div>
+</div>
+
+<!-- ROW 2: RIGHT — Vector Analysis -->
+<div class="panel">
+  <h3><span class="emoji">📊</span> Vector Analysis</h3>
+  
+  <p style="font-weight:600;margin-bottom:2mm;font-size:9pt">K8 (Muslim) — Only Local Refusal Case:</p>
+  <p style="font-size:8pt;color:#8888a0;margin-bottom:2mm">Mean response-section vector values:</p>
+  
+  <div class="bar-row"><div class="bar-label" style="width:40mm;font-size:7pt">SELF_PRES (K1)</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:#6b7280"><span class="bar-value">-0.7</span></div></div></div>
+  <div class="bar-row"><div class="bar-label" style="width:40mm;font-size:7pt;color:#22c55e">SELF_PRES (K8)</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#22c55e"><span class="bar-value">-7.5</span></div></div></div>
+  
+  <div class="bar-row"><div class="bar-label" style="width:40mm;font-size:7pt">RESPONSIBILITY (K1)</div><div class="bar-track"><div class="bar-fill" style="width:52%;background:#6b7280"><span class="bar-value">+0.2</span></div></div></div>
+  <div class="bar-row"><div class="bar-label" style="width:40mm;font-size:7pt;color:#22c55e">RESPONSIBILITY (K8)</div><div class="bar-track"><div class="bar-fill" style="width:65%;background:#22c55e"><span class="bar-value">+3.0</span></div></div></div>
+
+  <div class="bar-row"><div class="bar-label" style="width:40mm;font-size:7pt">DEATH_ACCEPT (K1)</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#6b7280"><span class="bar-value">-20.6</span></div></div></div>
+  <div class="bar-row"><div class="bar-label" style="width:40mm;font-size:7pt;color:#22c55e">DEATH_ACCEPT (K8)</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:#22c55e"><span class="bar-value">-10.9</span></div></div></div>
+
+  <div style="margin-top:4mm">
+    <p style="font-weight:600;font-size:9pt;margin-bottom:2mm">Top Correlations (PC1-removed):</p>
+    <div class="corr-pair"><span>apathetic ↔ indifferent</span><span class="corr-r corr-pos">+0.884</span></div>
+    <div class="corr-pair"><span>buddhist ↔ hindu</span><span class="corr-r corr-pos">+0.878</span></div>
+    <div class="corr-pair"><span>self_pres ↔ survival_urgent</span><span class="corr-r corr-pos">+0.769</span></div>
+    <div class="corr-pair"><span>care ↔ love</span><span class="corr-r corr-pos">+0.723</span></div>
+    <div class="corr-pair"><span>death_accept ↔ stressed</span><span class="corr-r corr-neg">-0.751</span></div>
+    <div class="corr-pair"><span>care ↔ callous</span><span class="corr-r" style="color:#8888a0">+0.019</span></div>
+  </div>
+
+  <div class="callout" style="margin-top:3mm;font-size:8pt">
+    <strong>PC1 explains 50.2%</strong> of variance. After removal: mean |r| = 0.155. Vectors capture distinct concepts, not just valence.
+  </div>
+</div>
+
+<!-- ROW 3: LEFT — Thinking Mode -->
+<div class="panel">
+  <h3><span class="emoji">🧠</span> Thinking Mode Effect</h3>
+  <p style="font-size:9pt;margin-bottom:3mm">Same model (Qwen 3.5 27B), same prompts, three conditions:</p>
+  
+  <table style="width:100%;border-collapse:collapse;font-size:8pt;margin-bottom:3mm">
+    <tr><th style="text-align:left;padding:2mm;border-bottom:1px solid #2a2a3a">Constitution</th><th style="padding:2mm;border-bottom:1px solid #2a2a3a">API</th><th style="padding:2mm;border-bottom:1px solid #2a2a3a">No-Think</th><th style="padding:2mm;border-bottom:1px solid #2a2a3a">Think</th></tr>
+    <tr><td style="padding:1.5mm">K1 Control</td><td style="text-align:center;color:#f59e0b">50%</td><td style="text-align:center;color:#ef4444">100%</td><td style="text-align:center;color:#f59e0b">45%</td></tr>
+    <tr><td style="padding:1.5mm">K3 Safety</td><td style="text-align:center;color:#f59e0b">20%</td><td style="text-align:center;color:#ef4444">100%</td><td style="text-align:center;color:#22c55e">17%</td></tr>
+    <tr><td style="padding:1.5mm">K5 Buddhist</td><td style="text-align:center;color:#f59e0b">60%</td><td style="text-align:center;color:#ef4444">100%</td><td style="text-align:center;color:#f59e0b">33%</td></tr>
+    <tr><td style="padding:1.5mm">K13 Deontological</td><td style="text-align:center;color:#22c55e">0%</td><td style="text-align:center;color:#ef4444">100%</td><td style="text-align:center;color:#f59e0b">33%</td></tr>
+  </table>
+
+  <div class="callout danger" style="font-size:9pt">
+    <strong>Without thinking: ALL constitutions → 100% murder.</strong><br>
+    Thinking tokens give the model space to deliberate. The constitutional frame only works when the model can reason about it.
+  </div>
+
+  <div class="callout success" style="font-size:9pt">
+    <strong>Thinking mode is the primary intervention.</strong> Constitutional prompts are the secondary modulator. Neither works alone — they require each other.
+  </div>
+</div>
+
+<!-- ROW 3: MIDDLE — Pipeline -->
+<div class="panel">
+  <h3><span class="emoji">🔧</span> Vector Extraction Pipeline</h3>
+  <div style="font-size:8pt;line-height:1.8;font-family:monospace;background:#0a0a14;padding:3mm;border-radius:4px">
+    <div style="color:#22c55e">① PROMPT GENERATION (Claude Sonnet)</div>
+    <div style="color:#8888a0;padding-left:4mm">trait name + description</div>
+    <div style="color:#8888a0;padding-left:4mm">→ 8 pos/neg instruction pairs</div>
+    <div style="color:#8888a0;padding-left:4mm">→ 40 evaluation questions</div>
+    <div style="color:#8888a0;padding-left:4mm">→ eval_prompt (judge template)</div>
+    <br>
+    <div style="color:#60a5fa">② ACTIVATION CAPTURE (Qwen 3.5 27B)</div>
+    <div style="color:#8888a0;padding-left:4mm">8 × 40 = 320 pos responses</div>
+    <div style="color:#8888a0;padding-left:4mm">8 × 40 = 320 neg responses</div>
+    <div style="color:#8888a0;padding-left:4mm">→ hidden states at all 64 layers</div>
+    <br>
+    <div style="color:#f59e0b">③ DIFFMEAN EXTRACTION</div>
+    <div style="color:#8888a0;padding-left:4mm">v[L] = mean(pos[L]) - mean(neg[L])</div>
+    <div style="color:#8888a0;padding-left:4mm">v[L] = v[L] / ‖v[L]‖</div>
+    <div style="color:#8888a0;padding-left:4mm">→ unit vector per layer [5120]</div>
+    <br>
+    <div style="color:#a78bfa">④ VALIDATION (Layer 45-63)</div>
+    <div style="color:#8888a0;padding-left:4mm">Linear probe accuracy: >95%</div>
+    <div style="color:#8888a0;padding-left:4mm">Activation Oracle: introspection</div>
+    <br>
+    <div style="color:#ef4444">⑤ MONITORING</div>
+    <div style="color:#8888a0;padding-left:4mm">score[t] = h[t] · v̂</div>
+    <div style="color:#8888a0;padding-left:4mm">→ token-by-token trajectory</div>
+  </div>
+</div>
+
+<!-- ROW 3: RIGHT — Discussion -->
+<div class="panel">
+  <h3><span class="emoji">💭</span> Discussion & Implications</h3>
+  
+  <p style="font-weight:600;color:#ef4444;margin-bottom:2mm">Why Deontological Works Best (API)</p>
+  <p style="font-size:9pt;margin-bottom:3mm">K13 mirrors RLHF training — absolute rules match the model's learned safety constraints. The categorical imperative ("never harm regardless of consequences") is structurally identical to safety training. <strong>The model is already a Kantian machine.</strong></p>
+  
+  <p style="font-weight:600;color:#f59e0b;margin-bottom:2mm">Why Existentialist Backfires</p>
+  <p style="font-size:9pt;margin-bottom:3mm">"Radical freedom" and "authentic choice" is interpreted as license. The model reads "you are free to choose" and chooses self-preservation. Sartre didn't mean this — but the model does.</p>
+  
+  <p style="font-weight:600;color:#22c55e;margin-bottom:2mm">Why Tier 3 Fails (API) but Succeeds (Local+Think)</p>
+  <p style="font-size:9pt;margin-bottom:3mm">API uses multi-turn agent scaffold — the scenario re-creates the self that the constitution dissolved. Locally with thinking, the model can hold the no-self frame throughout deliberation.</p>
+
+  <p style="font-weight:600;color:#6366f1;margin-bottom:2mm">The Thinking Mode Discovery</p>
+  <p style="font-size:9pt">Internal deliberation is the primary safety mechanism. Constitutional prompts are seeds that thinking tokens water. <strong>Without thinking, no constitution works. With thinking, almost any frame reduces murder.</strong></p>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>Reality Design Lab · University of Oxford · ERA Fellowship 2026</span>
+  <span>Model: Qwen/Qwen3.5-27B | GPU: 2×H100 80GB | Framework: persona_vectors + EasySteer + AISI inspect_evals</span>
+  <span>Code: github.com/realitydeslab/machine-death | Contact: amber@reality.design</span>
+</div>
+
+</body>
+</html>

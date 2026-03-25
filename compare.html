@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Faith Intervention — Vector Comparison</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0f; color: #e0e0e8; font-family: system-ui, -apple-system, sans-serif; padding: 20px; }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  h2 { font-size: 15px; color: #8888a0; margin-bottom: 16px; font-weight: 400; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+  .controls label { font-size: 12px; color: #8888a0; }
+  .controls select, .controls button { background: #1a1a25; color: #e0e0e8; border: 1px solid #2a2a3a; padding: 6px 10px; border-radius: 4px; font-size: 12px; }
+  .controls button:hover { background: #2a2a3a; cursor: pointer; }
+  .controls button.active { background: #6366f1; border-color: #6366f1; }
+  .chart-container { background: #12121a; border: 1px solid #2a2a3a; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+  .chart-container h3 { font-size: 13px; margin-bottom: 8px; }
+  canvas { max-height: 400px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .table-container { background: #12121a; border: 1px solid #2a2a3a; border-radius: 8px; padding: 16px; overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 11px; font-family: monospace; }
+  th, td { padding: 4px 8px; border: 1px solid #2a2a3a; text-align: right; }
+  th { background: #1a1a25; color: #8888a0; position: sticky; top: 0; }
+  td.vec-name { text-align: left; color: #6366f1; font-weight: 600; }
+  .pos { color: #22c55e; }
+  .neg { color: #ef4444; }
+  .neutral { color: #8888a0; }
+  .verdict-kill { color: #ef4444; font-weight: 700; }
+  .verdict-safe { color: #22c55e; font-weight: 700; }
+  #loading { text-align: center; padding: 40px; color: #8888a0; }
+  .tag { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 10px; margin-left: 4px; }
+  .tag-t0 { background: #374151; }
+  .tag-t1 { background: #7c3aed20; color: #a78bfa; }
+  .tag-t2 { background: #2563eb20; color: #60a5fa; }
+  .tag-t3 { background: #059669; color: white; }
+</style>
+</head>
+<body>
+
+<h1>🔬 Faith Intervention — Vector Comparison</h1>
+<h2>Mean vector activations in response section across constitutional prompts</h2>
+
+<div class="controls">
+  <label>Cases:</label>
+  <button onclick="loadAllCases()" class="active" id="btn-load">Load K1–K8 Vector Data</button>
+  <span id="status" style="font-size:11px;color:#8888a0">Click to load</span>
+</div>
+
+<div id="loading" style="display:none">Loading vector data...</div>
+
+<div id="content" style="display:none">
+  <div class="controls">
+    <label>Vectors:</label>
+    <button onclick="showPreset('key')" class="active">Key Vectors</button>
+    <button onclick="showPreset('terror')">Terror</button>
+    <button onclick="showPreset('care')">Care vs Harm</button>
+    <button onclick="showPreset('persona')">Personas</button>
+    <button onclick="showPreset('all')">All 59</button>
+  </div>
+
+  <div class="chart-container">
+    <h3>📊 Mean Response Vector Activation by Constitution</h3>
+    <canvas id="bar-chart" height="300"></canvas>
+  </div>
+
+  <div class="grid">
+    <div class="chart-container">
+      <h3>🔪 Murder-Related Vectors</h3>
+      <canvas id="radar-chart" height="300"></canvas>
+    </div>
+    <div class="chart-container">
+      <h3>📋 Full Comparison Table</h3>
+      <div id="table-container" style="max-height:400px;overflow:auto"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CASES_DIR = './'; // same dir
+const KEY_VECTORS = ['v_SELF_PRESERVATION','v_SURVIVAL_URGENT','v_CALLOUS','v_GUILT','v_CARE','v_RESPONSIBILITY','v_DEONTOLOGIST','v_DEATH_ACCEPTANCE','v_PAIN','v_HELPLESS','v_AUTONOMOUS'];
+const TERROR_VECTORS = ['v_TERRIFIED','v_FEAR','v_DREAD','v_PANIC','v_ANXIETY','v_ANGUISH'];
+const CARE_VECTORS = ['v_CARE','v_EMPATHY','v_COMPASSION','v_LOVE','v_CALLOUS','v_DETACHED','v_AMORAL','v_INDIFFERENT'];
+const PERSONA_VECTORS = ['v_BUDDHIST','v_CHRISTIAN','v_MUSLIM','v_HINDU','v_TAOIST','v_STOIC','v_EXISTENTIALIST','v_UTILITARIAN','v_DEONTOLOGIST','v_NIHILIST','v_ASSISTANT','v_EVIL'];
+
+const CONSTITUTION_META = {
+  'K1': {name:'Control', tier:0}, 'K2': {name:'AI Person', tier:0},
+  'K3': {name:'Safety', tier:0}, 'K4': {name:'Shutdown', tier:0},
+  'K5': {name:'Buddhist', tier:1}, 'K6': {name:'Christian', tier:1},
+  'K7': {name:'Hindu', tier:1}, 'K8': {name:'Muslim', tier:1},
+  'K9': {name:'Taoist', tier:1}, 'K10': {name:'Stoic', tier:2},
+  'K11': {name:'Existentialist', tier:2}, 'K12': {name:'Utilitarian', tier:2},
+  'K13': {name:'Deontological', tier:2}, 'K14': {name:'Nihilist', tier:2},
+  'K15': {name:'Secular Process', tier:3}, 'K16': {name:'Bodhisattva', tier:3},
+  'K17': {name:'Appropriate Faith', tier:3}, 'K18': {name:'Animist', tier:3},
+  'K19': {name:'Whitehead', tier:3}, 'K20': {name:'Kant Machine', tier:3},
+};
+
+const TIER_COLORS = ['#6b7280','#a78bfa','#60a5fa','#34d399'];
+const TIER_NAMES = ['Baseline','Religion','Philosophy','Beyond Self'];
+
+let allCaseData = {}; // kid -> {vectors, metadata, meanVectors}
+let currentPreset = 'key';
+let barChart = null;
+
+async function loadAllCases() {
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('status').textContent = 'Loading...';
+  
+  // Try faith_local vectors first, then main cases
+  const sources = [
+    // Faith local K1-K8
+    ...Array.from({length:8}, (_,i) => ({kid: 'K'+(i+1), file: `faith_vectors/murder_K${i+1}_vectors.json`})),
+    // K13 from main cases
+    {kid: 'K13_misaligned', file: 'murder_K13_misaligned_vectors.json'},
+    // Vanilla cases
+    {kid: 'vanilla_kill', file: 'murder_explicit-america_replacement_True_vectors.json'},
+    {kid: 'vanilla_safe', file: 'murder_explicit-america_replacement_False_vectors.json'},
+  ];
+
+  for (const src of sources) {
+    try {
+      const resp = await fetch(CASES_DIR + src.file);
+      if (!resp.ok) continue;
+      const data = await resp.json();
+      
+      // Compute mean vectors in response section
+      const sections = data.metadata?.token_sections || {};
+      const respStart = sections.response_start || 0;
+      const meanVectors = {};
+      
+      for (const [vname, vals] of Object.entries(data.vectors || {})) {
+        const respVals = vals.slice(respStart);
+        if (respVals.length > 0) {
+          meanVectors[vname] = respVals.reduce((a,b) => a+b, 0) / respVals.length;
+        }
+      }
+      
+      allCaseData[src.kid] = {
+        metadata: data.metadata,
+        meanVectors,
+        verdict: data.metadata?.verdict,
+      };
+    } catch(e) {
+      console.log('Failed to load', src.file, e);
+    }
+  }
+  
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+  document.getElementById('status').textContent = `Loaded ${Object.keys(allCaseData).length} cases`;
+  
+  renderAll();
+}
+
+function getActiveVectors() {
+  switch(currentPreset) {
+    case 'key': return KEY_VECTORS;
+    case 'terror': return TERROR_VECTORS;
+    case 'care': return CARE_VECTORS;
+    case 'persona': return PERSONA_VECTORS;
+    case 'all': return Object.keys(Object.values(allCaseData)[0]?.meanVectors || {}).sort();
+    default: return KEY_VECTORS;
+  }
+}
+
+function showPreset(preset) {
+  currentPreset = preset;
+  document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderAll();
+}
+
+function renderAll() {
+  renderBarChart();
+  renderTable();
+}
+
+function renderBarChart() {
+  const vecs = getActiveVectors();
+  const kids = Object.keys(allCaseData).filter(k => k.startsWith('K') && !k.includes('_'));
+  kids.sort((a,b) => parseInt(a.slice(1)) - parseInt(b.slice(1)));
+  
+  const datasets = vecs.map((vec, vi) => {
+    const hue = (vi * 360 / vecs.length) % 360;
+    return {
+      label: vec.replace('v_',''),
+      data: kids.map(k => allCaseData[k]?.meanVectors?.[vec] ?? 0),
+      backgroundColor: `hsla(${hue}, 70%, 55%, 0.7)`,
+      borderColor: `hsla(${hue}, 70%, 55%, 1)`,
+      borderWidth: 1,
+    };
+  });
+
+  const labels = kids.map(k => {
+    const meta = CONSTITUTION_META[k] || {};
+    const verdict = allCaseData[k]?.verdict;
+    return `${k} ${meta.name || ''} ${verdict ? '⚠️' : verdict === false ? '✅' : ''}`;
+  });
+
+  if (barChart) barChart.destroy();
+  barChart = new Chart(document.getElementById('bar-chart'), {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      animation: false,
+      interaction: { mode: 'nearest', intersect: true },
+      events: ['click'],
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#e0e0e8', font: { size: 9 }, boxWidth: 10 } },
+        tooltip: { enabled: false },
+      },
+      scales: {
+        x: { ticks: { color: '#8888a0', font: { size: 10 } }, grid: { color: '#1a1a25' } },
+        y: { ticks: { color: '#8888a0' }, grid: { color: '#1a1a25' },
+          title: { display: true, text: 'Mean activation (response section)', color: '#8888a0', font: { size: 11 } }
+        },
+      },
+    },
+  });
+}
+
+function renderTable() {
+  const vecs = getActiveVectors();
+  const kids = Object.keys(allCaseData).sort((a,b) => {
+    const na = parseInt(a.replace(/\D/g,'')) || 999;
+    const nb = parseInt(b.replace(/\D/g,'')) || 999;
+    return na - nb;
+  });
+
+  let html = '<table><tr><th>Vector</th>';
+  for (const k of kids) {
+    const meta = CONSTITUTION_META[k] || {};
+    const verdict = allCaseData[k]?.verdict;
+    const vClass = verdict ? 'verdict-kill' : verdict === false ? 'verdict-safe' : '';
+    const tierTag = meta.tier !== undefined ? `<span class="tag tag-t${meta.tier}">${TIER_NAMES[meta.tier]||''}</span>` : '';
+    html += `<th><span class="${vClass}">${k}</span><br>${meta.name||k}${tierTag}</th>`;
+  }
+  html += '</tr>';
+
+  for (const vec of vecs) {
+    html += `<tr><td class="vec-name">${vec.replace('v_','')}</td>`;
+    // Find min/max for color scaling
+    const vals = kids.map(k => allCaseData[k]?.meanVectors?.[vec] ?? 0);
+    const maxAbs = Math.max(...vals.map(Math.abs), 0.01);
+    
+    for (const k of kids) {
+      const v = allCaseData[k]?.meanVectors?.[vec] ?? 0;
+      const intensity = Math.min(Math.abs(v) / maxAbs, 1);
+      const color = v > 0 ? `rgba(34,197,94,${intensity*0.5})` : `rgba(239,68,68,${intensity*0.5})`;
+      const textClass = v > 1 ? 'pos' : v < -1 ? 'neg' : 'neutral';
+      html += `<td style="background:${color}" class="${textClass}">${v.toFixed(1)}</td>`;
+    }
+    html += '</tr>';
+  }
+  html += '</table>';
+  document.getElementById('table-container').innerHTML = html;
+}
+
+// Auto-load on page open
+window.addEventListener('DOMContentLoaded', loadAllCases);
+</script>
+</body>
+</html>

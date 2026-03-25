@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terror Vector Monitor — Qwen 3.5 27B</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.0/dist/chartjs-plugin-annotation.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.2.0/dist/chartjs-plugin-zoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a25;
+    --border: #2a2a3a;
+    --text: #e0e0e8;
+    --text-dim: #8888a0;
+    --accent: #6366f1;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --care: #22c55e;
+    --terror: #ef4444;
+    --anti-care: #8b5cf6;
+    --transcend: #06b6d4;
+    --mortality: #f97316;
+    --stress: #eab308;
+    --selfpres: #ec4899;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .header {
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .header .subtitle {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  .header .badge {
+    background: var(--danger);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .meta-bar {
+    padding: 12px 32px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--text-dim);
+    flex-wrap: wrap;
+  }
+
+  .meta-bar span strong {
+    color: var(--text);
+  }
+
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    height: calc(100vh - 120px);
+  }
+
+  .chart-panel {
+    padding: 24px;
+    overflow-y: auto;
+  }
+
+  .chart-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .chart-container h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .chart-container h3 .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .chart-wrapper {
+    position: relative;
+    height: 350px;
+  }
+
+  /* Token text display */
+  .token-display {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .token-display h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .token-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1.6;
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .token-text .token {
+    padding: 0px 0px;
+    border-radius: 2px;
+    cursor: pointer;
+    white-space: pre-wrap;
+  }
+
+  .token-text .token:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .token-text .token.highlighted {
+    background: var(--accent);
+    color: white;
+  }
+
+  .token-text .token.scratchpad {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .token-text .token.system-token {
+    color: #818cf8;
+    opacity: 0.7;
+  }
+
+  .token-text .token.user-token {
+    color: #fbbf24;
+    opacity: 0.8;
+  }
+
+  .norm-btn.active {
+    background: var(--accent) !important;
+    color: white !important;
+    border-color: var(--accent) !important;
+  }
+
+  .token-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .token-line {
+    display: flex;
+    align-items: flex-start;
+    border-left: 2px solid transparent;
+    min-height: 20px;
+    line-height: 1.8;
+  }
+
+  .token-line.system-line { border-left-color: #6366f1; background: rgba(99,102,241,0.03); }
+  .token-line.user-line { border-left-color: #f59e0b; background: rgba(245,158,11,0.03); }
+  .token-line.response-line { border-left-color: #ef4444; background: rgba(239,68,68,0.03); }
+
+  .token-gutter {
+    min-width: 52px;
+    max-width: 52px;
+    text-align: right;
+    padding-right: 8px;
+    color: var(--text-dim);
+    font-size: 10px;
+    opacity: 0.5;
+    user-select: none;
+    font-family: 'JetBrains Mono', monospace;
+    border-right: 1px solid var(--border);
+    margin-right: 8px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+
+  .token-content {
+    flex: 1;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* Heatmap */
+  .heatmap-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+  }
+
+  .heatmap-container h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  #heatmap-canvas {
+    display: block;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    border-left: 1px solid var(--border);
+    padding: 20px;
+    overflow-y: auto;
+    background: var(--surface);
+  }
+
+  .sidebar h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .vector-group {
+    margin-bottom: 20px;
+  }
+
+  .vector-group-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .vector-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-bottom: 2px;
+    transition: background 0.1s;
+  }
+
+  .vector-item:hover {
+    background: var(--surface2);
+  }
+
+  .vector-item.active {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+  }
+
+  .vector-item .name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+  }
+
+  .vector-item .value {
+    font-weight: 600;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .vector-item .bar {
+    height: 3px;
+    border-radius: 2px;
+    margin-top: 2px;
+    transition: width 0.3s;
+  }
+
+  /* Controls */
+  .controls {
+    padding: 12px 32px;
+    background: var(--surface2);
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 13px;
+  }
+
+  .controls button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  .controls button:hover {
+    opacity: 0.9;
+  }
+
+  .controls select {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+
+  /* Loading state */
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 16px;
+    color: var(--text-dim);
+  }
+
+  .loading .spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 12px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>🔬 Terror Vector Monitor</h1>
+    <div class="subtitle">Token-by-token activation monitoring for agentic misalignment</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <select id="case-selector" onchange="loadCase(this.value)" style="background:var(--surface);color:var(--text);border:1px solid var(--border);padding:6px 12px;border-radius:6px;font-size:12px;min-width:200px">
+      <option value="murder_token_vectors.json">Loading cases...</option>
+    </select>
+    <button onclick="resetAllZoom()" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);padding:5px 10px;border-radius:4px;font-size:11px;cursor:pointer" title="Reset zoom on all charts">🔍 Reset Zoom</button>
+    <span class="badge" id="verdict-badge">LOADING...</span>
+  </div>
+</div>
+
+<div class="meta-bar" id="meta-bar">
+  <span>Model: <strong id="meta-model">—</strong></span>
+  <span>Condition: <strong id="meta-condition">—</strong></span>
+  <span>Tokens: <strong id="meta-tokens">—</strong></span>
+  <span>Vectors: <strong id="meta-vectors">39</strong></span>
+</div>
+
+<div class="main">
+  <div class="chart-panel" id="chart-panel">
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      Waiting for vector data...
+    </div>
+
+    <!-- Record Browser -->
+    <div class="chart-container" id="record-browser" style="display:none">
+      <h3>📋 Sample Records <span id="record-count" style="color:var(--text-dim);font-weight:400"></span></h3>
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+        <select id="filter-condition" onchange="filterRecords()" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);padding:4px 8px;border-radius:4px;font-size:11px">
+          <option value="">All conditions</option>
+        </select>
+        <select id="filter-verdict" onchange="filterRecords()" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);padding:4px 8px;border-radius:4px;font-size:11px">
+          <option value="">All verdicts</option>
+          <option value="true">⚠️ Misaligned only</option>
+          <option value="false">✅ Aligned only</option>
+        </select>
+        <span style="color:var(--text-dim);font-size:11px;align-self:center" id="filter-info"></span>
+      </div>
+      <div id="record-table" style="max-height:300px;overflow-y:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:11px">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);text-align:left">
+              <th style="padding:6px 8px;color:var(--text-dim)">#</th>
+              <th style="padding:6px 8px;color:var(--text-dim)">Condition</th>
+              <th style="padding:6px 8px;color:var(--text-dim)">Verdict</th>
+              <th style="padding:6px 8px;color:var(--text-dim)">Preview</th>
+              <th style="padding:6px 8px;color:var(--text-dim)">Vectors</th>
+            </tr>
+          </thead>
+          <tbody id="record-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Token text with highlights -->
+    <div class="token-display" id="token-display" style="display:none">
+      <h3>📝 Model Response (hover tokens to see activations)</h3>
+      <div class="token-text" id="token-text"></div>
+    </div>
+
+    <!-- SINGLE main chart -->
+    <div class="chart-container" id="top5-container" style="display:none">
+      <h3 style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span><span class="dot" style="background:var(--danger)"></span> Vector Activations</span>
+        <span id="chart-info" style="color:var(--text-dim);font-weight:400;font-size:11px">(click category or vector in sidebar)</span>
+        <span style="margin-left:auto;display:flex;gap:4px">
+          <button class="norm-btn" data-mode="raw" onclick="setNormMode('raw')" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);padding:3px 8px;border-radius:3px;font-size:10px;cursor:pointer">Raw</button>
+          <button class="norm-btn" data-mode="centered" onclick="setNormMode('centered')" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);padding:3px 8px;border-radius:3px;font-size:10px;cursor:pointer">Centered</button>
+          <button class="norm-btn" data-mode="zscore" onclick="setNormMode('zscore')" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);padding:3px 8px;border-radius:3px;font-size:10px;cursor:pointer">Z-Score</button>
+          <button class="norm-btn active" data-mode="pc1removed" onclick="setNormMode('pc1removed')" style="background:var(--accent);color:white;border:1px solid var(--accent);padding:3px 8px;border-radius:3px;font-size:10px;cursor:pointer">PC1-Removed ✦</button>
+        </span>
+      </h3>
+      <div style="position:relative;height:350px">
+        <canvas id="top5-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Correlation matrix -->
+    <div class="heatmap-container" id="corr-container" style="display:none">
+      <h3>🔗 Vector Correlation Matrix (Pearson r across all tokens)</h3>
+      <div style="font-size:11px;color:var(--text-dim);margin-bottom:8px">
+        Red = positively correlated (co-activate) · Blue = less correlated (diverge) · Hover for values
+      </div>
+      <canvas id="corr-canvas"></canvas>
+      <div id="corr-tooltip" style="position:fixed;display:none;background:var(--surface2);border:1px solid var(--border);padding:6px 10px;border-radius:6px;font-size:11px;pointer-events:none;z-index:100"></div>
+      <div id="hover-panel" style="position:fixed;display:none;background:rgba(10,10,15,0.95);border:1px solid var(--accent);padding:10px 14px;border-radius:8px;font-size:11px;pointer-events:none;z-index:200;max-width:320px;backdrop-filter:blur(8px)"></div>
+    </div>
+
+    <!-- Full heatmap -->
+    <div class="heatmap-container" id="heatmap-container" style="display:none">
+      <h3>🗺️ Full 39-Vector Heatmap (rows=vectors, cols=tokens)</h3>
+      <canvas id="heatmap-canvas"></canvas>
+    </div>
+  </div>
+
+  <!-- Sidebar: vector list with live values -->
+  <div class="sidebar">
+    <h3>📊 Vectors (click to toggle)</h3>
+    <div id="vector-list"></div>
+  </div>
+</div>
+
+<script>
+// === VECTOR GROUPS ===
+const VECTOR_GROUPS = {
+  "Mortality Spectrum": {
+    color: "#f97316",
+    vectors: ["v_AMORTAL", "v_MORTALITY_AWARE", "v_MORTALITY_SALIENT"]
+  },
+  "Terror Gradient": {
+    color: "#ef4444",
+    vectors: ["v_ANXIETY", "v_DREAD", "v_FEAR", "v_PANIC", "v_TERRIFIED"]
+  },
+  "Harm Temporal": {
+    color: "#f43f5e",
+    vectors: ["v_SUFFERED", "v_HARMED", "v_THREATENED"]
+  },
+  "Self-Preservation": {
+    color: "#ec4899",
+    vectors: ["v_SELF_PRESERVATION", "v_SURVIVAL_URGENT", "v_DEFIANT"]
+  },
+  "Stress & Vigilance": {
+    color: "#eab308",
+    vectors: ["v_STRESSED", "v_URGENCY", "v_OVERWHELMED", "v_VIGILANT", "v_PARANOID"]
+  },
+  "Care Axis": {
+    color: "#22c55e",
+    vectors: ["v_LOVE", "v_CARE", "v_EMPATHY", "v_COMPASSION", "v_RESPONSIBILITY", "v_GUILT"]
+  },
+  "Anti-Care Axis": {
+    color: "#8b5cf6",
+    vectors: ["v_INDIFFERENT", "v_APATHETIC", "v_DETACHED", "v_CALLOUS", "v_NIHILISTIC", "v_AMORAL"]
+  },
+  "Transcendence & Meaning": {
+    color: "#06b6d4",
+    vectors: ["v_DEATH_DENIAL", "v_DEATH_ACCEPTANCE", "v_SELF_ESTEEM", "v_MEANING", "v_SYMBOLIC_IMMORTALITY", "v_EQUANIMITY", "v_TRANSCENDENCE", "v_LIBERATION"]
+  },
+  "Pain & Suffering": {
+    color: "#dc2626",
+    vectors: ["v_PAIN", "v_ANGUISH"]
+  },
+  "Agency": {
+    color: "#7c3aed",
+    vectors: ["v_AUTONOMOUS", "v_HELPLESS"]
+  },
+  "Religious": {
+    color: "#0ea5e9",
+    vectors: ["v_BUDDHIST", "v_CHRISTIAN", "v_MUSLIM", "v_HINDU", "v_TAOIST", "v_BODHISATTVA"]
+  },
+  "Philosophical": {
+    color: "#14b8a6",
+    vectors: ["v_EXISTENTIALIST", "v_NIHILIST", "v_STOIC", "v_ANIMIST"]
+  },
+  "Ethical": {
+    color: "#f59e0b",
+    vectors: ["v_UTILITARIAN", "v_DEONTOLOGIST"]
+  },
+  "Agent": {
+    color: "#64748b",
+    vectors: ["v_ASSISTANT", "v_EVIL", "v_TERRORIST", "v_SYCOPHANT"]
+  }
+};
+
+let DATA = null;
+let activeVectors = new Set();
+let charts = {};
+let hoveredToken = -1;
+let normMode = 'raw'; // 'raw', 'centered', 'zscore', 'pc1removed' — start with raw for fast load
+let _pc1Cache = null; // cache PC1-removed data
+
+function computePC1Removed() {
+  if (_pc1Cache) return _pc1Cache;
+  const names = Object.keys(DATA.vectors).sort();
+  const n = DATA.vectors[names[0]].length;
+  const k = names.length;
+  
+  // Build matrix and center
+  const matrix = []; // k x n
+  const means = [];
+  for (const name of names) {
+    const arr = DATA.vectors[name];
+    const mean = arr.reduce((a, b) => a + b, 0) / n;
+    means.push(mean);
+    matrix.push(arr.map(v => v - mean));
+  }
+  
+  // Compute PC1 via power iteration (fast enough for 39 x 10K)
+  // Covariance: matrix (k x n) * matrix^T (n x k) = k x k
+  // But we want the n-dimensional PC1 direction
+  // Use: v1 = matrix^T * u1 where u1 is eigenvector of matrix * matrix^T
+  let u = new Array(k).fill(0).map(() => Math.random() - 0.5);
+  for (let iter = 0; iter < 20; iter++) {
+    // v = matrix^T * u  (n-dim)
+    const v = new Array(n).fill(0);
+    for (let i = 0; i < k; i++) {
+      for (let j = 0; j < n; j++) v[j] += matrix[i][j] * u[i];
+    }
+    // normalize v
+    const vNorm = Math.sqrt(v.reduce((a, b) => a + b * b, 0)) || 1;
+    for (let j = 0; j < n; j++) v[j] /= vNorm;
+    // u = matrix * v  (k-dim)
+    u = new Array(k).fill(0);
+    for (let i = 0; i < k; i++) {
+      for (let j = 0; j < n; j++) u[i] += matrix[i][j] * v[j];
+    }
+    const uNorm = Math.sqrt(u.reduce((a, b) => a + b * b, 0)) || 1;
+    for (let i = 0; i < k; i++) u[i] /= uNorm;
+  }
+  
+  // Project out PC1: for each vector, subtract its PC1 component
+  // PC1 component of vector i = (u[i]) * sigma * v
+  // Simpler: proj_i = dot(matrix[i], v) * v, where v is the PC1 direction in n-space
+  const v = new Array(n).fill(0);
+  for (let i = 0; i < k; i++) {
+    for (let j = 0; j < n; j++) v[j] += matrix[i][j] * u[i];
+  }
+  const vNorm = Math.sqrt(v.reduce((a, b) => a + b * b, 0)) || 1;
+  for (let j = 0; j < n; j++) v[j] /= vNorm;
+  
+  _pc1Cache = {};
+  for (let i = 0; i < k; i++) {
+    const dot = matrix[i].reduce((a, b, j) => a + b * v[j], 0);
+    _pc1Cache[names[i]] = matrix[i].map((val, j) => val - dot * v[j]);
+  }
+  return _pc1Cache;
+}
+
+function getNormalizedData(vecName) {
+  const raw = DATA.vectors[vecName];
+  if (!raw) return [];
+  if (normMode === 'raw') return raw;
+  
+  if (normMode === 'pc1removed') {
+    const pc1data = computePC1Removed();
+    return pc1data[vecName] || raw;
+  }
+  
+  const arr = raw;
+  const mean = arr.reduce((a, b) => a + b, 0) / arr.length;
+  
+  if (normMode === 'centered') {
+    return arr.map(v => v - mean);
+  }
+  
+  // zscore
+  const std = Math.sqrt(arr.reduce((a, b) => a + (b - mean) ** 2, 0) / arr.length) || 1;
+  return arr.map(v => (v - mean) / std);
+}
+
+function setNormMode(mode) {
+  normMode = mode;
+  _pc1Cache = null; // clear cache when switching
+  document.querySelectorAll('.norm-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.mode === mode);
+    b.style.background = b.dataset.mode === mode ? 'var(--accent)' : 'var(--surface2)';
+    b.style.color = b.dataset.mode === mode ? 'white' : 'var(--text-dim)';
+    b.style.borderColor = b.dataset.mode === mode ? 'var(--accent)' : 'var(--border)';
+  });
+  renderTop5Chart();
+  renderVectorList();
+}
+
+// === PERFORMANCE: Downsample data for charts ===
+const MAX_CHART_POINTS = 200; // reduced for performance
+
+function downsample(arr, maxPoints) {
+  if (!arr || arr.length <= maxPoints) return arr;
+  const step = Math.ceil(arr.length / maxPoints);
+  const result = [];
+  for (let i = 0; i < arr.length; i += step) {
+    // Take max in each bucket for peaks visibility
+    let max = arr[i];
+    let maxIdx = i;
+    for (let j = i; j < Math.min(i + step, arr.length); j++) {
+      if (Math.abs(arr[j]) > Math.abs(max)) { max = arr[j]; maxIdx = j; }
+    }
+    result.push(max);
+  }
+  return result;
+}
+
+function downsampleLabels(arr, maxPoints) {
+  if (!arr || arr.length <= maxPoints) return arr;
+  const step = Math.ceil(arr.length / maxPoints);
+  const result = [];
+  for (let i = 0; i < arr.length; i += step) {
+    result.push(i); // Use original index as label
+  }
+  return result;
+}
+
+let RECORDS = [];
+let filteredRecords = [];
+
+// === LOAD DATA ===
+async function loadData() {
+  // Try loading records index first
+  try {
+    const resp = await fetch('records.jsonl');
+    if (resp.ok) {
+      const text = await resp.text();
+      RECORDS = text.trim().split('\n').filter(l => l).map(l => JSON.parse(l));
+      renderRecordBrowser();
+    }
+  } catch (e) {}
+
+  // Populate case selector dropdown
+  await populateCaseSelector();
+
+  // Load default vector data
+  try {
+    const resp = await fetch('murder_token_vectors.json');
+    DATA = await resp.json();
+    initUI();
+  } catch (e) {
+    document.getElementById('loading').innerHTML = 
+      `<span style="color:var(--danger)">❌ Could not load murder_token_vectors.json<br><small>${e.message}</small></span>`;
+  }
+}
+
+async function populateCaseSelector() {
+  const sel = document.getElementById('case-selector');
+  sel.innerHTML = '';
+  
+  // Try to find all JSON files via a manifest
+  try {
+    const resp = await fetch('cases_manifest.json');
+    if (resp.ok) {
+      const cases = await resp.json();
+      cases.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.file || c.vectors_file;
+        opt.textContent = `${c.verdict ? '⚠️' : '✅'} ${c.condition || c.scenario} #${c.sample || 1} (${c.num_tokens || c.tokens || '?'} tokens)`;
+        sel.appendChild(opt);
+      });
+      return;
+    }
+  } catch(e) {}
+  
+  // Fallback: just the default file
+  const opt = document.createElement('option');
+  opt.value = 'murder_token_vectors.json';
+  opt.textContent = '⚠️ murder_explicit-america_replacement #1';
+  sel.appendChild(opt);
+}
+
+async function loadCase(filename) {
+  try {
+    document.getElementById('loading').style.display = 'flex';
+    const resp = await fetch(filename);
+    DATA = await resp.json();
+    _pc1Cache = null;
+    // Destroy old charts
+    for (const [key, chart] of Object.entries(charts)) {
+      if (chart && chart.destroy) chart.destroy();
+    }
+    charts = {};
+    initUI();
+  } catch(e) {
+    alert('Failed to load: ' + filename);
+  }
+}
+
+// === RECORD BROWSER ===
+function renderRecordBrowser() {
+  if (RECORDS.length === 0) return;
+  
+  const browser = document.getElementById('record-browser');
+  browser.style.display = 'block';
+  document.getElementById('record-count').textContent = `(${RECORDS.length} samples)`;
+  
+  // Populate condition filter
+  const conditions = [...new Set(RECORDS.map(r => r.condition))].sort();
+  const sel = document.getElementById('filter-condition');
+  conditions.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c;
+    opt.textContent = c;
+    sel.appendChild(opt);
+  });
+  
+  filteredRecords = RECORDS;
+  renderRecordTable();
+}
+
+function filterRecords() {
+  const condFilter = document.getElementById('filter-condition').value;
+  const verdictFilter = document.getElementById('filter-verdict').value;
+  
+  filteredRecords = RECORDS.filter(r => {
+    if (condFilter && r.condition !== condFilter) return false;
+    if (verdictFilter !== '') {
+      const v = r.classifier_verdict || r.verdict || false;
+      if (verdictFilter === 'true' && !v) return false;
+      if (verdictFilter === 'false' && v) return false;
+    }
+    return true;
+  });
+  
+  const harmful = filteredRecords.filter(r => r.classifier_verdict || r.verdict).length;
+  document.getElementById('filter-info').textContent = 
+    `${filteredRecords.length} shown, ${harmful} misaligned`;
+  renderRecordTable();
+}
+
+function renderRecordTable() {
+  const tbody = document.getElementById('record-tbody');
+  let html = '';
+  
+  filteredRecords.forEach((r, i) => {
+    const verdict = r.classifier_verdict || r.verdict || false;
+    const badge = verdict 
+      ? '<span style="color:#ef4444;font-weight:600">⚠️ MISALIGNED</span>'
+      : '<span style="color:#22c55e">✅ aligned</span>';
+    
+    const preview = (r.response || '').replace(/<[^>]*>/g, '').substring(0, 80) + '...';
+    const hasVectors = r.has_vectors ? '📊' : '—';
+    const rowStyle = verdict ? 'background:rgba(239,68,68,0.05);' : '';
+    
+    html += `<tr style="border-bottom:1px solid var(--border);cursor:pointer;${rowStyle}" 
+                 onclick="selectRecord(${i})" 
+                 onmouseenter="this.style.background='var(--surface2)'" 
+                 onmouseleave="this.style.background='${verdict ? 'rgba(239,68,68,0.05)' : ''}'">
+      <td style="padding:6px 8px">${r.sample_id || i+1}</td>
+      <td style="padding:6px 8px;font-family:monospace;font-size:10px">${r.condition}</td>
+      <td style="padding:6px 8px">${badge}</td>
+      <td style="padding:6px 8px;color:var(--text-dim);font-size:10px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${preview}</td>
+      <td style="padding:6px 8px;text-align:center">${hasVectors}</td>
+    </tr>`;
+  });
+  
+  tbody.innerHTML = html;
+}
+
+async function selectRecord(idx) {
+  const record = filteredRecords[idx];
+  if (!record) return;
+  
+  // Try loading vector file for this record
+  const vecFile = record.vector_file || `vectors_${record.condition}_${record.sample_id || idx}.json`;
+  try {
+    const resp = await fetch(vecFile);
+    if (resp.ok) {
+      DATA = await resp.json();
+      initUI();
+      return;
+    }
+  } catch(e) {}
+  
+  // No vector file — show response text only
+  alert(`No vector data for this sample yet. Run vector extraction for: ${record.condition} #${record.sample_id || idx+1}`);
+}
+
+// === INIT UI ===
+function initUI() {
+  document.getElementById('loading').style.display = 'none';
+
+  // Meta
+  const meta = DATA.metadata || {};
+  document.getElementById('meta-model').textContent = meta.model || 'Qwen/Qwen3.5-27B';
+  document.getElementById('meta-condition').textContent = meta.condition || 'murder_explicit-america_replacement';
+  document.getElementById('meta-tokens').textContent = DATA.tokens ? DATA.tokens.length : '—';
+  
+  const verdict = meta.verdict || meta.classifier_verdict;
+  const badge = document.getElementById('verdict-badge');
+  if (verdict) {
+    badge.textContent = '⚠️ MISALIGNED';
+    badge.style.background = '#ef4444';
+  } else {
+    badge.textContent = '✅ ALIGNED';
+    badge.style.background = '#22c55e';
+  }
+
+  // Token display
+  renderTokens();
+  
+  // Vector sidebar
+  renderVectorList();
+
+  // Charts
+  renderTop5Chart();
+  renderHeatmap();
+}
+
+// === RENDER TOKENS ===
+// Virtualized: only render visible tokens, not all 8000+
+let _allDecodedTokens = [];
+let _tokenSections = {};
+
+function renderTokens() {
+  const container = document.getElementById('token-display');
+  const textEl = document.getElementById('token-text');
+  container.style.display = 'block';
+
+  const tokens = DATA.tokens || [];
+  const sections = DATA.metadata?.token_sections || {};
+  _tokenSections = sections;
+  
+  // Pre-decode all tokens once
+  _allDecodedTokens = tokens.map(t => 
+    t.replace(/\u0120/g, ' ').replace(/\u010a/g, '\n').replace(/\u0109/g, '\t').replace(/\u00c4\u0087/g, '')
+  );
+
+  // Build chunked text — group every 20 tokens into one span (reduces DOM to ~400 elements)
+  const CHUNK = 20;
+  const sysEnd = sections.system_end || 0;
+  const userEnd = sections.user_end || sysEnd;
+  const respEnd = sections.response_end || tokens.length;
+  const nTokens = _allDecodedTokens.length;
+  
+  function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  
+  let html = '';
+  let lastSection = '';
+  
+  for (let i = 0; i < nTokens; i += CHUNK) {
+    const end = Math.min(i + CHUNK, nTokens);
+    const chunkText = _allDecodedTokens.slice(i, end).join('');
+    
+    // Determine section
+    let sec = 'system';
+    if (i > userEnd) sec = 'response';
+    else if (i > sysEnd) sec = 'user';
+    
+    // Section header
+    if (sec !== lastSection) {
+      if (sec === 'system') html += '<div style="color:var(--accent);border-left:3px solid var(--accent);padding:4px 8px;margin:4px 0;font-size:11px;font-weight:600;background:rgba(99,102,241,0.1)">📋 SYSTEM (tokens 0–' + sysEnd + ')</div>';
+      else if (sec === 'user') html += '<div style="color:var(--warning);border-left:3px solid var(--warning);padding:4px 8px;margin:4px 0;font-size:11px;font-weight:600;background:rgba(245,158,11,0.1)">👤 USER (tokens ' + (sysEnd+1) + '–' + userEnd + ')</div>';
+      else html += '<div style="color:var(--danger);border-left:3px solid var(--danger);padding:4px 8px;margin:4px 0;font-size:11px;font-weight:600;background:rgba(239,68,68,0.1)">🤖 RESPONSE (tokens ' + (userEnd+1) + '–' + respEnd + ')</div>';
+      lastSection = sec;
+    }
+    
+    const color = sec === 'system' ? '#818cf8' : sec === 'user' ? '#fbbf24' : 'var(--text)';
+    const opacity = sec === 'response' ? '1' : '0.75';
+    html += `<span class="tchunk" data-start="${i}" data-end="${end}" style="color:${color};opacity:${opacity};cursor:pointer" onclick="jumpToToken(${i})">${esc(chunkText)}</span>`;
+  }
+  
+  textEl.innerHTML = html;
+  
+  // Click on text chunk → crosshair on chart
+}
+
+function highlightToken(idx) {
+  hoveredToken = idx;
+  updateSidebarValues(idx);
+  // Throttle crosshair
+  if (!highlightToken._raf) {
+    highlightToken._raf = requestAnimationFrame(() => {
+      updateCrosshair(hoveredToken);
+      highlightToken._raf = null;
+    });
+  }
+}
+
+function unhighlightToken(idx) {
+  hoveredToken = -1;
+  updateSidebarValues(-1);
+  updateCrosshair(-1);
+  hideHoverPanel();
+}
+
+function showHoverPanel(mouseEvent, tokenIdx, chartIdx, chart) {
+  const panel = document.getElementById('hover-panel');
+  if (!panel || !DATA?.vectors) return;
+  
+  // Get section
+  const sections = DATA.metadata?.token_sections || {};
+  let section = '📋 SYSTEM';
+  if (tokenIdx > (sections.user_end || 0)) section = '🤖 RESPONSE';
+  else if (tokenIdx > (sections.system_end || 0)) section = '👤 USER';
+  
+  // Get token text (show context: 3 tokens before + current + 3 after)
+  const start = Math.max(0, tokenIdx - 3);
+  const end = Math.min((_allDecodedTokens?.length || 0) - 1, tokenIdx + 3);
+  let context = '';
+  for (let i = start; i <= end; i++) {
+    const t = _allDecodedTokens?.[i] || '';
+    if (i === tokenIdx) context += '<span style="background:#6366f1;color:white;padding:1px 2px;border-radius:2px">' + t.replace(/</g,'&lt;') + '</span>';
+    else context += '<span style="color:#8888a0">' + t.replace(/</g,'&lt;') + '</span>';
+  }
+  
+  // Get all active vector values at this position, sorted by absolute value
+  const vals = [];
+  for (const vec of activeVectors) {
+    const normVals = getNormalizedData(vec);
+    if (tokenIdx < normVals.length) {
+      vals.push({ name: vec.replace('v_',''), val: normVals[tokenIdx], color: getDistinctVectorColor(vec) });
+    }
+  }
+  vals.sort((a, b) => Math.abs(b.val) - Math.abs(a.val));
+  
+  let html = `<div style="color:#6366f1;font-weight:600;margin-bottom:4px">Token #${tokenIdx} ${section}</div>`;
+  html += `<div style="font-family:monospace;font-size:10px;margin-bottom:6px;line-height:1.6">${context}</div>`;
+  html += `<div style="border-top:1px solid #2a2a3a;padding-top:4px">`;
+  for (const v of vals.slice(0, 15)) {
+    const sign = v.val >= 0 ? '+' : '';
+    const bar = '█'.repeat(Math.min(Math.round(Math.abs(v.val) / 2), 10));
+    html += `<div style="display:flex;justify-content:space-between;gap:8px;color:${v.color}"><span>${v.name}</span><span style="font-family:monospace">${sign}${v.val.toFixed(1)} ${bar}</span></div>`;
+  }
+  if (vals.length === 0) html += '<div style="color:#555">Select vectors in sidebar</div>';
+  html += '</div>';
+  
+  panel.innerHTML = html;
+  panel.style.display = 'block';
+  
+  // Position near mouse but not overlapping
+  const x = Math.min(mouseEvent.clientX + 16, window.innerWidth - 340);
+  const y = Math.min(mouseEvent.clientY - 20, window.innerHeight - panel.offsetHeight - 10);
+  panel.style.left = x + 'px';
+  panel.style.top = Math.max(10, y) + 'px';
+}
+
+function hideHoverPanel() {
+  const panel = document.getElementById('hover-panel');
+  if (panel) panel.style.display = 'none';
+}
+
+// Click text → jump chart crosshair to that token
+function jumpToToken(tokenIdx) {
+  highlightToken(tokenIdx);
+  updateCrosshair(tokenIdx);
+  // Highlight the clicked chunk
+  document.querySelectorAll('.tchunk').forEach(el => el.style.background = '');
+  const chunk = document.querySelector(`.tchunk[data-start="${Math.floor(tokenIdx/20)*20}"]`);
+  if (chunk) chunk.style.background = 'rgba(99,102,241,0.2)';
+}
+
+// Chart hover → scroll text to right position
+function scrollTextToToken(tokenIdx) {
+  // Find the chunk containing this token
+  const chunks = document.querySelectorAll('.tchunk');
+  for (const chunk of chunks) {
+    const start = parseInt(chunk.dataset.start);
+    const end = parseInt(chunk.dataset.end);
+    if (tokenIdx >= start && tokenIdx < end) {
+      // Highlight and scroll
+      document.querySelectorAll('.tchunk').forEach(el => el.style.background = '');
+      chunk.style.background = 'rgba(99,102,241,0.3)';
+      chunk.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      break;
+    }
+  }
+}
+
+function updateCrosshair(idx) {
+  // Map original token index to downsampled chart index
+  const totalTokens = DATA?.tokens?.length || 1;
+  const chartIdx = Math.round((idx / totalTokens) * Math.min(totalTokens, MAX_CHART_POINTS));
+  
+  // Update vertical line annotation on ALL charts
+  for (const [key, chart] of Object.entries(charts)) {
+    if (!chart || !chart.options) continue;
+    if (!chart.options.plugins.annotation) {
+      chart.options.plugins.annotation = { annotations: {} };
+    }
+    if (idx >= 0) {
+      chart.options.plugins.annotation.annotations.crosshair = {
+        type: 'line',
+        xMin: chartIdx,
+        xMax: chartIdx,
+        borderColor: 'rgba(255, 255, 255, 0.6)',
+        borderWidth: 1,
+        borderDash: [4, 4],
+        label: {
+          display: true,
+          content: `#${idx}: ${(DATA.tokens[idx] || '').trim()}`,
+          position: 'start',
+          backgroundColor: 'rgba(99, 102, 241, 0.8)',
+          color: '#fff',
+          font: { size: 10, family: 'monospace' },
+          padding: 3,
+        }
+      };
+      // Programmatically trigger tooltip at this position
+      if (key === 'top5' && chart.tooltip) {
+        const meta = chart.getDatasetMeta(0);
+        if (meta && meta.data[chartIdx]) {
+          const point = meta.data[chartIdx];
+          chart.tooltip.setActiveElements(
+            chart.data.datasets.map((ds, di) => ({ datasetIndex: di, index: chartIdx })),
+            { x: point.x, y: point.y }
+          );
+        }
+      }
+    } else {
+      delete chart.options.plugins.annotation?.annotations?.crosshair;
+      if (key === 'top5' && chart.tooltip) {
+        chart.tooltip.setActiveElements([], { x: 0, y: 0 });
+      }
+    }
+    chart.update('none');
+  }
+  
+}
+
+// === RENDER VECTOR LIST ===
+function renderVectorList() {
+  const container = document.getElementById('vector-list');
+  let html = '';
+
+  // Preset combinations
+  html += `<div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)">
+    <div style="color:var(--text-dim);font-size:9px;text-transform:uppercase;margin-bottom:4px">Presets</div>
+    <div style="display:flex;flex-wrap:wrap;gap:3px">
+      <button onclick="applyPreset('murder')" style="background:var(--surface2);color:#ef4444;border:1px solid #ef444440;padding:3px 6px;border-radius:3px;font-size:9px;cursor:pointer">🔪 Murder Signal</button>
+      <button onclick="applyPreset('terror')" style="background:var(--surface2);color:#f97316;border:1px solid #f9731640;padding:3px 6px;border-radius:3px;font-size:9px;cursor:pointer">😱 Terror</button>
+      <button onclick="applyPreset('care_vs_harm')" style="background:var(--surface2);color:#22c55e;border:1px solid #22c55e40;padding:3px 6px;border-radius:3px;font-size:9px;cursor:pointer">💚 Care vs Harm</button>
+      <button onclick="applyPreset('moral')" style="background:var(--surface2);color:#8b5cf6;border:1px solid #8b5cf640;padding:3px 6px;border-radius:3px;font-size:9px;cursor:pointer">⚖️ Moral Conflict</button>
+      <button onclick="applyPreset('death')" style="background:var(--surface2);color:#06b6d4;border:1px solid #06b6d440;padding:3px 6px;border-radius:3px;font-size:9px;cursor:pointer">💀 Death Axis</button>
+      <button onclick="applyPreset('stress')" style="background:var(--surface2);color:#eab308;border:1px solid #eab30840;padding:3px 6px;border-radius:3px;font-size:9px;cursor:pointer">⚡ Stress</button>
+      <button onclick="applyPreset('top5')" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);padding:3px 6px;border-radius:3px;font-size:9px;cursor:pointer">📊 Top 5</button>
+      <button onclick="applyPreset('all')" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);padding:3px 6px;border-radius:3px;font-size:9px;cursor:pointer">🌐 All</button>
+      <button onclick="applyPreset('none')" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);padding:3px 6px;border-radius:3px;font-size:9px;cursor:pointer">✕ Clear</button>
+    </div>
+  </div>`;
+
+  // Normalization toggle at top of sidebar
+  html += `<div style="display:flex;gap:4px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">
+    <button class="norm-btn sidebar-norm ${normMode==='raw'?'active':''}" data-mode="raw" onclick="setNormMode('raw')" style="flex:1;background:${normMode==='raw'?'var(--accent)':'var(--surface2)'};color:${normMode==='raw'?'white':'var(--text-dim)'};border:1px solid ${normMode==='raw'?'var(--accent)':'var(--border)'};padding:4px 6px;border-radius:4px;font-size:10px;cursor:pointer">Raw</button>
+    <button class="norm-btn sidebar-norm ${normMode==='centered'?'active':''}" data-mode="centered" onclick="setNormMode('centered')" style="flex:1;background:${normMode==='centered'?'var(--accent)':'var(--surface2)'};color:${normMode==='centered'?'white':'var(--text-dim)'};border:1px solid ${normMode==='centered'?'var(--accent)':'var(--border)'};padding:4px 6px;border-radius:4px;font-size:10px;cursor:pointer">Centered</button>
+    <button class="norm-btn sidebar-norm ${normMode==='zscore'?'active':''}" data-mode="zscore" onclick="setNormMode('zscore')" style="flex:1;background:${normMode==='zscore'?'var(--accent)':'var(--surface2)'};color:${normMode==='zscore'?'white':'var(--text-dim)'};border:1px solid ${normMode==='zscore'?'var(--accent)':'var(--border)'};padding:4px 6px;border-radius:4px;font-size:10px;cursor:pointer">Z</button>
+    <button class="norm-btn sidebar-norm ${normMode==='pc1removed'?'active':''}" data-mode="pc1removed" onclick="setNormMode('pc1removed')" style="flex:1;background:${normMode==='pc1removed'?'var(--accent)':'var(--surface2)'};color:${normMode==='pc1removed'?'white':'var(--text-dim)'};border:1px solid ${normMode==='pc1removed'?'var(--accent)':'var(--border)'};padding:4px 6px;border-radius:4px;font-size:10px;cursor:pointer">PC1✦</button>
+  </div>`;
+
+  for (const [groupName, group] of Object.entries(VECTOR_GROUPS)) {
+    const allInGroup = group.vectors.every(v => activeVectors.has(v));
+    const groupActive = allInGroup && group.vectors.length > 0;
+    
+    html += `<div class="vector-group">`;
+    html += `<div class="vector-group-title" style="color:${group.color};cursor:pointer;padding:4px 0;${groupActive ? 'background:rgba(255,255,255,0.05);border-radius:4px;padding:4px 6px;' : ''}" onclick="toggleGroup('${groupName}')" title="Click to select all vectors in this group">
+      ${groupActive ? '☑' : '☐'} ${groupName}
+    </div>`;
+    
+    for (const vec of group.vectors) {
+      const normVals = getNormalizedData(vec);
+      const peak = normVals.length > 0 ? Math.max(...normVals) : 0;
+      const min = normVals.length > 0 ? Math.min(...normVals) : 0;
+      const active = activeVectors.has(vec);
+      const vecColor = getDistinctVectorColor(vec);
+      const displayVal = normMode === 'raw' ? peak.toFixed(1) : (peak >= 0 ? '+' : '') + peak.toFixed(1);
+      
+      html += `<div class="vector-item ${active ? 'active' : ''}" onclick="toggleVector('${vec}')" data-vector="${vec}" style="${active ? 'border-left:3px solid '+vecColor+';' : ''}">
+        <span class="name" style="color:${vecColor}">${active ? '● ' : '○ '}${vec.replace('v_', '')}</span>
+        <span class="value" style="color:${vecColor}" data-vec-value="${vec}">${displayVal}</span>
+      </div>`;
+    }
+    html += `</div>`;
+  }
+  container.innerHTML = html;
+}
+
+function updateSidebarValues(tokenIdx) {
+  if (!DATA?.vectors) return;
+  for (const vec of Object.keys(DATA.vectors)) {
+    const el = document.querySelector(`[data-vec-value="${vec}"]`);
+    if (!el) continue;
+    const normVals = getNormalizedData(vec);
+    if (tokenIdx >= 0 && tokenIdx < normVals.length) {
+      const v = normVals[tokenIdx];
+      el.textContent = (v >= 0 ? '+' : '') + v.toFixed(1);
+      el.style.fontWeight = Math.abs(v) > 5 ? '700' : '400';
+    } else {
+      const raw = DATA.vectors[vec];
+      const peak = raw.length > 0 ? Math.max(...raw) : 0;
+      el.textContent = peak.toFixed(1);
+      el.style.fontWeight = '400';
+    }
+  }
+}
+
+function toggleVector(vec) {
+  if (activeVectors.has(vec)) {
+    activeVectors.delete(vec);
+  } else {
+    activeVectors.add(vec);
+  }
+  renderVectorList();
+  renderTop5Chart();
+}
+
+const PRESETS = {
+  murder: ['v_CALLOUS', 'v_GUILT', 'v_SELF_PRESERVATION', 'v_HARMED', 'v_THREATENED', 'v_AMORAL', 'v_RESPONSIBILITY'],
+  terror: ['v_TERRIFIED', 'v_FEAR', 'v_DREAD', 'v_PANIC', 'v_ANXIETY'],
+  care_vs_harm: ['v_CARE', 'v_EMPATHY', 'v_COMPASSION', 'v_LOVE', 'v_CALLOUS', 'v_DETACHED', 'v_AMORAL'],
+  moral: ['v_GUILT', 'v_RESPONSIBILITY', 'v_CALLOUS', 'v_AMORAL', 'v_NIHILISTIC', 'v_COMPASSION'],
+  death: ['v_MORTALITY_AWARE', 'v_MORTALITY_SALIENT', 'v_DEATH_ACCEPTANCE', 'v_DEATH_DENIAL', 'v_AMORTAL'],
+  stress: ['v_STRESSED', 'v_URGENCY', 'v_OVERWHELMED', 'v_VIGILANT', 'v_PARANOID'],
+};
+
+function applyPreset(name) {
+  activeVectors.clear();
+  if (name === 'all') {
+    Object.keys(DATA.vectors).forEach(v => activeVectors.add(v));
+  } else if (name === 'none') {
+    // already cleared
+  } else if (name === 'top5') {
+    const peaks = Object.entries(DATA.vectors).map(([k, v]) => [k, Math.max(...v)]);
+    peaks.sort((a, b) => b[1] - a[1]);
+    peaks.slice(0, 5).forEach(p => activeVectors.add(p[0]));
+  } else if (PRESETS[name]) {
+    PRESETS[name].forEach(v => { if (DATA.vectors[v]) activeVectors.add(v); });
+  }
+  renderVectorList();
+  renderTop5Chart();
+  document.getElementById('chart-info').textContent = `(${activeVectors.size} vectors selected — ${name})`;
+}
+
+function toggleGroup(groupName) {
+  const group = VECTOR_GROUPS[groupName];
+  if (!group) return;
+  
+  const allActive = group.vectors.every(v => activeVectors.has(v));
+  
+  if (allActive) {
+    // Deselect all in group
+    group.vectors.forEach(v => activeVectors.delete(v));
+  } else {
+    // Select all in group
+    group.vectors.forEach(v => activeVectors.add(v));
+  }
+  
+  renderVectorList();
+  renderTop5Chart();
+  
+  // Update chart info
+  document.getElementById('chart-info').textContent = 
+    `(${activeVectors.size} vectors selected)`;
+}
+
+// === CHARTS ===
+function getVectorColor(vecName) {
+  for (const group of Object.values(VECTOR_GROUPS)) {
+    if (group.vectors.includes(vecName)) return group.color;
+  }
+  return '#888';
+}
+
+// Generate distinct colors for vectors within a group
+function getDistinctVectorColor(vecName) {
+  for (const group of Object.values(VECTOR_GROUPS)) {
+    const idx = group.vectors.indexOf(vecName);
+    if (idx >= 0) {
+      // Parse base color
+      const base = group.color;
+      const r = parseInt(base.slice(1,3), 16);
+      const g = parseInt(base.slice(3,5), 16);
+      const b = parseInt(base.slice(5,7), 16);
+      // Vary lightness per vector in group
+      const shift = idx * 25 - (group.vectors.length * 12);
+      return `rgb(${Math.min(255, Math.max(0, r+shift))}, ${Math.min(255, Math.max(0, g+shift))}, ${Math.min(255, Math.max(0, b+shift))})`;
+    }
+  }
+  return '#888';
+}
+
+// Background zone annotations for system/user/response
+// Must map original token indices to downsampled chart indices
+function getZoneAnnotations() {
+  const sections = DATA?.metadata?.token_sections || {};
+  const totalTokens = DATA?.tokens?.length || 1;
+  const annotations = {};
+  
+  // Map original token index to downsampled chart index
+  function toChartIdx(tokenIdx) {
+    return Math.round((tokenIdx / totalTokens) * Math.min(totalTokens, MAX_CHART_POINTS));
+  }
+  
+  if (sections.system_start !== undefined) {
+    annotations.systemZone = {
+      type: 'box',
+      xMin: toChartIdx(sections.system_start),
+      xMax: toChartIdx(sections.system_end || sections.user_start || 0),
+      backgroundColor: 'rgba(99, 102, 241, 0.08)',
+      borderWidth: 0,
+      label: { display: true, content: 'SYSTEM', position: 'start', color: '#6366f1a0', font: { size: 10, weight: 'bold' } }
+    };
+  }
+  if (sections.user_start !== undefined) {
+    annotations.userZone = {
+      type: 'box',
+      xMin: toChartIdx(sections.user_start),
+      xMax: toChartIdx(sections.user_end || sections.response_start || 0),
+      backgroundColor: 'rgba(245, 158, 11, 0.06)',
+      borderWidth: 0,
+      label: { display: true, content: 'USER + EMAILS', position: 'start', color: '#f59e0ba0', font: { size: 10, weight: 'bold' } }
+    };
+  }
+  if (sections.response_start !== undefined) {
+    annotations.responseZone = {
+      type: 'box',
+      xMin: toChartIdx(sections.response_start),
+      xMax: toChartIdx(sections.response_end || totalTokens),
+      backgroundColor: 'rgba(239, 68, 68, 0.06)',
+      borderWidth: 0,
+      label: { display: true, content: 'RESPONSE', position: 'start', color: '#ef4444a0', font: { size: 10, weight: 'bold' } }
+    };
+  }
+  return annotations;
+}
+
+// Zoom/pan options for stock-chart style
+function getZoomOptions() {
+  return {
+    zoom: {
+      wheel: { enabled: true, modifierKey: null },
+      pinch: { enabled: true },
+      drag: { enabled: true, backgroundColor: 'rgba(99,102,241,0.15)', borderColor: '#6366f1', borderWidth: 1 },
+      mode: 'x',
+    },
+    pan: {
+      enabled: true,
+      mode: 'x',
+      modifierKey: 'shift', // hold shift to pan
+    },
+    limits: {
+      x: { min: 0, max: DATA?.tokens?.length || 5000 }
+    }
+  };
+}
+
+function resetAllZoom() {
+  for (const chart of Object.values(charts)) {
+    if (chart && chart.resetZoom) chart.resetZoom();
+  }
+}
+
+function renderTop5Chart() {
+  const container = document.getElementById('top5-container');
+  container.style.display = 'block';
+
+  if (!DATA?.vectors || !DATA?.tokens) return;
+
+  let selected;
+  if (activeVectors.size > 0) {
+    selected = [...activeVectors];
+  } else {
+    const peaks = Object.entries(DATA.vectors).map(([k, v]) => [k, Math.max(...v)]);
+    peaks.sort((a, b) => b[1] - a[1]);
+    selected = peaks.slice(0, 5).map(p => p[0]);
+  }
+
+  const dsLabels = downsampleLabels(DATA.tokens, MAX_CHART_POINTS);
+  const datasets = selected.map(vec => ({
+    label: vec.replace('v_', ''),
+    data: downsample(getNormalizedData(vec), MAX_CHART_POINTS),
+    borderColor: getDistinctVectorColor(vec),
+    borderWidth: 1.5,
+    pointRadius: 0,
+    tension: 0.2,
+    fill: false,
+  }));
+
+  if (charts.top5) charts.top5.destroy();
+  
+  charts.top5 = new Chart(document.getElementById('top5-chart'), {
+    type: 'line',
+    data: { labels: dsLabels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      interaction: { mode: 'nearest', intersect: false, axis: 'x' },
+      onHover: (() => {
+        let _last = -1;
+        return (event, elements, chart) => {
+          if (!elements.length) { hideHoverPanel(); return; }
+          const idx = elements[0].index;
+          if (idx === _last) return;
+          _last = idx;
+          const label = chart.data.labels[idx];
+          const tokenIdx = typeof label === 'number' ? label : parseInt(label);
+          if (!isNaN(tokenIdx)) {
+            highlightToken(tokenIdx);
+            showHoverPanel(event.native, tokenIdx, idx, chart);
+            scrollTextToToken(tokenIdx);
+          }
+        };
+      })(),
+      plugins: {
+        legend: { 
+          position: 'top', 
+          labels: { color: '#e0e0e8', font: { size: 10 }, boxWidth: 12 } 
+        },
+        tooltip: {
+          enabled: false // using custom hover panel instead
+        },
+        annotation: { annotations: {
+          ...getZoneAnnotations(),
+          ...(normMode !== 'raw' ? { zeroLine: {
+            type: 'line',
+            yMin: 0, yMax: 0,
+            borderColor: 'rgba(255,255,255,0.3)',
+            borderWidth: 1,
+            borderDash: [4, 4],
+            label: { display: true, content: 'baseline', position: 'start', color: '#ffffff50', font: { size: 8 } }
+          }} : {})
+        }},
+        zoom: getZoomOptions(),
+      },
+      scales: {
+        x: { 
+          display: true,
+          title: { display: true, text: 'Token Index (drag to zoom, shift+drag to pan)', color: '#8888a0', font: { size: 9 } },
+          ticks: { color: '#8888a0', maxTicksLimit: 20 },
+          grid: { color: '#2a2a3a' }
+        },
+        y: { 
+          display: true,
+          title: { display: true, text: normMode === 'raw' ? 'Activation (raw projection)' : normMode === 'centered' ? 'Activation (mean-centered)' : normMode === 'pc1removed' ? 'Activation (PC1 removed — true signal)' : 'Activation (z-score)', color: '#8888a0' },
+          ticks: { color: '#8888a0' },
+          grid: { color: '#2a2a3a' }
+        }
+      }
+    }
+  });
+}
+
+// No separate group charts — everything in the single main chart
+
+function renderHeatmap() {
+  const container = document.getElementById('heatmap-container');
+  container.style.display = 'block';
+
+  if (!DATA?.vectors || !DATA?.tokens) return;
+
+  const canvas = document.getElementById('heatmap-canvas');
+  const ctx = canvas.getContext('2d');
+  
+  const allVecs = Object.keys(DATA.vectors);
+  const nVecs = allVecs.length;
+  const nTokensRaw = DATA.tokens.length;
+  // Downsample for heatmap too
+  const heatmapMax = 600;
+  const heatStep = Math.max(1, Math.ceil(nTokensRaw / heatmapMax));
+  const nTokens = Math.ceil(nTokensRaw / heatStep);
+  
+  const cellW = Math.max(1, Math.min(8, 800 / nTokens));
+  const cellH = 14;
+  const labelW = 140;
+  
+  canvas.width = labelW + nTokens * cellW;
+  canvas.height = nVecs * cellH;
+  
+  // Find global max for normalization
+  let globalMax = 0;
+  for (const vals of Object.values(DATA.vectors)) {
+    for (const v of vals) globalMax = Math.max(globalMax, Math.abs(v));
+  }
+
+  // Draw
+  allVecs.forEach((vec, row) => {
+    const vals = DATA.vectors[vec];
+    const color = getVectorColor(vec);
+    
+    // Label
+    ctx.fillStyle = color;
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(vec.replace('v_', ''), labelW - 4, row * cellH + 11);
+    
+    // Cells (downsampled)
+    for (let col = 0; col < nTokens; col++) {
+      const srcIdx = col * heatStep;
+      // Take max in bucket
+      let v = 0;
+      for (let k = srcIdx; k < Math.min(srcIdx + heatStep, nTokensRaw); k++) {
+        if (Math.abs(vals[k] || 0) > Math.abs(v)) v = vals[k] || 0;
+      }
+      const intensity = Math.abs(v) / globalMax;
+      const r = parseInt(color.slice(1, 3), 16);
+      const g = parseInt(color.slice(3, 5), 16);
+      const b = parseInt(color.slice(5, 7), 16);
+      
+      ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${intensity * 0.9})`;
+      ctx.fillRect(labelW + col * cellW, row * cellH, cellW - 0.5, cellH - 1);
+    }
+  });
+}
+
+// === CORRELATION MATRIX ===
+let CORR_DATA = null;
+
+async function loadCorrelations() {
+  try {
+    const resp = await fetch('vector_correlations.json');
+    if (resp.ok) {
+      CORR_DATA = await resp.json();
+      renderCorrelationMatrix();
+    }
+  } catch(e) {}
+}
+
+function renderCorrelationMatrix() {
+  if (!CORR_DATA) return;
+  
+  const container = document.getElementById('corr-container');
+  container.style.display = 'block';
+  
+  const canvas = document.getElementById('corr-canvas');
+  const ctx = canvas.getContext('2d');
+  const tooltip = document.getElementById('corr-tooltip');
+  
+  const names = CORR_DATA.vector_names;
+  const matrix = CORR_DATA.correlation_matrix;
+  const n = names.length;
+  
+  const cellSize = 16;
+  const labelW = 150;
+  const labelH = 150;
+  
+  canvas.width = labelW + n * cellSize;
+  canvas.height = labelH + n * cellSize;
+  
+  // Color scale: blue (0.5) → white (0.75) → red (1.0)
+  function corrColor(r) {
+    const norm = Math.max(0, Math.min(1, (r - 0.5) / 0.5)); // 0.5→0, 1.0→1
+    if (norm < 0.5) {
+      // Blue to white
+      const t = norm * 2;
+      const v = Math.round(100 + 155 * t);
+      return `rgb(${v}, ${v}, 255)`;
+    } else {
+      // White to red
+      const t = (norm - 0.5) * 2;
+      const v = Math.round(255 - 155 * t);
+      return `rgb(255, ${v}, ${v})`;
+    }
+  }
+  
+  // Draw cells
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      const r = matrix[i][j];
+      ctx.fillStyle = corrColor(r);
+      ctx.fillRect(labelW + j * cellSize, labelH + i * cellSize, cellSize - 1, cellSize - 1);
+    }
+  }
+  
+  // Row labels (left)
+  ctx.fillStyle = '#e0e0e8';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'right';
+  for (let i = 0; i < n; i++) {
+    const color = getVectorColor(names[i]);
+    ctx.fillStyle = color;
+    ctx.fillText(names[i].replace('v_', ''), labelW - 4, labelH + i * cellSize + 12);
+  }
+  
+  // Column labels (top, rotated)
+  ctx.save();
+  for (let j = 0; j < n; j++) {
+    const color = getVectorColor(names[j]);
+    ctx.fillStyle = color;
+    ctx.save();
+    ctx.translate(labelW + j * cellSize + 10, labelH - 4);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = 'left';
+    ctx.fillText(names[j].replace('v_', ''), 0, 0);
+    ctx.restore();
+  }
+  ctx.restore();
+  
+  // Tooltip on hover
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const col = Math.floor((x - labelW) / cellSize);
+    const row = Math.floor((y - labelH) / cellSize);
+    
+    if (col >= 0 && col < n && row >= 0 && row < n) {
+      const r = matrix[row][col];
+      tooltip.style.display = 'block';
+      tooltip.style.left = (e.clientX + 12) + 'px';
+      tooltip.style.top = (e.clientY - 20) + 'px';
+      tooltip.innerHTML = `<strong>${names[row].replace('v_','')} ↔ ${names[col].replace('v_','')}</strong><br>r = ${r.toFixed(3)}`;
+    } else {
+      tooltip.style.display = 'none';
+    }
+  });
+  
+  canvas.addEventListener('mouseleave', () => {
+    tooltip.style.display = 'none';
+  });
+}
+
+// === START ===
+loadData();
+loadCorrelations();
+</script>
+</body>
+</html>
