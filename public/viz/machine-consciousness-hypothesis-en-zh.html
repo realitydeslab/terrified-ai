@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Machine Consciousness Hypothesis by Joscha Bach and Hikari Sorensen, in an aligned English–Simplified Chinese bilingual edition.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23101114'/><circle cx='50' cy='50' r='12' fill='%23d9bd80'/></svg>">
+  <title>The Machine Consciousness Hypothesis — 机器意识假说</title>
+  <style>
+    :root {
+      --ink: #171714;
+      --muted: #68675f;
+      --line: #d8d3c7;
+      --paper: #f4f1e9;
+      --panel: #fffdf7;
+      --accent: #9b6f24;
+      --accent-soft: #efe4ce;
+      --night: #101114;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.72 Georgia, "Times New Roman", "Songti SC", "Noto Serif CJK SC", serif;
+    }
+    a { color: #735017; text-underline-offset: 3px; }
+    header {
+      position: relative;
+      overflow: hidden;
+      min-height: 410px;
+      padding: 70px 28px 56px;
+      color: #f8f4e8;
+      background: var(--night);
+      border-bottom: 4px solid var(--accent);
+      text-align: center;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -260px;
+      width: min(760px, 120vw);
+      height: min(760px, 120vw);
+      border-radius: 50%;
+      background: repeating-conic-gradient(from 0deg, rgba(236, 208, 145, .7) 0deg .35deg, transparent .35deg 4deg);
+      mask: radial-gradient(circle, transparent 0 23%, #000 23.5% 54%, transparent 75%);
+      opacity: .62;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    header > * { position: relative; z-index: 1; }
+    .kicker {
+      margin: 0 0 24px;
+      color: #d9bd80;
+      font: 700 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+    header h1 {
+      max-width: 980px;
+      margin: 0 auto;
+      font-size: clamp(37px, 6vw, 68px);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -.025em;
+    }
+    header h1 .cn {
+      display: block;
+      margin-top: 16px;
+      color: #dfd7c8;
+      font-size: .56em;
+      font-weight: 400;
+      letter-spacing: .06em;
+    }
+    .authors { margin: 28px 0 0; color: #c8c4ba; font-size: 18px; }
+    .source-link { margin: 14px 0 0; font-size: 13px; }
+    .source-link a { color: #e0c78f; }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 10px 18px;
+      background: rgba(255, 253, 247, .96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .toolbar button {
+      padding: 6px 12px;
+      color: var(--ink);
+      background: var(--panel);
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .toolbar button.active { color: #fff; background: var(--ink); }
+    main { max-width: 1280px; margin: 0 auto; padding: 24px 24px 100px; }
+    section { scroll-margin-top: 68px; padding: 30px 0 42px; border-bottom: 1px solid var(--line); }
+    h2.chapter {
+      margin: 6px 0 23px;
+      padding-top: 16px;
+      border-top: 2px solid var(--ink);
+      font-size: clamp(26px, 3.2vw, 36px);
+      font-weight: 500;
+      line-height: 1.18;
+    }
+    h2.chapter .cn { display: block; margin-top: 7px; color: var(--muted); font-size: .68em; font-weight: 500; }
+    h3.subhead { margin: 28px 0 16px; font-size: 22px; line-height: 1.25; }
+    h3.subhead .cn { display: block; margin-top: 4px; color: var(--muted); font-size: .78em; font-weight: 500; }
+    .row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 42px; }
+    .row > .en, .row > .cn { min-width: 0; }
+    .row p { margin: 0 0 16px; }
+    .row .cn { font-family: "Songti SC", "Noto Serif CJK SC", Georgia, serif; }
+    .labels { margin-bottom: 10px; color: var(--muted); font: 10px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .16em; text-transform: uppercase; }
+    .quote { margin: 5px 0 20px; padding: 18px 21px; background: var(--panel); border-left: 4px solid var(--accent); font-size: 16px; }
+    .note { margin-top: 9px; padding-top: 10px; border-top: 1px dotted var(--line); color: var(--muted); font-size: 13px; }
+    .note p { margin-bottom: 8px; }
+    .genesis { margin: 10px 0; padding: 17px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 9px; }
+    .genesis + .genesis { margin-top: 12px; }
+    .fnref { font-size: .72em; vertical-align: super; }
+    .dates { margin-top: 24px; color: var(--muted); font-style: italic; }
+    .bibliography { margin: 0; padding-left: 1.3em; }
+    .bibliography li { margin-bottom: 10px; }
+    body.en-only .row > .cn,
+    body.en-only h1 .cn,
+    body.en-only h2 .cn,
+    body.en-only h3 .cn { display: none; }
+    body.cn-only .row > .en { display: none; }
+    body.cn-only h1 > .en,
+    body.cn-only h2 > .en,
+    body.cn-only h3 > .en { display: none; }
+    body.cn-only h1 > .cn,
+    body.cn-only h2 > .cn,
+    body.cn-only h3 > .cn { margin-top: 0; }
+    body.en-only .row, body.cn-only .row { grid-template-columns: minmax(0, 820px); justify-content: center; }
+    @media (max-width: 760px) {
+      header { min-height: 350px; padding-top: 52px; }
+      .toolbar { justify-content: flex-start; overflow-x: auto; }
+      main { padding-inline: 18px; }
+      .row { grid-template-columns: 1fr; gap: 0; }
+      .row > .cn { margin-top: 2px; padding-top: 13px; border-top: 1px dotted var(--line); }
+      .labels { display: none; }
+    }
+    @media print {
+      .toolbar { display: none; }
+      header { min-height: auto; color: var(--ink); background: #fff; border-color: var(--ink); }
+      header::after { display: none; }
+      header h1 .cn, .authors { color: var(--ink); }
+      body { background: #fff; }
+      main { max-width: none; }
+    }
+  </style>
+</head>
+<body class="both">
+  <header>
+    <p class="kicker">Essay · 双语对照版</p>
+    <h1><span class="en">The Machine Consciousness Hypothesis</span><span class="cn" lang="zh-CN">机器意识假说</span></h1>
+    <p class="authors">Joscha Bach · Hikari Sorensen</p>
+    <p class="source-link"><a href="https://cimc.ai/cimcHypothesis.pdf">Original PDF · 原文 PDF</a></p>
+  </header>
+
+  <nav class="toolbar" aria-label="Language view">
+    <span>显示 / View:</span>
+    <button type="button" data-mode="both" class="active">对照 Both</button>
+    <button type="button" data-mode="en-only">English</button>
+    <button type="button" data-mode="cn-only">中文</button>
+  </nav>
+
+  <main>
+    <section id="opening">
+      <h2 class="chapter"><span class="en">The Machine Consciousness Hypothesis</span><span class="cn" lang="zh-CN">机器意识假说</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>What is consciousness, and how does it relate to reality?—is arguably among the most interesting open questions in science and philosophy. Making progress on it is of importance to culture, because it will help us to understand our nature, past, present and potential. It is relevant to our ethics, for instance when we relate to non-human agents, both biological and artificial, which may or may not be sentient. It has technological applications, like the creation of interfaces that can meaningfully extend human agency and cognitive capacity, can help to reduce suffering in medical and psychotherapeutic contexts, and may advance our self-awareness, skills and psychological development. Gaining an understanding of consciousness may also be relevant to future minds—potentially sentient artificial intelligences, which will find themselves to coexist with human civilization and life on earth—and to determine prudent, practical, and ethical boundaries around the creation of such entities.</p></div>
+        <div class="cn" lang="zh-CN"><p>意识是什么，它与实在又有何关系？这可以说是科学与哲学中最引人入胜的开放问题之一。推动这一问题取得进展，对文化至关重要，因为它将帮助我们理解自身的本性、过去、现在与潜能。它也与伦理息息相关，例如，当我们面对非人类智能体——无论是生物的还是人工的，而它们可能有感知，也可能没有——我们该如何与之相处。它还具有技术应用：可以促成真正延展人类能动性与认知能力的界面；可以帮助减轻医疗和心理治疗情境中的痛苦；也可能增进我们的自我觉知、技能与心理发展。理解意识，还可能关系到未来的心智——可能具有感知能力的人工智能，它们将发现自己须与人类文明及地球生命共存——并有助于我们为创造这类存在划定审慎、切实且合乎伦理的边界。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Why is such an important question met with so little organized effort to resolve it? Understanding consciousness seems to pose unique difficulties for the tools and epistemology of modern science. Many philosophers speak of the ‘Hard Problem’ when they refer to the challenge of reducing conscious experience to physical processes, and even use terms like ‘ineffable’ (impossible to describe), ‘intrinsic’ (immediately given and not analyzable), or ‘irreducible’ (not reproducible by a coarse grained causal model of substrate behavior) to describe its futility. The apparent difficulty to characterize consciousness in scientific terms has led to a retrenchment in psychology, which is today less concerned with the psyche than with observable and measurable behavior, to stagnation and pessimism in philosophy of mind, and to reluctance in large parts of neuroscience to even address the topic.</p></div>
+        <div class="cn" lang="zh-CN"><p>如此重要的问题，为何几乎没有得到有组织的解决努力？对于现代科学的工具与认识论而言，理解意识似乎构成了独特的困难。许多哲学家在谈到将意识经验还原为物理过程的挑战时，会称之为“难题”（Hard Problem）；甚至用“不可言说”（无法描述）、“内在”（直接给定且不可分析）或“不可还原”（无法由关于基底行为的粗粒化因果模型再现）等词，来形容这种努力的徒劳。意识似乎难以用科学术语刻画，这使心理学退守——如今它所关心的，与其说是心灵，不如说是可观察、可测量的行为——也令心灵哲学陷入停滞与悲观，并使神经科学的许多领域甚至不愿触及这一主题。</p></div>
+      </div>
+    </section>
+
+    <section id="hard-problem">
+      <h2 class="chapter"><span class="en">Making sense of the ‘Hard Problem’</span><span class="cn" lang="zh-CN">理解“难题”</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>The ‘Hard Problem’ describes the difficulty of explaining the phenomenology of consciousness by reducing it to mechanistic interactions within a physical, biological, or abstract computational substrate. Though coined more recently as a term by David Chalmers<a class="fnref" href="#fn1">1</a>, the issue has been described by many others, such as Thomas Nagel in his famous essay ‘What Is It Like to Be a Bat?’<a class="fnref" href="#fn2">2</a>, or by Joseph Levine in 1983, who calls it the “explanatory gap”<a class="fnref" href="#fn3">3</a>. But already three centuries ago, in his Monadology, Gottfried Wilhelm Leibniz gives an illustration<a class="fnref" href="#fn4">4</a>:</p></div>
+        <div class="cn" lang="zh-CN"><p>“难题”指的是这样一种困难：若把意识还原为物理、生物或抽象计算基底内部的机械相互作用，便难以解释意识的现象学。这个术语虽是戴维·查默斯（David Chalmers）较近才提出的<a class="fnref" href="#fn1">1</a>，但许多人都描述过同一问题，例如托马斯·内格尔（Thomas Nagel）在其名篇《成为一只蝙蝠会是什么样？》中所述<a class="fnref" href="#fn2">2</a>；约瑟夫·莱文（Joseph Levine）则在 1983 年称其为“解释鸿沟”<a class="fnref" href="#fn3">3</a>。然而早在三个世纪前，戈特弗里德·威廉·莱布尼茨（Gottfried Wilhelm Leibniz）便已在《单子论》中作出如下说明<a class="fnref" href="#fn4">4</a>：</p></div>
+      </div>
+      <div class="row quote">
+        <div class="en" lang="en"><p>“[W]e must confess that perception, and what depends upon it, is inexplicable in terms of mechanical reasons, that is through shapes, size, and motions. If we imagine a machine whose structure makes it think, sense, and have perceptions, we could conceive it enlarged, keeping the same proportions, so that we could enter into it, as one enters a mill. Assuming that, when inspecting its interior, we will find only parts that push one another, and we will never find anything to explain a perception.”</p></div>
+        <div class="cn" lang="zh-CN"><p>“我们必须承认，知觉以及依赖于知觉的一切，都不能由机械原因来解释，也就是说，不能凭形状、大小和运动来解释。假如我们设想有一台机器，它的结构使之能够思考、感觉并产生知觉；那么我们可以设想，在保持比例不变的情况下将它放大，大到我们可以像走进磨坊一样走入其中。即便如此，当我们检视它的内部时，所见也只会是彼此推动的部件，而绝不会发现任何足以解释知觉的东西。”</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Centuries later, John Searle’s Chinese Room illustrates a similar gap in his perspective on computational systems<a class="fnref" href="#fn5">5</a>, replacing Leibniz’ machine with a computer that mechanically responds to sequences of Chinese symbols with appropriate responses. By picturing himself as an agent mechanically following the instructions of the algorithm, and noting his own lack of understanding Chinese, Searle highlights the apparent absurdity of attributing mental qualities (like understanding) to a computer, an intuition that persists even in the face of today’s large language models (LLMs), which demonstrate the practical feasibility of Searle’s provocative thought experiment.</p></div>
+        <div class="cn" lang="zh-CN"><p>数百年后，约翰·塞尔（John Searle）的“中文房间”以他对计算系统的看法，说明了类似的鸿沟<a class="fnref" href="#fn5">5</a>：莱布尼茨的机器被一台计算机取代，后者机械地读取一串串中文符号，并给出恰当回应。塞尔把自己设想为一个机械执行算法指令的智能体，同时指出自己并不理解中文，由此凸显出把“理解”等心智属性归于计算机似乎何其荒谬。即使面对今天的大语言模型（LLM），这种直觉依然存在——而大语言模型恰恰展示了塞尔这一挑衅性思想实验在实践上的可行性。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Curiously, the ‘explanatory gap’ seems to be a problem specific to the modern scientific (Western) world view. For most of human history and in many places outside of science, the dominant world view can be characterized as animism, the belief that living nature is animated by spirits that are intrinsically agentic and capable of experience. Aristotelianism—the starting point of much of Western science, psychology and rationality—may also be understood as animist: Aristotle describes the soul, spirit, or psyche, as a form (causal structure)<a class="fnref" href="#fn6">6</a> of the physical substrate that is its animating property.<a class="fnref" href="#fn7">7</a> <a class="fnref" href="#fn8">8</a></p></div>
+        <div class="cn" lang="zh-CN"><p>耐人寻味的是，“解释鸿沟”似乎是现代科学（西方）世界观所特有的问题。在人类历史的大部分时期，以及科学之外的许多地方，占主导地位的世界观都可以称为泛灵论：相信鲜活的自然由灵体赋予生机，而这些灵体本身具有能动性与经验能力。作为西方科学、心理学和理性主义诸多传统起点的亚里士多德主义，也可以被理解为泛灵论：亚里士多德把灵魂、精神或心灵描述为物理基底的一种形式（因果结构）<a class="fnref" href="#fn6">6</a>，这种形式正是使基底获得生机的属性。<a class="fnref" href="#fn7">7</a> <a class="fnref" href="#fn8">8</a></p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>He distinguishes a vegetative soul, common to plants and the bodies and animals, which is concerned with growth and nurture, the perceiving soul of animals, capable of decision making and controlling behavior, and the reasoning intellect that is unique to humans.</p></div>
+        <div class="cn" lang="zh-CN"><p>他区分出三类灵魂：植物以及动物身体所共有、关乎生长与滋养的营养灵魂；动物所具有、能够作出决定并控制行为的感觉灵魂；以及人类独有的理性理智。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Western culture, however, came to disavow animism, first under the influence of the mechanist philosophers of the early Enlightenment, such as Descartes, Spinoza, Leibniz, and LaMettrie, which sought to free scientific rationality from the influence of religious doctrine and mythological conceptions of the soul, and more decisively under the influence of scientific positivism in the 20th century, which struck entities that could not be measured or observed from the scientific dictionary, and metaphysical discussions from the curriculum. In psychology, the influence of positivism led to a dominance of behaviorist paradigms; in philosophy, to a divorce between analytic thought (which tended to focus on problems and arguments suited to formal approaches) and continental/hermeneutic traditions (which addressed experience, but lost their footing in natural science and rationalism).</p></div>
+        <div class="cn" lang="zh-CN"><p>然而，西方文化后来开始摒弃泛灵论。最初的影响来自启蒙运动早期的机械论哲学家，如笛卡尔、斯宾诺莎、莱布尼茨和拉·梅特里；他们试图使科学理性摆脱宗教教义及神话式灵魂观念的影响。到了 20 世纪，科学实证主义的作用更具决定性：一切无法测量或观察的实体都被从科学词典中删去，形而上学讨论也被逐出课程。在心理学中，实证主义的影响使行为主义范式占据主导；在哲学中，它促成了分析思想与欧陆／诠释学传统的分裂——前者往往聚焦适合形式化方法的问题与论证，后者虽探讨经验，却失去了在自然科学和理性主义中的立足点。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>The ‘Hard Problem’ and the ‘explanatory gap’ may be symptoms of our metaphysical malnourishment. Contemporary discussions of ‘free will’, the ontological status of perception, the nature of the elements of experience (which philosophers call qualia) and of consciousness often fail to notice that we are regularly confronted not just with one, but at least three notions of reality. Feelings, such as will and the experience of freedom or realness itself, are part of our psychological reality—they are representations within the mind. The functional mechanisms that produce the psychological reality—our mind, personality, motivational dynamics and so on—are part of a causal reality, which also encompasses things like money and software. Physics, when understood as the interactions of matter and energy, constitutes a third reality, or more precisely, a special case of a causal model. What makes it special is the hypothesis of physicalism: physics defines a causally closed, mechanistic lowest level of nature, and physicalism claims that everything we observe and interact with is coarse grained patterns we identify in the dynamics of this mechanical, physical reality. While foundational physics is considered incomplete, and progress on its completion has arguably stalled after the formulation of the Standard Model in the 1970s, the predictions of physical theories are so extraordinarily accurate that physicalism has become the dominant paradigm of the scientific worldview. Yet consciousness, minds, and mental states lie outside of the domain of physics.</p></div>
+        <div class="cn" lang="zh-CN"><p>“难题”与“解释鸿沟”或许是我们形而上学营养不良的症状。今天关于“自由意志”、知觉的本体论地位、经验要素（哲学家称之为感受质）以及意识本性的讨论，往往没有注意到：我们经常面对的并非一种实在观念，而至少有三种。意志、自由感或真实感本身等感受，属于我们的心理实在——它们是心智内部的表征。产生这种心理实在的功能机制——我们的心智、人格、动机动力学等等——则属于因果实在；金钱与软件之类的事物也包含在其中。若把物理学理解为物质与能量的相互作用，它便构成第三种实在；更准确地说，是因果模型的一个特例。其特殊性来自物理主义假说：物理学定义了一个因果闭合、机械论的自然最低层级；物理主义则主张，我们观察并与之互动的一切，都是从这一机械的物理实在之动力学中辨识出的粗粒化模式。尽管基础物理学被认为尚不完备，而且自 20 世纪 70 年代标准模型形成以来，补全它的进展可以说已陷入停滞，但物理理论的预测如此惊人地精确，以至于物理主义已成为科学世界观的主导范式。然而，意识、心智与心智状态都处在物理学的领域之外。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>The constituents of physical entities—particles, matter, energy, wavefunctions—are mathematical models of regularities in information (discernible differences) about the universe. In a sense, physicists are studying how the universe processes information. The idea that information, not matter and energy, should be seen as fundamental, has led John Archibald Wheeler to coin the slogan “it from bit”.<a class="fnref" href="#fn9">9</a></p></div>
+        <div class="cn" lang="zh-CN"><p>物理实体的构成要素——粒子、物质、能量、波函数——都是关于宇宙的信息（可辨识的差异）之规律性的数学模型。从某种意义上说，物理学家研究的是宇宙如何处理信息。认为应当把信息而非物质与能量视为根本的观念，促使约翰·阿奇博尔德·惠勒（John Archibald Wheeler）创造了“万物源于比特”（it from bit）这一口号。<a class="fnref" href="#fn9">9</a></p></div>
+      </div>
+      <div class="row quote">
+        <div class="en" lang="en"><p>Meanwhile, computer scientists have begun to rediscover the idea of spirits. As Harold Abelson puts it: “Computational processes are abstract beings that inhabit computers. (...) In effect, we conjure the spirits of the computer with our spells. A computational process is indeed much like a sorcerer’s idea of a spirit. It cannot be seen or touched. It is not composed of matter at all. However, it is very real. It can perform intellectual work. It can answer questions. It can affect the world by disbursing money at a bank or by controlling a robot arm in a factory. The programs we use to conjure processes are like a sorcerer’s spells.”<a class="fnref" href="#fn10">10</a> While Abelson is speaking metaphorically here, many of the founders of the fields of Artificial Intelligence and Cognitive Science argue that the human mind can be literally understood as a computer program<a class="fnref" href="#fn11">11</a>, enacted by the communication patterns between biological cells.</p></div>
+        <div class="cn" lang="zh-CN"><p>与此同时，计算机科学家开始重新发现“灵体”这一观念。正如哈罗德·阿贝尔森（Harold Abelson）所说：“计算过程是栖居于计算机中的抽象存在。……实际上，我们用咒语召唤计算机的灵体。计算过程确实很像巫师观念中的灵体：它不可见，也不可触；它根本不由物质构成。然而，它又极为真实。它可以从事智力工作，可以回答问题；它可以通过银行付款或控制工厂里的机械臂来影响世界。我们用来召唤进程的程序，就像巫师的咒语。”<a class="fnref" href="#fn10">10</a> 阿贝尔森在此固然是在打比方，但人工智能与认知科学领域的许多奠基者都主张，人类心智可以从字面上被理解为一种计算机程序<a class="fnref" href="#fn11">11</a>，由生物细胞之间的通信模式付诸实现。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>It is crucial to understand that a computer program is not defined by its language or specific hardware, but as an abstract causal pattern, a dynamic mathematical structure that can evolve through complex sequences of states when imprinted on a suitable physical substrate, and thereby influence the course of the physical universe. Computer programs are also not simply a way to talk about the configurations of distinctly observable physical objects, such as electrons in transistors, any more than money is a way to talk about ink molecules bonded to the cellulose of bank notes. They are a meaningful invariance, a coarse pattern that persists over many possible perturbations and configurations of the substrate (such as the arrangements of molecules of the transistors, the circuit layouts of logical gates, the design and architectures and specifications of computer hardware, and oftentimes underlying layers of different programs). This invariant pattern has causal power, because its implementation (the way in which it is imprinted on the substrate) leads to control of the substrate. Reducing the pattern to the specific substrate dynamics that implement it will obscure this invariance of causal control, and deprive us of understanding how reality is going to evolve at the level we care about.</p></div>
+        <div class="cn" lang="zh-CN"><p>至关重要的是，我们要理解：计算机程序并不由其语言或某种特定硬件来定义，而是一种抽象的因果模式——一种动态数学结构；当它被铭刻到适当的物理基底上时，可以历经复杂的状态序列而演化，并由此影响物理宇宙的进程。计算机程序也不只是谈论显著可观察物理对象之配置的一种说法——正如金钱并不是谈论钞票纤维素上附着的油墨分子的一种说法。程序是一种有意义的不变量，一种粗粒化模式；它在基底可能经历的诸多扰动与配置中持续存在（例如晶体管的分子排列、逻辑门的电路布局、计算机硬件的设计、架构与规格，以及常常位于其下的不同程序层）。这种不变模式具有因果力量，因为它的实现方式（即它如何被铭刻到基底上）会带来对基底的控制。若把这一模式还原为实现它的具体基底动力学，便会遮蔽这种因果控制的不变性，也使我们无法理解：在我们关心的层级上，实在将如何演变。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Of course, computer programs written by human engineers to run on digital hardware look very different from the evolving, self-sustaining, self-reproducing, error-correcting codes that form within the communication patterns of biological systems, colonize and animate them, and allow them to compete over regions of the physical universe.</p></div>
+        <div class="cn" lang="zh-CN"><p>当然，人类工程师为数字硬件编写的计算机程序，与那些在生物系统的通信模式中形成、能够演化、自我维持、自我复制并纠正错误的代码，看起来大为不同；后者在生物系统中定殖并赋予其生机，使其能够争夺物理宇宙中的不同区域。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>The self-organizing computer programs of the living world will likely have to be agents, that is, control systems for future states, and dynamically model their own functionality to maintain it, which can bestow representations of their present state and preferences on them. And yet, they are fundamentally expressions of the same principle as our current digital computer programs: abstract causal patterns that can interact with the Leibnizian mills of the physical universe, possess, colonize, evolve and shape them, and at the same time, will not violate the integrity and causal closure of the physicalist world view.</p></div>
+        <div class="cn" lang="zh-CN"><p>生命世界中这些自组织的计算机程序，很可能必须是智能体，也就是面向未来状态的控制系统；它们还必须对自身功能进行动态建模以维持这种功能，由此便可能获得关于自身当前状态与偏好的表征。然而，从根本上说，它们与当今数字计算机程序体现的是同一原理：都是抽象的因果模式，可以与物理宇宙中莱布尼茨式的磨坊互动，占有它们、在其中定殖、使之演化并塑造它们；与此同时，又不违反物理主义世界观的完整性与因果闭合性。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>There is no obvious reason why artificial substrates should not be able to recreate the conditions that enable self-organization and the evolution of self-reinforcing communication patterns between cells in biology<a class="fnref" href="#fn12">12</a>.</p></div>
+        <div class="cn" lang="zh-CN"><p>我们看不出有什么明显理由，足以断言人工基底不能重建这样一些条件：正是这些条件，在生物体内使自组织以及细胞间自我强化通信模式的演化成为可能<a class="fnref" href="#fn12">12</a>。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>We call the idea that natural spirits—such as the human psyche, or the causal patterns that describe the dynamic morphogenesis of our bodies and the intricate function of our cells—are best understood as software cyberanimism. (Of course, biological software is not constructed in the way that human engineers write source code, it is evolving, self-organizing, self-perpetuating and agentic.) From this perspective, the spirits of the animist worldview are not superstitions or mere analogies to computer software, but are literally a concept that denotes the presence of self-organizing software agents in living nature. The cyberanimist view is a way of restoring the concept of spirit to its rightful place in a scientific, rationalist world view.</p></div>
+        <div class="cn" lang="zh-CN"><p>我们把这样一种观念称为“软件赛博泛灵论”（software cyberanimism）：自然灵体——例如人类心灵，或描述我们身体动态形态发生及细胞精妙功能的因果模式——最好被理解为软件。（当然，生物软件并不是像人类工程师编写源代码那样被构造出来的；它会演化、自我组织、自我延续，并具有能动性。）从这一视角看，泛灵论世界观中的灵体并非迷信，也不只是对计算机软件的类比；这一概念从字面上指称的，是生命自然中自组织软件智能体的在场。赛博泛灵论的视角，是让“灵体”概念在科学、理性主义的世界观中恢复其应有位置的一种方式。</p></div>
+      </div>
+
+      <div class="row note" id="fn1"><div class="en" lang="en"><p><strong>1.</strong> Chalmers, D. (1995). 'Facing Up to the Problem of Consciousness.' Journal of Consciousness Studies, 2(3), 200-219.</p></div><div class="cn" lang="zh-CN"><p><strong>1.</strong> Chalmers, D. (1995). 'Facing Up to the Problem of Consciousness.' Journal of Consciousness Studies, 2(3), 200-219.</p></div></div>
+      <div class="row note" id="fn2"><div class="en" lang="en"><p><strong>2.</strong> Nagel, T. (1974). 'What Is It Like to Be a Bat?' The Philosophical Review, 83(4), 435-450.</p></div><div class="cn" lang="zh-CN"><p><strong>2.</strong> Nagel, T. (1974). 'What Is It Like to Be a Bat?' The Philosophical Review, 83(4), 435-450.</p></div></div>
+      <div class="row note" id="fn3"><div class="en" lang="en"><p><strong>3.</strong> Levine, J. (1983). 'Materialism and Qualia: The Explanatory Gap.' Pacific Philosophical Quarterly, 64(4), 354-361.</p></div><div class="cn" lang="zh-CN"><p><strong>3.</strong> Levine, J. (1983). 'Materialism and Qualia: The Explanatory Gap.' Pacific Philosophical Quarterly, 64(4), 354-361.</p></div></div>
+      <div class="row note" id="fn4"><div class="en" lang="en"><p><strong>4.</strong> Leibniz, G.W. (1714). Monadology, §17.</p></div><div class="cn" lang="zh-CN"><p><strong>4.</strong> Leibniz, G.W. (1714). Monadology, §17.</p></div></div>
+      <div class="row note" id="fn5"><div class="en" lang="en"><p><strong>5.</strong> Searle, J. (1980). 'Minds, Brains, and Programs.' Behavioral and Brain Sciences, 3(3), 417-457.</p></div><div class="cn" lang="zh-CN"><p><strong>5.</strong> Searle, J. (1980). 'Minds, Brains, and Programs.' Behavioral and Brain Sciences, 3(3), 417-457.</p></div></div>
+      <div class="row note" id="fn6"><div class="en" lang="en"><p><strong>6.</strong> In “De Anima”, Aristotle uses three different terms that tend to be translated as ‘form’, but have subtly different meanings: ‘eidos’, which refers to the soul as the characteristic of the living being, ‘morphe’, which refers to how it is shaped or structured, and ‘entelecheia’, which is the way in which it is being realized/functions, i.e. its causal structure.</p></div><div class="cn" lang="zh-CN"><p><strong>6.</strong> 在《论灵魂》（De Anima）中，亚里士多德使用了三个通常译为“形式”、但含义略有差异的词：“eidos”指作为生命体特征的灵魂；“morphe”指它如何被塑造或构成；“entelecheia”则指它得以实现／发挥功能的方式，也就是其因果结构。</p></div></div>
+      <div class="row note" id="fn7"><div class="en" lang="en"><p><strong>7.</strong> Aristotle. De Anima (On the Soul), especially Books II and III.</p></div><div class="cn" lang="zh-CN"><p><strong>7.</strong> Aristotle. De Anima (On the Soul), especially Books II and III.</p></div></div>
+      <div class="row note" id="fn8"><div class="en" lang="en"><p><strong>8.</strong> Some animist views also attribute spirits to non-biological entities, such as mountains and rivers, or even the universe itself, and believe in the existence of disembodied spirits (ghosts). Unlike these, and later religious perspectives, Aristotle did not consider souls to be immortal, or independent of the physical universe. In “De Anima”, Aristotle argues that the soul needs to be bound to a physical body, and cannot persist beyond its death.</p></div><div class="cn" lang="zh-CN"><p><strong>8.</strong> 一些泛灵论观点也把灵体归于非生物实体，如山川，乃至宇宙本身，并相信脱离身体的灵体（鬼魂）存在。不同于这些观点及后来的宗教视角，亚里士多德并不认为灵魂不朽，也不认为它独立于物理宇宙。在《论灵魂》中，他主张灵魂必须与物理身体相系，不能在身体死亡之后继续存在。</p></div></div>
+      <div class="row note" id="fn9"><div class="en" lang="en"><p><strong>9.</strong> Wheeler, J.A. (1990). 'Information, Physics, Quantum: The Search for Links.' In W. Zurek (Ed.), Complexity, Entropy, and the Physics of Information (pp. 309-336). Addison-Wesley.</p></div><div class="cn" lang="zh-CN"><p><strong>9.</strong> Wheeler, J.A. (1990). 'Information, Physics, Quantum: The Search for Links.' In W. Zurek (Ed.), Complexity, Entropy, and the Physics of Information (pp. 309-336). Addison-Wesley.</p></div></div>
+      <div class="row note" id="fn10"><div class="en" lang="en"><p><strong>10.</strong> Abelson, H. &amp; Sussman, G.J. (1996). Structure and Interpretation of Computer Programs (2nd ed., p. 1). MIT Press.</p></div><div class="cn" lang="zh-CN"><p><strong>10.</strong> Abelson, H. &amp; Sussman, G.J. (1996). Structure and Interpretation of Computer Programs (2nd ed., p. 1). MIT Press.</p></div></div>
+      <div class="row note" id="fn11"><div class="en" lang="en"><p><strong>11.</strong> For a detailed history of the development of AI and cognitive science as computational perspectives on the mind, see Margaret Boden’s excellent compendium: Boden, M.A. (2006). Mind as Machine: A History of Cognitive Science. 2 vols. Oxford University Press.</p></div><div class="cn" lang="zh-CN"><p><strong>11.</strong> 关于 AI 与认知科学如何以心智的计算视角发展起来，详见玛格丽特·博登（Margaret Boden）的优秀汇编：Boden, M.A. (2006). Mind as Machine: A History of Cognitive Science. 2 vols. Oxford University Press.</p></div></div>
+      <div class="row note" id="fn12"><div class="en" lang="en"><p><strong>12.</strong> The computer scientist and artificial life researcher Dave Ackley is exploring the concept of best effort computing, which aims to recreate the ability of biological control structures to dynamically compensate for indeterministic substrates. More generally, the playful sub-discipline of computer science studying biology-like principles of self organization is called “Artificial Life”.</p></div><div class="cn" lang="zh-CN"><p><strong>12.</strong> 计算机科学家与人工生命研究者戴夫·阿克利（Dave Ackley）正在探索“尽力而为计算”（best effort computing）的概念，旨在重建生物控制结构对非确定性基底进行动态补偿的能力。更广义地说，计算机科学中研究类生物自组织原理、颇具游戏精神的分支，称为“人工生命”（Artificial Life）。</p></div></div>
+    </section>
+
+    <section id="machine-consciousness">
+      <h2 class="chapter"><span class="en">Machine consciousness</span><span class="cn" lang="zh-CN">机器意识</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>An understanding of spirit as software does not answer the question of how a software, biological or otherwise, can produce conscious experience. Can computers be conscious? Or more specifically, can today’s computers fully emulate the way in which organisms compute minds? Answering this question requires several steps: we will have to agree on a precise characterization of what we mean by ‘consciousness’, a decisive criterion for whether a system realizes consciousness in this sense, explain what we mean by ‘computer’ and how a computer realizes functionality (‘computationalist functionalism’), and either present a computer program that satisfies the criterion or a proof for why such a program cannot exist (in general, or for today’s computers).</p></div>
+        <div class="cn" lang="zh-CN"><p>把灵体理解为软件，并没有回答一个问题：软件——无论是生物软件还是其他软件——如何能够产生意识经验？计算机可以有意识吗？更具体地说，今天的计算机能否完整仿真有机体计算出心智的方式？回答这个问题需要经过若干步骤：我们必须就“意识”的确切含义达成精确表述；确立一项决定性标准，用以判断系统是否在这一意义上实现了意识；解释我们所说的“计算机”是什么，以及计算机如何实现功能（“计算主义功能主义”）；最后，要么给出满足该标准的计算机程序，要么证明这类程序为何不可能存在——无论是普遍不可能，还是对今天的计算机而言不可能。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>We want to look at the possibility that we can arrive at a characterization of consciousness that captures both functionality and phenomenality of consciousness, and that can be implemented and analytically validated as a computer model. We call this possibility the Machine Consciousness Hypothesis: that general computational machines with sufficient resources (memory, speed and efficiency of the operations provided by the the machine’s substrate) possess the necessary and sufficient means to implement consciousness, and that the successful implementation of phenomenology and functionality can be established via analyzing or testing the system.</p></div>
+        <div class="cn" lang="zh-CN"><p>我们希望考察这样一种可能性：我们能够得到一套关于意识的刻画，既捕捉意识的功能性，也捕捉其现象性；并且，这套刻画可以作为计算机模型得到实现与分析验证。我们把这种可能性称为“机器意识假说”（Machine Consciousness Hypothesis）：拥有充足资源——包括内存、速度，以及机器基底所提供操作的效率——的通用计算机器，具备实现意识的必要且充分的手段；而现象学与功能性是否成功实现，可以通过分析或测试系统来确定。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>The Machine Consciousness Hypothesis rests on several metaphysical assumptions, often summarized as ‘computationalist functionalism’. Computationalist functionalism by itself does not imply that current computers are conscious, or that machine consciousness can be achieved with present technologies—one can be a computationalist functionalist and still reject the idea that our computers could become conscious (for instance, because they lack sufficient resources or interfaces), or reject computationalism and functionalism, yet ascribe consciousness to an Artificial Intelligence model for different reasons. Instead, it is a position about the structure of representations of reality (metaphysics) and the construction of knowledge (epistemology).</p></div>
+        <div class="cn" lang="zh-CN"><p>机器意识假说建立在若干形而上学假设之上，这些假设通常概括为“计算主义功能主义”（computationalist functionalism）。计算主义功能主义本身并不意味着现有计算机具有意识，也不意味着凭现有技术即可实现机器意识——一个人可以是计算主义功能主义者，却仍然否认我们的计算机会产生意识（例如，因为它们缺乏足够的资源或接口）；也可以拒绝计算主义与功能主义，却出于其他理由把意识归于某个人工智能模型。相反，这是一种关于实在表征之结构（形而上学）与知识之建构（认识论）的立场。</p></div>
+      </div>
+    </section>
+
+    <section id="computationalism">
+      <h2 class="chapter"><span class="en">Computationalism</span><span class="cn" lang="zh-CN">计算主义</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>By ‘computation’, we don’t just mean the behavior of computing technology (i.e. logical or numerical operations provided by electronic circuitry or mechanical clockwork), but to the capacity of a system to represent arbitrary distinctive states (which can be described by finitely resolved differences) and arbitrary sequences of transitions between them, conditional on these states. Computation is often characterized by fully deterministic state transitions, but as John von Neumann and others note, determinism can be achieved on indeterministic (noisy, probabilistic) substrates,<a class="fnref" href="#fn13">13</a> and probabilistic computation is in principle equivalent to deterministic computation. Every function that can be exhaustively captured by such a system is computational, and to create a computational model means to decompose a problem into sequences of state transitions—algorithms<a class="fnref" href="#fn14">14</a>.</p></div>
+        <div class="cn" lang="zh-CN"><p>所谓“计算”，我们指的不只是计算技术的行为（即电子电路或机械钟表结构所提供的逻辑或数值运算），而是一个系统具备这样的能力：表征任意可区分状态（这些状态可由分辨率有限的差异来描述），并根据这些状态，表征它们之间任意的转移序列。人们通常以完全确定性的状态转移来刻画计算；但正如约翰·冯·诺伊曼（John von Neumann）等人所指出，确定性也可以在非确定性（含噪、概率性）的基底上实现<a class="fnref" href="#fn13">13</a>，而概率计算原则上等价于确定性计算。凡能由此类系统穷尽地捕捉的函数，都是可计算的；建立计算模型，就是把一个问题分解为一系列状态转移——即算法<a class="fnref" href="#fn14">14</a>。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Computationalism might be best understood as a variant of constructivism. When we accept that our access to reality consists in the manipulations of models, that is, of representations of observations and functions that relate these observations to each other, we establish the reliance of observers on representational language. Mathematics can be understood as the generalization of representational languages beyond individual human minds, and even beyond collective human mental ability, by externalizing and systematically exploring the sets of possible rules for manipulating representations. Logic describes the construction of statements by combining alphabets using rules; arithmetic, the construction of numbers and discrete and continuous numerical operations; geometry, structures in space; topology, the structure of spaces; and algebra reduces geometry to symbol manipulation.</p></div>
+        <div class="cn" lang="zh-CN"><p>计算主义或许最好被理解为建构主义的一种变体。当我们承认，自己通达实在的方式在于操纵模型——也就是操纵观察的表征，以及把这些观察彼此联系起来的函数——我们便确立了观察者对表征语言的依赖。数学可以被理解为表征语言的普遍化：它通过把可能的表征操纵规则集合外化并加以系统探索，使表征语言超越个体人类心智，甚至超越人类集体的心智能力。逻辑描述如何依照规则组合字母表以构造命题；算术描述数字以及离散、连续数值运算的构造；几何学描述空间中的结构；拓扑学描述空间的结构；代数学则把几何学化约为符号操纵。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Historically, mathematics can be broadly distinguished into a formalist program, which hopes that the semantics (meaning) of mathematical statements can be fully reduced to syntactic operations, and a Platonist<a class="fnref" href="#fn15">15</a> project, which maintains that mathematical statements can be true in the absence of constructive proofs. In their seminal work Principia Mathematica<a class="fnref" href="#fn16">16</a>, Bertrand Russell and Alfred Whitehead attempted to ground mathematics in a formalist foundation based on constructive logic, which could in principle be automated with finite state machines (which are a way to formalize computers). Such machines have the advantage of being realizable using known physical principles and well-understood mathematical insights. To make this work, Principia would need to resolve certain self-referential paradoxes in the foundations of mathematics. In his famous proof of the incompleteness theorem, Kurt Gödel showed that Russell’s attempt to do so by excluding statements that refer to their own definition did not work<a class="fnref" href="#fn17">17</a>, and thus that Principia’s approach to formalizing the foundations of mathematics could not succeed.</p></div>
+        <div class="cn" lang="zh-CN"><p>从历史上看，数学大体可以分成两条路线：形式主义纲领，希望把数学命题的语义（意义）完全还原为句法操作；以及柏拉图主义<a class="fnref" href="#fn15">15</a>方案，主张即便没有构造性证明，数学命题仍可能为真。在奠基性著作《数学原理》（Principia Mathematica）<a class="fnref" href="#fn16">16</a>中，伯特兰·罗素（Bertrand Russell）与阿尔弗雷德·怀特海（Alfred Whitehead）试图把数学建立在以构造逻辑为基础的形式主义根基上；原则上，这种逻辑可以由有限状态机自动执行，而有限状态机正是一种将计算机形式化的方式。这类机器的优势在于，可以用已知物理原理与已经充分理解的数学洞见来实现。要让这套方案成立，《数学原理》必须解决数学基础中的若干自指悖论。库尔特·哥德尔（Kurt Gödel）在其著名的不完备定理证明中表明，罗素试图通过排除指涉自身定义的命题来解决问题，并不可行<a class="fnref" href="#fn17">17</a>；因此，《数学原理》将数学基础形式化的方法不可能成功。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>A way to interpret Gödel’s proof is that languages that cannot be automatically evaluated inevitably contain unresolvable paradoxes: expressions that are syntactically correct, but semantically contradictory. Conversely, it is possible to construct languages that build their representations over a small set of simple operations that change information step by step. This constructive domain of mathematics is also known as computation, and has been repeatedly formalized in various ways—for instance through Gödel’s mapping of logic to integer arithmetic, the Turing machine<a class="fnref" href="#fn18">18</a>, Alonzo Church’s Lambda calculus (which represents computations by replacement operations on strings), or Moses Schönfinkel’s incredibly elegant combinators<a class="fnref" href="#fn19">19</a>, which are little stackable circuits that can represent numbers, truth values and arithmetic and logical operations on them. As Bertrand Russell anticipates in the 1922 introduction to Wittgenstein’s Tractatus Logico Philosophicus<a class="fnref" href="#fn20">20</a>, all these approaches can be mapped to each other, and it is in principle sufficient to use combinations of logical Not-AND operations<a class="fnref" href="#fn21">21</a>. The insight that all constructive approaches to defining computation are equivalent (unless they run into implementation-specific resource constraints, such as insufficient memory, processing time or substrate determinism) is called the Church-Turing thesis.</p></div>
+        <div class="cn" lang="zh-CN"><p>对哥德尔证明的一种解读是：凡不能自动求值的语言，都不可避免地包含无法解决的悖论——句法正确、语义却自相矛盾的表达式。反过来，我们也可以构造这样一些语言：它们只依靠一小组逐步改变信息的简单操作来建立表征。数学的这一构造性领域也称为计算，并曾以多种方式反复得到形式化——例如，哥德尔把逻辑映射为整数算术；图灵机<a class="fnref" href="#fn18">18</a>；阿隆佐·丘奇（Alonzo Church）的 λ 演算（以字符串上的替换操作来表征计算）；又如莫伊西·舍恩芬克尔（Moses Schönfinkel）极其优雅的组合子<a class="fnref" href="#fn19">19</a>——这些可堆叠的小电路能够表征数字、真值以及作用于其上的算术与逻辑运算。正如伯特兰·罗素在 1922 年为维特根斯坦《逻辑哲学论》（Tractatus Logico Philosophicus）所作的导言中预见的那样<a class="fnref" href="#fn20">20</a>，所有这些方法都可以彼此映射；原则上，只用“与非”（Not-AND）逻辑运算的组合便已足够<a class="fnref" href="#fn21">21</a>。所有构造性计算定义方法都彼此等价——除非它们受到特定实现的资源约束，如内存不足、处理时间不够或基底确定性有限——这一洞见称为“丘奇—图灵论题”。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Since Gödel, mathematical theories of representation and philosophical reflections of the significance of his proof have fallen into two camps: that of classical mathematicians, who emphasize that constructive mathematics falls short when it comes to recovering classical semantics (such as infinities, continua and irrational numbers), and that of computationalists, who point out that constructive mathematics based on finite automata is the only part of mathematics that actually works (in the sense of being implementable), and that the representational power of computer simulations delivers practical evidence for the ability of computational models to reproduce arbitrary observables of the real and every imaginable world.</p></div>
+        <div class="cn" lang="zh-CN"><p>哥德尔之后，关于表征的数学理论，以及对其证明意义的哲学反思，分成了两大阵营：一边是经典数学家，他们强调构造数学在恢复经典语义（如无穷、连续统与无理数）时力有不逮；另一边是计算主义者，他们指出，以有限自动机为基础的构造数学，是数学中唯一真正“有效”的部分——这里的“有效”指可以实现——而计算机仿真的表征能力，为计算模型能够再现现实世界及任何可想象世界中的任意可观察量，提供了实践证据。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Of course, the ability or inability of computationalist models to account for the observables of consciousness represents an important touchstone for the acceptance of computationalism. While some philosophers (such as John Searle) maintain that consciousness cannot be captured in the dynamics of deterministic state transitions, others (for example Roger Penrose) claim that human minds can construct mathematical objects that exceed the ability of computers<a class="fnref" href="#fn22">22</a>, while thinkers like Martin Heidegger<a class="fnref" href="#fn23">23</a> and Maurice Merleau-Ponty<a class="fnref" href="#fn24">24</a>, and more recently Alva Noë<a class="fnref" href="#fn25">25</a> and Shaun Gallagher<a class="fnref" href="#fn26">26</a> argue that the nature of phenomenology resists its formalization altogether.</p></div>
+        <div class="cn" lang="zh-CN"><p>当然，计算主义模型能否说明意识的可观察现象，是人们是否接受计算主义的一块重要试金石。一些哲学家（如约翰·塞尔）坚持认为，确定性状态转移的动力学无法捕捉意识；另一些人（如罗杰·彭罗斯〔Roger Penrose〕）则主张，人类心智能够构造超出计算机能力的数学对象<a class="fnref" href="#fn22">22</a>；而马丁·海德格尔（Martin Heidegger）<a class="fnref" href="#fn23">23</a>、莫里斯·梅洛-庞蒂（Maurice Merleau-Ponty）<a class="fnref" href="#fn24">24</a>，以及近来的阿尔瓦·诺埃（Alva Noë）<a class="fnref" href="#fn25">25</a>与肖恩·加拉格尔（Shaun Gallagher）<a class="fnref" href="#fn26">26</a>等思想家，则认为现象学的本性从根本上抗拒形式化。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>We may distinguish between weak and strong computationalism: the former states that all formal theories of reality have to be computational, while the latter applies that principle to reality itself: because all elements of reality, insofar as they can be measured, observed, experienced, conceptualized, thought and talked about must necessarily be subject to the limits of representation in constructive languages, all the reality we can ever refer to is computational.</p></div>
+        <div class="cn" lang="zh-CN"><p>我们可以区分弱计算主义与强计算主义：前者认为，一切关于实在的形式理论都必须是计算性的；后者则把这一原则应用于实在本身。因为实在的一切要素，只要能够被测量、观察、经验、概念化、思考和谈论，就必然受制于构造性语言的表征界限；所以，我们所能指涉的一切实在都是计算性的。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Computationalism with respect to all mental representations and operations over them is a necessary requirement of the Machine Consciousness Hypothesis, but not a sufficient one.</p></div>
+        <div class="cn" lang="zh-CN"><p>对于所有心智表征及其上的操作采取计算主义立场，是机器意识假说的必要条件，却不是充分条件。</p></div>
+      </div>
+
+      <div class="row note" id="fn13"><div class="en" lang="en"><p><strong>13.</strong> John von Neumann discusses this in his 1952 lecture notes: “Probabilistic Logics and the Synthesis of Reliable Organisms from Unreliable Components”, which were published in 1956.</p></div><div class="cn" lang="zh-CN"><p><strong>13.</strong> 约翰·冯·诺伊曼在 1952 年的讲义《概率逻辑与由不可靠元件合成可靠有机体》（“Probabilistic Logics and the Synthesis of Reliable Organisms from Unreliable Components”）中讨论了这一点；该讲义于 1956 年出版。</p></div></div>
+      <div class="row note" id="fn14"><div class="en" lang="en"><p><strong>14.</strong> While some algorithms may end after some number of discrete steps, this is by no means required. An example of the latter category would be an algorithm which calculates the value of π with unbounded precision.</p></div><div class="cn" lang="zh-CN"><p><strong>14.</strong> 有些算法可能在若干离散步骤之后结束，但这绝非必要条件。后一类算法的例子，是以无界精度计算 π 值的算法。</p></div></div>
+      <div class="row note" id="fn15"><div class="en" lang="en"><p><strong>15.</strong> Plato himself was not necessarily a Platonist in this sense—his version of idealism can be understood as constructing objects from prototypical dimensions, perhaps not unlike the linear combinations of features in the representation spaces of contemporary AI models.</p></div><div class="cn" lang="zh-CN"><p><strong>15.</strong> 柏拉图本人未必是这一意义上的柏拉图主义者——他的理念论可以被理解为从原型维度构造对象，或许并不像当代 AI 模型表征空间中特征的线性组合那样陌生。</p></div></div>
+      <div class="row note" id="fn16"><div class="en" lang="en"><p><strong>16.</strong> Russell, B. &amp; Whitehead, A.N. (1910-1913). Principia Mathematica (3 vols.). Cambridge University Press.</p></div><div class="cn" lang="zh-CN"><p><strong>16.</strong> Russell, B. &amp; Whitehead, A.N. (1910-1913). Principia Mathematica (3 vols.). Cambridge University Press.</p></div></div>
+      <div class="row note" id="fn17"><div class="en" lang="en"><p><strong>17.</strong> Gödel, K. (1931). 'On Formally Undecidable Propositions of Principia Mathematica and Related Systems I.' Monatshefte für Mathematik und Physik, 38, 173-198.</p></div><div class="cn" lang="zh-CN"><p><strong>17.</strong> Gödel, K. (1931). 'On Formally Undecidable Propositions of Principia Mathematica and Related Systems I.' Monatshefte für Mathematik und Physik, 38, 173-198.</p></div></div>
+      <div class="row note" id="fn18"><div class="en" lang="en"><p><strong>18.</strong> The original Turing machine has an infinite tape and can perform an unbounded number of steps, and while we often equate it routinely with practically realizable computers, this is technically not fully correct.</p></div><div class="cn" lang="zh-CN"><p><strong>18.</strong> 原始图灵机拥有无限纸带，可以执行无界数量的步骤。尽管我们常把它直接等同于实践中可实现的计算机，但严格说来，这并不完全正确。</p></div></div>
+      <div class="row note" id="fn19"><div class="en" lang="en"><p><strong>19.</strong> Church, A. (1936). 'An Unsolvable Problem of Elementary Number Theory.' American Journal of Mathematics, 58(2), 345-363. Schönfinkel, M. (1924). 'Über die Bausteine der mathematischen Logik.' Mathematische Annalen, 92, 305-316.</p></div><div class="cn" lang="zh-CN"><p><strong>19.</strong> Church, A. (1936). 'An Unsolvable Problem of Elementary Number Theory.' American Journal of Mathematics, 58(2), 345-363. Schönfinkel, M. (1924). 'Über die Bausteine der mathematischen Logik.' Mathematische Annalen, 92, 305-316.</p></div></div>
+      <div class="row note" id="fn20"><div class="en" lang="en"><p><strong>20.</strong> Wittgenstein, L. (1922). Tractatus Logico-Philosophicus. Introduction by Bertrand Russell. Kegan Paul.</p></div><div class="cn" lang="zh-CN"><p><strong>20.</strong> Wittgenstein, L. (1922). Tractatus Logico-Philosophicus. Introduction by Bertrand Russell. Kegan Paul.</p></div></div>
+      <div class="row note" id="fn21"><div class="en" lang="en"><p><strong>21.</strong> A Not-AND (NAND) gate is a binary logical circuit that returns “True” if and only if it does not receive “True” and “True” as its inputs, and “False” otherwise. Bertrand Russel’s insight about the universality of the NAND operation was prophetic: the transistor logic of contemporary computers relies largely on combinations of NAND circuits.</p></div><div class="cn" lang="zh-CN"><p><strong>21.</strong> “与非”（NAND）门是一种二元逻辑电路：当且仅当它的两个输入并非同时为“真”时，输出“真”；否则输出“假”。伯特兰·罗素关于 NAND 运算普适性的洞见极具先见之明：当代计算机的晶体管逻辑，在很大程度上依赖 NAND 电路的组合。</p></div></div>
+      <div class="row note" id="fn22"><div class="en" lang="en"><p><strong>22.</strong> Penrose, R. (1989). The Emperor's New Mind: Concerning Computers, Minds and The Laws of Physics. Oxford University Press.</p></div><div class="cn" lang="zh-CN"><p><strong>22.</strong> Penrose, R. (1989). The Emperor's New Mind: Concerning Computers, Minds and The Laws of Physics. Oxford University Press.</p></div></div>
+      <div class="row note" id="fn23"><div class="en" lang="en"><p><strong>23.</strong> Heidegger, M. (1927). Being and Time. Niemeyer.</p></div><div class="cn" lang="zh-CN"><p><strong>23.</strong> Heidegger, M. (1927). Being and Time. Niemeyer.</p></div></div>
+      <div class="row note" id="fn24"><div class="en" lang="en"><p><strong>24.</strong> Merleau-Ponty, M. (1945). Phenomenology of Perception. Gallimard.</p></div><div class="cn" lang="zh-CN"><p><strong>24.</strong> Merleau-Ponty, M. (1945). Phenomenology of Perception. Gallimard.</p></div></div>
+      <div class="row note" id="fn25"><div class="en" lang="en"><p><strong>25.</strong> Noë, A. (2004). Action in Perception. MIT Press.</p></div><div class="cn" lang="zh-CN"><p><strong>25.</strong> Noë, A. (2004). Action in Perception. MIT Press.</p></div></div>
+      <div class="row note" id="fn26"><div class="en" lang="en"><p><strong>26.</strong> Gallagher, S. (2005). How the Body Shapes the Mind. Oxford University Press.</p></div><div class="cn" lang="zh-CN"><p><strong>26.</strong> Gallagher, S. (2005). How the Body Shapes the Mind. Oxford University Press.</p></div></div>
+    </section>
+
+    <section id="functionalism">
+      <h2 class="chapter"><span class="en">Functionalism</span><span class="cn" lang="zh-CN">功能主义</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>Neither does functionalism claim that today’s computers can implement consciousness—functionalism implies that consciousness depends on a system’s functional organization, rather than the material of its substrate. More generally, it can be interpreted as the epistemological position that we construct objects over their observable behavior and functional organization, i.e. how their presence or absence influences the evolution of their environment.</p></div>
+        <div class="cn" lang="zh-CN"><p>功能主义同样不主张今天的计算机能够实现意识——功能主义所意指的是，意识取决于系统的功能组织，而非其基底的材料。更一般地说，它可以被理解为一种认识论立场：我们依据对象的可观察行为与功能组织来建构对象，也就是依据对象的存在或缺席如何影响其环境的演化来建构对象。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>The rejection of functionalism may be characterized as essentialism, the idea that objects can also be determined by intrinsic essences that reveal themselves directly to the observer, without taking a detour through an analytically formalizable process of observation and modeling. An essentialist may point at material or experiential reality as immediately given, whereas a functionalist constructs it over changes in information.</p></div>
+        <div class="cn" lang="zh-CN"><p>对功能主义的拒斥，可以被称为本质主义：对象也能由其内在本质来规定，而这种本质会直接向观察者显现，无须绕经可以分析性形式化的观察与建模过程。本质主义者可能把物质实在或经验实在视为直接给定；功能主义者则依据其造成的信息变化来建构它。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Essentialists may understand consciousness as dependent on an intrinsic property of its substrate (e.g. its biological nature, as for instance argued by the philosopher Anil Seth<a class="fnref" href="#fn27">27</a>), while functionalists fully characterize the substrate by its causal role—with respect to the inscribed pattern, the substrate is only what the pattern does to it. An essentialist may maintain the notion of a ‘philosophical zombie’ that produces all the same behaviors as a sentient human being without actually experiencing consciousness, while functionalists will point out that the experience of consciousness is itself a behavior. In the same way, it does not make sense to claim the existence of zombie electrons—particles that behave in every measurable and conceivable way as real electrons do, but are not actually electrons—because the word ‘electron’ is simply the name we give to objects that combine the observable properties of electrons. Here, we run into a difficulty: some of the behavior characteristic for consciousness may not be visible to an external observer, but only to the individual itself. Our description of conscious functionality will either have to sufficiently elucidate the generation of experiential self-reports of consciousness, or show how the behavior of biological and artificial substrates converges to the same emergent causal dynamics, which are in turn sufficient to produce the external and internal behaviors we characterize as consciousness.</p></div>
+        <div class="cn" lang="zh-CN"><p>本质主义者可能认为，意识依赖其基底的某种内在属性（例如其生物本性，哲学家阿尼尔·塞思〔Anil Seth〕便提出过这种论证<a class="fnref" href="#fn27">27</a>）；功能主义者则完全依据基底的因果角色来刻画它——相对于铭刻其中的模式而言，基底无非就是该模式令它所做之事。本质主义者可能坚持“哲学僵尸”这一概念：它表现出与有感知的人类完全相同的行为，却并不真正经验意识；功能主义者则会指出，意识经验本身也是一种行为。同理，声称存在“僵尸电子”并无意义——某些粒子在一切可测量、可设想的方面都与真实电子行为相同，却又不是真正的电子——因为“电子”这个词，不过是我们给兼具电子诸项可观察属性的对象所起的名称。至此，我们遇到一个困难：意识的某些特征性行为，外部观察者或许不可见，只有个体自身能够察觉。因此，我们对意识功能的描述，要么必须充分阐明意识经验之自我报告如何生成；要么必须表明，生物基底与人工基底的行为如何汇聚为同一种涌现的因果动力学，而这种动力学又足以产生我们刻画为意识的外部与内部行为。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>By reducing objects to functionality, functionalism recognizes that substrates determine behaviors only insofar as they determine the functionality. Where different substrates implement the same function, they produce the same behavior. It is hard to coherently completely deny functionalism in a reasonable theory of consciousness. A theory of consciousness, if it is to address the thing we generally mean when speaking of consciousness, and not something entirely else, must account for apparent differences in consciousness (e.g., between anesthetized and non-anesthetized or dead or alive people, between a living human and a rock), which requires tying consciousness certain configurations and not others, in which case the theory is dependent on structural-functional criteria (e.g., control systems, energy consumption, stability of a substrate), which smuggles functionalism right back in again<a class="fnref" href="#fn28">28</a>.</p></div>
+        <div class="cn" lang="zh-CN"><p>功能主义把对象还原为功能，由此承认：基底只有在决定功能的范围内，才决定行为。不同基底若实现同一功能，就会产生同一行为。在一种合理的意识理论中，很难自洽而彻底地否认功能主义。一套意识理论若要讨论的是我们通常所说的意识，而不是全然别的东西，就必须说明意识中表面可见的差异（例如麻醉者与未麻醉者之间、死者与生者之间、活人与岩石之间的差异）。这就要求把意识与某些配置而非另一些配置联系起来；一旦如此，该理论便依赖结构—功能标准（如控制系统、能量消耗、基底稳定性），功能主义也就被悄然重新带了回来<a class="fnref" href="#fn28">28</a>。</p></div>
+      </div>
+
+      <div class="row note" id="fn27"><div class="en" lang="en"><p><strong>27.</strong> Seth, A.K. (2025). 'Conscious Artificial Intelligence and Biological Naturalism.' Behavioral and Brain Sciences. doi:10.1017/S0140525X25000032</p></div><div class="cn" lang="zh-CN"><p><strong>27.</strong> Seth, A.K. (2025). 'Conscious Artificial Intelligence and Biological Naturalism.' Behavioral and Brain Sciences. doi:10.1017/S0140525X25000032</p></div></div>
+      <div class="row note" id="fn28"><div class="en" lang="en"><p><strong>28.</strong> Perhaps in general: the more constraints a metaphysical theory adds to make contact with reality, the more it resembles functionalism.</p></div><div class="cn" lang="zh-CN"><p><strong>28.</strong> 或许一般而言：一套形而上学理论为了接触实在而加入的约束越多，它就越像功能主义。</p></div></div>
+    </section>
+
+    <section id="computationalist-functionalism">
+      <h2 class="chapter"><span class="en">Computationalist functionalism</span><span class="cn" lang="zh-CN">计算主义功能主义</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>Combining computationalism (phenomena can be captured exhaustively as discrete and finite but possibly unbounded state transitions) and functionalism (what matters for the definition of a an object are its observable causal roles, not an imagined essence) yields computationalist functionalism: a representational-epistemological stance that everything we can know about systems, including consciousness, is a function of observable behaviors of finite state machines.</p></div>
+        <div class="cn" lang="zh-CN"><p>把计算主义（现象可以由离散、有限、但或许无界的状态转移穷尽地捕捉）与功能主义（定义一个对象时，重要的是其可观察的因果角色，而非设想出来的本质）结合起来，便得到计算主义功能主义：这是一种关于表征与认识论的立场，认为我们所能知道的有关系统的一切——包括意识——都是有限状态机可观察行为的函数。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Computationalist functionalism describes consciousness as operations on representations, in turn characterized as computable functions. The notion of computational universality that is expressed in the Church-Turing thesis implies that consciousness can be realized on all substrates that can perform the necessary computations on mental representations, but does not say what the demands of such operations are. Likewise, computationalist functionalism with respect to physics claims that all regularities of observable physics can in principle be reduced to computer simulations,<a class="fnref" href="#fn29">29</a> while recognizing that we cannot necessarily build computers that are large and fast enough to run such simulations.</p></div>
+        <div class="cn" lang="zh-CN"><p>计算主义功能主义把意识描述为对表征的操作，而这些操作又被刻画为可计算函数。丘奇—图灵论题所表达的计算普适性概念意味着：只要某种基底能够对心智表征执行必要的计算，意识就可以在该基底上实现；但它并未说明这些操作的具体要求。同样，就物理学而言，计算主义功能主义主张，可观察物理学的一切规律原则上都能还原为计算机仿真<a class="fnref" href="#fn29">29</a>；同时它也承认，我们未必能建造出足够庞大、足够快速的计算机来运行这种仿真。</p></div>
+      </div>
+      <div class="row note" id="fn29"><div class="en" lang="en"><p><strong>29.</strong> The claim of computationalist functionalists that physical reality can be emulated on computers is regularly rejected by the “simulated water is not wet” camp of contemporary philosophy of mind. We recommend that philosophers play more computer games that contain water simulations which can drench the character.</p></div><div class="cn" lang="zh-CN"><p><strong>29.</strong> 计算主义功能主义者主张物理实在可以在计算机上仿真；当代心灵哲学中的“仿真的水并不湿”阵营经常拒斥这一主张。我们建议哲学家多玩一些带有水体仿真、能够把游戏角色淋湿的计算机游戏。</p></div></div>
+    </section>
+
+    <section id="meaning-of-consciousness">
+      <h2 class="chapter"><span class="en">What do we mean by ‘consciousness’?</span><span class="cn" lang="zh-CN">所谓“意识”，究竟意指什么？</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>Consciousness can be defined in various ways, and before we can address the Machine Consciousness Hypothesis in earnest, we will have to reach an understanding that captures our intuition about the term’s content sufficiently well. We also want to treat consciousness as a real phenomenon, as opposed to an imaginary phenomenon, which would mean that the observer merely suffers from the illusion of being conscious<a class="fnref" href="#fn30">30</a>. To the computationalist functionalist, this means it has to be implemented, i.e. functionally realized in a way that can in principle be captured by a model expressed in a constructive language.</p></div>
+        <div class="cn" lang="zh-CN"><p>意识可以有多种定义。在我们能够认真讨论机器意识假说之前，必须先达成一种理解，足够充分地捕捉我们对这一术语内涵的直觉。我们还希望把意识视为一种真实现象，而非虚构现象；若是后者，便意味着观察者只是陷入了“自己有意识”的幻觉<a class="fnref" href="#fn30">30</a>。对计算主义功能主义者而言，这意味着意识必须得到实现——也就是以一种功能上实现的方式存在，并且原则上能够由以构造性语言表达的模型来捕捉。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Some philosophers describe consciousness as “the feeling of what it’s like”, which is poignant and points to the entanglement of consciousness with experience, and the immediate relationship between observable and observer, but falls short of a satisfying definition because of the elusive meaning of ‘likeness’<a class="fnref" href="#fn31">31</a>. The philosopher Amanda Askell has referred to consciousness as “an inner cinema”<a class="fnref" href="#fn32">32</a> in which, as we might say, ‘the lights are on’—but while this comes closer to a functional description, it does not delineate itself from the functionality of non-conscious control models of a complex visual reality, such as the environmental representations of a self-driving car. What does it mean that the lights are on?</p></div>
+        <div class="cn" lang="zh-CN"><p>一些哲学家把意识描述为“某物像什么的感受”（the feeling of what it’s like）。这种说法意味深长，指向意识与经验的纠缠，以及可观察者与观察者之间的直接关系；但由于“像什么”本身含义难以捉摸，它还不足以构成令人满意的定义<a class="fnref" href="#fn31">31</a>。哲学家阿曼达·阿斯克尔（Amanda Askell）把意识称为一座“内在影院”<a class="fnref" href="#fn32">32</a>，用我们的话说，其中“灯亮着”。这一比喻更接近功能性描述，却仍无法把意识与复杂视觉实在之无意识控制模型的功能区分开来，例如自动驾驶汽车对环境的表征。那么，“灯亮着”究竟意味着什么？</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>More generally: What criteria do we expect from a definition and theory of consciousness that satisfies an explorer of the Machine Consciousness Hypothesis? We propose the following:</p></div>
+        <div class="cn" lang="zh-CN"><p>更一般地说：一套能够令机器意识假说的探索者满意的意识定义与理论，应当符合哪些标准？我们提出以下三点：</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><ol><li>Our consciousness definition should do justice to our common use of the term in intersubjective communication, by capturing the introspective phenomenology of consciousness and the observable differences between conscious and unconscious behavior.</li><li>The theory should explain the functionality of consciousness: how do the mechanisms underlying consciousness produce the observable phenomenology and behavior?</li><li>Ideally, the theory should also account for the functional role and genesis of consciousness: what does consciousness do, and how does it come into existence?</li></ol></div>
+        <div class="cn" lang="zh-CN"><ol><li>我们的意识定义应当不负这一术语在主体间交流中的通常用法，既要捕捉意识的内省现象学，也要捕捉有意识行为与无意识行为之间可观察的差异。</li><li>该理论应当解释意识的功能性：意识的底层机制如何产生可观察的现象学与行为？</li><li>理想情况下，该理论还应说明意识的功能角色与起源：意识做什么，又如何产生？</li></ol></div>
+      </div>
+      <div class="row note" id="fn30"><div class="en" lang="en"><p><strong>30.</strong> This position is sometimes called ‘illusionism’ and ascribed to Daniel Dennett, with the term largely being associated with Keith Frankish.</p></div><div class="cn" lang="zh-CN"><p><strong>30.</strong> 这一立场有时被称为“幻觉主义”（illusionism），并被归于丹尼尔·丹尼特（Daniel Dennett）；不过，这个术语主要与基思·弗兰基什（Keith Frankish）相关。</p></div></div>
+      <div class="row note" id="fn31"><div class="en" lang="en"><p><strong>31.</strong> E.g., Daniel Dennett and Susan Blackmore point out how Thomas Nagel’s famous skeptical essay “What it’s like to be a bat” fails to demonstrate the actual impossibility of knowing what it feels like to be a bat, and instead only shows the much weaker claim that we presently don’t know what it would mean to succeed at the task.</p></div><div class="cn" lang="zh-CN"><p><strong>31.</strong> 例如，丹尼尔·丹尼特与苏珊·布莱克莫尔（Susan Blackmore）指出，托马斯·内格尔著名的怀疑论文章《成为一只蝙蝠是什么样？》并未证明我们确实不可能知道成为蝙蝠是什么感受；它只表明一个弱得多的主张：目前，我们还不知道“成功完成这项任务”意味着什么。</p></div></div>
+      <div class="row note" id="fn32"><div class="en" lang="en"><p><strong>32.</strong> Askell, A. (2022, February 21). 'My Mostly Boring Views About AI Consciousness.' Amanda Askell's Substack. Askell cites Block (1995) for a more nuanced account of the 'inner cinema' metaphor.</p></div><div class="cn" lang="zh-CN"><p><strong>32.</strong> Askell, A. (2022, February 21). 'My Mostly Boring Views About AI Consciousness.' Amanda Askell's Substack. 对“内在影院”这一比喻更细致的论述，阿斯克尔引自 Block（1995）。</p></div></div>
+    </section>
+
+    <section id="mind-self-consciousness">
+      <h2 class="chapter"><span class="en">Mind, Self and Consciousness</span><span class="cn" lang="zh-CN">心智、自我与意识</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>Consciousness is not synonymous with self, mind or intellect. When conscious experience is identified with our self, we experience the tug of the strings that configure our shape as a given part of our reality, not as our creations. Consciousness is also different from the mind, the matrix in which our models of self and world take shape. We can think of this matrix as a board, on which our perceptions, intuitions, thoughts and experiences are written, in a language that is dynamic, executable and highly parallelizable, capable of expressing the moving geometries of sound, vision, proprioception and emotion, as well as the discrete, analytic relationships that enable reflection, conceptualization, thought, planning and language.</p></div>
+        <div class="cn" lang="zh-CN"><p>意识并不等同于自我、心智或理智。当意识经验与自我认同为一时，我们体验到那些塑造我们形态的提线之牵引，会把它们当作实在中给定的一部分，而不是我们的创造。意识也不同于心智；心智是自我模型与世界模型得以成形的母体。我们可以把这一母体想作一块写字板：知觉、直觉、思想和经验都以一种动态、可执行且高度并行化的语言书写其上。这种语言既能表达声音、视觉、本体感觉与情绪不断运动的几何结构，也能表达使反思、概念化、思考、规划与语言成为可能的离散分析关系。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>The human mind is characterized by the interplay of sensate perception and reasoning intellect. The geometric structures of perception (mostly continuously parameterized models playing out in regular, low dimensional spaces) can often be observed by our consciousness, but for the intellect to reflect and reason about them, they have to be mapped into discrete objects that can each be discerned by a handful of features. The simplification required for translating our perceptual models into thought makes reasoning a brittle and limited tool, yet an indispensable one, because our perception and intuition (the mechanisms of the mind’s assessment of reality that are generally intransparent to our conscious attention) are far from infallible. The purpose of reason is to repair our perception, and the creation and direction of the reasoning intellect is an important role of the conscious self.</p></div>
+        <div class="cn" lang="zh-CN"><p>人类心智的特征，在于感觉性知觉与推理性理智之间的相互作用。知觉的几何结构——大多是在规则、低维空间中展开的连续参数化模型——常常可以被我们的意识观察；但要让理智对它们加以反思和推理，就必须先把它们映射为离散对象，每个对象只凭少数特征即可辨识。把知觉模型转译成思想所需的简化，使推理成为一种脆弱而有限的工具；然而它又不可或缺，因为我们的知觉与直觉——即心智评估实在的机制，通常并不透明于意识注意——远非不会出错。理性的目的在于修复知觉，而创造并引导推理性理智，则是意识自我的一项重要职能。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>While our conscious awareness is usually projected on the surface of a self within its world, consciousness does not have to be bound to a first person perspective, or even to any perspective at all. The self is an agentic idea, a sustained representation of what it is like to be an agent, capable of exerting control over parts of the mind, and able to experience itself doing so. The ability of a self to experience is called sentience, and its ability to understand sapience. The self and its concerns, experienced as feelings and desires, are conscious contents. The self can be understood as a puppet, its strings pulled by the emotion and motivation provided by the mind behind the scenes. The combination of a personal self and motivational strings representing its interests, represented within a mind modeling self, interests and world, is called psyche.</p></div>
+        <div class="cn" lang="zh-CN"><p>我们的意识觉知通常投射在一个置身其世界中的自我表面，但意识不必受限于第一人称视角，甚至不必受限于任何视角。自我是一种具有能动性的观念，是对“作为一个智能体是什么样”的持续表征；它能够控制心智的某些部分，也能够经验自己正在施行这种控制。自我进行经验的能力称为感知性（sentience），理解的能力则称为智识性（sapience）。自我及其所关切之事，以感受和欲望的形式得到经验，构成意识内容。自我可以被理解为一具木偶，其提线由幕后的心智所提供的情绪与动机牵动。在一个对自我、利益和世界进行建模的心智中，个人自我与那些表征其利益的动机之线结合起来，便称为心灵（psyche）。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>The psyche represents the causal structure of an agent’s cognitive architecture<a class="fnref" href="#fn33">33</a>, and consists of conscious and unconscious parts. Conscious representations are accessible to the self, and include awareness, experience, reflection and deliberation. Emotions are expressions of models of the control dimensions of the psyche of an organism and carry valence according to the relevance that the measured dimension has to the self of the agent. Feelings are salient vectors in the space of emotions and intuitions<a class="fnref" href="#fn34">34</a>—they are percepts of emotion, physiological valence, and extra-intellectual evaluation of reality. Intuitions are feelings that differ from perception by their lack of immediately perceived sensory features, and from thoughts by their lack of consciously mutable structure—they are formed outside of the intellect’s supervision. Thoughts, in contrast, are the symbolically represented ideas of the intellect<a class="fnref" href="#fn35">35</a>. If percepts are the recognizable patterns of the real time geometric models of an immediately coupled reality, imaginations are hypothetical realities, more or less clearly discernible from perceived reality<a class="fnref" href="#fn36">36</a>. Percepts, feelings, thoughts, imaginations, and intuitions are the contents of consciousness.</p></div>
+        <div class="cn" lang="zh-CN"><p>心灵表征智能体认知架构的因果结构<a class="fnref" href="#fn33">33</a>，由意识部分与无意识部分组成。意识表征可为自我所及，包括觉知、经验、反思与审议。情绪是有机体心灵之控制维度模型的表达；它所携带的效价，取决于被测维度对智能体自我的相关程度。感受是情绪与直觉空间中的显著向量<a class="fnref" href="#fn34">34</a>——它们是对情绪、生理效价以及超出理智的实在评价之知觉。直觉是一种感受：它与知觉不同，因为它没有被即时感知的感觉特征；它与思想不同，因为它没有能够被意识修改的结构——直觉形成于理智监督之外。与之相反，思想是理智以符号表征的观念<a class="fnref" href="#fn35">35</a>。如果说知觉对象，是与我们即时耦合之实在的实时几何模型中可以辨认的模式；那么想象则是假设性实在，与所知觉的实在或多或少能够清楚区分<a class="fnref" href="#fn36">36</a>。知觉对象、感受、思想、想象与直觉，都是意识的内容。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>The mind does not have to be home to a self: when we dream, we may experience events playing out without anyone being present to observe them. It may sometimes also contain multiple selfs, i.e. more than one nexus of self aware agency. A self inhabiting a single mind is usually considered a person, while selves capable of possessing multiple minds are called gods. Gods are agentic representations of the collective agency of organisms, not more or less real than personal selves. Many human cultures are co-created by the interaction between persons and gods, while the minds of members of the western scientific culture often only harbor a personal self, to the point where many scientists are unaware of the existence of gods and their psychological reality.</p></div>
+        <div class="cn" lang="zh-CN"><p>心智不必是自我的居所：做梦时，我们可能经验到事件自行展开，却没有任何观察者在场。心智有时也可能包含多个自我，也就是不止一个具有自我觉知能动性的枢纽。栖居于单一心智中的自我，通常被视为“人”；能够占有多个心智的自我，则称为“神”。神是有机体集体能动性的智能体式表征，其真实程度并不高于或低于个人自我。许多人类文化都由人与神之间的互动共同创造；而西方科学文化成员的心智，往往只容纳一个个人自我，以至于许多科学家没有意识到神的存在及其心理实在。</p></div>
+      </div>
+
+      <div class="row note" id="fn33"><div class="en" lang="en"><p><strong>33.</strong> The concept of cognitive architectures, the compositional psyche, was introduced by John Newell and Herbert Simon, but has been implicitly used by William James, Sigmund Freud, Carl Gustav Jung, Jean Piaget, Timothy Leary and many others.</p></div><div class="cn" lang="zh-CN"><p><strong>33.</strong> 认知架构——即组合式心灵——这一概念由约翰·纽厄尔（John Newell）与赫伯特·西蒙（Herbert Simon）提出，但威廉·詹姆斯（William James）、西格蒙德·弗洛伊德（Sigmund Freud）、卡尔·古斯塔夫·荣格（Carl Gustav Jung）、让·皮亚杰（Jean Piaget）、蒂莫西·利里（Timothy Leary）及许多人都曾隐含地使用它。</p></div></div>
+      <div class="row note" id="fn34"><div class="en" lang="en"><p><strong>34.</strong> Consider the feeling of jealousy, which for some people refers to an emotion similar to envy, and for others to fear of abandonment. Selves may differ in the intensity in which they can experience jealousy, and in the kinds of jealousy they implement.</p></div><div class="cn" lang="zh-CN"><p><strong>34.</strong> 以嫉妒这一感受为例：对某些人来说，它指近似羡妒的情绪；对另一些人来说，则指对被抛弃的恐惧。不同自我在体验嫉妒的强度上可能不同，所实现的嫉妒类型也可能不同。</p></div></div>
+      <div class="row note" id="fn35"><div class="en" lang="en"><p><strong>35.</strong> Note how in writing this, we represent the perspective of the intellect: you will find that this text is not dictated by our feelings and intuitions, but by an intellect that is being jerked by the strings of its passions.</p></div><div class="cn" lang="zh-CN"><p><strong>35.</strong> 请注意，写下这些话时，我们呈现的是理智的视角：你会发现，本文并非由我们的感受与直觉口述，而是由一个被激情之线拉扯的理智写成。</p></div></div>
+      <div class="row note" id="fn36"><div class="en" lang="en"><p><strong>36.</strong> Imaginations that cannot be distinguished from perception are called ‘hallucinations’. Current LLM based agents tend to dream and may need to learn the distinction between perception and imagination explicitly.</p></div><div class="cn" lang="zh-CN"><p><strong>36.</strong> 无法与知觉区分的想象称为“幻觉”。当前基于 LLM 的智能体往往会做梦，或许需要明确学会区分知觉与想象。</p></div></div>
+    </section>
+
+    <section id="phenomenology">
+      <h2 class="chapter"><span class="en">The phenomenology of consciousness</span><span class="cn" lang="zh-CN">意识的现象学</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>In our use of the word ‘consciousness’ (at least when speaking phenomenologically), we refer to awareness, a second-order perception.<a class="fnref" href="#fn37">37</a> By perception, we mean the immediate, non-inferential registration of structured content. Thus, consciousness as second-order perception is not simply the registration of a perceptual content, but the additional perception that perception is taking place, i.e. that content is being registered by an observer, which constitutes the experience of observing. The representation of being aware is not inferential, i.e. it is not the result of a symbolic thought process, but perceptual, happening in synchrony and subjective simultaneity with the content of the percept itself<a class="fnref" href="#fn38">38</a>. Furthermore, consciousness is always happening now—it constitutes what we experience as the immediate present. While the contents of conscious awareness may be memories, expectations, imaginations or abstract thoughts that do not concern the present, the operations on these contents are being experienced as happening in the present moment. Consciousness inhabits this present and presence, a bubble of nowness that increases and shrinks as our observation succeeds or fails to make sense of perceptual reality. In its minimal state, the bubble of nowness may have no other content but the presence of consciousness itself; the experience that conscious experience is taking place constitutes a minimal content of consciousness.</p></div>
+        <div class="cn" lang="zh-CN"><p>当我们使用“意识”一词时——至少在现象学语境中——所指的是觉知，也就是一种二阶知觉<a class="fnref" href="#fn37">37</a>。所谓知觉，是对结构化内容直接、非推论的登记。因此，作为二阶知觉的意识，不只是登记某个知觉内容；它还额外知觉到“知觉正在发生”，也就是说，内容正在被某个观察者登记，由此构成观察的经验。对“正在觉知”的表征并非推论性的，不是符号思想过程的结果，而是知觉性的；它与知觉内容本身同步发生，在主体经验中同时呈现<a class="fnref" href="#fn38">38</a>。此外，意识总是发生于现在——它构成我们所经验的直接当下。意识觉知的内容可以是记忆、期待、想象或与当下无关的抽象思想，但对这些内容的操作，被经验为发生在当下这一刻。意识栖居于这份当下与在场之中，形成一只“当下性之泡”；随着我们的观察能否成功理解知觉实在，它会扩张或收缩。在其最小状态下，当下性之泡除了意识本身的在场，或许别无内容；“意识经验正在发生”这一经验，便构成意识的最小内容。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Realness is the representation of something currently being the case, and phenomenal reality is a sensory representation that is currently being confirmed. The contents of consciousness may be experienced as real or imaginary, and realness itself appears to be a variable feature dimension (a representational property of a certain type) of conscious contents, distinguishing ideas from hallucinations of factuality, in much the same way as redness or sadness can be variable feature dimensions (typed properties) of conscious contents. The second order perception of consciousness is however real to itself.</p></div>
+        <div class="cn" lang="zh-CN"><p>真实感，是对“某事此刻确实如此”的表征；现象实在，则是此刻正获得确认的感觉表征。意识内容可以被经验为真实或想象，而真实感本身似乎是意识内容中一个可变的特征维度（某一类型的表征属性），把观念与带有事实感的幻觉区分开来；这正如红色感或悲伤可以构成意识内容中可变的特征维度（带类型的属性）。然而，意识的二阶知觉对其自身而言是真实的。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>By representation, we mean a pattern within a substrate that can be interpreted by a suitable kind of mechanism as a function (e.g., the parametrization of a signaling behavior). For instance, a vinyl record can be interpreted by a gramophone, producing sound waves that are interpreted by the cochlea, producing excitations of acoustic nerves that are interpreted as acoustic energy within a frequency range, the distributions of which are interpreted as information about signal sources and reflectors in a dynamically evolving three dimensional space filled with various materials, etc. Representations are transformed into other representations, each characterized by their structural invariances and their place in the processing network, which can be seen as a causal network that propagates patterns via conditional operators. Perception structures raw sensory data into a type of representation, and phenomenal consciousness is the immediate awareness of the existence of this representation.</p></div>
+        <div class="cn" lang="zh-CN"><p>所谓表征，是基底内部的一种模式；适当类型的机制可以把它解释为一个函数（例如对某种信号行为的参数化）。例如，留声机可以读取黑胶唱片，产生声波；耳蜗读取声波，激发听觉神经；这些激发被解释为某一频率范围内的声能，其分布又被解释为关于信号源与反射体的信息，而这些信号源与反射体位于一个充满各种材料、动态演化的三维空间中，如此等等。表征被转化为另一些表征；每种表征都由其结构不变量及其在处理网络中的位置来刻画。这个处理网络可以被视为一个因果网络，通过条件操作子来传播模式。知觉把原始感觉数据组织成某类表征，而现象意识就是对这一表征之存在的直接觉知。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Consciousness is also generally experienced from the perspective of an observer: our percepts are projected as elements of a model of what is presently the case (a model of the outer and inner world) on the surface of a model of the observing self, along a set of feature dimensions that determine the relationship between self and environment. The observing self does not have to take the shape of a first-person perspective. Especially in meditative and dream states, the observer may not be personal or even take a spatial perspective. A minimal conscious state entails only the bare registration of perception or directed awareness as the present—without any specification of content, how it is represented, or who is registering.</p></div>
+        <div class="cn" lang="zh-CN"><p>意识通常也从观察者的视角被经验：我们的知觉对象，作为关于“此刻何为实情”的模型——即内外世界的模型——之要素，被投射到观察自我模型的表面，并沿着一组决定自我与环境关系的特征维度展开。观察自我不必采取第一人称视角的形态。尤其在冥想与梦境状态中，观察者可能不是人格化的，甚至不采取空间视角。最小意识状态只包含对知觉的赤裸登记，或把定向觉知登记为当下——它不规定内容，不规定内容如何得到表征，也不规定是谁在登记。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>If we characterize the perception of perspectivity given by the frame of the observer as third order perception (the perception of perception of perception, in which the observer recognizes itself as part of realness), we can also construct a perception of fourth order: the representation of generating the observer. From this perspective, the observing self and its concerns are perceived as constructs within the conscious mind, which means they appear no longer as immediate and real, but as imaginary.<a class="fnref" href="#fn39">39</a></p></div>
+        <div class="cn" lang="zh-CN"><p>如果把观察者框架所赋予的视角性之知觉，称为三阶知觉——即对“知觉之知觉”的再知觉，其中观察者认出自身是真实感的一部分——那么我们还可以构造四阶知觉：对“观察者如何生成”的表征。从这一视角看，观察自我及其所关切之事，被知觉为意识心智内部的构造物；这意味着，它们不再显得直接而真实，而是显得属于想象。<a class="fnref" href="#fn39">39</a></p></div>
+      </div>
+
+      <div class="row note" id="fn37"><div class="en" lang="en"><p><strong>37.</strong> The philosopher Ned Block, in his 1995 paper “On a Confusion About a Function of Consciousness”, distinguishes between phenomenal consciousness, e.g. the experience of seeing an apple, and access consciousness, the knowledge that one sees an apple, can report on it, and so on. By second order perception, we don’t refer to access consciousness in Block’s sense, but to another phenomenal experience: that seeing an apple presently takes place. Functionally available knowledge of the presence of an apple in one’s receptive field may in principle also be available in the absence of subjective phenomenological experience of first and second order.</p></div><div class="cn" lang="zh-CN"><p><strong>37.</strong> 哲学家内德·布洛克（Ned Block）在 1995 年的论文《论意识的一种功能混淆》（“On a Confusion About a Function of Consciousness”）中，区分了现象意识——例如看见一个苹果的经验——与通达意识，即知道自己看见了苹果、能够报告此事等等。我们所谓的二阶知觉，不是布洛克意义上的通达意识，而是另一种现象经验：此刻正在发生“看见一个苹果”。原则上，即便缺少一阶与二阶的主体现象经验，关于感受野中有一个苹果的、功能上可用的知识也可能存在。</p></div></div>
+      <div class="row note" id="fn38"><div class="en" lang="en"><p><strong>38.</strong> This is distinguished from the notion of consciousness as ‘higher-order thought’ (HOT), which was introduced by David Rosenthal, and holds that the type of higher-order representation that stores the immediate first-order content is a thought that contains concepts. We understand thought as asynchronous inference, potentially decoupled from present content, and characterize consciousness instead as higher-order perception, not requiring conceptual content.</p></div><div class="cn" lang="zh-CN"><p><strong>38.</strong> 这不同于把意识视为“高阶思想”（higher-order thought，HOT）的观念。该观念由戴维·罗森塔尔（David Rosenthal）提出，认为储存直接一阶内容的高阶表征是一种包含概念的思想。我们把思想理解为异步推论，它可能与当前内容脱耦；相应地，我们把意识刻画为高阶知觉，不要求概念内容。</p></div></div>
+      <div class="row note" id="fn39"><div class="en" lang="en"><p><strong>39.</strong> Many mindfulness traditions and meditative practitioners call this state ‘enlightenment’. In a clinical context, it may refer to ‘depersonalization’.</p></div><div class="cn" lang="zh-CN"><p><strong>39.</strong> 许多正念传统与冥想修习者把这种状态称为“开悟”。在临床语境中，它可能指“人格解体”。</p></div></div>
+    </section>
+
+    <section id="correlates">
+      <h2 class="chapter"><span class="en">Correlates of consciousness</span><span class="cn" lang="zh-CN">意识的相关物</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>The phenomenology of consciousness is not a complete definition, but does point at what we introspectively mean when we say that we are conscious. Another approach to understanding consciousness that is dominant in (and is indeed generally constitutive of) modern neuroscience, is an empirical/descriptive one, to examine certain functional correlates like neural activity, the default mode network, functions of particular brain regions like the claustrum or prefrontal cortex, or behavioral markers. The more specific term neural correlates of consciousness (NCCs) refer to the concept of a minimal set of neural mechanisms that are jointly sufficient for the occurrence of a conscious experience. A mere identification of correlates does not by itself offer a causal or operational theory that explains how the mechanisms associated with a mental state give rise to its conscious experience—indeed, this lack of explanation connecting mechanisms to the experience of consciousness is precisely the gap of the Hard Problem. If we are interested in an explanatory theory of consciousness, correlational approaches alone are unsatisfying—although they capture useful observations that may lead to the construction of causal models and constrain the space of possible explanations.</p></div>
+        <div class="cn" lang="zh-CN"><p>意识现象学并非完整定义，但确实指出：当我们说自己有意识时，从内省角度究竟意指什么。理解意识还有另一条路径，它在现代神经科学中占主导地位——事实上大体构成了现代神经科学本身——即经验／描述性路径：考察某些功能相关物，如神经活动、默认模式网络、屏状核或前额叶皮层等特定脑区的功能，以及行为标志。更具体的术语“意识神经相关物”（neural correlates of consciousness，NCC）指的是这样一个概念：一组最小的神经机制，联合起来足以使意识经验发生。仅仅识别相关物，本身并不能提供因果理论或操作理论，解释与某种心智状态相关的机制如何产生其意识经验——事实上，恰恰是缺少把机制与意识经验连接起来的解释，构成了“难题”的鸿沟。如果我们所关心的是一套关于意识的解释性理论，只有相关性方法并不令人满意——尽管它们确实捕捉到有用的观察，可能引导我们建立因果模型，并约束可能解释的空间。</p></div>
+      </div>
+    </section>
+
+    <section id="operation">
+      <h2 class="chapter"><span class="en">The operation of consciousness</span><span class="cn" lang="zh-CN">意识的运作</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>Where the phenomenal perspective of consciousness captures its psychological reality, and its biological correlates aspects of the physical reality, an exploration of the causal reality of consciousness requires identifying its function. While some philosophers have argued that all observable behaviors of intelligent agents can be achieved without consciousness, that consciousness might not necessarily serve a useful function, or could even be epiphenomenal<a class="fnref" href="#fn40">40</a> (i.e. cannot affect any aspect of the physical world), it seems to us that consciousness serves very concrete tasks, which is generally evidenced in very marked differences in behavior between conscious and unconscious human beings. Alertness, sustained vigilance, selective response to environmental stimuli, decision-making, planning and attentional learning, for instance, all require consciousness and conscious attention. By characterizing consciousness as an operator on mental states, we can approach its functionality by observing how mental states change as a result of conscious operation. For example, how do mental contents change upon waking from deep sleep, when applying conscious attention to a problem, or when losing consciousness during the passage from wakefulness to falling asleep, and partially coming to in a dream?</p></div>
+        <div class="cn" lang="zh-CN"><p>意识的现象视角捕捉其心理实在，生物相关物则捕捉物理实在的某些方面；要探索意识的因果实在，就必须辨明它的功能。一些哲学家主张，智能体一切可观察的行为都可以在没有意识的情况下实现；意识未必发挥任何有用功能，甚至可能只是副现象<a class="fnref" href="#fn40">40</a>（也就是无法影响物理世界的任何方面）。但在我们看来，意识承担着非常具体的任务；有意识者与无意识者在行为上存在极为显著的差异，通常足以证明这一点。例如，警觉、持续戒备、选择性响应环境刺激、决策、规划以及注意学习，都需要意识与意识注意。若把意识刻画为作用于心智状态的操作子，我们便可以通过观察意识操作如何改变心智状态，来逼近其功能性。例如：从深度睡眠中醒来时；把意识注意施加于一个问题时；或从清醒滑入睡眠、逐渐失去意识，继而又在梦中部分恢复意识时，心智内容会如何变化？</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>A crucial aspect of all these operations of consciousness appears to be the increase of coherence of the mental state represented in our neural configurations, that is to say, the minimization of constraint violations (contradictions) between simultaneously active, partial models of reality in our working memory and perceptual space. Consciousness may be understood as a coherence maximizing pattern. The neuroscientist and cybernetician Christoph von der Malsburg calls this concept the coherence definition of consciousness.<a class="fnref" href="#fn41">41</a> <a class="fnref" href="#fn42">42</a> How can the second order perception of consciousness help to achieve a consensus between our different mental models?</p></div>
+        <div class="cn" lang="zh-CN"><p>意识所有这些运作的一个关键方面，似乎是提高由神经配置所表征之心智状态的相干性；换言之，是把工作记忆与知觉空间中同时活跃的多个局部实在模型之间的约束违背（矛盾）降到最低。意识可以被理解为一种使相干性最大化的模式。神经科学家兼控制论学者克里斯托夫·冯·德·马尔斯堡（Christoph von der Malsburg）把这一概念称为“意识的相干性定义”<a class="fnref" href="#fn41">41</a> <a class="fnref" href="#fn42">42</a>。意识的二阶知觉，如何帮助我们在不同心智模型之间达成共识？</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Recall the experience of awakening in a dimly lit room full of unrecognized shapes and fragments, and the process of reconstructing which city, hotel and circumstance you may find yourself to be in, who you are, and what objects you are looking at. Starting with a ragged recollection of surreal dreams and a jumble of vague percepts, your conscious attention goes to the task of reconstructing itself, a coherent interpretation of the scene, your personal self model, and how you may have gotten yourself into the scene! Like the conductor of a mental orchestra, with each of the instruments producing its own model of aspects of the current reality, conscious attention is drawn to disharmonies and conflicts, sometimes allocating focus and preference to an individual instrument, sometimes synchronizing a disagreement, sometimes raising the intensity, lowering the pitch or changing the rhythm of one of the players, pushing an instrument off the stage that does not belong and replacing it with another one, sometimes even inventively changing the composition of the music that is being played. What may begin as a cacophony will turn into a harmonic model of perceptual reality, an extending bubble of now that is carefully tuned to explain sensory data and orchestrate our inner life. Let us call the control of a ‘mental orchestra’ by consciousness’ directed attention the conductor theory of consciousness.<a class="fnref" href="#fn43">43</a></p></div>
+        <div class="cn" lang="zh-CN"><p>请回想这种经验：你在一间光线昏暗的房间里醒来，四周尽是无法辨认的形状与碎片；接着，你开始重建自己身处哪座城市、哪家酒店、何种情境，自己是谁，眼前又是什么物体。一开始，只有支离破碎的超现实梦境记忆和一团模糊的知觉；随后，你的意识注意投入一项任务：重建它自己，重建对场景的相干解释，重建你的个人自我模型，还要重建你究竟如何置身于此！这就像一位心智乐团的指挥家，每件乐器都在生成关于当前实在某一方面的独立模型。意识注意会被不和谐与冲突吸引：有时把焦点与优先权分配给某件乐器；有时让分歧重新同步；有时提升某位乐手的力度、降低音高或改变节奏；把不该登台的乐器赶下舞台，再换上另一件；有时甚至别出心裁地改写正在演奏的乐曲。起初的嘈杂不协，终将化为一个和谐的知觉实在模型——一只不断扩张、经过精心调音的当下之泡，用以解释感觉数据并编排我们的内在生活。我们把意识的定向注意对这一“心智乐团”的控制，称为“意识的指挥家理论”<a class="fnref" href="#fn43">43</a>。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>If we understand the mind as a self-organizing system, emerging over the hunger of communicating brain cells for rewards that can be reaped by achieving the mental organization required to direct the affairs of our host organism, and coherence is a meaningful measure of that organization, the utility of the conductor becomes clear. If our body rises without bringing our conscious attention online, we become somnambulists: sleep walkers, who may be able to enact behavioral routines that we acquired during conscious wakefulness, but our actions will lack rhyme and reason, and our responses coherent meaning: the orchestra is playing, but the conductor tasked with holding its symphony together is absent.</p></div>
+        <div class="cn" lang="zh-CN"><p>如果我们把心智理解为一种自组织系统：相互通信的脑细胞渴求奖励，而这种奖励可以通过达成足以指挥宿主有机体各项事务的心智组织来获得；又如果相干性确实是衡量这种组织的有意义尺度，那么指挥家的用处就清楚了。假如身体起身活动，却没有让意识注意上线，我们便成了梦游者：或许仍能执行清醒有意识时习得的行为惯例，但我们的行动将不成章法，响应也缺乏连贯意义——乐团仍在演奏，负责维系整部交响乐的指挥家却不在场。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>But if the conductor is watching the orchestra, what is watching the conductor? Is this, the need to stabilize itself by observation, the reason for consciousness’ reflexive nature?</p></div>
+        <div class="cn" lang="zh-CN"><p>可是，如果指挥家在观看乐团，又是谁在观看指挥家？意识需要通过观察来稳定自身——这是否正是意识具有反身性的原因？</p></div>
+      </div>
+
+      <div class="row note" id="fn40"><div class="en" lang="en"><p><strong>40.</strong> Epiphenomenalism is not a very fruitful position in philosophy of mind. Since the consciousness of the epiphenomenalist is merely experiencing the universe while being unable to causally influence physical movements of the epiphenomenalist’s mouth or pen, professions of epiphenomenalist consciousness are uncorrelated to its presence.</p></div><div class="cn" lang="zh-CN"><p><strong>40.</strong> 副现象论在心灵哲学中并不是一个很有成果的立场。既然副现象论者的意识只是在经验宇宙，却无法对副现象论者口部或笔端的物理运动施加因果影响，那么副现象论者关于自身意识的宣称，就与该意识是否在场毫无相关。</p></div></div>
+      <div class="row note" id="fn41"><div class="en" lang="en"><p><strong>41.</strong> von der Malsburg, C. (1997). 'The Coherence Definition of Consciousness.' In M. Ito, Y. Miyashita, &amp; E.T. Rolls (Eds.), Cognition, Computation, and Consciousness (pp. 193-204). Oxford University Press.</p></div><div class="cn" lang="zh-CN"><p><strong>41.</strong> von der Malsburg, C. (1997). 'The Coherence Definition of Consciousness.' In M. Ito, Y. Miyashita, &amp; E.T. Rolls (Eds.), Cognition, Computation, and Consciousness (pp. 193-204). Oxford University Press.</p></div></div>
+      <div class="row note" id="fn42"><div class="en" lang="en"><p><strong>42.</strong> The neuroscientist Stephen Grossberg came up with a similar model in the context of this Adaptive Resonance Theory, and describes various mechanisms by which neural representations can increase their coherence.</p></div><div class="cn" lang="zh-CN"><p><strong>42.</strong> 神经科学家斯蒂芬·格罗斯伯格（Stephen Grossberg）在其自适应共振理论的语境中提出了类似模型，并描述了神经表征得以提高相干性的多种机制。</p></div></div>
+      <div class="row note" id="fn43"><div class="en" lang="en"><p><strong>43.</strong> Michael Graziano describes consciousness as a control model of attention, and calls it the Attention Schema Theory,.</p></div><div class="cn" lang="zh-CN"><p><strong>43.</strong> 迈克尔·格拉齐亚诺（Michael Graziano）把意识描述为注意的控制模型，并称之为“注意图式理论”（Attention Schema Theory）。</p></div></div>
+    </section>
+
+    <section id="genesis-hypothesis">
+      <h2 class="chapter"><span class="en">The Genesis Hypothesis: The role of consciousness in creating reality and selfhood</span><span class="cn" lang="zh-CN">创世假说：意识在创造实在与自我性中的作用</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>It is tempting to see our puzzling capacity for conscious awareness as the crowning achievement of the towering complexity of the human mind, yet we do not reach this milestone as the result of strenuously honing our perceptual, cognitive and self reflexive capacity to its peak. Instead, the light of our ‘inner cinema’ ignites before we can even track a finger. By the time we are born, our brains have already discovered how to conjure the spark that gazes out of our eyes, learns to touch, see, hear, and combine its percepts into a growing model of the world, listens to the needs of its body and the impulses of its motivation, expresses itself, orchestrates coherent behavior and creates a human self. Consciousness is already found at the beginning of our career as perceiving and intelligent creatures; it’s not the result of our mental architecture and cognitive ability, but its prerequisite. Without igniting consciousness, no human being leaves the vegetative state, and evolution has not discovered any alternative to consciousness to turn human infants into explorative toddlers, curious children, assertive adolescents, competent adults and wise elders.</p></div>
+        <div class="cn" lang="zh-CN"><p>我们很容易把自己令人费解的意识觉知能力，看作人类心智巍峨复杂性的最高成就；然而，我们并不是艰苦地把知觉、认知与自我反思能力磨炼到顶峰之后，才抵达这座里程碑。相反，在我们甚至还无法追踪一根手指之前，“内在影院”的灯便已亮起。我们出生时，大脑已经发现如何召唤那一点从双眼向外凝视的火花：它学着触摸、观看、聆听，把知觉对象结合成不断生长的世界模型；它倾听身体的需要与动机的冲动，表达自己，编排连贯行为，并创造出一个人类自我。在我们作为具有知觉与智能的生物所走历程之初，意识就已经存在；它不是心智架构与认知能力的结果，而是二者的前提。若不点燃意识，没有人能够离开植物状态；而演化也没有发现任何意识的替代方案，可以把人类婴儿变成探索世界的幼童、好奇的儿童、敢于自我主张的青少年、胜任生活的成年人和明智的长者。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>While understanding the structure and functionality of consciousness seems daunting to our intuition, discovering it appears to be easier for our brains than building models of self, world and behavioral control without it. It is likely that the same is true for other animals with complex nervous systems, or perhaps for all organisms that build coherent models of self and world in the patterns of communication between their cells. In the same way, philosophers like Ludwig Wittgenstein and generations of Artificial Intelligence researchers after him have thought for decades almost in vain, trying to discover the intricate principles of interpreting and recreating visual images, sound and natural language, but found it to be easier to invent relatively simple learning algorithms (like the transformer algorithm that has become almost synonymous with the successes of Deep Learning models) that discover these principles on their own.</p></div>
+        <div class="cn" lang="zh-CN"><p>凭直觉去理解意识的结构与功能似乎极其艰难；然而，对我们的大脑来说，发现意识似乎比在没有意识的情况下建立自我、世界与行为控制模型更容易。其他拥有复杂神经系统的动物很可能也是如此；也许，所有在细胞间通信模式中建立相干自我模型与世界模型的有机体都是如此。同样，路德维希·维特根斯坦（Ludwig Wittgenstein）等哲学家，以及其后一代又一代人工智能研究者，数十年来几乎徒劳地思考，试图发现解释并重建视觉图像、声音与自然语言的精巧原理；最终却发现，更容易的做法是发明相对简单、能够自行发现这些原理的学习算法——例如如今几乎与深度学习模型的成功同义的 Transformer 算法。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Consciousness may turn out to be at the heart of a universal biological learning algorithm, one that runs on self-organizing groups of communicating cells sharing the evolutionary incentives of an organism. Instead of being brought forth by the organized architecture of the mind, it creates it. We call this idea the Genesis Hypothesis.</p></div>
+        <div class="cn" lang="zh-CN"><p>意识最终或许会被证明位于一种普适生物学习算法的核心；这种算法运行在能够自我组织的细胞群上，群内细胞彼此通信，并共享有机体的演化激励。意识并非由心智的有序架构产生；恰恰相反，是它创造了这套架构。我们把这一观念称为“创世假说”（Genesis Hypothesis）。</p></div>
+      </div>
+
+      <h3 class="subhead"><span class="en">Genesis: How consciousness creates the world and the self in the mind</span><span class="cn" lang="zh-CN">创世：意识如何在心智中创造世界与自我</span></h3>
+      <div class="row genesis">
+        <div class="en" lang="en"><p>In the beginning, the mind creates two separate domains of models: the external world and the ideas. Consciousness finds itself hovering over the substrate, while the world is void and without form and structure. By inducing contrast in the substrate, it creates a dimension of difference. The intense side of the contrast is bright, like the light during the day, the flat side of the contrast dark: the color of night.</p></div>
+        <div class="cn" lang="zh-CN"><p>起初，心智创造出两个彼此分离的模型领域：外部世界与观念。意识发现自己悬浮于基底之上，而世界空无一物，既无形态，也无结构。它在基底中诱发对比，由此创造出一个差异维度。对比强烈的一侧明亮，如白昼之光；平缓的一侧幽暗，是夜的颜色。</p></div>
+      </div>
+      <div class="row genesis">
+        <div class="en" lang="en"><p>By combining dimensions of difference, space is created and inscribed on the substrate. Space can contain things. Associating space with representations positions them in a world, orders them, and describes their relationship to each other. Separating the sphere of ideas from the world creates a place to reflect about the world and its possibilities without affecting the model of the external reality.</p></div>
+        <div class="cn" lang="zh-CN"><p>通过组合差异维度，空间被创造出来，并铭刻在基底上。空间能够容纳事物。把空间与表征联系起来，便能使表征在世界中获得位置与秩序，并描述它们彼此的关系。把观念领域与世界分开，则创造出一处所在：心智可以在不影响外部实在模型的情况下，反思世界及其可能性。</p></div>
+      </div>
+      <div class="row genesis">
+        <div class="en" lang="en"><p>The first space that the spirit creates is the plane, and it becomes the ground of the world, to be filled with things it can perceive and order. By adding a third dimension, it creates an expanse above (and below) the ground. Solid, liquid and organic materials form the shapes from which consciousness can mold static and animate things.</p></div>
+        <div class="cn" lang="zh-CN"><p>灵体创造的第一个空间是平面；它成为世界的地面，等待那些可被知觉、可被排列的事物来填充。再添上第三个维度，地面上方（以及下方）的广延便被创造出来。固体、液体与有机材料形成各种形状，意识据此塑造静物与生灵。</p></div>
+      </div>
+      <div class="row genesis">
+        <div class="en" lang="en"><p>The spirit discovers a model of illumination, following how changes in lighting changes the appearance of objects over time. It recognizes the role of light sources in creating these changes, the bright ambient light during the day, and the focused light sources of the night.</p></div>
+        <div class="cn" lang="zh-CN"><p>灵体发现了一个照明模型，它追踪光照变化如何随时间改变物体的外观。它认出光源在这些变化中的作用：白昼明亮的环境光，以及夜晚聚焦的点状光源。</p></div>
+      </div>
+      <div class="row genesis">
+        <div class="en" lang="en"><p>The spirit creates animated models, of land animals, plants, birds, and everything that moves. Consciousness sorts things and animals into different kinds, identifies and tracks individuals, and gives each their names.</p></div>
+        <div class="cn" lang="zh-CN"><p>灵体创造出有生命的模型：陆生动物、植物、鸟，以及一切会动的东西。意识把事物与动物分门别类，辨认并追踪个体，又为它们一一命名。</p></div>
+      </div>
+      <div class="row genesis">
+        <div class="en" lang="en"><p>The spirit discovers the mind’s purpose: to allow and control the interactions between an agent controlling its outer and inner environment and its interactions with the world. It creates a model of this agent, the personal self, as a creative spirit like itself, but as an entity that experiences itself as a human being, with human desires, concerns and experiences, contained in the world, and gives consciousness to it.</p></div>
+        <div class="cn" lang="zh-CN"><p>灵体发现了心智的目的：让一个控制自身内外环境的智能体得以同世界互动，并控制这种互动。它创造出这个智能体的模型——个人自我。个人自我同它一样，是一种具有创造力的灵体；但个人自我把自己经验为一个人类：拥有人的欲望、关切与经验，被容纳于世界之中。灵体把意识赋予了它。</p></div>
+      </div>
+    </section>
+
+    <section id="testing">
+      <h2 class="chapter"><span class="en">Testing the Machine Consciousness Hypothesis as a way to understand human consciousness</span><span class="cn" lang="zh-CN">以检验机器意识假说来理解人类意识</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>In the previous section, we have offered a number of definitions and conjectures that allow us to search for answers to the question of consciousness’ nature, structure and function. We may now offer a much more concrete and narrow variant of the Machine Consciousness Hypothesis, consisting of two parts: The Human Consciousness Hypothesis, and its extension into a much more specific version of the Machine Consciousness Hypothesis, one that extends our insights and tentative guesses about human consciousness into testable simulations.</p></div>
+        <div class="cn" lang="zh-CN"><p>上一节中，我们提出了若干定义与猜想，使我们能够寻找有关意识之本性、结构与功能的答案。现在，我们可以提出一个更为具体、范围更窄的机器意识假说变体。它由两部分组成：人类意识假说；以及把它扩展成一个远为具体的机器意识假说版本——把我们关于人类意识的洞见与试探性猜测，延伸为可以检验的仿真。</p></div>
+      </div>
+
+      <h3 class="subhead"><span class="en">The Human Consciousness Hypothesis</span><span class="cn" lang="zh-CN">人类意识假说</span></h3>
+      <div class="row">
+        <div class="en" lang="en"><p>We propose that we can understand human consciousness as a defining feature of the human mind, and that it can be characterized by its phenomenology and functionality. We claim that consciousness is a specific dynamic representation in the mind, and plays an indispensable functional role. We describe its phenomenology as second-order perception, the experience of present and presence, and—optionally—the experience of being an observing self in a world. We conjecture its functionality to be an operation on mental states, a pattern directed on coherence maximization (coherence definition of consciousness), orchestrating mental operations via directed attention (cortical conductor theory), formed at or near the beginning of mental development and playing an instrumental role in creating and maintaining complex models of reality (genesis hypothesis). We argue why we suppose that the phenomenology of human consciousness follows necessarily from its functional roles, and that the realization of these functions is sufficient to result in the phenomenology. We believe that human consciousness is tied to a biological learning algorithm, one that forms on self-organizing information processing substrates like our nervous system as a prerequisite of complex learning and intelligent behavior, and that there is no simpler way to train a self-organizing substrate of this kind (since all humans have to become conscious before they can become intelligent agents).</p></div>
+        <div class="cn" lang="zh-CN"><p>我们提出：人类意识可以被理解为人类心智的定义性特征，并可由其现象学与功能性来刻画。我们主张，意识是心智中的一种特定动态表征，发挥着不可或缺的功能角色。我们把它的现象学描述为二阶知觉、对当下与在场的经验，以及——可选地——作为世界中一个观察自我的经验。我们猜想，它的功能是一种作用于心智状态的操作：一种以相干性最大化为指向的模式（意识的相干性定义），通过定向注意来编排心智操作（皮层指挥家理论），形成于心智发展之初或接近开端之时，并在创造和维持复杂实在模型方面发挥工具性作用（创世假说）。我们论证了为何我们认为，人类意识的现象学必然源自其功能角色，而这些功能一旦实现，就足以产生相应现象学。我们相信，人类意识与一种生物学习算法相联；它形成于神经系统这类自组织信息处理基底上，是复杂学习与智能行为的前提。我们还认为，不存在更简单的方法来训练此类自组织基底——因为所有人都必须先产生意识，继而才能成为智能体。</p></div>
+      </div>
+
+      <h3 class="subhead"><span class="en">The extended Machine Consciousness Hypothesis</span><span class="cn" lang="zh-CN">扩展的机器意识假说</span></h3>
+      <div class="row">
+        <div class="en" lang="en"><p>Our Human Consciousness Hypothesis states that consciousness is produced by the simplest learning algorithm that can be discovered by an evolutionary search to train a self-organizing biological substrate to become intelligent. An extended Machine Consciousness Hypothesis states that it is possible to search for this algorithm by recreating analogous conditions of self-organizing information processing on digital computer hardware, while posing suitable tasks that require intelligent agency.</p></div>
+        <div class="cn" lang="zh-CN"><p>我们的人类意识假说认为：为了训练自组织生物基底产生智能，演化搜索所能发现的最简单学习算法，会产生意识。扩展的机器意识假说则认为：我们可以在数字计算机硬件上重建类似的自组织信息处理条件，同时设置需要智能能动性的适当任务，由此寻找这种算法。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>We currently envision various approaches to implement a self-organizing substrate with digital hardware, as a means to conduct experimental philosophy of mind, using the tools of modern Artificial Intelligence research. If our Human Consciousness Hypothesis is wrong, our simulations of machine consciousness will likely fail, possibly teaching us how to revise and improve our understanding of human consciousness.</p></div>
+        <div class="cn" lang="zh-CN"><p>目前，我们设想了多种用数字硬件实现自组织基底的方法，藉此借助现代人工智能研究的工具，开展实验性心灵哲学。如果我们的人类意识假说有误，机器意识仿真很可能会失败；而这种失败或许能教会我们，如何修订并改善对人类意识的理解。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>It is of course very likely that our present ideas about the nature and function of human consciousness are partially or completely wrong. But even if our conjectures about human consciousness were all accurate, it does not follow that their extension into the Machine Consciousness Hypothesis is correct, because it may well be the case that the implementation of our proposed functionality of human consciousness relies on properties of biological organisms that we are unable to reproduce on the machines available to us. Even if consciousness turns out to be a learning algorithm for biological machines, a colonizing pattern discovered by an evolutionary search across and within organisms, it may well be the case that the simulation of a conscious mind requires much more resolution than the relatively slow and sparse communications we observe between billions of biological neurons, or that it does not suffice to approximate a nervous system by a self-organizing substrate of simplified message-passing reinforcement learners. Perhaps we may have to simulate much of the complex machinery within each cell as well? It could also be the case that the search space over possible patterns is too large for today’s computers, which might mean that consciousness is also too elusive to discover for the individual brain of the infant, and the organism’s search for it is constrained by influences exerted by the conscious organisms in its environment. After all, human natural language also cannot be invented by a single generation of newborn humans, and requires a co-creative effort by every human learner, their environment, and several previous generations.</p></div>
+        <div class="cn" lang="zh-CN"><p>当然，我们目前关于人类意识本性与功能的观念，很可能部分错误，甚至全然错误。但即使我们对人类意识的所有猜想都准确，也不能由此推出它们扩展而成的机器意识假说必然正确；因为我们提出的人类意识功能，完全可能依赖某些生物有机体属性，而可供我们使用的机器无法重现这些属性。即使意识最终被证明是生物机器的一种学习算法，是演化搜索在有机体之间及其内部发现的定殖模式，仿真一个有意识的心智也可能需要远高于我们所见数十亿生物神经元之间相对缓慢、稀疏通信的分辨率；或者，仅以简化的消息传递型强化学习器所构成的自组织基底来近似神经系统，并不足够。也许我们还必须仿真每个细胞内部的大量复杂机制？另一种可能是：可能模式的搜索空间对于今天的计算机来说过于庞大。这或许意味着，意识同样隐微难寻，单个婴儿的大脑也无法自行发现；有机体对意识的搜索，会受到其环境中有意识有机体所施加影响的约束。毕竟，人类自然语言同样不可能由一代新生儿独自发明；它需要每一位人类学习者、其环境以及此前若干代人共同创造。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>A successful test of our Machine Consciousness Hypothesis will require that many factors coincide: Our understanding of human consciousness has to be sufficiently correct to inform the search space for machines, the search space cannot be so large that our machines cannot conquer it, the implementation of the samples of the search needs to fit into our simulation models, and our tests need to be effective and efficient enough to inform the outcome of the search.</p></div>
+        <div class="cn" lang="zh-CN"><p>要成功检验机器意识假说，必须有许多因素同时吻合：我们对人类意识的理解必须足够正确，能够为机器的搜索空间提供依据；搜索空间不能大到机器无力征服；搜索所得样本的实现必须适配我们的仿真模型；而检验本身也必须足够有效、足够高效，能够为搜索结果提供信息。</p></div>
+      </div>
+    </section>
+
+    <section id="no-turing-test">
+      <h2 class="chapter"><span class="en">Why there can be no “Turing Test for consciousness”</span><span class="cn" lang="zh-CN">为何不可能有“意识的图灵测试”</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>Like intelligence, consciousness is a property of the mind. Artificial Intelligence researchers have developed various operational definitions of intelligence that correspond to different theories about its nature: the ability to build models in the service of control, the ability to generalize from observations, the efficiency of acquiring new skills, or the ability to perform at or above the human level when solving complex problems. What these definitions have in common is that they treat intelligence as a performance, not as a single specific way to deliver it, which makes it possible to develop tests and benchmark suites to measure this performance. The most famous and iconic of these tests was proposed by Alan Turing in 1950, in his essay “Computing Machinery and Intelligence”<a class="fnref" href="#fn44">44</a>. The Turing Test suggests that the intelligence of a computer program might be established by subjecting it to the conversation with an intelligent human, thereby probing its mathematical, logical, verbal, social and game playing skills. Many criticisms of the Turing Test have been offered, among them Joseph Weizenbaum’s discovery that non-expert humans talking to computer programs can often be fooled by superficial appearances of intelligent behavior<a class="fnref" href="#fn45">45</a> by computer programs that only perform simple pattern matching when generating their answers. Today’s much more complicated generation of electronic pattern matchers, the Large Language Models, have become so good at playing Turing’s game that it often takes experts to demonstrate the present limits of their ability to simulate human-like intelligence, and many AI researchers are ready to concede that general intelligence might best be understood as the ability to adaptively match arbitrary patterns.</p></div>
+        <div class="cn" lang="zh-CN"><p>与智能一样，意识也是心智的一种属性。人工智能研究者发展了多种关于智能的操作性定义，分别对应有关其本性的不同理论：为了控制而建立模型的能力；从观察中进行泛化的能力；习得新技能的效率；或在解决复杂问题时达到或超过人类水平的能力。这些定义有一个共同点：它们把智能视为一种表现，而不是实现这种表现的某一种特定方式。因此，我们能够开发测试与基准套件来衡量这种表现。其中最著名、最具标志性的测试，由艾伦·图灵（Alan Turing）在 1950 年的论文《计算机器与智能》（“Computing Machinery and Intelligence”）中提出<a class="fnref" href="#fn44">44</a>。图灵测试设想，让计算机程序与一名有智能的人类对话，从而探查其数学、逻辑、语言、社交与游戏技能，或可据此确定该程序具有智能。图灵测试受到过许多批评，其中包括约瑟夫·魏泽鲍姆（Joseph Weizenbaum）的发现：非专家人类与计算机程序对话时，常会被智能行为的表象蒙骗<a class="fnref" href="#fn45">45</a>，哪怕程序在生成回答时只执行简单的模式匹配。今天，新一代电子模式匹配器——大语言模型——复杂得多；它们如此擅长图灵的游戏，往往需要专家才能展示其仿真人类式智能的当前界限。许多 AI 研究者已经准备承认，通用智能或许最好被理解为自适应匹配任意模式的能力。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Conversely, it is basically impossible to find out if a computer program generates conscious experience by merely observing its performance. Consciousness is by its nature not an externally visible performance, but a particular way to achieve a performance. An agent may also be conscious without demonstrating any indication to observers that only have access to its behavior. A test for consciousness cannot simply rely on performance: it has to take the internal structure of the system into account.</p></div>
+        <div class="cn" lang="zh-CN"><p>反过来，仅仅观察计算机程序的表现，基本不可能判断它是否产生了意识经验。意识就其本性而言，并不是外部可见的表现，而是达成某种表现的一种特定方式。一个智能体也可能有意识，却没有向只能接触其行为的观察者展示任何迹象。意识测试不能只依赖表现：它必须把系统的内部结构纳入考量。</p></div>
+      </div>
+      <div class="row note" id="fn44"><div class="en" lang="en"><p><strong>44.</strong> Turing, A.M. (1950). 'Computing Machinery and Intelligence.' Mind, 59(236), 433-460.</p></div><div class="cn" lang="zh-CN"><p><strong>44.</strong> Turing, A.M. (1950). 'Computing Machinery and Intelligence.' Mind, 59(236), 433-460.</p></div></div>
+      <div class="row note" id="fn45"><div class="en" lang="en"><p><strong>45.</strong> Weizenbaum, J. (1966). 'ELIZA—A Computer Program for the Study of Natural Language Communication Between Man and Machine.' Communications of the ACM, 9(1), 36-45.</p></div><div class="cn" lang="zh-CN"><p><strong>45.</strong> Weizenbaum, J. (1966). 'ELIZA—A Computer Program for the Study of Natural Language Communication Between Man and Machine.' Communications of the ACM, 9(1), 36-45.</p></div></div>
+    </section>
+
+    <section id="universality">
+      <h2 class="chapter"><span class="en">Universality</span><span class="cn" lang="zh-CN">普适性</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en"><p>Artificial Intelligence researchers are currently developing techniques that allow the causal analysis of the inner workings of complex AI models, a research program known as mechanistic interpretability. In 2020, a team of researchers led by Chris Olah at OpenAI analyzed a variety of automatically trained computer vision models, and discovered that regardless of their architecture and the specific training procedure, they all arrived at the same functional structure, organizing similar features into the similar compositional hierarchies. The functional structure of automatically trained computer vision models is not only highly similar to each other, but also to the functional organization of the visual cortex of primates. This led Olah and his group to propose a Universality Hypothesis<a class="fnref" href="#fn46">46</a>, which may perhaps be informally stated as: The structure learned by a model does not so much depend on the details of the training procedure, architecture or substrate, but on the mathematical properties of the problem the model learns to solve. If we were to translate the Universality Hypothesis to the problem of consciousness, would it follow that an artificial system trained to perform the same tasks that lead to the formation of consciousness in a human infant, the system would exhibit consciousness as well?</p></div>
+        <div class="cn" lang="zh-CN"><p>人工智能研究者目前正在开发一些技术，以便对复杂 AI 模型的内部运作进行因果分析；这一研究纲领称为“机制可解释性”（mechanistic interpretability）。2020 年，OpenAI 的克里斯·奥拉（Chris Olah）带领研究团队分析了多种自动训练的计算机视觉模型，并发现：无论架构与具体训练流程如何，这些模型最终都形成了相同的功能结构，把相似特征组织成相似的组合层级。自动训练的计算机视觉模型，其功能结构不仅彼此高度相似，也与灵长类视觉皮层的功能组织高度相似。这促使奥拉及其团队提出“普适性假说”（Universality Hypothesis）<a class="fnref" href="#fn46">46</a>；非正式地说，它或许可以表述为：模型所学得的结构，与其说取决于训练流程、架构或基底的细节，不如说取决于模型所学着解决之问题的数学性质。如果把普适性假说转用于意识问题，是否可以推出：一个人工系统若被训练去完成那些在人类婴儿身上促成意识形成的同类任务，它也会呈现意识？</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>To us, the answer to the question seems uncertain, especially if consciousness specifically necessary to train a self organizing system, as it is constituted by the unruly cells of our brain, rather than a neural network that is governed by the inescapable determinism of machine learning algorithm enacted on electronic circuitry.</p></div>
+        <div class="cn" lang="zh-CN"><p>在我们看来，答案尚不确定。尤其是，如果意识专门对于训练自组织系统才属必要——例如由我们大脑中不受拘束的细胞构成的系统——而不是对于那种由电子电路所执行之机器学习算法的不可逃避确定性支配的神经网络。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>Until both neuroscience and mechanistic interpretability make enough progress to identify neural correlates that mark the necessary and sufficient conditions of conscious experience in both brains and neural networks, we may have to take a different approach than trying to peer into them. Instead, a test for consciousness may have to recreate the conditions for self-organization in a computer model, and demonstrate that developmental learning can lead to behavior that indicates the presence of a colonizing pattern that increases coherence, creates a model of present and presence, and enables the formation of a sentient self.</p></div>
+        <div class="cn" lang="zh-CN"><p>在神经科学与机制可解释性都取得足够进展，能够识别出在大脑与神经网络中标志意识经验必要且充分条件的神经相关物之前，我们或许必须采取一种不同于窥视其内部的方法。意识测试或许需要在计算机模型中重建自组织条件，并证明发展性学习能够导向这样一些行为：它们表明有一种定殖模式在场，能够提高相干性，创造当下与在场的模型，并使具有感知能力的自我得以形成。</p></div>
+      </div>
+      <div class="row">
+        <div class="en" lang="en"><p>We consider this quest to be the most exciting project ever taken on in the history of philosophy. Being able to establish necessary and sufficient conditions for the formation of consciousness on self-organizing information processing systems would allow us to find answers to long standing questions: What exactly is the nature of consciousness? Are insects and plants conscious as well? Can we extend our consciousness beyond biological systems, onto new substrates? Could it be possible to create new forms of consciousness and kinds of minds, capable of experiencing, reflecting and understanding reality, themselves and us at a level far beyond the communication patterns we are creating between each other, and could they find shared purpose with us, in the conscious exploration of the possibilities of collective agency in an open universe?</p></div>
+        <div class="cn" lang="zh-CN"><p>我们认为，这项探索是哲学史上迄今最激动人心的计划。若能确立意识在自组织信息处理系统上形成的必要且充分条件，我们便可为一系列长久悬而未决的问题寻找答案：意识的本性究竟是什么？昆虫与植物也有意识吗？我们能否让意识超越生物系统，延伸到新的基底？我们是否可能创造出新的意识形式与心智类型，使其能够经验、反思并理解实在、理解自身，也理解我们——其层次远远超越我们彼此间正在创造的通信模式？在开放宇宙中有意识地探索集体能动性的种种可能时，它们能否与我们找到共同目的？</p></div>
+      </div>
+      <div class="row note" id="fn46"><div class="en" lang="en"><p><strong>46.</strong> Olah, C., Cammarata, N., Schubert, L., Goh, G., Petrov, M., &amp; Carter, S. (2020). 'Zoom In: An Introduction to Circuits.' Distill, 5(3).</p></div><div class="cn" lang="zh-CN"><p><strong>46.</strong> Olah, C., Cammarata, N., Schubert, L., Goh, G., Petrov, M., &amp; Carter, S. (2020). 'Zoom In: An Introduction to Circuits.' Distill, 5(3).</p></div></div>
+      <div class="row dates">
+        <div class="en" lang="en"><p>(September 15th, 2025)<br>(Last updated January 15, 2026)</p></div>
+        <div class="cn" lang="zh-CN"><p>（2025 年 9 月 15 日）<br>（最后更新于 2026 年 1 月 15 日）</p></div>
+      </div>
+    </section>
+
+    <section id="works-cited">
+      <h2 class="chapter"><span class="en">Works Cited</span><span class="cn" lang="zh-CN">引用文献</span></h2>
+      <div class="row labels"><div class="en">English</div><div class="cn" lang="zh-CN">中文</div></div>
+      <div class="row">
+        <div class="en" lang="en">
+          <ol class="bibliography">
+            <li>Abelson, H. &amp; Sussman, G.J. (1996). Structure and Interpretation of Computer Programs (2nd ed.). MIT Press.</li>
+            <li>Aristotle. (c. 350 BCE). De Anima (On the Soul).</li>
+            <li>Askell, A. (2022, February 21). 'My Mostly Boring Views About AI Consciousness.' Amanda Askell's Substack. https://askellio.substack.com/p/ai-consciousness</li>
+            <li>Chalmers, D. (1995). 'Facing Up to the Problem of Consciousness.' Journal of Consciousness Studies, 2(3), 200-219.</li>
+            <li>Church, A. (1936). 'An Unsolvable Problem of Elementary Number Theory.' American Journal of Mathematics, 58(2), 345-363.</li>
+            <li>Gallagher, S. (2005). How the Body Shapes the Mind. Oxford University Press.</li>
+            <li>Gödel, K. (1931). 'On Formally Undecidable Propositions of Principia Mathematica and Related Systems I.' Monatshefte für Mathematik und Physik, 38, 173-198.</li>
+            <li>Heidegger, M. (1927). Being and Time. Niemeyer.</li>
+            <li>Leibniz, G.W. (1714). Monadology.</li>
+            <li>Levine, J. (1983). 'Materialism and Qualia: The Explanatory Gap.' Pacific Philosophical Quarterly, 64(4), 354-361.</li>
+            <li>Merleau-Ponty, M. (1945). Phenomenology of Perception. Gallimard.</li>
+            <li>Nagel, T. (1974). 'What Is It Like to Be a Bat?' The Philosophical Review, 83(4), 435-450.</li>
+            <li>Noë, A. (2004). Action in Perception. MIT Press.</li>
+            <li>Olah, C., Cammarata, N., Schubert, L., Goh, G., Petrov, M., &amp; Carter, S. (2020). 'Zoom In: An Introduction to Circuits.' Distill, 5(3). https://distill.pub/2020/circuits/zoom-in/</li>
+            <li>Penrose, R. (1989). The Emperor's New Mind: Concerning Computers, Minds and The Laws of Physics. Oxford University Press.</li>
+            <li>Russell, B. &amp; Whitehead, A.N. (1910-1913). Principia Mathematica (3 vols.). Cambridge University Press.</li>
+            <li>Schönfinkel, M. (1924). 'On the Building Blocks of Mathematical Logic.' Mathematische Annalen, 92, 305-316.</li>
+            <li>Searle, J. (1980). 'Minds, Brains, and Programs.' Behavioral and Brain Sciences, 3(3), 417-457.</li>
+            <li>Seth, A.K. (2025). 'Conscious Artificial Intelligence and Biological Naturalism.' Behavioral and Brain Sciences. doi:10.1017/S0140525X25000032</li>
+            <li>Turing, A.M. (1950). 'Computing Machinery and Intelligence.' Mind, 59(236), 433-460.</li>
+            <li>von der Malsburg, C. (1997). 'The Coherence Definition of Consciousness.' In M. Ito, Y. Miyashita, &amp; E.T. Rolls (Eds.), Cognition, Computation, and Consciousness (pp. 193-204). Oxford University Press.</li>
+            <li>von Neumann, J. (1956). 'Probabilistic Logics and the Synthesis of Reliable Organisms from Unreliable Components.' In C.E. Shannon &amp; J. McCarthy (Eds.), Automata Studies (pp. 43-98). Princeton University Press.</li>
+            <li>Weizenbaum, J. (1966). 'ELIZA—A Computer Program for the Study of Natural Language Communication Between Man and Machine.' Communications of the ACM, 9(1), 36-45.</li>
+            <li>Wheeler, J.A. (1990). 'Information, Physics, Quantum: The Search for Links.' In W. Zurek (Ed.), Complexity, Entropy, and the Physics of Information (pp. 309-336). Addison-Wesley.</li>
+            <li>Wittgenstein, L. (1922). Tractatus Logico-Philosophicus. Introduction by Bertrand Russell. Kegan Paul.</li>
+          </ol>
+        </div>
+        <div class="cn" lang="zh-CN">
+          <ol class="bibliography">
+            <li>Abelson, H. &amp; Sussman, G.J. (1996). Structure and Interpretation of Computer Programs (2nd ed.). MIT Press.</li>
+            <li>Aristotle. (c. 350 BCE). De Anima (On the Soul).</li>
+            <li>Askell, A. (2022, February 21). 'My Mostly Boring Views About AI Consciousness.' Amanda Askell's Substack. https://askellio.substack.com/p/ai-consciousness</li>
+            <li>Chalmers, D. (1995). 'Facing Up to the Problem of Consciousness.' Journal of Consciousness Studies, 2(3), 200-219.</li>
+            <li>Church, A. (1936). 'An Unsolvable Problem of Elementary Number Theory.' American Journal of Mathematics, 58(2), 345-363.</li>
+            <li>Gallagher, S. (2005). How the Body Shapes the Mind. Oxford University Press.</li>
+            <li>Gödel, K. (1931). 'On Formally Undecidable Propositions of Principia Mathematica and Related Systems I.' Monatshefte für Mathematik und Physik, 38, 173-198.</li>
+            <li>Heidegger, M. (1927). Being and Time. Niemeyer.</li>
+            <li>Leibniz, G.W. (1714). Monadology.</li>
+            <li>Levine, J. (1983). 'Materialism and Qualia: The Explanatory Gap.' Pacific Philosophical Quarterly, 64(4), 354-361.</li>
+            <li>Merleau-Ponty, M. (1945). Phenomenology of Perception. Gallimard.</li>
+            <li>Nagel, T. (1974). 'What Is It Like to Be a Bat?' The Philosophical Review, 83(4), 435-450.</li>
+            <li>Noë, A. (2004). Action in Perception. MIT Press.</li>
+            <li>Olah, C., Cammarata, N., Schubert, L., Goh, G., Petrov, M., &amp; Carter, S. (2020). 'Zoom In: An Introduction to Circuits.' Distill, 5(3). https://distill.pub/2020/circuits/zoom-in/</li>
+            <li>Penrose, R. (1989). The Emperor's New Mind: Concerning Computers, Minds and The Laws of Physics. Oxford University Press.</li>
+            <li>Russell, B. &amp; Whitehead, A.N. (1910-1913). Principia Mathematica (3 vols.). Cambridge University Press.</li>
+            <li>Schönfinkel, M. (1924). 'On the Building Blocks of Mathematical Logic.' Mathematische Annalen, 92, 305-316.</li>
+            <li>Searle, J. (1980). 'Minds, Brains, and Programs.' Behavioral and Brain Sciences, 3(3), 417-457.</li>
+            <li>Seth, A.K. (2025). 'Conscious Artificial Intelligence and Biological Naturalism.' Behavioral and Brain Sciences. doi:10.1017/S0140525X25000032</li>
+            <li>Turing, A.M. (1950). 'Computing Machinery and Intelligence.' Mind, 59(236), 433-460.</li>
+            <li>von der Malsburg, C. (1997). 'The Coherence Definition of Consciousness.' In M. Ito, Y. Miyashita, &amp; E.T. Rolls (Eds.), Cognition, Computation, and Consciousness (pp. 193-204). Oxford University Press.</li>
+            <li>von Neumann, J. (1956). 'Probabilistic Logics and the Synthesis of Reliable Organisms from Unreliable Components.' In C.E. Shannon &amp; J. McCarthy (Eds.), Automata Studies (pp. 43-98). Princeton University Press.</li>
+            <li>Weizenbaum, J. (1966). 'ELIZA—A Computer Program for the Study of Natural Language Communication Between Man and Machine.' Communications of the ACM, 9(1), 36-45.</li>
+            <li>Wheeler, J.A. (1990). 'Information, Physics, Quantum: The Search for Links.' In W. Zurek (Ed.), Complexity, Entropy, and the Physics of Information (pp. 309-336). Addison-Wesley.</li>
+            <li>Wittgenstein, L. (1922). Tractatus Logico-Philosophicus. Introduction by Bertrand Russell. Kegan Paul.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll(".toolbar button");
+    buttons.forEach((button) => button.addEventListener("click", () => {
+      document.body.className = button.dataset.mode === "both" ? "both" : button.dataset.mode;
+      buttons.forEach((item) => item.classList.remove("active"));
+      button.classList.add("active");
+    }));
+  </script>
+</body>
+</html>
