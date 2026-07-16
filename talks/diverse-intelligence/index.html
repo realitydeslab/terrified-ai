@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A complete, timestamped English–Simplified Chinese transcript of Michael Levin's talk on diverse intelligence, morphogenesis, bioelectricity, xenobots, and novel minds.">
+  <meta name="theme-color" content="#173b36">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23173b36'/%3E%3Ccircle cx='50' cy='50' r='17' fill='%239bd2c6'/%3E%3C/svg%3E">
+  <title>Diverse Intelligence — 多样智能 | Michael Levin bilingual transcript</title>
+  <style>
+    :root {
+      --ink: #17221f;
+      --muted: #66736f;
+      --line: #d6dfda;
+      --paper: #f4f1e8;
+      --panel: #fffdf7;
+      --deep: #173b36;
+      --accent: #167c6a;
+      --accent-soft: #dfeee8;
+      --gold: #b58032;
+      --shadow: 0 18px 60px rgba(23, 59, 54, .12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 8% 2%, rgba(22, 124, 106, .09), transparent 32rem),
+        var(--paper);
+      color: var(--ink);
+      font: 16px/1.72 Georgia, "Times New Roman", "Songti SC", "Noto Serif CJK SC", serif;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    .hero {
+      overflow: hidden;
+      position: relative;
+      padding: 56px 24px 44px;
+      color: #f9f7ef;
+      background: var(--deep);
+      border-bottom: 4px solid var(--gold);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10vw -22rem 40%;
+      height: 34rem;
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: 50%;
+      box-shadow: 0 0 0 5rem rgba(255,255,255,.025), 0 0 0 10rem rgba(255,255,255,.018);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; }
+    .kicker {
+      margin: 0 0 13px;
+      color: #9bd2c6;
+      font: 700 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+    h1 { max-width: 1050px; margin: 0; font-size: clamp(34px, 5.5vw, 65px); line-height: 1.05; letter-spacing: -.035em; }
+    h1 .cn { display: block; margin-top: 13px; color: #b9d7cf; font-size: .55em; font-weight: 500; letter-spacing: 0; }
+    .dek { max-width: 850px; margin: 22px 0 0; color: #d7e3df; font-size: clamp(17px, 2vw, 21px); line-height: 1.55; }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 25px; color: #b9cdc7; font-size: 13px; }
+    .meta strong { color: #fff; font-weight: 600; }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: rgba(255, 253, 247, .95);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+      font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .toolbar span { margin-right: 4px; color: var(--muted); }
+    .toolbar button {
+      min-height: 34px;
+      padding: 5px 13px;
+      color: var(--deep);
+      background: transparent;
+      border: 1px solid #8da29c;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+    }
+    .toolbar button:hover { border-color: var(--accent); }
+    .toolbar button.active { color: #fff; background: var(--deep); border-color: var(--deep); }
+    main { max-width: 1240px; margin: 0 auto; padding: 30px 24px 90px; }
+    .source-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, .8fr);
+      gap: 22px;
+      align-items: center;
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    .video { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; background: #0b1513; }
+    .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .source-copy h2 { margin: 0 0 11px; color: var(--deep); font-size: 24px; line-height: 1.2; }
+    .source-copy p { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
+    .source-copy .note { padding: 12px 14px; background: var(--accent-soft); border-left: 3px solid var(--accent); color: #31534c; }
+    .toc-wrap { margin: 34px 0 12px; }
+    .toc-wrap h2 { margin: 0 0 12px; font-size: 15px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .toc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .toc a { display: flex; min-height: 80px; flex-direction: column; justify-content: center; padding: 13px 15px; color: var(--ink); background: rgba(255, 253, 247, .72); border: 1px solid var(--line); border-radius: 10px; text-decoration: none; }
+    .toc a:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .toc a span:last-child { margin-top: 3px; color: var(--muted); font-family: "Songti SC", "Noto Serif CJK SC", serif; font-size: 13px; }
+    section { scroll-margin-top: 68px; padding: 34px 0 18px; }
+    h2.chapter { margin: 0 0 11px; padding: 17px 0 0; border-top: 3px solid var(--deep); color: var(--deep); font-size: clamp(26px, 3vw, 36px); line-height: 1.18; letter-spacing: -.02em; }
+    h2.chapter .cn { display: block; margin-top: 6px; color: var(--muted); font-family: "Songti SC", "Noto Serif CJK SC", serif; font-size: .67em; font-weight: 500; letter-spacing: 0; }
+    .row { display: grid; grid-template-columns: 72px minmax(0, 1fr) minmax(0, 1fr); gap: 0 30px; padding: 22px 0; border-top: 1px solid var(--line); }
+    .timestamp { align-self: start; position: sticky; top: 68px; padding-top: 3px; color: var(--accent); font: 700 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; text-decoration: none; }
+    .timestamp::before { content: "▶ "; font-size: 8px; }
+    .timestamp:hover { color: var(--deep); }
+    .row p { margin: 0; }
+    .row .cn { font-family: "Songti SC", "Noto Serif CJK SC", Georgia, serif; }
+    .lang-label { margin-bottom: 7px; color: var(--muted); font: 10px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; text-transform: uppercase; }
+    body.en-only .row .cn, body.en-only h1 .cn, body.en-only h2.chapter .cn { display: none; }
+    body.cn-only .row .en { display: none; }
+    body.en-only .row, body.cn-only .row { grid-template-columns: 72px minmax(0, 1fr); }
+    body.en-only .row .en, body.cn-only .row .cn { max-width: 850px; }
+    footer { padding: 30px 24px 55px; color: #b9cdc7; background: var(--deep); text-align: center; font-size: 13px; }
+    footer a { color: #b8eadf; }
+    @media (max-width: 900px) {
+      .source-card { grid-template-columns: 1fr; }
+      .toc { grid-template-columns: repeat(2, 1fr); }
+      .row { gap: 0 22px; }
+    }
+    @media (max-width: 720px) {
+      .hero { padding: 42px 20px 34px; }
+      .toolbar { justify-content: flex-start; overflow-x: auto; }
+      main { padding-inline: 17px; }
+      .source-card { padding: 13px; }
+      .source-copy { padding: 5px 5px 7px; }
+      .toc { grid-template-columns: 1fr; }
+      .toc a { min-height: auto; }
+      .row, body.en-only .row, body.cn-only .row { grid-template-columns: 1fr; gap: 0; padding: 18px 0 22px; }
+      .timestamp { position: static; margin-bottom: 10px; }
+      .row .cn { margin-top: 15px; padding-top: 15px; border-top: 1px dotted #aebbb6; }
+      body.cn-only .row .cn { margin-top: 0; padding-top: 0; border-top: 0; }
+    }
+    @media print {
+      body { background: #fff; font-size: 10pt; }
+      .hero { padding: 20px; color: #000; background: #fff; border-color: #000; }
+      .hero h1 .cn, .hero .dek, .hero .meta, .kicker { color: #222; }
+      .toolbar, .video { display: none; }
+      .source-card { display: block; box-shadow: none; }
+      main { max-width: none; padding: 0; }
+      .row { grid-template-columns: 50px 1fr 1fr; gap: 0 16px; break-inside: avoid; }
+      .timestamp { position: static; }
+      footer { color: #000; background: #fff; }
+    }
+  </style>
+</head>
+<body class="both">
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="kicker">Complete bilingual transcript · 双语完整实录</p>
+      <h1>Diverse Intelligence: A New Frontier for the Origins, Possibilities, and Diseases of Mind(s)<span class="cn" lang="zh-CN">多样智能：心智之起源、可能性与疾病的新前沿</span></h1>
+      <p class="dek">Michael Levin on morphogenesis, bioelectric communication, regenerative medicine, xenobots, and the radically diverse minds that may soon share our world.</p>
+      <div class="meta">
+        <span><strong>Speaker</strong> Michael Levin</span>
+        <span><strong>Length</strong> 54:08</span>
+        <span><strong>Published</strong> 10 July 2026</span>
+        <span><strong>Transcript</strong> 99 aligned passages</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="toolbar" aria-label="Language view">
+    <span>显示 / View</span>
+    <button type="button" data-mode="both" class="active" aria-pressed="true">对照 Both</button>
+    <button type="button" data-mode="en-only" aria-pressed="false">English</button>
+    <button type="button" data-mode="cn-only" aria-pressed="false">中文</button>
+  </nav>
+
+  <main>
+    <div class="source-card">
+      <div class="video">
+        <iframe src="https://www.youtube-nocookie.com/embed/-elegwQQOww" title="Diverse Intelligence by Michael Levin" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div class="source-copy">
+        <h2>About this edition<br><span lang="zh-CN">关于本版</span></h2>
+        <p><a href="https://www.youtube.com/watch?v=-elegwQQOww" target="_blank" rel="noopener">Watch the original talk on YouTube</a> · <a href="https://thoughtforms.life/wp-content/uploads/2026/06/Psychiatrists-and-Psychoanalysts-1-hour-talk-slides.pdf" target="_blank" rel="noopener">View the accompanying slides</a></p>
+        <p class="note">Lightly edited for readability: false starts and repeated filler have been reduced, while substantive claims and sequence are preserved. Specialist terms and names were checked against the slides and audio.<br><span lang="zh-CN">为便于阅读，本实录删减了口误与重复语气词，同时完整保留论述内容与先后次序；专业术语及人名均据幻灯片与音频核校。</span></p>
+      </div>
+    </div>
+
+    <div class="toc-wrap">
+      <h2>Contents · 目录</h2>
+      <nav class="toc" aria-label="Transcript sections"><a href="#section-1"><span>Why this matters now</span><span lang="zh-CN">为什么这一切与当下有关</span></a>
+<a href="#section-2"><span>A framework for diverse intelligence</span><span lang="zh-CN">理解多样智能的框架</span></a>
+<a href="#section-3"><span>Morphogenesis and the agential material of life</span><span lang="zh-CN">形态发生与生命的能动性材料</span></a>
+<a href="#section-4"><span>Top-down control and bioelectric communication</span><span lang="zh-CN">自上而下控制与生物电沟通</span></a>
+<a href="#section-5"><span>Cancer, regeneration, and somatic psychiatry</span><span lang="zh-CN">癌症、再生与躯体精神病学</span></a>
+<a href="#section-6"><span>Novel beings and the origins of minds</span><span lang="zh-CN">新奇存在者与心智的起源</span></a>
+<a href="#section-7"><span>Closing questions and thanks</span><span lang="zh-CN">最后的问题与致谢</span></a></nav>
+    </div>
+
+    <section id="section-1">
+  <h2 class="chapter">Why this matters now<span class="cn" lang="zh-CN">为什么这一切与当下有关</span></h2>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=0s" target="_blank" rel="noopener" aria-label="Play video at 00:00">00:00</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And thank you for that extremely kind introduction and for giving me an opportunity to talk to this audience. If anybody wants to chase down some of the things that I&#x27;m only going to briefly mention, this is our website that has all the primary papers, the data sets, the software, everything is here. And then this is my personal blog where I write around what I think some of these things mean. So, what I would like to do today is four things. First of all, just briefly introduce myself and why I think some of these things are of relevance to you.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>非常感谢如此盛情的介绍，也感谢你们给我机会面对这一群听众发言。如果有人想进一步追索我今天只能略加提及的内容，这是我们的网站；所有原始论文、数据集和软件都在这里。另一个是我的个人博客，我会在那里写下自己对这些工作之意义的思考。今天我想做四件事。首先，我会简要介绍自己，以及为什么我认为其中一些问题与你们息息相关。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=29s" target="_blank" rel="noopener" aria-label="Play video at 00:29">00:29</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And then I&#x27;m going to go over a framework that we&#x27;ve been developing that is designed to really advance diverse intelligence research and applications. And I&#x27;m going to show numerous examples that are directly grounded in neuroscience and capabilities of brains and so on, but I&#x27;m going to take it in a much farther direction. I will show you one model system that I think is a good stepping stone for communicating with semi-alien minds and that is morphogenesis, the ability of individual cells to work together as a collective intelligence that solves problems in anatomical space.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>接着，我会介绍我们正在发展的一套框架，旨在真正推进多样智能（diverse intelligence）的研究与应用。我会展示许多直接立足于神经科学、大脑能力等方面的例子，但也会把问题带向远得多的地方。我还会展示一个模型系统；在我看来，它是与“半异类心智”沟通的良好踏脚石——这就是形态发生（morphogenesis）：单个细胞以集体智能的方式协同，在解剖形态空间中解决问题的能力。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=63s" target="_blank" rel="noopener" aria-label="Play video at 01:03">01:03</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And at the end, I&#x27;ll say some of the most speculative things about what I think is the future of the sciences of minds. The first thing I would point out is that, both in basic science and for the mental health profession, I think your client list is about to get very strange. This notion of ‘non-neurotypical’ doesn&#x27;t even begin to cover what&#x27;s going to happen. Basically, as I&#x27;ll point out, tremendous changes are going to be made both to the— Sorry, there is some kind of noise coming through.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>最后，我会谈一些最具推测性的想法，说明我所设想的心智科学之未来。首先，无论对基础科学还是精神健康行业而言，我认为你们的来访者名单都将变得非常、非常陌生。“非神经典型”这一概念，甚至不足以开始涵盖即将发生的事情。正如我会指出的，无论是……抱歉，似乎有某种噪声传进来了。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=103s" target="_blank" rel="noopener" aria-label="Play video at 01:43">01:43</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>I don&#x27;t know if that&#x27;s... Okay. Basically, there are going to be great changes both in the physical embodiment and in the cognitive capabilities of various beings. They are going to need different degrees of help, and we really have to start to understand how we&#x27;re going to relate to them. I&#x27;ll talk more about this. And again, we&#x27;re on both sides of this door, right? As mental health professionals, you need to know how to relate to new clients who are not the same standard humans that have been here for thousands of years. And for all of us entering this new world, things are really going to change.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我不确定那是什么……好了。基本上，各类存在者的物理具身与认知能力都将发生巨大变化；它们会需要程度各异的帮助，而我们必须开始理解应当如何与它们相处。稍后我会进一步谈到这一点。并且，我们其实站在这扇门的两侧。作为精神健康专业人士，你们需要知道如何面对新的来访者——他们不再是数千年来那种标准的人类。对我们所有人而言，进入这个新世界之后，事情都会真正改变。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=150s" target="_blank" rel="noopener" aria-label="Play video at 02:30">02:30</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>The background to these claims is this: the road to transformative regenerative medicine—which I&#x27;m going to show you how we&#x27;re pursuing—meaning the ability to induce growth, form, and repair on demand, leads directly to something I call freedom of embodiment. I don&#x27;t think there&#x27;s any way to avoid it. I don&#x27;t think we want to avoid it. But it&#x27;s very clear that these kinds of modifications to our minds and bodies are not some separate thing that we can choose to address or not.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这些判断的背景大致如下：通往变革性再生医学的道路——我会展示我们正在如何推进它——也就是按需诱导生长、塑形与修复的能力，会直接导向我所谓的“具身自由”（freedom of embodiment）。我认为这无可避免，也不认为我们想要避免。很清楚，对身心作出此类改变，并不是一件可以由我们另行决定是否面对的、彼此分离的事情。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=181s" target="_blank" rel="noopener" aria-label="Play video at 03:01">03:01</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Basically, our efforts at radical healing are going to lead to this. They&#x27;re going to lead to this capability of basically having whatever kind of body and possibly whatever kind of mind you want. I don&#x27;t believe there is any timeline in which humanity simply keeps the same form factor of hominids that we were sort of left with by the various actions of cosmic rays hitting our cells over the evolutionary time scale. This is the embodiment we have. I don&#x27;t see any future in which we leave it exactly as it is while humanity moves forward into a mature species.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我们追求彻底治愈的努力，本身就会把我们带到那里：人们将能够拥有几乎任何想要的身体，乃至可能拥有任何想要的心智。我不相信存在这样一条时间线：人类永远保留演化留给我们的同一套人科动物形态——那是宇宙射线在漫长演化尺度上击中细胞等种种作用的结果。这是我们当下拥有的具身形式；但当人类走向成熟物种时，我看不到任何未来会把它原封不动地保留下来。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=216s" target="_blank" rel="noopener" aria-label="Play video at 03:36">03:36</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>So, this is happening now. This is not some future sci-fi world. This is actually happening right now. And I think the other step to becoming a mature species is to overcome what I think of as significant mind blindness. We have tremendous difficulties visualizing the possibilities of minds and unconventional embodiments, never mind communicating with them or relating to them, but even to visualize the minds at other scales of time, of space, operating in other problem spaces. So, the thing to keep in mind is that all of us are part of a continuum.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这一切正在此刻发生，并非某个未来的科幻世界。我认为，成为成熟物种的另一步，是克服一种严重的“心智盲视”（mind-blindness）。我们极难想象非常规具身中可能存在的心智，更不用说与之沟通、建立关系；甚至连运行于其他时间尺度、空间尺度和问题空间中的心智，我们都难以设想。要记住的是，我们所有人都处在同一个连续谱上。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=251s" target="_blank" rel="noopener" aria-label="Play video at 04:11">04:11</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>We started out as a single cell, both developmentally and evolutionarily. There was a slow, gradual set of transformations. There is no magic lightning bolt during development at which you used to be the province of chemistry and physics, but now you&#x27;re the subject of behavior science and psychiatry. This is a slow and gradual process, and not only did it happen on these time scales naturally, we now have another continuum that we are at the center of where through technological change and biological change, all of these things are now up for grabs.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>无论从个体发育还是物种演化来看，我们都始于一个细胞，其间发生的是缓慢而渐进的转变。发育过程中并没有一道神奇闪电：闪电劈下之前，你属于化学和物理学；劈下之后，你便突然成为行为科学和精神病学的对象。这是缓慢、连续的过程。它不仅曾在这些自然时间尺度上发生；如今，我们又置身另一条连续谱的中央——技术变化与生物变化使这一切都重新成为开放的可能。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=284s" target="_blank" rel="noopener" aria-label="Play video at 04:44">04:44</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And so, this is really fundamental to questions of the mind. Whatever you think a modern adult human has in terms of hopes and dreams and personal responsibilities and all of those kinds of things, we have to ask ourselves where on this timeline did that appear, right? We typically don&#x27;t talk that way about cells, but eventually we do. And so, what is the story of transformation that we&#x27;re telling here? And that transformation is going to have a huge opening in terms of capabilities.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>因此，这对心智问题至为根本。无论你认为一个现代成年人拥有什么——希望、梦想、个人责任以及诸如此类的一切——我们都必须追问：它们是在这条时间线上的何处出现的？我们通常不会这样谈论细胞，但到后来，我们确实会这样谈论人。那么，我们在这里讲述的究竟是哪一种转变故事？而这场转变，将为能力打开极其广阔的空间。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=317s" target="_blank" rel="noopener" aria-label="Play video at 05:17">05:17</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>So, we&#x27;ve all heard issues with AI and language models and trying to compare them to humans and so on. But there are two things to know here. One is that none of this is really about language models or AI sitting in a box somewhere. This is first going to come forward when your neighbor has some percentage of their brain or body replaced with novel technologies, with engineered systems, with the smart implants, and all of that. Again, these already exist, and people are already getting them for therapeutics, but there&#x27;s also going to be a great variety of optional modifications that of course people are going to want to take.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我们都听过围绕 AI 与语言模型的争论，也听过人们尝试把它们与人类相比较。但这里有两点需要明白。第一，这真正关涉的并不是某个盒子里的语言模型或 AI。问题最先会在这种情形下浮现：你的邻居有一定比例的大脑或身体，被新技术、工程系统、智能植入物等所替代。这些技术已经存在，人们也已为治疗而采用它们；而未来还会出现种类繁多的可选改造，人们当然会希望接受这些改造。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=353s" target="_blank" rel="noopener" aria-label="Play video at 05:53">05:53</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And so, trying to understand whether somebody is a proper human or a quote-unquote machine—I think that whole distinction is not going to survive the decade. These binary distinctions simply will not do. And I think that most of the issues brought up by AI are basically reflections of fundamental unsolved questions about ourselves, our own origins, and our potential. So, what I&#x27;m going to tell you today is basically this:</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>因此，若还试图判断某个存在究竟是“真正的人”还是所谓的“机器”，我认为这种区分撑不过这十年。这样的二元划分根本不敷使用。AI 所引发的大多数问题，其实都映照出关于我们自身、我们自身起源与潜能的根本悬而未决之问。今天我要告诉你们的，基本上就是这一点：</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=388s" target="_blank" rel="noopener" aria-label="Play video at 06:28">06:28</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>intelligence, and diseases of cognition that are not well captured by models of organic disease—they are not all hardware issues—are far older than neurons and brains. The kinds of things that you all study are of intense and profound relevance to problems in developmental biology and evolution. None of this is specific to neurons or brains. What we&#x27;ve been doing is borrowing tools from behavioral science, cognitive science, and so on, and applying them to all kinds of other problems. Because the ‘you’ that I&#x27;m speaking to right now, which exists in your body, is not the only intelligence present in your body; and the 3D behavior of you moving around in the outside world is not the only kind of behavior.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>智能，以及那些无法由器质性疾病模型妥善刻画的认知疾患，并不全是硬件问题；它们远比神经元和大脑古老。你们研究的问题，与发育生物学和演化中的问题具有深刻而强烈的关联；这些现象都不为神经元或大脑所独有。我们一直在借用行为科学、认知科学等领域的工具，把它们真正应用于各类其他问题。因为我此刻对话的、存在于你身体里的那个“你”，并不是你体内唯一的智能；你在外部世界三维空间中的活动，也不是唯一的行为。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=436s" target="_blank" rel="noopener" aria-label="Play video at 07:16">07:16</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And so, what I think is possible now is a very rich, virtuous cycle—a positive feedback loop—between progress in cognitive science and what I can only summarize as multi-scale biology. I&#x27;ll show you this momentarily. The basic idea is that cognitive and behavioral sciences have a lot to say about things that are not neurons or brains. Conversely, on the biology and bioengineering side, the things we discover can feed back and perhaps help your community understand the origins of the kinds of cognitive systems that you&#x27;re all dealing with.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>因此，我认为如今存在一种可能：认知科学的进展，与我只能概括为“多尺度生物学”的领域之间，可以形成极为丰厚的良性正反馈循环。我马上会展示这一点。基本思想是，认知科学与行为科学对并非神经元或大脑的事物同样大有可说；反过来，我们在生物学与生物工程一侧的发现，也可以反馈回来，或许帮助你们这个共同体理解自己所面对的认知系统究竟从何而来。</p>
+  </div>
+</article>
+</section>
+<section id="section-2">
+  <h2 class="chapter">A framework for diverse intelligence<span class="cn" lang="zh-CN">理解多样智能的框架</span></h2>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=476s" target="_blank" rel="noopener" aria-label="Play video at 07:56">07:56</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Okay. So, this is why I think these things kind of come together. And so now let&#x27;s take a look at a framework for trying to understand what I mean by diverse intelligence. So, what I would like to do is to create a way to think about all kinds of different beings on the same scale regardless of their origin story or their composition. Okay, it shouldn&#x27;t matter what you&#x27;re made of or how you got here whether it was natural evolution or engineering or some combination thereof.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这就是为什么我认为这些问题会汇聚到一起。现在，让我们看看一套用来理解“多样智能”的框架。我希望建立一种方式，把形形色色的存在者放在同一种尺度上思考，而不论它们有着怎样的起源叙事，也不论它们由什么构成。你由什么制成、如何来到这里——靠自然演化、工程设计，还是两者的某种结合——都不应成为决定性因素。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=509s" target="_blank" rel="noopener" aria-label="Play video at 08:29">08:29</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>We should be able to think about what do all significant minds have in common. And this means being able to think about not just familiar creatures such as primates, birds, maybe an octopus or a whale, but also weird kinds of things like beehives and synthetic biology, which I&#x27;m going to show you some examples of engineered new life forms, AIs whether software or robotic, maybe someday exobiological agents as well. I&#x27;ll say that there are a lot of people thinking about connecting to life off planet, and I&#x27;ll just say that if we can&#x27;t wrap our heads around what&#x27;s going on with the cognition inside our body organs and our cells, there&#x27;s no way we&#x27;re going to be able to connect to actual aliens.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我们应当能够追问：所有具有重要意义的心智，究竟共享什么？这意味着，我们不仅要思考灵长类、鸟、章鱼或鲸等熟悉生物，还要思考蜂巢这类奇特系统、合成生物学创造的工程化新生命、软件或机器人形态的 AI，乃至未来可能遇到的外星生物智能体。很多人正在设想如何连接地外生命；但我要说，如果我们连自己器官和细胞内部的认知活动都无法理解，就更不可能与真正的外星生命建立联系。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=551s" target="_blank" rel="noopener" aria-label="Play video at 09:11">09:11</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>This is a stepping stone. And so, of course, this idea is not new to me. So, here&#x27;s Rosenblueth, Wiener, and Bigelow in 1943 trying to paint a picture of the spectrum, how you get from passive matter all the way up to human-level metacognition and those kinds of things and what the steps are in between. This is a very cybernetic view and I think a good one. And the framework that I&#x27;m interested in and it&#x27;s laid out here in detail has to move experimental work forward.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这是通向那里的一个踏脚石。当然，这一构想并非由我首创。早在 1943 年，罗森布鲁思（Rosenblueth）、维纳（Wiener）和比格洛（Bigelow）便试图描绘一条光谱：如何从被动物质一路走向达到人类水平的元认知，其间又有哪些台阶。这是一种很有控制论色彩的观点，我认为也是很好的观点。我所关注的框架——这里已有详细阐述——必须能推动实验工作向前。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=582s" target="_blank" rel="noopener" aria-label="Play video at 09:42">09:42</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>It cannot just be philosophy or linguistics. It has to move experimental work forward. It has to have implications that drive new discoveries in biomedicine and synthetic morphology, but also I think it has massive implications for ethics and for how we relate to these beings. And I see it kind of like what&#x27;s happened in math. So we started out with natural numbers here and then progressively by breaking rules, breaking arbitrary limitations on what we thought these objects were, we discovered more and more kinds of important objects out there.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>它不能止于哲学或语言学，而必须对实验产生推进作用，给出生物医学与合成形态学中新发现的方向；同时，我认为它也会对伦理，以及我们如何与这些存在者相处，产生巨大影响。这有些像数学中发生过的事情：我们从自然数出发，逐渐打破规则，解除自己对这些对象所施加的任意限制，于是发现越来越多其他重要的数学对象。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=619s" target="_blank" rel="noopener" aria-label="Play video at 10:19">10:19</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And that always happens when you examine your assumptions and you examine your categories and you say, &quot;Okay, but what happens if I give up this axiom or that axiom? What can I discover?&quot; And so this is kind of the trajectory that we&#x27;ve been on. I&#x27;m not going to get a chance to talk about any of this, but basically, looking beyond just brainy animals, what does the material of life actually offer? And then some other things that are kind of combinations of evolved, designed, and hybrid agents.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>当你审视自己的假设与范畴，并追问：“如果放弃这条公理或那条公理，会发生什么？我能发现什么？”新的对象总会显现。这就是我们一直沿行的轨迹。今天没有机会展开所有内容；大致说来，我们要越过那些有大脑的动物，追问生命材料本身能够提供什么；还要考察由演化而来、由设计而成，以及兼具两者的混合智能体。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=650s" target="_blank" rel="noopener" aria-label="Play video at 10:50">10:50</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And for each of these we have to think about what is the conceptual leap that&#x27;s needed and what can it do for us and then how do we actually relate to these novel beings that we&#x27;re discovering. And I think the set of other minds all around us that are difficult to notice right now is going to grow enormously. I think it&#x27;s going to expand greatly. So let&#x27;s just look. When we look at things like this, right?</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>对其中每一类，我们都必须思考：所需的概念飞跃是什么？它能为我们做什么？而我们又该如何与这些正在被发现的新奇存在者建立关系？在我看来，那些环绕在我们身边、目前却难以察觉的其他心智，其集合将会急剧增长、极大扩展。那么，让我们先来看一个例子。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=675s" target="_blank" rel="noopener" aria-label="Play video at 11:15">11:15</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Take brainy mammals. Here he is, setting up a little accident scene. He has a very good theory of mind about his owners: he knows what will happen when they see this. Very clever. He even looks to make sure they&#x27;re watching. These things are so obvious to us because they occur on the same spatiotemporal scale as we do: behavior in the 3D world, on the same scales of space and time, with similar goals such as safety.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>先看有大脑的哺乳动物：它正在布置一个小小的“事故现场”。它对主人的心智状态有着很好的理论；它知道主人看见这一幕会如何反应。确实很聪明。它甚至会回头确认主人是否正在观看。我们如此容易看出这些行为中的心智，是因为它们发生在与我们相同的时空尺度上：同样是在三维世界中行动，时间与空间尺度相近，安全之类的目标也相似。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=704s" target="_blank" rel="noopener" aria-label="Play video at 11:44">11:44</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Okay, fine. But even with brains, things are not simple. For example, Karina Kofman and I reviewed a number of rare clinical cases where there is a radical mismatch between the amount of human brain tissue you would expect to be present and the cognitive performance of that individual. This is not common, but it does occur. And so we know there is something going on here.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>然而，即便已有大脑，事情也并不简单。例如，我与卡里娜·科夫曼（Karina Kofman）回顾过若干案例，其中出现了极端错配。这些临床病例很少见：一个人实际拥有的人类脑组织量，与其认知表现之间，和我们通常预期的关系严重不符。虽然并不常见，但它确实发生；我们已经知道，这里有某种尚未理解的事情。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=733s" target="_blank" rel="noopener" aria-label="Play video at 12:13">12:13</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And you can try to patch it up with talk of redundancies and things like that, but fundamentally the models we have do not predict that things like this will happen. They can perhaps be shoehorned into it, but they don&#x27;t predict it. And then there are many other really interesting things that we don&#x27;t understand. For example, this is a tadpole of the frog Xenopus laevis. Here&#x27;s the mouth, here are the nostrils, here&#x27;s the brain, the spinal cord. And so what you&#x27;ll notice we&#x27;ve done is we&#x27;ve made sure the primary eyes don&#x27;t form, but we put an eye on its tail.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>你可以试图用“冗余”之类的说法来修补解释，但从根本上讲，现有模型并不能预言这类现象。它们或许能在事后被硬塞进模型，却不是模型原本预测的结果。此外，还有许多我们不理解的有趣现象。例如，这是一只非洲爪蟾（Xenopus laevis）蝌蚪：这里是嘴、鼻孔、大脑和脊髓。我们阻止了原生双眼形成，却在它的尾巴上移植了一只眼睛。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=762s" target="_blank" rel="noopener" aria-label="Play video at 12:42">12:42</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Okay? And this eye puts out an optic nerve. Here&#x27;s the optic nerve. It does not connect to the brain. It synapses sometimes on the spinal cord, sometimes on the gut, sometimes nowhere at all. And then we built this device to automate the behavioral training of these animals for visual cues. And what we discovered is that they can see. Okay? They can learn from visual cues. Even though this thing does not connect to the brain, even though they have a completely different sensory motor architecture, immediately out of the box this works.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这只眼睛伸出一条视神经。视神经不与大脑相连：有时在脊髓上形成突触，有时连到肠道，有时哪里也不连接。随后，我们制造了一台装置，自动训练这些动物响应视觉线索。结果发现，它们看得见；它们能够依据视觉线索学习。尽管眼睛不连接大脑，尽管它们拥有完全不同的感觉—运动架构，这套系统一上来就能运作。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=791s" target="_blank" rel="noopener" aria-label="Play video at 13:11">13:11</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>No new rounds of mutation, selection, or adaptation to this completely different form factor of the sensory and processing systems—no problem. It works right out of the box. Where does this incredible plasticity come from? Why is it so highly reconfigurable? Why don&#x27;t you need rounds of selection to make it work, starting with a 100% genetically normal animal? We don&#x27;t touch the genome, by the way. Why does this work? We should also talk about the ability of memories to move through tissues.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>它不需要经历新一轮突变、选择和适应，来配合这种全然不同的感觉与处理系统形态；它从一开始就能工作。这种惊人的可塑性从何而来？为何系统如此高度可重构？为什么无需一轮轮选择，就能让一个起初在遗传上百分之百正常的动物适应它？顺带一提，我们没有改动基因组。那么，它为何能工作？我们还应讨论记忆穿行于组织的能力。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=824s" target="_blank" rel="noopener" aria-label="Play video at 13:44">13:44</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>These are planaria—you&#x27;ll see more of them in a minute. They are flatworms, similar to our direct ancestor. They have a truly centralized brain and the same neurotransmitters that you and I do. They are highly regenerative: you can chop them into pieces and each piece regenerates. But they are also pretty smart; you can train them. For example, use place conditioning by feeding them in these bumpy little circles. If you chop off their heads, the tail sits there doing nothing. Eventually, it regrows a brand-new brain.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这些是涡虫，稍后你们还会看到。它们是扁形虫，与我们的直系祖先相似，拥有真正的中枢化大脑，使用与我们相同的神经递质，而且再生能力极强。你可以把它们切成几块，每一块都会再生；同时，它们也相当聪明，能够接受训练。例如，可以在这些表面凹凸的小圆圈里对它们进行位置条件训练。砍掉头之后，尾部会暂时留在原地，什么也不做；最终，它会长出一颗全新的大脑。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=852s" target="_blank" rel="noopener" aria-label="Play video at 14:12">14:12</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And now behavior kicks in and by testing them in that same machine that I just showed you, you find out that these animals remember the original training. So, what&#x27;s happened here is that the memory was somewhere. It was not just in the brain. That&#x27;s clear. It was imprinted onto the new brain. The new brain has access to it, okay, after it appears in this new tissue. So, the new tissue has access to these memories formed by the old tissue. So, this has implications for understanding what&#x27;s going to happen when we trigger regenerative responses in brains.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>新大脑长成后，行为重新出现。用刚才展示的装置测试，会发现这些动物仍记得最初的训练。这意味着记忆曾储存在某处，而且显然并非只在大脑里。旧记忆被印入新大脑；当新大脑在新组织中出现，它便能访问这些记忆。换言之，新组织能够读取由旧组织形成的记忆。这对理解我们在大脑中触发再生反应时将会发生什么，具有重要意义。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=883s" target="_blank" rel="noopener" aria-label="Play video at 14:43">14:43</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>This has implications for patients&#x27; longevity and even augmentation. If, for example, the algorithms that power hearing can take over visual-processing areas in the blind, what else can your thought patterns inhabit? What other real estate can they take over? If we grew you a new hemisphere, would they take over? Would they move into that space? This intersection between behavior and morphogenesis, when novel tissue—brain or otherwise—grows, is extremely interesting.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这关乎患者的寿命，甚至关乎增强。比如，在盲人身上，如果原本支撑听觉的算法能够接管视觉处理区域，那么你的思维模式还能栖居于什么地方？它们还能占据哪些“地产”？如果我们为你长出一个新的大脑半球，它们会不会接管、迁入那片空间？因此，当新的组织——无论是脑组织还是其他组织——生长出来时，行为与形态发生之间的交汇极为耐人寻味。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=917s" target="_blank" rel="noopener" aria-label="Play video at 15:17">15:17</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>We can also think about examples like this where caterpillars turn into butterflies. In order to do this, they rip up their brain, basically dissolve most of the connections, kill off most of the cells, build a completely new brain suitable for a very different kind of lifestyle. But one thing that has been found is that if you train the caterpillars, the memories are recovered in the butterfly or moth. They persist—and that is already a big enough issue: how do memories persist when all the synaptic connections are broken, right?</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我们也可以思考毛虫化蝶。为完成这一转变，毛虫会拆解自己的大脑：大部分连接被溶解，大部分细胞被杀死，随后建立一颗适合全然不同生活方式的新大脑。然而研究发现，如果训练毛虫，相关记忆会在蝴蝶或飞蛾身上恢复。记忆不仅持续存在——仅仅是“所有突触连接断裂之后，记忆如何继续存在”这一点，本身就已是个大问题。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=947s" target="_blank" rel="noopener" aria-label="Play video at 15:47">15:47</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>That has implications for theories of where memory is. But the bigger issue is that the caterpillar&#x27;s actual memories are of no use to the butterfly. Butterflies don&#x27;t eat the leaves the caterpillars received as a reward, and they don&#x27;t crawl the way caterpillars did. The memories have to be remapped onto completely new architecture. That plasticity, baked into living tissue, is there for us to think about and perhaps take advantage of: how do you remap your cognitive capabilities—including your memories and personality—onto new hardware, whether of the body or the brain?</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这会影响我们关于记忆究竟位于何处的理论。但更大的问题是，毛虫的实际记忆对蝴蝶并无直接用途：蝴蝶不吃毛虫作为奖励得到的叶子，也不会用毛虫那种爬行方式行动。记忆必须被重新映射到一套全新架构上。活体组织中这种内生的可塑性，值得我们深思，也可能为我们所用：如何把既有的认知能力——包括记忆、人格等——重新映射到新硬件上，无论那是身体还是大脑的新硬件。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=991s" target="_blank" rel="noopener" aria-label="Play video at 16:31">16:31</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>There are many interesting perspectives we could take: the caterpillar facing the singularity; the butterfly saddled with memories whose origin it cannot know, because the training did not occur in this embodiment; and perhaps the perspective of the memory itself as it is remapped. We can talk about that. I think this plasticity is very interesting, and it is telling us something important. Here is another example I like.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这里有许多有趣的视角：一是毛虫面对“奇点”时的视角；一是蝴蝶背负着某些记忆，却不知道它们从何而来，因为当前具身从未经历过相应训练；也许还可以采取记忆本身的视角，看它如何被重新映射。我们可以继续讨论这些。我认为这种可塑性非常有意思，也在告诉我们某种重要的事情。下面是另一个我很喜欢的例子。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1018s" target="_blank" rel="noopener" aria-label="Play video at 16:58">16:58</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>If I said to you, I would like to take a reptile, a shy, slow-moving turtle. I want it to work at a cat-like speed of life. I want it to be playful. I want it to move at the speed of a cat. What would you have to do? And you might think that, wow, millions of years of evolution or perhaps some sort of neuroengineering that we have no idea how to do. Actually, it turns out you don&#x27;t have to do much. So, this guy put his turtle on the little skateboard and immediately unlocked this incredible change in behavior.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>假如我对你说：我要让一种爬行动物——一只害羞、行动迟缓的乌龟——按照猫一般的生命节奏生活；我要它活泼好玩，以猫的速度行动。你需要做什么？你也许会想到数百万年的演化，或某种我们根本不知道如何实施的神经工程。事实上，你几乎什么也不用做。这个人把乌龟放上一块小滑板，立刻释放出一次惊人的行为转变。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1050s" target="_blank" rel="noopener" aria-label="Play video at 17:30">17:30</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>The cat looks puzzled, that makes sense. We should all be puzzled at this. The turtle has no problem moving at the relevant speed. He clearly wants to play. He&#x27;s keeping up with the animal. What was the latent space of possibilities? What else could you unlock with really very minimal changes to the embodiment? Have these turtles been around for millions of years just capable of all of this and not being able to do it because their body didn&#x27;t let them?</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>那只猫看起来困惑不解——这很合理，我们都应当感到困惑。乌龟以相应速度移动毫无困难；它显然想玩，也能紧跟另一只动物。这里潜藏着怎样的可能性空间？只需极小地改变具身条件，还能释放出什么？这些乌龟是否数百万年来一直拥有这一切能力，却仅仅因为身体不允许而无法展现？</p>
+  </div>
+</article>
+</section>
+<section id="section-3">
+  <h2 class="chapter">Morphogenesis and the agential material of life<span class="cn" lang="zh-CN">形态发生与生命的能动性材料</span></h2>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1076s" target="_blank" rel="noopener" aria-label="Play video at 17:56">17:56</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And what is going to be unlocked in humans when we have things that are much more capable than a skateboard for us to connect to? So, that kind of plasticity of form, of function, of in fact of integrated form and function asks us to really understand what&#x27;s happening when cells build and accommodate new structures. And so, what I&#x27;m going to do for the next let&#x27;s say 15 minutes is to talk about morphogenesis as a model system. So, let&#x27;s talk about the cells that we&#x27;re all made of to understand what I think of as the agential material of life.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>当人类能够连接的东西远比滑板强大时，又会有什么能力被释放？这种形态与功能的可塑性——更准确地说，是形态—功能一体的可塑性——要求我们真正理解细胞在建造并适应新结构时发生了什么。接下来的约十五分钟，我会把形态发生作为模型系统来讨论。让我们从构成我们的细胞谈起，以理解我所谓生命的“能动性材料”（agential material）。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1111s" target="_blank" rel="noopener" aria-label="Play video at 18:31">18:31</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>This is the multi-scale intelligence that underlies our behavior and our cognition. So, first just to remind us that not just beehives and ant colonies, but all of us are collective intelligences. We are all made of parts. Everything that we are able to do is underwritten by the cognitive glue, by the policies and mechanisms that keep our parts aligned towards specific goals. This is the kind of thing we&#x27;re made of. Now, this is a free-living organism called Lacrymaria, but you get the point. It&#x27;s got no brain, no nervous system, extremely competent in its own little environment doing the things that it needs to do to survive.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这种多尺度智能构成了我们行为与认知的基础。首先提醒一下：不仅蜂巢和蚁群是集体智能，我们所有人也都是。我们都由诸多部分组成；我们能做的一切，都由某种“认知黏合机制”提供支撑——正是那些策略与机制，使各个部分朝特定目标保持对齐。我们由这样的东西构成。眼前这个自由生活的生物叫 Lacrymaria。它没有大脑，也没有神经系统，却能在自己的小小环境中展现极高胜任力，完成生存所需之事。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1150s" target="_blank" rel="noopener" aria-label="Play video at 19:10">19:10</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>These are the kinds of things that work together to build our bodies. When I ask people, ‘Could you reward or punish something like this?’ most people say yes; they feel you could. If I ask, ‘Could you reward or punish a chemical network?’ most people say no: chemicals don&#x27;t care what happens; you can&#x27;t reward or punish them. But of course, what is this made of? That is exactly what it is made of: a chemical network.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>正是这类东西协作建造出我们的身体。当我问人们：“你能奖赏或惩罚这样的生物吗？”大多数人会说能，他们觉得这是可行的。但如果我问：“你能奖赏或惩罚一个化学网络吗？”多数人会说不能——化学物质不在乎发生什么，你无法奖惩它们。然而，眼前这个生物又是由什么构成的？它恰恰就是由化学网络构成的。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1174s" target="_blank" rel="noopener" aria-label="Play video at 19:34">19:34</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>So, what happened? What&#x27;s happening from here to there? And what I want to point out is that even chemical networks, in fact, small chemical networks, the smallest one is just four nodes that can do Pavlovian conditioning. Chemical networks, as we&#x27;ve now discovered, can do at least five or six different kinds of learning. They can do habituation, sensitization, associative conditioning, they can count to small numbers. Walter Fontana showed they can do probabilistic inference. All of this, not brains, not neurons, not even cells, small chemical networks.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>那么，从化学网络到这样的生物，究竟发生了什么？我要指出，即使是很小的化学网络——最小只需四个节点——也能完成巴甫洛夫式条件作用。我们如今发现，化学网络至少能进行五六种学习：习惯化、敏化、联想条件作用，还能数到较小的数。沃尔特·丰塔纳（Walter Fontana）表明，它们也能进行概率推断。完成这一切的，不是大脑，不是神经元，甚至不是细胞，而是小型化学网络。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1206s" target="_blank" rel="noopener" aria-label="Play video at 20:06">20:06</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>The material that we are all made of, that our cells are made of, is already cognitive right at the beginning. It can do primitive kinds of operations that are easily recognizable to any behavioral scientist. There are a couple of interesting things I&#x27;ll point out about this work. One is that this is a kind of molecular placebo. When you train this network in an associative-conditioning context—when I hit it with a drug that causes a strong outcome and then pair it with another drug, where the neutral stimulus normally does nothing—the system learns. The neutral stimulus becomes the conditioned stimulus and activates the response.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>构成我们、也构成我们细胞的材料，从一开始就已具有认知性。它能够执行一些原始操作，任何行为科学家都能轻易认出它们。关于这项工作，有几点尤其有趣。其一，这是某种“分子安慰剂”。当你用联想条件作用训练这个网络：先给它一种会引起强烈结果的药物，再把另一种通常没有作用的中性刺激药物与之配对；两者共同出现后，系统会学会关联。随后，中性刺激便成为条件刺激，并能激活相应反应。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1246s" target="_blank" rel="noopener" aria-label="Play video at 20:46">20:46</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>It is basically a kind of placebo effect. At that point, the system reacts to the inert drug as if it were something else, because its history of experience has convinced it that this is what the drug means. You can already see how things familiar from human medicine scale down to systems like these. The other interesting finding concerns causal emergence: metrics that tell you the degree to which the whole is more than the sum of its parts.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这基本上是一种安慰剂效应。此时，系统会对惰性药物作出反应，仿佛它是另一种东西，因为过去的经历已使系统相信它“就是”那种东西。由此可以看出，我们熟悉的人类医学现象，如何一路缩放到这类微小系统。另一个有趣发现涉及因果涌现（causal emergence）：这类指标基本上告诉你，一个整体在多大程度上超越其各部分之和。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1279s" target="_blank" rel="noopener" aria-label="Play video at 21:19">21:19</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>People use this to distinguish between locked-in patients, comatose patients, and just a pile of neurons—the question of, ‘Is somebody home?’ Giulio Tononi and others use these kinds of metrics. What we&#x27;ve shown is that, if you use them to look at these chemical networks, you will find that quite often causal emergence goes up with training. Their integrated agency goes up the more you train them, but also, the more it goes up, the better they get at learning. There is an incredible feedback loop which is actually asymmetric: it points in one direction. If you force them to forget, you do not lose the gains that you made in causal emergence.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>人们会用这类指标来区分闭锁综合征患者、昏迷患者与一堆神经元；换句话说，是在问：“里面有人吗？”朱利奥·托诺尼（Giulio Tononi）等人便使用过这类指标。我们发现，用它们考察化学网络时，训练往往会提高因果涌现：训练越多，网络的整合能动性越强；而整合能动性越强，它们也学得越好。这里形成了惊人的反馈环路，并且具有方向性——即使强迫网络遗忘，也不会抹去它在因果涌现方面已取得的增益。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1315s" target="_blank" rel="noopener" aria-label="Play video at 21:55">21:55</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>That&#x27;s very interesting. It means that these networks are primed for higher intelligence and higher agency. It is not symmetrical; it is not just as easy to fall back down. If you ask where that comes from, it doesn&#x27;t come from physics or selection. It is actually a property of mathematics—a free gift from mathematics—that the properties of these systems aim upward in terms of intelligence and integrated agency.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这一点很有意思。它意味着，这些网络会被预备好，朝更高智能与更高能动性发展；这一过程并不对称，不是同样容易跌回较低水平。如果追问它从何而来，答案既不是物理学，也不是选择。它其实是数学的一个性质，是数学白白赠予我们的礼物：这类系统的性质，使它们在智能与整合能动性上天然朝向上方。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1350s" target="_blank" rel="noopener" aria-label="Play video at 22:30">22:30</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>We looked at the molecular networks inside cells. Now we move to the cellular level and look at an early embryo. Here is a blastoderm, perhaps a few hundred thousand cells at this point. We look at it and say, ‘There is an embryo.’ When we say there is one embryo, what is there one of? What there is one of is a kind of collective model. All the cells are connected and aligned, both physically and physiologically, toward the same journey in anatomical space.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我们刚才考察了细胞内部的分子网络；现在上升到细胞层次，来看早期胚胎。这里是一个胚盘，此时也许已有几十万个细胞。我们看着它说：“这是一个胚胎。”可当我们说这里有“一个”胚胎，究竟什么东西是一个？这里的“一”，是一种集体模型：所有细胞彼此连接，在物理和生理层面保持对齐，共同踏上一段穿越解剖形态空间的旅程。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1382s" target="_blank" rel="noopener" aria-label="Play video at 23:02">23:02</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>They&#x27;re going to undertake actions that bring them closer to a specific, species-specific target morphology. Now, if you take a little needle and put some scratches into this blastoderm, each one of these little islands before they heal up is going to make its own embryo. And so, that&#x27;s how you get conjoined twins and triplets and so on. And so, now some very interesting questions arise. The number of beings, the number of individuals inside this embryo is not known in advance. It is not fixed by the genetics.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>它们将采取行动，使系统逐步接近一个物种特有的目标形态。如果用细针在胚盘上划出几道伤痕，那么每一座小小“岛屿”在重新愈合之前，都可能各自形成一个胚胎；连体双胎、三胎等正可由此产生。于是，一些非常有趣的问题出现了：一个胚胎内部有多少存在者、多少个体，并非预先已知，也不是由遗传信息固定决定，而是生理事件所产生的结果。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1408s" target="_blank" rel="noopener" aria-label="Play video at 23:28">23:28</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>It is an outcome of the physiological events that take place. We can ask how many agents per cubic millimeter of embryonic tissue. Like, what&#x27;s the carrying capacity? For computer science, we think we know how to calculate those kinds of things based on the number of logic gates you have and so on. But for biology, we really don&#x27;t. And of course you all deal with these kinds of things all the time. Split brain patients, dissociative disorders. How many personalities can you actually fit in a standard amount of brain?</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我们可以追问：每立方毫米胚胎组织能容纳多少智能体？它的承载能力是多少？在计算机科学中，我们以为可以根据逻辑门数量等因素计算这类问题；但在生物学中，我们其实做不到。当然，你们一直在面对类似问题：裂脑患者、分离性障碍——在一份标准大小的大脑里，究竟能装下多少种人格？</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1439s" target="_blank" rel="noopener" aria-label="Play video at 23:59">23:59</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>These are all open questions. The bodies of which we are made are a kind of multi-scale competency architecture. Each level of organization, from molecular networks upward, has its own agendas. They solve problems in various spaces and have learning capacity; they have different ways of sensing and acting at every level. This is one difference from how we currently make robotics and related systems. We are a multi-scale intelligence that is collective at every step.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这些都是开放问题。因此，我们的身体是一种多尺度能力架构（multi-scale competency architecture）。从分子网络向上的每一个组织层级，都有自身议程；它们在不同空间中解决问题，拥有学习能力，也各有感知与行动方式。每一层都是如此。这与我们目前制造机器人等系统的方式不同：我们是一种多尺度智能，而且在每一个层次上都是集体。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1473s" target="_blank" rel="noopener" aria-label="Play video at 24:33">24:33</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Now, I will also point out that what&#x27;s really important to know is that these kinds of systems have embodiments way outside of familiar three-dimensional space. We are pretty good at recognizing intelligence as movement in 3D space, but biology has been solving problems long before nerve and muscle showed up. So, cells have been navigating the space of gene expression, high dimensional difficult space, like 20,000 dimensions in some cases. Anatomical space, physiological state space. So, when you&#x27;re looking at an organoid that&#x27;s just sitting there not moving around and you say, &quot;Well, it has no embodiment.&quot; Or in fact, a language model, you say, &quot;It has no embodiment.&quot; Yeah, maybe.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>还必须明白，这类系统的具身远远超出熟悉的三维空间。我们很擅长把三维空间中的运动识别为智能，但早在神经和肌肉出现之前，生物就已开始解决问题。细胞一直在基因表达空间中导航——那是一个高维而困难的空间，有时多达两万个维度；它们也在解剖形态空间和生理状态空间中导航。因此，当你看到一个静止不动的类器官，便说“它没有具身”，或对语言模型也作如是判断——也许吧。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1511s" target="_blank" rel="noopener" aria-label="Play video at 25:11">25:11</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>It doesn&#x27;t have embodiment as movement in 3D space, but there are many other spaces in which agents do this perception, decision-making, action loop, active inference, all these things. They&#x27;re doing this in all kinds of other spaces. So, what we&#x27;ve been saying is the symmetry between behavioral science and developmental biology. I like James&#x27;s sort of definition of intelligence, the ability to navigate spaces towards the same goals. And what we&#x27;ve been studying is the hypothesis that morphogenesis, the creation and repair of bodies, is a collective intelligence that exerts its behavioral competencies in a different space, in anatomical space.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>它确实没有以三维空间运动的方式具身；但在许多其他空间里，智能体同样执行感知、决策、行动的循环，进行主动推断等活动。我们因此一直强调行为科学与发育生物学之间的对称性。我喜欢威廉·詹姆斯关于智能的大意：能够以不同方式抵达同一目标。我们研究的假设是，形态发生——身体的生成与修复——是一种集体智能，只是它在另一种空间，即解剖形态空间中施展自己的行为能力。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1547s" target="_blank" rel="noopener" aria-label="Play video at 25:47">25:47</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>You and I are collective intelligences in the sense that our neurons and other cell types work together to help us navigate 3D space. There are some pivots that you can make around time scale and so on. And actually, the symmetry is incredibly strong. And we&#x27;ve actually made tools where you can paste in a neuroscience paper and it swaps the word milliseconds for minutes and neurons for the word cells and then you have yourself a developmental biology paper.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>你我同样是集体智能：神经元和其他细胞类型协作，帮助我们在三维空间中导航。这里可以围绕时间尺度等作一些转换，而二者的对称性其实强得惊人。我们甚至制作过工具：把一篇神经科学论文贴进去，将“毫秒”换成“分钟”、将“神经元”换成“细胞”，你就得到了一篇发育生物学论文。</p>
+  </div>
+</article>
+</section>
+<section id="section-4">
+  <h2 class="chapter">Top-down control and bioelectric communication<span class="cn" lang="zh-CN">自上而下控制与生物电沟通</span></h2>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1576s" target="_blank" rel="noopener" aria-label="Play video at 26:16">26:16</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>So, there are really strong similarities. And that&#x27;s because, as I&#x27;ll point out in a minute, the underlying evolutionary origin is common. These are not sort of really distinct things that I&#x27;m trying to pull together. They actually have the same underlying molecular mechanisms. So, I&#x27;ll show you a couple of interesting examples. I could talk for an hour just on that subject alone. But let&#x27;s talk about the kind of top-down control.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>二者确有极强的相似性。正如我稍后会指出的，它们拥有共同的演化起源；这并非我刻意拉到一起的两类截然不同之物，它们其实共享相同的底层分子机制。我会展示几个有趣例子——单是这个主题我就能讲上一小时。现在先谈一种自上而下的控制。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1608s" target="_blank" rel="noopener" aria-label="Play video at 26:48">26:48</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>So, here&#x27;s an experiment. We take an amphibian like this and this is not our work. This is back from the 50s. They would graft a tail onto the side here, the flank, and this thing slowly transforms into a limb. Why? Because the system as a whole has a stored representation, as it turns out, of what a correct system is supposed to look like. And when there are errors, it tries to repair them and to move towards the right location.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>有一个实验并非出自我们，而是可以追溯到 20 世纪 50 年代。研究者把一条尾巴移植到两栖动物的身体侧面，它会慢慢转化成一条肢体。为什么？因为系统作为整体，储存着某种关于“正确系统应当是什么样”的表征。一旦出现误差，它就会尝试修复，并朝正确位置移动。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1640s" target="_blank" rel="noopener" aria-label="Play video at 27:20">27:20</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Look: the cells at the tip of this tail are tail-tip cells, where they belong. There&#x27;s nothing wrong with them. They have no damage; there is no injury. And yet they turn into fingers. Why is this happening? Because the system is primed to transduce a large-scale, highly abstract piece of information about the layout of a typical amphibian down to the molecular events of cells. Cells have no idea what a limb is or how many fingers you&#x27;re supposed to have.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>请注意，尾巴尖端的细胞本来就是尾尖细胞，也待在它们所属的位置；它们没有任何问题，没有受损，也不存在创伤，却转变成了手指。为什么？因为系统已准备好完成这样一种转导：一条关于典型两栖动物整体布局的大尺度、高度抽象的信息，必须一路向下过滤，抵达细胞的分子事件。单个细胞不知道肢体是什么，也不知道应当有几根手指。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1667s" target="_blank" rel="noopener" aria-label="Play video at 27:47">27:47</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>The collective does, but the individual cells have to be instructed as the system transduces down into the chemical signals that actually are required to make this happen. Where have we seen this before? Well, basically, voluntary motion. When you get up in the morning and you have these incredibly abstract goals around financial goals, research goals, whatever, in order for you to actually move on to act on any of those goals, the chemistry has to change. Ions have to cross your muscle membranes for this to happen. And our bodies are basically an amazing system for transducing very abstract kinds of goals in very high-level spaces down into actually making the chemistry and physics act in accordance.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>集体知道，但个体细胞必须在系统把抽象目标转导为所需化学信号时得到指令。我们在哪里见过同样的事？就在自主运动中。你早晨起床时，抱有关于财务、研究等极其抽象的目标；但要真正据此采取行动，身体化学就必须改变，离子必须穿过肌肉细胞膜。我们的身体是一套惊人的转导系统，能把高层空间中极其抽象的目标，一路落实到化学与物理的实际活动。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1711s" target="_blank" rel="noopener" aria-label="Play video at 28:31">28:31</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And of course, vice versa. And then we have these kind of creative problem-solving capacities where if you take a normal newt that has eight to 10 cells that normally make up its kidney tubules, we can artificially make newts where the cells are gigantic —Fankhauser did this years ago. If you do that, the cells automatically adjust. Fewer cells but the exact same large-scale structure. If you keep pushing it and make truly enormous cells, just one cell will bend around itself leaving a space in the middle, giving you the exact same structure.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>反方向的转导当然也成立。接着看这种创造性问题解决能力：普通蝾螈的肾小管通常由八到十个细胞构成。多年前，Fankhauser 人为制造出细胞体积巨大的蝾螈，结果细胞会自动调整——细胞数量变少，却仍构成完全相同的大尺度结构。如果进一步把细胞变得极其巨大，那么只需一个细胞，它便会绕自身弯曲，在中央留下空腔，形成同样的结构。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1745s" target="_blank" rel="noopener" aria-label="Play video at 29:05">29:05</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Two things are happening here. One is the ability to call up different molecular mechanisms: cell-to-cell communication in one case, cytoskeletal bending in another. Calling up different mechanisms to solve a problem is the kind of thing you see on every IQ test: here is a set of objects; use them to solve this problem. Here are the molecular affordances you have; use them to solve a problem you&#x27;ve never seen before. It is creative problem-solving in anatomical space. A new embryo cannot even count on its own parts: it knows neither the environment, nor how many copies of its genome it will have, nor the size of its cells.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这里发生了两件事。第一，系统能调用不同的分子机制：一种方案依靠细胞间通信，另一种则依靠细胞骨架弯曲。也就是说，它会调用不同机制解决问题——这正是每种 IQ 测验都会考的能力：给你一组物件，请用它们解决问题。这里给出的，是一组分子可供性（molecular affordances）；系统会用它们解决从未遇到过的问题。这是在解剖形态空间中的创造性解题。而且，一个新胚胎来到世界时，连自身部件都无法预先假定：它不知道环境如何，不知道会有多少份基因组副本，也不知道细胞会有多大。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1785s" target="_blank" rel="noopener" aria-label="Play video at 29:45">29:45</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>It has to get the job done in this very unreliable medium. Biology is an unreliable medium, and it drives a feedback loop of creative intelligence that existed long before neurons appeared. What I&#x27;ve shown you, then, are these ideas about top-down control and problem-solving. One other thing that helps cement together cognitive science, morphogenesis, and evolution is the following.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>它必须在极不可靠的媒介中完成任务。生物是一种不可靠的媒介，而这驱动了创造性智能的反馈环路；早在神经元出现之前，这套机制就已存在。因此，我刚才展示的是关于自上而下控制与问题解决的构想。要进一步把认知科学、形态发生与演化连接起来，还需要谈另一件事。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1819s" target="_blank" rel="noopener" aria-label="Play video at 30:19">30:19</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>None of us have access to our past. What you have access to are the memory engrams that past versions of you created based on experiences they had. The memories you have are messages. They are communications from a past self that left a specific, highly compressed kind of representation somewhere in your brain or body. That&#x27;s what happens in the past. Here is our now moment. Every cognitive system is in charge of interpreting this information into the future.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我们谁也无法直接访问自己的过去。你能够访问的，是过去版本的你依据其经历所留下的记忆痕迹（engram）。也就是说，你拥有的记忆其实是信息，是过去的自我留下的通信：它在你的大脑或身体某处存放了一种高度压缩的表征。那是过去发生的事；这里则是我们的“现在”时刻。每一个认知系统，都负责解释这些信息，并将其带向未来。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1856s" target="_blank" rel="noopener" aria-label="Play video at 30:56">30:56</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Because compression and generalization inevitably throw away information, you don&#x27;t have all the details, nor could you function if you did. But this means that recall is a creative process. As you know better than anybody, recalling memories involves a lot of reconstruction. Your job at any given moment is to figure out what your own memories mean. You do not necessarily owe allegiance to how your past self interpreted them.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>压缩与概括不可避免地丢弃信息；你不可能拥有全部细节，即使拥有，也无法正常运作。但这意味着，解释记忆是一项创造性工作。正如你们比谁都清楚的，回忆总带有大量重构。每一刻，你的任务都是弄清自己的记忆究竟意味着什么；而你不必忠于过去那个自我当时的解释。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1883s" target="_blank" rel="noopener" aria-label="Play video at 31:23">31:23</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>You are trying to tell the most adaptive story going forward into the future. So this is a creative improvisational process, and that is exactly what evolution does. So you get handed a set of genetic affordances, which are compressed representations of the experience of your ancestors. But now as an embryo undergoing morphogenesis, your goal is to reconstruct the most adaptive meaning, rather than what it used to mean—because you have actually no idea what it used to mean.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>你试图讲出一个最有利于适应未来的故事。这是一种创造性的即兴过程，而演化所做的恰恰如此。你得到一组遗传可供性，它们是祖先经验的压缩表征。可当你作为胚胎经历形态发生时，任务是重构出当下最具适应性的意义，而不是恢复它从前“原本”的意义——事实上，你根本不知道它过去意味着什么。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1917s" target="_blank" rel="noopener" aria-label="Play video at 31:57">31:57</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>What you have to do now is use them as best you can to construct a good story going forward. This explains the plasticity in all these examples: why the eye on the tail works, why these systems can do it, and many other examples of amazing plasticity. The whole process of building a body is not what we were told for decades: that you have DNA, and DNA tells you what you&#x27;re going to be.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>此刻，你只能尽可能善用这些遗传可供性，为未来建构一个好故事。这正是所有惊人可塑性案例的根源：尾部的眼睛为何能工作，刚才的系统为何能克服变化，以及其他许多例子。因为建造身体的全过程，并不是几十年来我们所听的那套故事——并非“你拥有 DNA，而 DNA 告诉你将成为什么”。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1942s" target="_blank" rel="noopener" aria-label="Play video at 32:22">32:22</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>That isn&#x27;t it at all. The genome is basically a set of engrams or prompts, and it is an active intelligent process by groups of cells to interpret it and to do something coherent. And I&#x27;m going to show you some very unusual things that they do in a moment. So, how does all this work? How does all this intelligence work? Well, in the brain, we think what&#x27;s happening is that you have the hardware. I don&#x27;t have to tell this group what the hardware looks like.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>事实完全不是那样。基因组基本上是一组记忆痕迹或提示词（prompts）；一群细胞通过主动而智能的过程解释它，并完成某种连贯的建构。稍后我会展示它们会做出一些很不寻常的事情。那么，这一切智能究竟如何运作？谈到大脑，我们认为首先存在硬件；在座各位无需我解释大脑硬件是什么样。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=1971s" target="_blank" rel="noopener" aria-label="Play video at 32:51">32:51</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>It is an electrical network, employing both chemical and electrical synapses. That network performs information processing that can, among other things, move you through three-dimensional space. People who work on neural decoding try to read these electrophysiological states and infer what the subject was thinking about—memories, goals, and so on. It turns out that this system is incredibly ancient; it goes back to the time of bacterial biofilms. This is what evolution co-opted and sped up to make nervous systems.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>它是一张电网络，同时采用化学突触和电突触。这样的网络能够处理信息，例如让你在三维空间中移动。研究神经解码的人会尝试读取这些电生理状态，从而推断受试者在想什么——记忆、目标等。可是，这套系统其实极其古老，可以追溯到细菌生物膜的时代。演化后来征用了它并为它加速，才形成神经系统。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2006s" target="_blank" rel="noopener" aria-label="Play video at 33:26">33:26</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Every cell in your body has ion channels. Most cells have electrical synapses, known as gap junctions, connecting them to neighboring cells; together they make electrical networks. We can take all the tools of neuroscience and behavioral science and make just a few pivots. If you&#x27;re willing to talk about morphospace instead of 3D space, and to use minutes and hours instead of milliseconds, everything works. The same mechanisms create voltage potentials, propagate them through tissue, use them to compute and integrate information, and store memories and counterfactuals.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>你身体里的每个细胞都有离子通道，大多数细胞还通过称为缝隙连接的电突触与邻近细胞相连，从而构成电网络。我们基本可以把神经科学与行为科学的全部工具搬过来，只需作几项转换：愿意谈“形态空间”而不是三维空间，把毫秒尺度放慢到分钟和小时，一切便都能运作。因为这就是演化实际发生的事情：产生电位、使电位沿组织中的路径传播、用它们计算与整合信息、存储记忆和反事实表征——底层机制都是同类的。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2045s" target="_blank" rel="noopener" aria-label="Play video at 34:05">34:05</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>All of this is extremely ancient. We developed the first tools to read and write these electrical pattern memories. We have some idea what the electrical networks in your brain like to think about. But what did electrical networks think about before there were brains, neurons, or muscles able to move you around? It turns out that they thought about shape. That is what these networks were originally for: processing movement through anatomical space.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这一切极其古老。我们开发了第一批能够读写这些电模式记忆的工具。我们多少知道，大脑里的电网络喜欢“思考”什么；可在大脑、神经元和肌肉出现以前，在它们还不能带你四处移动时，这些电网络思考的是什么？答案是形状。这些网络最初的用途，正是处理系统在解剖形态空间中的移动。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2076s" target="_blank" rel="noopener" aria-label="Play video at 34:36">34:36</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>They moved your configuration from a single cell to that of a human, or whatever else. That is the navigation they used to think about. We developed tools using voltage-sensitive fluorescent dyes to see the electrical conversations among cells in an early frog embryo, down to the individual-cell level. We also do a lot of computational modeling across scales: from transcription of ion-channel genes all the way up to network properties such as in-painting and out-painting, the kinds of things you see in regeneration.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>它们负责把你的构型从单个细胞导航到人类或其他生物的形态。为此，我们开发了一些工具，例如用电压敏感染料观察早期蛙胚中所有细胞的电学“对话”，并追踪到单细胞层次。我们也进行了大量计算建模，建立跨尺度模型：向下直至离子通道基因的转录，向上直至网络的内补与外扩等性质——也就是再生过程中所见的那些能力。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2115s" target="_blank" rel="noopener" aria-label="Play video at 35:15">35:15</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>For the next few minutes, I want to show you what this gives us. We have identified a symmetry between the algorithms carried out by cognitive systems and those that build your body, in addition to those that build your mind. What does that give us? One thing we can do is start to communicate with this somatic intelligence—the problem-solving system I&#x27;ve shown you, with its incredible plasticity and ability to solve various problems.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>接下来的几分钟，我想展示这项认识究竟带给我们什么。我们发现，建造身体的算法与建造心智的认知系统算法之间存在对称性；那么，这能让我们做到什么？其中一件事，是开始与这种躯体智能（somatic intelligence）沟通。直到目前，我所展示的正是这个问题解决系统：它拥有惊人的可塑性，也能解决各类问题。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2145s" target="_blank" rel="noopener" aria-label="Play video at 35:45">35:45</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Now that we understand the medium in which it records its goals—basically the same electrophysiological networks as in the brain—we can read and write information there and use it as an interface to communicate novel goals. Not to micromanage them. One of the most interesting things about neuroscience is how it helps us understand this kind of multi-scale phenomenon. When I&#x27;m talking to you now, I don&#x27;t need to worry about what your synaptic proteins are doing.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我们如今理解了它用来记录目标的媒介——基本上与大脑相同，都是电生理网络。一旦能够在那里读写信息，就可以把它当作接口，传达新的目标，而无需微观管理细节。在我看来，神经科学最有趣之处之一，是帮助我们理解这种多尺度现象：我此刻与你交谈，并不需要操心你的突触蛋白在做什么。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2180s" target="_blank" rel="noopener" aria-label="Play video at 36:20">36:20</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>You will take care of all of that. I&#x27;m giving you high-level prompts through a thin language interface and your system will then transduce this down to the chemistry that&#x27;s needed to make things happen. It&#x27;s the reason humans were able to train dogs and horses for thousands of years before we knew any neuroscience at all. But this works all the way down, and so we can make a very simple prompt to a bunch of cells here in the early embryo and say make an eye. Okay, we don&#x27;t have to tell it how to make an eye.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>你会自行处理所有细节。我只是通过一条纤细的语言接口，向你提供高层提示；你的系统随后会把提示向下转导为使事情发生所需的化学活动。人类能在对神经科学一无所知的数千年前训练狗和马，原因正在于此。而这条原则可以一路向下成立：我们能向早期胚胎中的一群细胞发出一个极为简单的提示——“造一只眼睛”。我们不需要告诉它如何造眼睛。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2207s" target="_blank" rel="noopener" aria-label="Play video at 36:47">36:47</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>We have no idea how to make an eye. But what we do know is a little bit of the electrical language, and this is what we&#x27;re trying to do is to crack this code such that we can then inject ion channels that induce a particular voltage state in these cells, and we now know how the cells interpret that particular multicellular voltage pattern: ‘Oh, we should build an eye here’. And they build an eye. Here&#x27;s one sitting in the gut.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我们也不知道该如何造眼睛。但我们确实懂得一点电信号语言，而现在的目标就是破解这套编码。我们可以导入离子通道，使这些细胞形成特定电压状态；如今已经知道，细胞会把这种多细胞电压模式解释为：“哦，我们应当在这里造一只眼睛。”于是它们真的造出一只眼睛。这里就有一只长在肠道里的眼睛。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2235s" target="_blank" rel="noopener" aria-label="Play video at 37:15">37:15</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>It has the lens, retina, optic nerve—all the things it&#x27;s supposed to have. If there are too few of the blue cells, the ones we injected with the channels, they recruit their neighbors to help build the eye. They know there aren&#x27;t enough of them, so they recruit their neighbors. Ants and termites do exactly the same thing; this is a common feature of collective intelligence. You can induce these ectopic foci, but then a battle begins, because the surrounding cells know perfectly well that there should not be an eye there.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>晶状体、视网膜、视神经——该有的全都有。如果参与的细胞太少，被我们导入通道的蓝色细胞会招募邻近细胞，帮助建造眼睛；它们知道自己数量不足，于是拉来邻居。蚂蚁、白蚁等也会做完全相同的事，这是集体智能的共同特征。我们可以诱导这些异位灶，但随后会爆发一场争夺，因为周围细胞非常清楚：这里不应当有眼睛。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2267s" target="_blank" rel="noopener" aria-label="Play video at 37:47">37:47</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>As a cancer-suppression mechanism, the surrounding cells try to normalize the voltage. So you may not get three or four eyes; you may get only one or none, because there is a battle for the future of the morphogenetic journey. Some cells say, ‘Go to the eye fate.’ Others say, ‘No, you should stay skin,’ or whatever they are. We can watch these conversations take place. In the flatworms I showed you, if you cut them into pieces, every piece makes one head and one tail.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>作为一种抑癌机制，周围细胞会尝试移除异常状态，使电压恢复正常。因此，你原本想造三四只眼睛，最后也许只得到一只，甚至一只也没有——形态发生的未来路径正在被争夺。一部分细胞说“走向眼睛命运”，另一部分说“不，你应当继续做皮肤或原来的组织”。我们可以实际观察这些对话发生。在之前展示的涡虫中，把它切成碎片，每一片都会长出一头一尾。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2293s" target="_blank" rel="noopener" aria-label="Play video at 38:13">38:13</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>You might think genetics tells every piece how many heads to have. But remember that the genome says nothing about heads; if you actually read it, it refers to proteins. So we still have the question: how does a piece know how many heads it should have? It turns out there is a readable voltage gradient, and it says one head, one tail. We can rewrite that gradient to say, ‘No, you should have two heads,’ and then cut the animal.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>你也许以为，是遗传信息告诉每一块组织应当长出几个头。但请记得，基因组根本不谈“头”；如果真正去读它，里面谈的是蛋白质。于是问题仍在：一块组织如何知道自己应当有几个头？原来，存在一条可以读取的电压梯度，它表达的是“一头一尾”。如果我们重写梯度，告诉系统“不，你应当有两个头”，然后才把动物切开——</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2322s" target="_blank" rel="noopener" aria-label="Play video at 38:42">38:42</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Here is a perfectly normal body with perfectly normal molecular-marker expression, but it has an aberrant memory of what a correct planarian should look like. That memory is latent; it does nothing until we cut. At that point, all the cells consult the memory and say, ‘Ah, two heads—fine,’ and build this two-headed worm. This is not AI or Photoshop; these are actual animals. A single body can hold at least two—and probably more—different representations of what a planarian should look like.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>此时我们有一具完全正常的身体，分子标记表达也完全正常，但它关于“正确涡虫应当长什么样”的记忆却发生了偏差。这份记忆是潜伏的；平时什么也不做，只静静待着。直到我们切开动物，所有细胞才查阅这份记忆，说：“啊，两个头，没问题。”于是它们造出这条双头涡虫。这不是 AI，也不是 Photoshop，而是真实动物。同一具身体至少能同时容纳两种关于涡虫形态的表征，也许还能容纳更多。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2354s" target="_blank" rel="noopener" aria-label="Play video at 39:14">39:14</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>This, I think, is the origin of the mental time travel that we can all do in counterfactual thought. This creature is holding a pattern that is not correct right now: I only have one head now, but my memory says what to do if I am injured in the future. That is the counterfactual part—this is what I would build in the future. And that is in fact what they do. There is lots of interesting neuroscience to be done on these animals with two heads.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我认为，这正是我们都能在反事实思考中进行“心理时间旅行”的起源。这个生物保存着一个并不符合当前现实的模式：此刻我明明只有一个头，但记忆告诉我，如果未来可能受伤，应当如何重建。这正是反事实部分——“这是我未来会建造的形态。”而它们的确会照此行动。双头涡虫身上还有许多有趣的神经科学问题可做。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2381s" target="_blank" rel="noopener" aria-label="Play video at 39:41">39:41</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Again, we don&#x27;t touch the genome. This is not about the hardware at all. The planarian genome builds a system that makes a single head by default, but it is highly reprogrammable; that outcome is not nailed down. You can also ask it to make heads of other species. Here is a Dugesia dorotocephala with a nice triangular head. They can make worms with flat heads, round heads, and so on—changing not just the head shape, but the shape of the brain and the distribution of stem cells.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>再次提醒，我们没有触碰基因组；这丝毫不关乎硬件。涡虫基因组建造的系统，默认会长出一个头，却高度可重编程，并未被钉死。你甚至可以要求它们长出其他物种的头。这里是一条头部呈漂亮三角形的 Dugesia dorotocephala；同一种涡虫还可以长出扁平头、圆头等。不仅头部外形会改变，大脑形状和干细胞分布也会随之改变。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2408s" target="_blank" rel="noopener" aria-label="Play video at 40:08">40:08</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>These other species are 100 to 150 million years apart in evolutionary distance. There is no genetic change. The same hardware is perfectly happy to visit attractors in morphospace that are normally occupied by these other systems. We can use the same thing for repair. I won&#x27;t go into the details, but this is our program in birth-defect repair. If you create a dominant mutation in a gene called Notch—a very important neurogenesis gene, as we probably all know—the brain is completely wrecked.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这些形态对应的物种与它相隔一亿到一亿五千万年的演化距离，却不需要任何遗传改变。同一套硬件完全能够访问形态空间中通常由其他系统占据的吸引子。我们还能用同一思路进行修复。这里不展开细节，但这是我们的出生缺陷修复项目：如果在一个名为 Notch 的基因上引入显性突变——大家大概都知道，它对神经发生至关重要——大脑会遭到彻底破坏。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2437s" target="_blank" rel="noopener" aria-label="Play video at 40:37">40:37</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>There is no forebrain; the midbrain and hindbrain are a bubble; there is no behavior—profound damage. With a very simple modification of an HCN2 ion channel, we get back to a correct bioelectric pattern for the brain, and then the cells build to suit. You get a normal brain, normal gene expression, and normal IQs. Their learning rates, which we measure, go back to those of controls, even though they have this profound dominant Notch mutation. So at least some hardware defects can be fixed, quote-unquote, ‘in software’: not at the level of the genetics, but at the level of the physiology that drives.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>前脑消失，中脑和后脑变成一个泡状结构，行为缺失，损伤极为严重。只需对 HCN2 离子通道作一项很简单的调节，我们就能恢复正确的脑部生物电模式，随后细胞会“因势构建”：正常大脑、正常基因表达和正常 IQ 都会回来。我们测得的学习率也恢复到对照组水平，尽管动物仍携带严重的 Notch 显性突变。因此，至少某些硬件缺陷可以“在软件层修复”——不是改动遗传层，而是改动起驱动作用的生理层。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2476s" target="_blank" rel="noopener" aria-label="Play video at 41:16">41:16</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>We have a similar program in limb regeneration. We can take frogs, which normally don&#x27;t regenerate their legs as adults, and give a simple 24-hour stimulus that then leads to a year and a half of leg growth. It is just a simple trigger at the beginning: go down the leg-building path, not the scarring path. By 45 days, you already have some toes and a toenail, and then it grows for a year and a half. What I&#x27;m showing you now are the consequences of pursuing the hypothesis that this kind of multi-scale problem-solving and communication is not just for brains in 3D space. It is fundamentally baked into biology all the way to the bottom, and we can now take advantage of it.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我们也有类似的肢体再生项目。成年青蛙通常无法再生腿部，但我们给予一次简单的 24 小时刺激，便能引发长达一年半的腿部生长。只需在最初发出一个简单触发：“走上造腿路径，不要走瘢痕路径。”大约 45 天时，已经能看到脚趾和趾甲；随后它还会继续生长一年半。这些结果来自同一假设：多尺度问题解决，以及与这些系统沟通的能力，并非只存在于三维空间中的大脑，而是从根本上一路嵌入生物学的最底层；如今我们可以开始利用它。</p>
+  </div>
+</article>
+</section>
+<section id="section-5">
+  <h2 class="chapter">Cancer, regeneration, and somatic psychiatry<span class="cn" lang="zh-CN">癌症、再生与躯体精神病学</span></h2>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2524s" target="_blank" rel="noopener" aria-label="Play video at 42:04">42:04</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And the final example I&#x27;m going to show you has to do with a cancer problem, and what happens in evolution and development is that you start with single cells which have extremely tiny goals. So, a single cell is only concerned about managing its own pH, hunger level, those kinds of things, right? So, very tiny cognitive light cone, very tiny scalar kinds of goals. When you make a network, this network is able to store much larger set points for its homeostatic activity.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>最后一个例子与癌症问题有关。在演化与发育中，起点是单细胞，它们的目标极其微小：一个细胞只关心调节自己的 pH 值、饥饿程度等；它的认知光锥（cognitive light cone）很小，目标尺度也很小。当许多细胞组成网络，这个网络就能为自身的稳态活动保存大得多的设定点。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2553s" target="_blank" rel="noopener" aria-label="Play video at 42:33">42:33</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Here is an amphibian limb. If you amputate anywhere along it, the cells quickly return, grow what is needed, and then stop. Why do they stop? Because this is a homeostatic process: they note the error and try to reduce it; when it is within acceptable limits, they stop. In the worm and other cases I&#x27;ve shown you, how do they know what the target pattern is? It is stored bioelectrically.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这里是一条两栖动物的肢体。无论从哪里截肢，细胞都很快返回伤处，长出缺失的部分，随后停止。为什么停止？因为这是一个稳态过程：系统察觉误差，努力缩小误差；当误差进入可接受范围，生长便停止。刚才的涡虫等例子已经展示了它们如何知道目标模式是什么：该模式以生物电形式储存。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2581s" target="_blank" rel="noopener" aria-label="Play video at 43:01">43:01</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>There is a bioelectrical pre-pattern that tells them what the set point for this homeostatic activity is. But note that collectives of cells can store enormous, grandiose goals. Their cognitive light cones are huge: the collective can store a memory of a large-scale shape like this. Of course, that system has a failure mode, and that failure mode is cancer. Cancer cells aren&#x27;t more selfish than normal cells; they just have smaller selves. When a single cell disconnects from this electrical collective, it no longer has access to the enormous memory of what they were building.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>存在一幅生物电预模式，告诉细胞这项稳态活动的设定点是什么。请注意，细胞集体能够存储宏大得惊人的目标；它们的认知光锥极为辽阔，整个集体可以保存对这样一种大尺度形态的记忆。当然，这种系统也有一种失效模式，那就是癌症。癌细胞并不比正常细胞更自私，它们只是拥有更小的“自我”。当单个细胞与电学集体断开，它便无法再访问关于大家共同建造之物的宏大记忆。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2617s" target="_blank" rel="noopener" aria-label="Play video at 43:37">43:37</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Now, the border between it and the outside world shrinks, right? It&#x27;s back to being a unicellular organism as far as it&#x27;s concerned. The rest of the body is just external environment, and it pursues its own tiny little goals, which are eat as much as you want, reproduce as much as you can, go where life is good, and that&#x27;s metastasis. So, we&#x27;ve been using this idea of cancer as basically a somatic dissociative identity disorder, right? All of these things together have the identity that they&#x27;re building a limb, and they have ways of doing it, but individual cells once they disconnect have no access to that.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>此时，它与外部世界之间的边界收缩了。就这个细胞自身而言，它重新成了单细胞生物，身体其余部分只是外部环境。于是它追逐自己的微小目标：尽可能多地摄食、尽可能多地繁殖、去往生存条件更好的地方——这就是转移。因此，我们一直把癌症理解为一种“躯体的分离性身份障碍”：所有细胞共同拥有“我们正在建造一条肢体”的身份，也有实现方式；可单个细胞一旦断开，就再也无法访问这份身份。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2651s" target="_blank" rel="noopener" aria-label="Play video at 44:11">44:11</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>There is a diagnostic here. You can use these voltage dyes to see when it is about to happen. We inject human oncogenes into these tadpoles; eventually they make tumors, but you can see when the cells are about to disconnect. Most importantly, when you reconnect them—we don&#x27;t fix the oncogene, we don&#x27;t kill the cells; this isn&#x27;t chemotherapy; we leave the cells alone but forcibly reconnect them to the electrical network—there is no tumor, even though the oncoprotein is blazingly expressed here.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这里存在一种诊断方法：利用电压敏感染料，可以看到细胞何时即将断开。我们把人类癌基因导入这些蝌蚪，它们最终会形成肿瘤；但在肿瘤形成前，你就能看到细胞何时准备脱离。更重要的是，如果把它们重新接入网络——我们不修复癌基因，也不杀死细胞，这不是化疗；我们不动细胞，只是强制它们重新接入电网络——那么，即使这里的癌蛋白表达强烈得刺眼，也不会形成肿瘤。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2681s" target="_blank" rel="noopener" aria-label="Play video at 44:41">44:41</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>It is not the genetics that drives; it is the physiology. As long as the network is thinking about making large-scale structures like muscle and skin, the cells stay away from those ancient, unicellular behaviors. The bottom line is that I really think the control of growth and form for regenerative therapeutics addresses issues that affect most of the problems we have in medicine.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>因为真正起驱动作用的不是遗传信息，而是生理状态。只要网络仍在“思考”如何建造肌肉、皮肤等大尺度结构，细胞就不会退回那些古老的单细胞行为。所有这些工作的结论是：为了治疗而控制生长与形态，是再生治疗学的核心问题；它们关乎医学面对的大多数难题。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2714s" target="_blank" rel="noopener" aria-label="Play video at 45:14">45:14</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>This kind of top-down control, taken straight from concepts in behavioral and cognitive sciences, complements the bottom-up work that everybody has focused on for hundreds of years. I actually think future medicine is going to look much more like a kind of somatic psychiatry than like chemistry. It won&#x27;t be the kind of bottom-up intervention that we try to achieve with drugs today. The bioelectric layer is not the only interface, but it is a massively useful one.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>数百年来，大家一直聚焦于自下而上的方法；我们现在用直接来自行为科学与认知科学的概念，以自上而下的控制补充它。我甚至认为，未来医学与其说会像化学，不如说更像一种“躯体精神病学”（somatic psychiatry）。它不会再主要依靠今天药物式的自下而上干预。生物电层并非唯一接口，却是极其有用的重要接口。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2744s" target="_blank" rel="noopener" aria-label="Play video at 45:44">45:44</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Just a couple of final points. We&#x27;ve been talking about addressing birth defects, traumatic injury, cancer, and aging. What we want is complete control—an anatomical compiler. All of these problems would go away if we were able to communicate. This is not a 3D printer; it is a way to communicate your goals as a bioengineer to the goals of the cellular collective. Maybe you draw a three-headed flatworm. The compiler gives you the exact stimuli that must be given to cells to get them to build whatever you want.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>最后再指出几件事。我们谈到的包括出生缺陷、创伤、癌症与衰老，而我们想要的是完整的控制能力，想要一个“解剖形态编译器”（anatomical compiler）。如果能与细胞集体沟通，所有这些问题都会消失。这不是某种 3D 打印机，而是一种把生物工程师的目标传达给细胞集体目标的方式。也许你画出一条三头涡虫；编译器所做的，就是给出必须施加于细胞的精确刺激，使它们建造你想要的形态。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2781s" target="_blank" rel="noopener" aria-label="Play video at 46:21">46:21</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>We are very far from a complete version of this, but we&#x27;ve taken the first steps. In the near future, we will rebuild organs—the standard structures that belong in your body. What is left? What goes beyond that? Here is the last part, just for a couple of minutes: where does your mental architecture come from? Most people will say evolution, right?</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我们距离完整版本还很远，但已经迈出了第一步。近期目标，是重建本应存在于人体中的器官和标准结构。那么，再往后呢？超出这些之后还剩什么？最后几分钟，我想谈一个有趣的问题：你的心智架构从何而来？多数人会回答：“来自演化”，它由你的演化历史塑造。</p>
+  </div>
+</article>
+</section>
+<section id="section-6">
+  <h2 class="chapter">Novel beings and the origins of minds<span class="cn" lang="zh-CN">新奇存在者与心智的起源</span></h2>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2809s" target="_blank" rel="noopener" aria-label="Play video at 46:49">46:49</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>It&#x27;s been shaped by your evolutionary history. Okay, but what are going to be the goals, preferences, and capabilities of entirely novel beings that have never been here before, that don&#x27;t have an evolutionary history that selected them for cognitive properties? What is the content of their mind going to be like? And so, I want to show you two quick examples. The first we call xenobots. These are made of frog cells. We dissociate some epithelial cells from a frog embryo. This is just skin. There are no neurons. There&#x27;s nothing.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>可是，那些前所未有、没有演化史来筛选其认知属性的全新存在者，会拥有怎样的目标、偏好和能力？它们的心智内容将是什么样？我想迅速展示两个例子。第一种叫异种机器人（xenobots）。它们由青蛙细胞构成：我们把一些上皮细胞从蛙胚中解离出来。这只是皮肤，没有神经元，没有其他特殊成分。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2835s" target="_blank" rel="noopener" aria-label="Play video at 47:15">47:15</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>They combine into this little thing that swims. It uses the cilia on the epithelial cells to coordinate its swimming activity. Here it is traversing a maze; it turns around whenever it wants to. It has the amazing property that, if you give it loose epithelial cells, it collects and compacts them into little piles. And guess what the little piles turn into? They become the next generation of xenobots, which then go on to do the same thing, and the same thing again.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这些细胞会结合成一个能够游动的小东西；它利用上皮细胞上的纤毛，协调自身的游动活动。这里，它正在穿越一座迷宫，并且想什么时候转向就什么时候转向。它还有一种惊人的性质：如果提供松散的上皮细胞，它会把细胞收集起来，压成一小堆。这些小堆最后会变成什么？它们会变成下一代异种机器人，接着重复同样的过程，一代又一代。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2867s" target="_blank" rel="noopener" aria-label="Play video at 47:47">47:47</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>This is kinematic replication. We&#x27;ve made it impossible for them to reproduce in the normal froggy fashion. They figured out another way of doing it. No other creature on Earth that we know of does kinematic self-replication: they make copies of themselves from materials they find in the environment. If you track the calcium signaling—remember, there are no neurons here; these are just epithelial cells—and apply some metrics, then, in Thomas Varley&#x27;s work from Josh Bongard&#x27;s lab, they do about as well against null models as what we see in fMRI of brains.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这就是运动学复制（kinematic replication）。我们已让它们无法按通常的青蛙方式繁殖，它们却找到了另一条路。据我们所知，地球上没有其他生物会进行运动学自我复制——它们用环境中找到的材料制造自己的副本。如果追踪钙信号——请记住，这里没有神经元，只有上皮细胞——再应用一些指标，根据 Josh Bongard 实验室 Thomas Varley 的工作，与零模型相比，它们的表现大致达到我们在大脑 fMRI 数据中所见的水平。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2900s" target="_blank" rel="noopener" aria-label="Play video at 48:20">48:20</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>I&#x27;m not saying that these are brain-like. What I&#x27;m saying is that both brains and these kinds of simple systems are exploiting dynamics that are incredibly fundamental, and we can catch this with metrics like causal-emergence metrics. That might seem weird and perhaps specific to amphibians. I would ask you: what would your cells do if I liberated them from your body? You can look at something like this. It looks like we got it off the bottom of a pond somewhere. Actually, if you were to sequence it: 100% Homo sapiens genome, completely normal human genome.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我并不是说这些系统与大脑相似；我的意思是，大脑与这些简单系统都在利用极为根本的动力学，而因果涌现之类的指标能够捕捉这种共同点。这听起来也许很奇怪，甚至像是两栖动物特有的现象。但我想问：如果把你的细胞从身体中“解放”出来，它们会做什么？看看这个东西，它像是从池塘底部捞上来的；然而测序会显示，它拥有百分之百正常的人类（Homo sapiens）基因组。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2935s" target="_blank" rel="noopener" aria-label="Play video at 48:55">48:55</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>These are made from adult cells taken from patients undergoing tracheal biopsies. We buy the cells, let them reboot their multicellularity, and they make these amazing little creatures known as anthrobots. Anthrobots have over 9,000 gene-expression differences from when the cells were sitting in your trachea. Remember, we don&#x27;t touch the genome: no synthetic biology, no scaffolds, no weird nanomaterials. These are simply new lifestyles that your cells can adopt, given the opportunity. One thing they like to do is heal neural wounds.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>它们由接受气管活检的患者身上取得的成体细胞制成。我们购入这些细胞，让它们重启自身的多细胞性，于是它们形成了这些惊人的小生物，称为“人源机器人”（anthrobots）。与待在气管中时相比，人源机器人的基因表达有九千多项不同。请记住，我们没有触碰基因组：没有合成生物学，没有支架，也没有奇特纳米材料。这只是你的细胞一有机会便能采取的全新生活方式。其中一件它们喜欢做的事，是修复神经创伤。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=2967s" target="_blank" rel="noopener" aria-label="Play video at 49:27">49:27</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>For example, if we make a scratch through a group of human neurons in a dish, these creatures get together and, over the next four days, take the two edges of the wound and heal them together. We did not teach them to do that. This is not anything in their history; it is just the first thing we looked for. Now we have a simple question with a very difficult answer. We know when we paid the computational cost to make a good frog, with its developmental stages and tadpole behaviors: the eons of the genome bashing against the environment. That is when we paid that computational cost.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>例如，我们在培养皿中的一片人类神经元上划出一道伤口；这些小生物会聚在一起，在接下来的四天里把伤口两侧拉拢并愈合。我们没有教它们这样做，这也不是它们历史中曾经发生过的事情；而且，这仅仅是我们首先尝试观察的能力。于是，一个答案极难的简单问题出现了：我们知道，打造一只良好的青蛙、形成分明的发育阶段和具有行为的蝌蚪，其计算成本是在何时支付的——基因组亿万年来与环境不断碰撞，成本正是在那里付出。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=3006s" target="_blank" rel="noopener" aria-label="Play video at 50:06">50:06</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>When did we pay the computational cost to make a good xenobot or anthrobot? There had never been any xenobots or anthrobots, and there was no selection for those features. We have to think carefully about what it means to say that, while selecting for frogs, we also obtained kinematic replication and hearing—xenobots can hear in ways tadpoles do not—as if those capacities simply came along at the same time. That rips up the whole point of specificity between environmental and selection history and what we get at the end, which was the point of evolutionary theory.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>可是，打造一个良好的异种机器人或人源机器人的计算成本，究竟何时支付？历史上从未有过异种机器人或人源机器人，也从未发生针对这些特征的选择。如果我们一面坚持说，选择青蛙的同时也顺带获得了运动学复制和听觉——异种机器人的听觉方式甚至不同于蝌蚪——仿佛这些能力只是同时附赠的；那么，环境史与选择的特殊性如何对应最终产物，这一整套逻辑就会被撕裂，而那原本正是演化理论的要义。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=3037s" target="_blank" rel="noopener" aria-label="Play video at 50:37">50:37</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>That was the whole point of evolutionary theory. This kind of plasticity, and the ability to have these capacities right out of the box, really asks us to think about where they come from in the first place. Selection is only part of the story. We need to understand them because we make novel things all the time: the Internet of Things, swarm robotics, and social and financial structures that we have no idea how to predict. As biologists, we like to think these things come from genetics and environment, but I want to point out—just to tease this last part—that there is another source of information.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>因此，这种可塑性，以及系统一上来就具备相应能力的事实，迫使我们追问：这些能力最初从何而来？选择只是故事的一部分。我们必须理解它们，因为我们一直在制造新东西：物联网、群体机器人、社会结构与金融结构，而我们完全不知道如何预测它们。作为生物学家，我们喜欢认为形式与能力来自遗传和环境；但我只想指出，还存在另一种信息来源。最后这一部分，我只稍作点题。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=3071s" target="_blank" rel="noopener" aria-label="Play video at 51:11">51:11</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>I&#x27;ve been doing a lot of work on this and have written many things about it. I&#x27;ll only tease it here by pointing out another source of information. This pattern, for example, appears when you make a Halley plot of a tiny equation in complex numbers. All of this is hidden in there. Where is it specified? Where does it come from? No aspect of physics, history, or environment says that it must have the specificity of exactly this pattern.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>我已围绕它做了很多工作，也写过不少内容。这里只给一个提示：例如，这幅图案来自一个极小的复数方程；你对它执行 Halley 迭代并绘图，所有复杂形态便藏在其中。这一切被规定在哪里？它从何而来？物理学、历史或环境中，没有任何因素规定它必须精确呈现为这幅图案。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=3099s" target="_blank" rel="noopener" aria-label="Play video at 51:39">51:39</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>Where does it come from? I&#x27;ve been working on a model in which these truths of mathematics are relevant not only to mathematical objects, but to patterns of physiology and behavior—in other words, kinds of minds. We can talk about that. The bottom line is this: because of life&#x27;s plasticity, pretty much any combination of evolved cellular material, engineered material, and software is some kind of viable agent. This tiny corner of the space contains everything Darwin called ‘endless forms most beautiful.’</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>那么，它究竟从何而来？我一直在发展一个模型：这类数学真理不仅与数学对象有关，也关乎生理模式、行为模式——也就是各种心智。我们可以另行讨论。结论是：由演化而来的细胞材料、工程材料和软件，无论怎样组合，凭借生命的可塑性，几乎都能形成某种可行的智能体。这个小得可怜的角落，已经容纳了达尔文所谓“最美、最奇异的无尽形态”。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=3133s" target="_blank" rel="noopener" aria-label="Play video at 52:13">52:13</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>The actual space is enormous: cyborgs, hybrots, and a combinatorial explosion of different kinds of embodied minds. I really think we must work very hard to enter some kind of ethical synthbiosis with the beings that will share our world very soon. To summarize: intelligence—problem-solving in different spaces—is much older and broader than brains. Morphogenesis is a model system for beginning to communicate with these alien intelligences.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>而实际的空间无比巨大：赛博格、混合机器人（hybrots），以及不同具身心智的组合爆炸。我真心认为，我们必须竭力与那些很快将和我们共享世界的存在者，建立某种“伦理合成共生”（ethical synthbiosis）。总结一下：今天我告诉你们，智能——也就是在不同空间中解决问题——远比大脑古老，也远比大脑广泛。形态发生是一个模型系统，让我们开始与这些异类智能沟通。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=3167s" target="_blank" rel="noopener" aria-label="Play video at 52:47">52:47</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>The applications in regenerative medicine are the outcomes telling us we&#x27;re on the right track. I think the standard picture—physics, then chemistry, with behavioral science somewhere at the top—is upside down. For many reasons, I think it is basically behavioral science all the way down. Certainly, by the time you have molecular networks, all of your behavior textbooks are relevant. What is coming is a field of diverse intelligence research that will have to inform us about mental-health diseases in novel beings with completely different life experiences.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>再生医学中的应用结果，基本上在告诉我们：这条路走对了。通常的图景把物理学放在底层，其上是化学，再往上某处才出现行为科学；我认为这幅图颠倒了。出于许多理由，真实情况基本上是“行为科学一路到底”。至少从分子网络开始，行为学教科书就已经全部适用。多样智能研究将使我们看清：全新存在者会患上精神疾患，而它们的生命经验与我们截然不同。</p>
+  </div>
+</article>
+</section>
+<section id="section-7">
+  <h2 class="chapter">Closing questions and thanks<span class="cn" lang="zh-CN">最后的问题与致谢</span></h2>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=3207s" target="_blank" rel="noopener" aria-label="Play video at 53:27">53:27</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>You&#x27;ll have patients with highly diverse Umwelts, with new sensory-motor capabilities, with connections to others. We&#x27;re going to have to figure out what we do. For example, if you&#x27;re analyzing dreams, what do the dreams of novel beings look like? What do they mean? How do we help beings that have never been here before that don&#x27;t share the same evolutionary stream? How do we help them have a good and meaningful life? So, I will just stop here and thank the people who did the empirical work that I showed you today and our many collaborators.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>你们会面对拥有高度多样的感知世界（Umwelts）、全新感觉—运动能力，以及不同连接方式的来访者。我们必须弄清该怎么办。例如，如果你从事梦的分析，全新存在者会做怎样的梦？那些梦意味着什么？面对从未存在过、也不与我们共享同一条演化支流的存在者，我们如何帮助它们过上良好而有意义的生活？我就讲到这里，并感谢完成今天所展示实证工作的同事，以及我们众多的合作者。</p>
+  </div>
+</article>
+<article class="row">
+  <a class="timestamp" href="https://www.youtube.com/watch?v=-elegwQQOww&t=3237s" target="_blank" rel="noopener" aria-label="Play video at 53:57">53:57</a>
+  <div class="en" lang="en">
+    <div class="lang-label">English</div>
+    <p>And here are some disclosures. These are companies that have licensed some of the IP that we&#x27;ve had. Thank you so much. I&#x27;ll stop here.</p>
+  </div>
+  <div class="cn" lang="zh-CN">
+    <div class="lang-label">中文</div>
+    <p>这里还有一些利益披露：这些公司获得了我们部分知识产权的许可。非常感谢。我就在这里结束。</p>
+  </div>
+</article>
+</section>
+  </main>
+
+  <footer>
+    Bilingual transcript of <a href="https://www.youtube.com/watch?v=-elegwQQOww">Michael Levin’s original lecture</a> · English / 简体中文
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll(".toolbar button");
+    const applyMode = (mode) => {
+      document.body.className = mode === "both" ? "both" : mode;
+      buttons.forEach((button) => {
+        const active = button.dataset.mode === mode;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+      try { localStorage.setItem("bilingual-view", mode); } catch (_) {}
+    };
+    buttons.forEach((button) => button.addEventListener("click", () => applyMode(button.dataset.mode)));
+    try {
+      const saved = localStorage.getItem("bilingual-view");
+      if (["both", "en-only", "cn-only"].includes(saved)) applyMode(saved);
+    } catch (_) {}
+  </script>
+</body>
+</html>
