@@ -73,52 +73,56 @@ export function Sidebar({
           ))}
 
           {/* Experiments collapsible */}
-          <li className="sidebar-item appendix-group">
-            <button
-              className={`sidebar-link appendix-toggle`}
-              onClick={() => setExperimentsOpen(!experimentsOpen)}
-              aria-expanded={experimentsOpen}
-            >
-              <span className={`chevron ${experimentsOpen ? 'open' : ''}`} />
-              Experiments
-            </button>
-            <ul className={`appendix-list ${experimentsOpen ? 'open' : ''}`}>
-              {config.nav.experiments.map((item) => (
-                <li key={item.slug} className="sidebar-item">
-                  <Link
-                    href={`/${item.slug}`}
-                    className={`sidebar-link ${isActive(item.slug) ? 'active' : ''}`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </li>
+          {config.nav.experiments.length > 0 && (
+            <li className="sidebar-item appendix-group">
+              <button
+                className={`sidebar-link appendix-toggle`}
+                onClick={() => setExperimentsOpen(!experimentsOpen)}
+                aria-expanded={experimentsOpen}
+              >
+                <span className={`chevron ${experimentsOpen ? 'open' : ''}`} />
+                Experiments
+              </button>
+              <ul className={`appendix-list ${experimentsOpen ? 'open' : ''}`}>
+                {config.nav.experiments.map((item) => (
+                  <li key={item.slug} className="sidebar-item">
+                    <Link
+                      href={`/${item.slug}`}
+                      className={`sidebar-link ${isActive(item.slug) ? 'active' : ''}`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          )}
 
           {/* Supplementary collapsible */}
-          <li className="sidebar-item appendix-group">
-            <button
-              className={`sidebar-link appendix-toggle`}
-              onClick={() => setSupplementaryOpen(!supplementaryOpen)}
-              aria-expanded={supplementaryOpen}
-            >
-              <span className={`chevron ${supplementaryOpen ? 'open' : ''}`} />
-              Supplementary Material
-            </button>
-            <ul className={`appendix-list ${supplementaryOpen ? 'open' : ''}`}>
-              {config.nav.supplementary.map((item) => (
-                <li key={item.slug} className="sidebar-item">
-                  <Link
-                    href={`/${item.slug}`}
-                    className={`sidebar-link ${isActive(item.slug) ? 'active' : ''}`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </li>
+          {config.nav.supplementary.length > 0 && (
+            <li className="sidebar-item appendix-group">
+              <button
+                className={`sidebar-link appendix-toggle`}
+                onClick={() => setSupplementaryOpen(!supplementaryOpen)}
+                aria-expanded={supplementaryOpen}
+              >
+                <span className={`chevron ${supplementaryOpen ? 'open' : ''}`} />
+                Supplementary Material
+              </button>
+              <ul className={`appendix-list ${supplementaryOpen ? 'open' : ''}`}>
+                {config.nav.supplementary.map((item) => (
+                  <li key={item.slug} className="sidebar-item">
+                    <Link
+                      href={`/${item.slug}`}
+                      className={`sidebar-link ${isActive(item.slug) ? 'active' : ''}`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          )}
 
           {/* Interactive Visualizations */}
           {(config.nav as any).visualizations && (

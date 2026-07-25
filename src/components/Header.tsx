@@ -77,31 +77,39 @@ export function Header({ title, config }: { title: string; config?: SiteConfig }
                   </Link>
                 </li>
               ))}
-              <li className="mobile-nav-divider" />
-              <li className="mobile-nav-section">Experiments</li>
-              {config.nav.experiments.map((item) => (
-                <li key={item.slug}>
-                  <Link
-                    href={`/${item.slug}`}
-                    className={`mobile-nav-link sub ${isActive(item.slug) ? 'active' : ''}`}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-              <li className="mobile-nav-section">Supplementary</li>
-              {config.nav.supplementary.map((item) => (
-                <li key={item.slug}>
-                  <Link
-                    href={`/${item.slug}`}
-                    className={`mobile-nav-link sub ${isActive(item.slug) ? 'active' : ''}`}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {config.nav.experiments.length > 0 && (
+                <>
+                  <li className="mobile-nav-divider" />
+                  <li className="mobile-nav-section">Experiments</li>
+                  {config.nav.experiments.map((item) => (
+                    <li key={item.slug}>
+                      <Link
+                        href={`/${item.slug}`}
+                        className={`mobile-nav-link sub ${isActive(item.slug) ? 'active' : ''}`}
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </>
+              )}
+              {config.nav.supplementary.length > 0 && (
+                <>
+                  <li className="mobile-nav-section">Supplementary</li>
+                  {config.nav.supplementary.map((item) => (
+                    <li key={item.slug}>
+                      <Link
+                        href={`/${item.slug}`}
+                        className={`mobile-nav-link sub ${isActive(item.slug) ? 'active' : ''}`}
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </>
+              )}
               {(config.nav as any).visualizations && (
                 <>
                   <li className="mobile-nav-divider" />

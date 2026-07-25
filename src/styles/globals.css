@@ -778,3 +778,110 @@ a.citation:hover {
   margin-top: 1em !important;
   margin-bottom: 2em !important;
 }
+
+/* ============================================
+   Paper landing and publication controls
+   ============================================ */
+.paper-kicker {
+  margin: 0 0 0.65rem;
+  color: var(--neutral-500);
+  font-family: var(--content-font);
+  font-size: 0.78rem !important;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.paper-byline {
+  margin: 1rem 0 0.15rem;
+  font-size: 1.08rem !important;
+  text-align: left;
+}
+
+.paper-affiliation {
+  margin: 0 0 1.4rem;
+  color: var(--neutral-600);
+  font-size: 0.92rem !important;
+  text-align: left;
+}
+
+.paper-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1.25rem 0 1.6rem;
+}
+
+.prose .paper-button {
+  display: inline-flex;
+  min-height: 2.6rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.62rem 0.95rem;
+  border: 1px solid var(--neutral-300);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--foreground);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.prose .paper-button:hover {
+  border-color: var(--primary);
+  color: var(--primary-dark);
+}
+
+.prose .paper-button-primary {
+  border-color: var(--foreground);
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.prose .paper-button-primary:hover {
+  border-color: var(--primary-dark);
+  background: var(--primary-dark);
+  color: #ffffff;
+}
+
+.paper-status {
+  margin: 1.5rem 0 2.25rem;
+  padding: 1rem 1.1rem;
+  border-left: 3px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 6%, var(--background));
+  color: var(--neutral-700);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.paper-closing {
+  margin: 3rem 0 1rem;
+  padding: 1.4rem 1.5rem 0.2rem;
+  border: 1px solid var(--neutral-300);
+  border-radius: 0.5rem;
+  background: var(--surface);
+}
+
+.paper-closing .paper-actions {
+  margin-bottom: 1.2rem;
+}
+
+@media (max-width: 40rem) {
+  .paper-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .prose .paper-button {
+    width: 100%;
+  }
+
+  .prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

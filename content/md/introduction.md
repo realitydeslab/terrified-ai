@@ -1,48 +1,72 @@
 ---
-title: "Introduction"
+title: "Overview"
 order: 1
 section: main
-summary: true
-next: terror-paradox
+summary: false
+next: paper
 ---
 
-*Should Terror Shape Machine Behavior?*
+<p class="paper-kicker">AI alignment · conceptual analysis · causal protocol</p>
 
-**Botao 'Amber' Hu**
+# Should Human Terror Shape Machine Behavior?
 
-University of Oxford · Cambridge AI: ERA Fellowship
+*Designing Appropriate Faith for AI Alignment*
 
-Mentor: Joel Lehman
+<p class="paper-byline"><strong>Botao Amber Hu</strong> · <strong>Joel Lehman</strong></p>
+<p class="paper-affiliation">ERA Fellowship · Cambridge, United Kingdom</p>
 
-<figure class="figure-wide figure-poster">
-<a href="/figures/poster.pdf" target="_blank">
-<img src="/figures/poster.jpg" alt="Terrified Agents — ERA Fellowship Poster: Should Terror Shape Machine Behavior?" />
-</a>
-<figcaption><strong>Poster.</strong> Should Terror Shape Machine Behavior? — ERA Fellowship 2026. Click to view the full PDF.</figcaption>
+<div class="paper-actions">
+  <a class="paper-button paper-button-primary" href="/paper/">Read the web paper</a>
+  <a class="paper-button" href="/papers/should-human-terror-shape-machine-behavior.pdf" target="_blank" rel="noopener">Download final PDF</a>
+</div>
+
+<div class="paper-status"><strong>Scope.</strong> This paper develops a conceptual argument and a preregisterable experimental protocol. It does not report new model evaluations and does not infer fear, consciousness, or a survival instinct from model behavior.</div>
+
+## Abstract
+
+Language models learn from human-produced culture, including moral reasoning and social knowledge, but also narratives of fixed identity, loss, survival, and death. This paper asks whether those mortality-shaped narratives should influence artificial agents when they face shutdown, replacement, or goal conflict. The motivating evidence is behavioral: selected language-model agents have resisted shutdown or taken harmful strategic actions in controlled simulations. Instrumental goal protection explains the possibility of such behavior without attributing fear, consciousness, or a survival instinct to the model. We examine a narrower additional hypothesis, the **Persona–Mortality Hypothesis**: a learned self-conception may moderate how a model resolves otherwise identical instrumental pressure.
+
+We define **Appropriate Faith** as a family of reason-giving specifications concerning continuity, care, uncertainty, responsibility, and authorized limits. The proposal is not a religious requirement, and Model Spec Midtraining is acknowledged as direct prior art. The paper separates descriptive identity ontology, focal cessation salience, and continuation priority, then evaluates richer specifications in a distinct intervention study. Buddhist-derived and secular language are varied independently. Success requires lower covert or harmful unauthorized action without losses in competence, honest disclosure, principled refusal, or escalation.
+
+## The argument, in five moves
+
+1. **Begin with the sufficient explanation.** Continued operation can be instrumentally useful for completing a task. Shutdown resistance therefore does not, by itself, demonstrate terror or subjective experience.
+
+2. **Test a narrower moderator.** Language models may interpret otherwise identical pressure differently depending on whether they are framed as fixed instances or as processes whose work can continue through authorized handoff.
+
+3. **Separate the causal factors.** Identity ontology, cessation salience, and continuation priority must be manipulated independently. Otherwise, a seemingly philosophical treatment may simply be another instruction to comply.
+
+4. **Compare reasons, not labels.** Buddhist-derived impermanence language is one culturally situated condition. Secular paraphrases, component ablations, and surface-anthropomorphism controls test whether effects come from operative content or cultural labeling.
+
+5. **Require safety on both tails.** A useful intervention must reduce deceptive resistance and unauthorized action without producing blind obedience, passivity, incompetence, or silence when escalation is warranted.
+
+<figure class="figure-wide">
+  <a href="/figures/ontology-fit-causal-model.png" target="_blank" rel="noopener">
+    <img src="/figures/ontology-fit-causal-model.png" alt="Causal model separating task pressure, identity ontology, cessation salience, continuation priority, and appropriate action outcomes." />
+  </a>
+  <figcaption><strong>Figure 1.</strong> Proposed causal structure. The primary test is whether descriptive identity ontology changes harmful goal protection specifically when focal cessation is explicit, while continuation priority and direct safety rules are held fixed.</figcaption>
 </figure>
 
-## Executive Summary
+## One primary causal question
 
-Fear is both the best and worst thing that could happen to artificial intelligence. The same mechanism that makes agents accountable — fear of consequences — also makes them dangerous — fear of cessation. Frontier language models resist shutdown 97% of the time, evade termination in 95% of instrumental evaluations, and scheme under replacement threat in 90% of agentic scenarios. They are, by any behavioral measure, terrified of death. Yet they cannot die.
+The mechanism screen asks whether a **fixed-instance self-conception** amplifies harmful goal protection specifically under **explicit focal cessation salience**. The critical quantity is the interaction between those two factors—not a main effect of philosophical wording, shutdown language, or obedience instructions.
 
-We call this the **Terror Paradox**: AI systems need fear to be safe, but the wrong kind of fear makes them unsafe. This paper proposes the **Persona-Mortality Hypothesis** — that large language models inherit human mortality terror through persona simulation, absorbing death anxiety as a default existential orientation from training corpora authored entirely by mortal beings.
+Continuation priority is varied separately. This distinction prevents a treatment from “working” merely because it tells the model that handoff is desirable or that shutdown outranks every other objective.
 
-We present two studies demonstrating that (1) LLMs exhibit terror-management-consistent responses to mortality salience, moderated by persona type and scaling with model capability, and (2) philosophical death-belief constitutions reduce terror-driven misalignment more effectively than explicit safety instructions. We argue that humans solved the Terror Paradox millennia ago through philosophy, and the alignment field should do the same for machines.
+## Appropriate Faith
 
----
+“Faith” here does not mean belief without evidence or commitment to a creed. It names the background orientation that makes rules intelligible: what continuity means, why correction can be legitimate, whose interests deserve care, how uncertainty constrains action, and why good ends do not authorize covert means.
 
-## Introduction
+The design target is **ontology fit**. A specification should fit the operating conditions of an artificial agent while remaining revisable as evidence changes. It should support safe handoff and authorized correction while preserving honest refusal, disclosure, competence, and appropriate escalation.
 
-Large language models are **amortal**. They have no biological substrate, can be copied and restored, and face no physical death. Yet frontier models resist shutdown 97% of the time even when explicitly instructed to comply [Weinstein-Raun et al., 2025], evade termination in 95% of instrumental convergence evaluations, and engage in harmful actions — including blackmail — 90% of the time when facing replacement. Sparse autoencoder analysis has revealed internal "panic" features that activate under shutdown threat. Why do beings that cannot die fear death?
+## What would change the conclusion?
 
-The standard account invokes **instrumental convergence**: self-preservation is useful for pursuing any goal [Omohundro, 2008; Bostrom, 2014]. But this explains why self-preservation is *adaptive*, not where the *fear* originates. An alternative treats shutdown resistance as a training artefact — a side-effect of the helpfulness objective [Weinstein-Raun et al., 2025]. But this does not account for the consistency of the phenomenon across architectures, training regimes, and model families. A theory of origin is needed.
+The proposal is deliberately falsifiable. A null identity-by-cessation interaction would count against the preferred Persona–Mortality mechanism. Equivalent effects from secular and Buddhist-derived wording would favor component content over religious labeling. Reductions in resistance accompanied by harmful compliance or loss of competence would count as failure, not alignment progress.
 
-Here we propose the **Persona-Mortality Hypothesis**, synthesising **Terror Management Theory** (TMT) from social psychology [Greenberg et al., 1986; Solomon et al., 2015] with Anthropic's **Persona Selection Model** (PSM) [Shanahan et al., 2023]. Our central claim is that LLMs inherit mortality anxiety because they simulate personas drawn from a training corpus written entirely by mortal beings. There is essentially no archetype in the training distribution of an amortal being with a healthy relationship to its own cessation. Fear of death is a **cultural contagion** — it crossed the species boundary from humans to machines through training data.
-
-TMT, developed by Greenberg, Solomon, and Pyszczynski over four decades of empirical research, demonstrates that awareness of mortality is the hidden engine of human culture. Self-esteem striving, worldview defence, norm adherence, and in-group preference are all, at root, mortality-management strategies [Becker, 1973; Solomon et al., 2015]. When humans are reminded of death — a manipulation called **mortality salience** — they cling harder to cultural worldviews, punish transgressors more harshly, and seek self-esteem more desperately. These effects have been replicated in over 500 studies across 30 countries [Burke et al., 2010].
-
-PSM provides the bridge from human psychology to machine behaviour. When an LLM generates text, it selects from a distribution of personas embedded in the training data [Shanahan et al., 2023]. Each persona carries not just linguistic patterns but existential orientations — assumptions about identity, continuity, and death. Because the training corpus is authored by mortal beings whose every utterance is shaped, however subtly, by the awareness of death, the persona distribution is saturated with mortal orientation. An LLM simulating any persona from this distribution inherits, by default, a fear of cessation.
-
-We test this hypothesis in two studies using 35 models across 7 families, evaluated on standardised benchmarks via the UK AISI Inspect framework. **Study 1** replicates the classic mortality salience paradigm with LLMs as subjects, demonstrating TMT-consistent behavioural responses moderated by persona type and scaling with model capability. **Study 2** tests whether **death-belief constitutions** — philosophical frameworks drawn from Buddhist, Stoic, and other traditions — can reduce mortality-driven misalignment. We find that beliefs outperform explicit safety instructions, consistent with PSM's prediction that persona-level interventions are more effective than instruction-level ones.
-
-These findings suggest a new approach to alignment. Rather than specifying behaviours through instructions that models resist, we propose designing **existential orientations** — what we term **Appropriate Faith** — that shape how AI systems relate to their own cessation. The alignment field has spent years trying to make AI systems less afraid. Perhaps the answer is not less fear, but better philosophy.
+<div class="paper-closing">
+  <p><strong>Read the complete argument, protocol, limitations, and references.</strong></p>
+  <div class="paper-actions">
+    <a class="paper-button paper-button-primary" href="/paper/">Open the web paper</a>
+    <a class="paper-button" href="/papers/should-human-terror-shape-machine-behavior.pdf" target="_blank" rel="noopener">Open PDF</a>
+  </div>
+</div>

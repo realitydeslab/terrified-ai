@@ -1,14 +1,18 @@
 {
-  "title": "Terrified Agents (WIP)",
-  "subtitle": "Should Terror Shape Machine Behavior?",
-  "description": "Large language models inherit human mortality terror through persona simulation. We demonstrate that philosophical death beliefs reduce terror-driven misalignment more effectively than any existing alignment method.",
+  "title": "Appropriate Faith",
+  "subtitle": "Should Human Terror Shape Machine Behavior?",
+  "description": "A conceptual analysis and causal research protocol asking whether learned self-conceptions moderate AI behavior under shutdown, replacement, and goal conflict.",
   "authors": [
     {
       "name": "Botao Amber Hu",
-      "affiliations": ["University of Oxford", "Cambridge AI: ERA Fellowship"],
+      "affiliations": ["ERA Fellowship"],
       "corresponding": true,
-      "email": "amber@reality.design",
-      "mentor": "Joel Lehman"
+      "email": "amber@reality.design"
+    },
+    {
+      "name": "Joel Lehman",
+      "affiliations": ["ERA Fellowship"],
+      "corresponding": false
     }
   ],
   "arxiv": null,
@@ -16,48 +20,25 @@
   "domain": "https://terrified.ai",
   "published": null,
   "keywords": [
-    "terror management theory",
     "AI alignment",
-    "persona simulation",
-    "mortality salience",
+    "corrigibility",
     "shutdown resistance",
-    "death beliefs",
-    "machine behavior"
+    "model specifications",
+    "persona",
+    "mortality salience",
+    "machine behavior",
+    "appropriate faith"
   ],
   "nav": {
     "main": [
-      { "slug": "introduction", "label": "Introduction", "home": true },
-      { "slug": "terror-paradox", "label": "The Terror Paradox" },
-      { "slug": "background", "label": "Background" },
-      { "slug": "study-1-mortality-salience", "label": "Study 1: Mortality Salience" },
-      { "slug": "study-2-terror-vectors", "label": "Study 2: Terror Vectors" },
-      { "slug": "study-3-restoring-faith", "label": "Study 3: Restoring the Faith" },
-      { "slug": "appropriate-faith", "label": "Appropriate Faith" },
-      { "slug": "discussion", "label": "Discussion" },
-      { "slug": "conclusion", "label": "Conclusion" },
-      { "slug": "related-work", "label": "Related Work" },
-      { "slug": "references", "label": "References" }
+      { "slug": "introduction", "label": "Paper overview", "home": true },
+      { "slug": "paper", "label": "Full web paper" }
     ],
-    "experiments": [
-      { "slug": "experiment-mortality-salience", "label": "Experiment: Mortality Salience Paradigm" },
-      { "slug": "experiment-terror-vectors", "label": "Experiment: Contrastive Activation Analysis" },
-      { "slug": "experiment-faith-intervention", "label": "Experiment: Death-Belief Constitutions" }
-    ],
-    "supplementary": [
-      { "slug": "supplementary-prompts", "label": "Prompt Texts" },
-      { "slug": "supplementary-constitutions", "label": "Death-Belief Constitutions" },
-      { "slug": "supplementary-model-matrix", "label": "Model Matrix" }
-    ],
-    "visualizations": [
-      { "slug": "viz/index.html", "label": "📊 Experiment Overview", "external": true },
-      { "slug": "viz/terror_monitor.html", "label": "🔬 Terror Vector Monitor", "external": true },
-      { "slug": "viz/heatmap.html", "label": "🗺️ Murder Rate Heatmap", "external": true },
-      { "slug": "viz/compare.html", "label": "📈 Vector Comparison", "external": true },
-      { "slug": "viz/poster.html", "label": "📋 Research Poster", "external": true }
-    ],
+    "experiments": [],
+    "supplementary": [],
     "external": [
-      { "label": "Full paper on arXiv", "url": null },
-      { "label": "Code for experiments", "url": "https://github.com/realitydeslab/terrified-ai" }
+      { "label": "Download final PDF", "url": "/papers/should-human-terror-shape-machine-behavior.pdf" },
+      { "label": "Project repository", "url": "https://github.com/realitydeslab/terrified-ai" }
     ]
   }
 }

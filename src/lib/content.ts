@@ -34,10 +34,17 @@ export interface Page {
 
 export function getPageSlugs(): string[] {
   if (!fs.existsSync(CONTENT_DIR)) return [];
+  const config = getSiteConfig();
+  const publishedSlugs = new Set([
+    ...config.nav.main,
+    ...config.nav.experiments,
+    ...config.nav.supplementary,
+  ].map((item: { slug: string }) => item.slug));
   return fs
     .readdirSync(CONTENT_DIR)
     .filter((f) => f.endsWith('.md'))
-    .map((f) => f.replace(/\.md$/, ''));
+    .map((f) => f.replace(/\.md$/, ''))
+    .filter((slug) => publishedSlugs.has(slug));
 }
 
 export async function getPage(slug: string): Promise<Page | null> {
