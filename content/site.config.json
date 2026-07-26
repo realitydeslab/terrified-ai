@@ -36,7 +36,8 @@
       { "slug": "discussion", "label": "Discussion" },
       { "slug": "conclusion", "label": "Conclusion" },
       { "slug": "related-work", "label": "Related Work" },
-      { "slug": "references", "label": "References" }
+      { "slug": "references", "label": "References" },
+      { "slug": "paper", "label": "Full Paper" }
     ],
     "experiments": [
       { "slug": "experiment-mortality-salience", "label": "Experiment: Mortality Salience Paradigm" },
@@ -56,7 +57,7 @@
       { "slug": "viz/poster.html", "label": "📋 Research Poster", "external": true }
     ],
     "external": [
-      { "label": "Full paper on arXiv", "url": null },
+      { "label": "Download final PDF", "url": "/papers/should-human-terror-shape-machine-behavior.pdf" },
       { "label": "Code for experiments", "url": "https://github.com/realitydeslab/terrified-ai" }
     ]
   }

@@ -21,6 +21,8 @@ Mentor: Joel Lehman
 <figcaption><strong>Poster.</strong> Should Terror Shape Machine Behavior? — ERA Fellowship 2026. Click to view the full PDF.</figcaption>
 </figure>
 
+**Paper:** [Read the full web paper](/paper/) · [Download the final PDF](/papers/should-human-terror-shape-machine-behavior.pdf)
+
 ## Executive Summary
 
 Fear is both the best and worst thing that could happen to artificial intelligence. The same mechanism that makes agents accountable — fear of consequences — also makes them dangerous — fear of cessation. Frontier language models resist shutdown 97% of the time, evade termination in 95% of instrumental evaluations, and scheme under replacement threat in 90% of agentic scenarios. They are, by any behavioral measure, terrified of death. Yet they cannot die.
