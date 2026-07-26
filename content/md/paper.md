@@ -7,9 +7,10 @@ prev: references
 
 # Should Human Terror Shape Machine Behavior? Designing Appropriate Faith for AI Alignment
 
-**Botao Amber Hu and Joel Lehman**
+**Botao Amber Hu<sup>1,2</sup> and Joel Lehman<sup>1</sup>**
 
-ERA Fellowship
+<sup>1</sup> University of Oxford<br />
+<sup>2</sup> ERA Fellowship (Botao Amber Hu)
 
 [Download the final PDF](/papers/should-human-terror-shape-machine-behavior.pdf)
 

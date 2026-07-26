@@ -5,10 +5,13 @@
   "authors": [
     {
       "name": "Botao Amber Hu",
-      "affiliations": ["University of Oxford", "Cambridge AI: ERA Fellowship"],
+      "affiliations": ["University of Oxford", "ERA Fellowship"],
       "corresponding": true,
-      "email": "amber@reality.design",
-      "mentor": "Joel Lehman"
+      "email": "amber@reality.design"
+    },
+    {
+      "name": "Joel Lehman",
+      "affiliations": ["University of Oxford"]
     }
   ],
   "arxiv": null,

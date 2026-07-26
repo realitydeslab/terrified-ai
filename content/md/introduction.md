@@ -8,11 +8,11 @@ next: terror-paradox
 
 *Should Terror Shape Machine Behavior?*
 
-**Botao 'Amber' Hu**
+**Botao 'Amber' Hu · Joel Lehman**
 
-University of Oxford · Cambridge AI: ERA Fellowship
+University of Oxford
 
-Mentor: Joel Lehman
+Botao Amber Hu · ERA Fellowship
 
 <figure class="figure-wide figure-poster">
 <a href="/figures/poster.pdf" target="_blank">
